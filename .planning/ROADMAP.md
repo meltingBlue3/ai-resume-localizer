@@ -93,11 +93,11 @@ Plans:
   1. User sees descriptive loading states with stage-specific progress messages during AI extraction and translation processing
   2. System displays clear, actionable error messages when Dify API calls or other operations fail, without crashing or losing user data
   3. User can see a completeness indicator showing what percentage of resume fields are filled at any point in the workflow
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
+- [ ] 05-01-PLAN.md — Utility modules (errorClassifier, completeness) + reusable UI components (ErrorBanner, CompletenessIndicator) + i18n keys
+- [ ] 05-02-PLAN.md — Integrate loading stages, classified errors, and completeness into all step components + human verify
 
 ## Progress
 
