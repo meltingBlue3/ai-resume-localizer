@@ -95,47 +95,55 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UPLD-01 | — | Pending |
-| UPLD-02 | — | Pending |
-| UPLD-03 | — | Pending |
-| EXTR-01 | — | Pending |
-| EXTR-02 | — | Pending |
-| EXTR-03 | — | Pending |
-| EXTR-04 | — | Pending |
-| EXTR-05 | — | Pending |
-| TRAN-01 | — | Pending |
-| TRAN-02 | — | Pending |
-| TRAN-03 | — | Pending |
-| TRAN-04 | — | Pending |
-| TRAN-05 | — | Pending |
-| TRAN-06 | — | Pending |
-| TRAN-07 | — | Pending |
-| TRAN-08 | — | Pending |
-| DOCG-01 | — | Pending |
-| DOCG-02 | — | Pending |
-| DOCG-03 | — | Pending |
-| DOCG-04 | — | Pending |
-| DOCG-05 | — | Pending |
-| DOCG-06 | — | Pending |
-| DOCG-07 | — | Pending |
-| DOCG-08 | — | Pending |
-| DOCG-09 | — | Pending |
-| DOCG-10 | — | Pending |
-| DOCG-11 | — | Pending |
-| UXUI-01 | — | Pending |
-| UXUI-02 | — | Pending |
-| UXUI-03 | — | Pending |
-| UXUI-04 | — | Pending |
-| UXUI-05 | — | Pending |
-| UXUI-06 | — | Pending |
-| UXUI-07 | — | Pending |
-| UXUI-08 | — | Pending |
+| UPLD-01 | Phase 2 | Pending |
+| UPLD-02 | Phase 2 | Pending |
+| UPLD-03 | Phase 2 | Pending |
+| EXTR-01 | Phase 2 | Pending |
+| EXTR-02 | Phase 2 | Pending |
+| EXTR-03 | Phase 2 | Pending |
+| EXTR-04 | Phase 2 | Pending |
+| EXTR-05 | Phase 2 | Pending |
+| TRAN-01 | Phase 3 | Pending |
+| TRAN-02 | Phase 3 | Pending |
+| TRAN-03 | Phase 3 | Pending |
+| TRAN-04 | Phase 3 | Pending |
+| TRAN-05 | Phase 3 | Pending |
+| TRAN-06 | Phase 3 | Pending |
+| TRAN-07 | Phase 3 | Pending |
+| TRAN-08 | Phase 3 | Pending |
+| DOCG-01 | Phase 4 | Pending |
+| DOCG-02 | Phase 4 | Pending |
+| DOCG-03 | Phase 4 | Pending |
+| DOCG-04 | Phase 4 | Pending |
+| DOCG-05 | Phase 4 | Pending |
+| DOCG-06 | Phase 3 | Pending |
+| DOCG-07 | Phase 4 | Pending |
+| DOCG-08 | Phase 4 | Pending |
+| DOCG-09 | Phase 4 | Pending |
+| DOCG-10 | Phase 4 | Pending |
+| DOCG-11 | Phase 4 | Pending |
+| UXUI-01 | Phase 1 | Pending |
+| UXUI-02 | Phase 1 | Pending |
+| UXUI-03 | Phase 1 | Pending |
+| UXUI-04 | Phase 1 | Pending |
+| UXUI-05 | Phase 1 | Pending |
+| UXUI-06 | Phase 5 | Pending |
+| UXUI-07 | Phase 5 | Pending |
+| UXUI-08 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 35 total
-- Mapped to phases: 0
-- Unmapped: 35 ⚠️
+- Mapped to phases: 35 ✓
+- Unmapped: 0
+
+| Phase | Count | Requirements |
+|-------|-------|--------------|
+| Phase 1 | 5 | UXUI-01–05 |
+| Phase 2 | 8 | UPLD-01–03, EXTR-01–05 |
+| Phase 3 | 9 | TRAN-01–08, DOCG-06 |
+| Phase 4 | 10 | DOCG-01–05, DOCG-07–11 |
+| Phase 5 | 3 | UXUI-06–08 |
 
 ---
 *Requirements defined: 2026-02-18*
-*Last updated: 2026-02-18 after initial definition*
+*Last updated: 2026-02-18 after roadmap creation*
