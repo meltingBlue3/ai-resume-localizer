@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企业招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** Phase 3 — Translation & Data Processing — IN PROGRESS
+**Current focus:** Phase 3 — Translation & Data Processing — COMPLETE
 
 ## Current Position
 
-Phase: 3 of 5 (Translation & Data Processing)
-Plan: 2 of 3 in current phase (03-01 complete, 03-02 complete)
-Status: Executing Phase 3 — 03-03 remaining
-Last activity: 2026-02-18 — Completed 03-01 (Translation Pipeline Backend)
+Phase: 3 of 5 (Translation & Data Processing) — COMPLETE
+Plan: 3 of 3 in current phase (03-01 complete, 03-02 complete, 03-03 complete)
+Status: Phase 3 complete — ready for Phase 4 planning
+Last activity: 2026-02-18 — Completed 03-03 (Review Translation UI)
 
-Progress: [██████░░░░] 60%
+Progress: [██████░░░░] 66%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
-- Average duration: ~6.1min
-- Total execution time: ~0.82 hours
+- Total plans completed: 9
+- Average duration: ~6.0min
+- Total execution time: ~0.93 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [██████░░░░] 60%
 |-------|-------|-------|----------|
 | 01-foundation | 3 | ~27min | ~9min |
 | 02-upload-extraction | 3 | ~15min | ~5min |
-| 03-translation-data-processing | 2 | ~8min | ~4min |
+| 03-translation-data-processing | 3 | ~15min | ~5min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (~3min), 02-03 (~8min), 03-02 (~4min), 03-01 (~4min)
-- Trend: Consistently fast for data-layer plans
+- Last 5 plans: 02-03 (~8min), 03-02 (~4min), 03-01 (~4min), 03-03 (~7min)
+- Trend: UI plans slightly longer due to multi-file coordination
 
 *Updated after each plan completion*
 
@@ -75,6 +75,10 @@ Recent decisions affecting current work:
 - [03-01]: DifyClient.translate_resume() follows extract_resume() pattern — raises DifyWorkflowError, route converts to HTTPException
 - [03-01]: Jp* models use 3.10+ syntax (str | None, list[...]) matching existing Cn* models
 - [03-01]: Translate route creates own DifyClient instance with translation API key — same lifecycle as upload route
+- [03-03]: JpResumeFieldEditor uses own CollapsibleSection/FieldInput (not shared from ResumeFieldEditor) — needs helperText and ReactNode labels for tooltip integration
+- [03-03]: Culture tips on section headers (summary, motivation, education) and inline on name_katakana — context without clutter
+- [03-03]: Skills array as comma-separated string, responsibilities/achievements as newline-separated textarea
+- [03-03]: Human verification passed all 7 test cases — complete Phase 3 flow confirmed end-to-end
 
 ### Pending Todos
 
@@ -90,5 +94,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 03-01-PLAN.md (Translation Pipeline Backend)
-Resume file: .planning/phases/03-translation-data-processing/03-01-SUMMARY.md
+Stopped at: Completed 03-03-PLAN.md (Review Translation UI) — Phase 3 fully complete
+Resume file: .planning/phases/03-translation-data-processing/03-03-SUMMARY.md
