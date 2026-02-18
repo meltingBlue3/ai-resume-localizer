@@ -14,3 +14,8 @@ class TranslateRequest(BaseModel):
 
 class TranslateResponse(BaseModel):
     jp_resume: JpResumeData
+
+
+class PreviewRequest(BaseModel):
+    jp_resume: JpResumeData
+    photo_base64: str | None = None
