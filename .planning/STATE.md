@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 ## Current Position
 
 Phase: 4 of 5 (Preview & PDF Generation) — IN PROGRESS
-Plan: 1 of 3 in current phase (04-01 complete)
-Status: Executing Phase 4 — 04-01 complete, 04-02 next
-Last activity: 2026-02-18 — Completed 04-01 (Template Rendering & Preview/Download API)
+Plan: 2 of 3 in current phase (04-02 complete)
+Status: Executing Phase 4 — 04-02 complete, 04-03 next
+Last activity: 2026-02-18 — Completed 04-02 (Frontend Data Layer & Photo Cropping)
 
-Progress: [███████░░░] 73%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
-- Average duration: ~6.0min
-- Total execution time: ~1.05 hours
+- Total plans completed: 11
+- Average duration: ~5.8min
+- Total execution time: ~1.12 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [███████░░░] 73%
 | 01-foundation | 3 | ~27min | ~9min |
 | 02-upload-extraction | 3 | ~15min | ~5min |
 | 03-translation-data-processing | 3 | ~15min | ~5min |
-| 04-preview-pdf-generation | 1 | ~7min | ~7min |
+| 04-preview-pdf-generation | 2 | ~11min | ~5.5min |
 
 **Recent Trend:**
-- Last 5 plans: 03-02 (~4min), 03-01 (~4min), 03-03 (~7min), 04-01 (~7min)
-- Trend: Stable ~5-7min per plan
+- Last 5 plans: 03-01 (~4min), 03-03 (~7min), 04-01 (~7min), 04-02 (~4min)
+- Trend: Stable ~4-7min per plan
 
 *Updated after each plan completion*
 
@@ -85,6 +85,9 @@ Recent decisions affecting current work:
 - [04-01]: Separate *_processed arrays (education_processed, work_history_processed, certifications_processed) with split year/month for rirekisho grid
 - [04-01]: Wareki year = gregorian_year - 2018 for Reiwa era (sufficient 2019-2099)
 - [04-01]: Shokumukeirekisho uses original work_history (full text dates), rirekisho uses processed version (split year/month cells)
+- [04-02]: Raw base64 (no data URI prefix) sent to backend -- backend adds prefix in Jinja2 templates
+- [04-02]: 354x472px target dimensions (30mm x 40mm at 300 DPI) for Japanese passport photo standard
+- [04-02]: JPEG quality 0.85 balances file size and photo clarity
 
 ### Pending Todos
 
@@ -100,5 +103,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 04-01-PLAN.md (Template Rendering & Preview/Download API)
-Resume file: .planning/phases/04-preview-pdf-generation/04-01-SUMMARY.md
+Stopped at: Completed 04-02-PLAN.md (Frontend Data Layer & Photo Cropping)
+Resume file: .planning/phases/04-preview-pdf-generation/04-02-SUMMARY.md
