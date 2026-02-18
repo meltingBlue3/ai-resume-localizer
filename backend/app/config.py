@@ -12,6 +12,7 @@ class Settings(BaseSettings):
 
     dify_base_url: str = "https://api.dify.ai/v1"
     dify_extraction_api_key: str = ""
+    dify_translation_api_key: str = ""
 
     @property
     def base_dir(self) -> Path:
