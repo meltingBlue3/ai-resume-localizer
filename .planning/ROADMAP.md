@@ -78,12 +78,12 @@ Plans:
   2. User can upload and crop a photo to 3:4 ratio for the 履歴書, or see an appropriate placeholder when no photo is provided
   3. User can edit fields directly in the preview stage and see changes reflected immediately
   4. User can download both documents as properly formatted A4 PDFs with bundled CJK fonts (Noto Sans JP) and null/missing fields displayed as "未記入" or appropriate empty formatting
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
-- [ ] 04-03: TBD
+- [ ] 04-01-PLAN.md — Backend Jinja2 template conversion + template renderer service + preview/download API endpoints
+- [ ] 04-02-PLAN.md — Frontend photo cropper (react-easy-crop), store/API client extensions for preview state
+- [ ] 04-03-PLAN.md — PreviewStep UI integration (two-panel layout, editing, photo crop, download) + human verification
 
 ### Phase 5: Polish & Production Readiness
 **Goal**: The application handles all edge cases gracefully with informative feedback, production-quality error states, and data completeness visibility
