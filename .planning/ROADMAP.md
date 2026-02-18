@@ -62,12 +62,12 @@ Plans:
   3. Chinese names have katakana furigana auto-generated, and Chinese education credentials are mapped to Japanese equivalents (本科→学士, 硕士→修士, etc.)
   4. All dates in the translated data are converted to Japanese era format (和暦) with correct era boundaries and 元年 handling
   5. System provides contextual Japanese resume culture tips at relevant fields via tooltips
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
-- [ ] 03-03: TBD
+- [ ] 03-01-PLAN.md — Backend translation pipeline (JpResumeData schema, DifyClient.translate_resume(), POST /api/translate)
+- [ ] 03-02-PLAN.md — Frontend data layer (JpResumeData TS types, wareki.ts, credentials.ts, store expansion, translateResume API client)
+- [ ] 03-03-PLAN.md — ReviewTranslationStep UI (JpResumeFieldEditor, FieldTooltip culture tips, side-by-side layout, human verify)
 
 ### Phase 4: Preview & PDF Generation
 **Goal**: Users can preview and download production-quality 履歴書 and 職務経歴書 as A4 PDFs with photo, correct fonts, and proper null-field handling
@@ -108,6 +108,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundation & Risk Mitigation | 3/3 | ✓ Complete | 2026-02-18 |
 | 2. Upload & Extraction | 3/3 | ✓ Complete | 2026-02-18 |
-| 3. Translation & Data Processing | 0/TBD | Not started | - |
+| 3. Translation & Data Processing | 0/3 | Not started | - |
 | 4. Preview & PDF Generation | 0/TBD | Not started | - |
 | 5. Polish & Production Readiness | 0/TBD | Not started | - |
