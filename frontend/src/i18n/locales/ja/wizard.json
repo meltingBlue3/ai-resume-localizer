@@ -74,7 +74,11 @@
     },
     "download": {
       "title": "ダウンロード",
-      "description": "最終的なPDF履歴書ファイルをダウンロードします"
+      "description": "最終的なPDF履歴書ファイルをダウンロードします",
+      "ready": "書類の準備が完了しました",
+      "readyDescription": "日本語の履歴書が作成されました。下のボタンからPDFをダウンロードしてください",
+      "rirekishoCard": "履歴書（JIS標準形式）",
+      "shokumukeirekishoCard": "職務経歴書（逆編年体形式）"
     }
   },
   "reviewTranslation": {
@@ -138,6 +142,27 @@
     "degree": "日本企業の基準：学士→大学卒業、修士→大学院修了（修士）、博士→大学院修了（博士）。",
     "skills": "具体的なツール・技術名を記載し、使用年数を添えると効果的です（例：Python 3年）。",
     "certifications": "JLPT等の日本関連資格は採用担当者に好印象を与えます。"
+  },
+  "preview": {
+    "tabs": {
+      "rirekisho": "履歴書",
+      "shokumukeirekisho": "職務経歴書"
+    },
+    "uploadPhoto": "写真をアップロード",
+    "removePhoto": "写真を削除",
+    "downloadRirekisho": "履歴書PDFをダウンロード",
+    "downloadShokumukeirekisho": "職務経歴書PDFをダウンロード",
+    "rendering": "プレビューを生成中...",
+    "noData": "翻訳レビューを先に完了してください",
+    "previewError": "プレビュー生成に失敗しました",
+    "downloadError": "ダウンロードに失敗しました",
+    "downloading": "PDF生成中...",
+    "photoCropper": {
+      "title": "写真をトリミング",
+      "zoom": "ズーム",
+      "confirm": "確認",
+      "cancel": "キャンセル"
+    }
   },
   "placeholder": "このステップは今後のフェーズで実装されます",
   "inputLabel": "テスト入力",
