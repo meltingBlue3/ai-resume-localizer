@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 ## Current Position
 
 Phase: 3 of 5 (Translation & Data Processing)
-Plan: 2 of 3 in current phase (03-01 in parallel, 03-02 complete)
-Status: Executing Phase 3
-Last activity: 2026-02-18 — Completed 03-02 (Frontend Data Layer)
+Plan: 2 of 3 in current phase (03-01 complete, 03-02 complete)
+Status: Executing Phase 3 — 03-03 remaining
+Last activity: 2026-02-18 — Completed 03-01 (Translation Pipeline Backend)
 
-Progress: [█████░░░░░] 53%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
-- Average duration: ~6.5min
-- Total execution time: ~0.76 hours
+- Total plans completed: 8
+- Average duration: ~6.1min
+- Total execution time: ~0.82 hours
 
 **By Phase:**
 
@@ -29,10 +29,10 @@ Progress: [█████░░░░░] 53%
 |-------|-------|-------|----------|
 | 01-foundation | 3 | ~27min | ~9min |
 | 02-upload-extraction | 3 | ~15min | ~5min |
-| 03-translation-data-processing | 1 | ~4min | ~4min |
+| 03-translation-data-processing | 2 | ~8min | ~4min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (~4min), 02-02 (~3min), 02-03 (~8min), 03-02 (~4min)
+- Last 5 plans: 02-02 (~3min), 02-03 (~8min), 03-02 (~4min), 03-01 (~4min)
 - Trend: Consistently fast for data-layer plans
 
 *Updated after each plan completion*
@@ -72,6 +72,9 @@ Recent decisions affecting current work:
 - [03-02]: Gannen (元年) handled via Unicode Script=Han regex, not hardcoded era boundaries
 - [03-02]: Store keeps pure state; step component orchestrates API calls (no translate store action)
 - [03-02]: @radix-ui/react-tooltip pre-installed for 03-03 UI plan
+- [03-01]: DifyClient.translate_resume() follows extract_resume() pattern — raises DifyWorkflowError, route converts to HTTPException
+- [03-01]: Jp* models use 3.10+ syntax (str | None, list[...]) matching existing Cn* models
+- [03-01]: Translate route creates own DifyClient instance with translation API key — same lifecycle as upload route
 
 ### Pending Todos
 
@@ -87,5 +90,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 03-02-PLAN.md (Frontend Data Layer for Translation)
-Resume file: .planning/phases/03-translation-data-processing/03-02-SUMMARY.md
+Stopped at: Completed 03-01-PLAN.md (Translation Pipeline Backend)
+Resume file: .planning/phases/03-translation-data-processing/03-01-SUMMARY.md
