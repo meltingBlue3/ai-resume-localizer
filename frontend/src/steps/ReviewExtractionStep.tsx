@@ -1,10 +1,43 @@
 import { useTranslation } from 'react-i18next';
+import { useWizardStore } from '../stores/useWizardStore.ts';
+import { useResumeStore } from '../stores/useResumeStore.ts';
+import DocumentViewer from '../components/review/DocumentViewer.tsx';
+import ResumeFieldEditor from '../components/review/ResumeFieldEditor.tsx';
 
 export default function ReviewExtractionStep() {
   const { t } = useTranslation('wizard');
+  const setStep = useWizardStore((s) => s.setStep);
+
+  const resumeFile = useResumeStore((s) => s.resumeFile);
+  const cnResumeData = useResumeStore((s) => s.cnResumeData);
+  const setCnResumeData = useResumeStore((s) => s.setCnResumeData);
+
+  if (!resumeFile || !cnResumeData) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100">
+          <svg className="h-8 w-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+          </svg>
+        </div>
+        <p className="mt-4 text-sm text-slate-500">{t('steps.reviewExtraction.noData')}</p>
+        <button
+          type="button"
+          onClick={() => setStep(0)}
+          className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
+        >
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          {t('steps.reviewExtraction.goBack')}
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
+      {/* Step header */}
       <div className="flex items-start gap-4">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-emerald-100">
           <svg className="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -17,8 +50,27 @@ export default function ReviewExtractionStep() {
         </div>
       </div>
 
-      <div className="rounded-lg border-2 border-dashed border-emerald-200 bg-emerald-50 p-8 text-center">
-        <p className="text-sm text-slate-400">{t('placeholder')}</p>
+      {/* Side-by-side panels */}
+      <div className="grid h-[calc(100vh-20rem)] grid-cols-1 gap-4 lg:grid-cols-2">
+        {/* Left: Original document */}
+        <div className="flex flex-col overflow-hidden rounded-lg border border-slate-200">
+          <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5">
+            <h3 className="text-sm font-semibold text-slate-700">{t('steps.reviewExtraction.originalDoc')}</h3>
+          </div>
+          <div className="flex-1 overflow-y-auto bg-slate-100">
+            <DocumentViewer file={resumeFile} />
+          </div>
+        </div>
+
+        {/* Right: Extracted data editor */}
+        <div className="flex flex-col overflow-hidden rounded-lg border border-slate-200">
+          <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5">
+            <h3 className="text-sm font-semibold text-slate-700">{t('steps.reviewExtraction.extractedData')}</h3>
+          </div>
+          <div className="flex-1 overflow-y-auto p-4">
+            <ResumeFieldEditor data={cnResumeData} onChange={setCnResumeData} />
+          </div>
+        </div>
       </div>
     </div>
   );
