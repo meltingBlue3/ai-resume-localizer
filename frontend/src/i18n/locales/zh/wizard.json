@@ -1,0 +1,27 @@
+{
+  "steps": {
+    "upload": {
+      "title": "上传简历",
+      "description": "上传您的中文简历文件（支持PDF/Word格式），可选上传证件照"
+    },
+    "reviewExtraction": {
+      "title": "审核提取",
+      "description": "查看并编辑从简历中提取的结构化信息"
+    },
+    "reviewTranslation": {
+      "title": "审核翻译",
+      "description": "查看并编辑AI翻译的日文内容，确保翻译准确"
+    },
+    "preview": {
+      "title": "预览简历",
+      "description": "预览生成的日文履歴書和職務経歴書"
+    },
+    "download": {
+      "title": "下载",
+      "description": "下载最终的PDF简历文件"
+    }
+  },
+  "placeholder": "此步骤将在后续阶段实现",
+  "inputLabel": "测试输入",
+  "inputPlaceholder": "在此输入内容以测试数据持久化..."
+}

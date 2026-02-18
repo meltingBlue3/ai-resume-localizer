@@ -1,0 +1,27 @@
+{
+  "steps": {
+    "upload": {
+      "title": "履歴書アップロード",
+      "description": "中国語の履歴書ファイルをアップロードしてください（PDF/Word対応）。証明写真も添付可能です"
+    },
+    "reviewExtraction": {
+      "title": "抽出内容の確認",
+      "description": "履歴書から抽出された構造化情報を確認・編集してください"
+    },
+    "reviewTranslation": {
+      "title": "翻訳の確認",
+      "description": "AI翻訳された日本語の内容を確認・編集し、翻訳の正確性を確保してください"
+    },
+    "preview": {
+      "title": "プレビュー",
+      "description": "生成された日本語の履歴書と職務経歴書をプレビューします"
+    },
+    "download": {
+      "title": "ダウンロード",
+      "description": "最終的なPDF履歴書ファイルをダウンロードします"
+    }
+  },
+  "placeholder": "このステップは今後のフェーズで実装されます",
+  "inputLabel": "テスト入力",
+  "inputPlaceholder": "データ永続性をテストするためにここに入力してください..."
+}

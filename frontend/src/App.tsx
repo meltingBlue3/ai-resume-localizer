@@ -1,3 +1,10 @@
+import { BrowserRouter } from 'react-router';
+import WizardShell from './components/wizard/WizardShell.tsx';
+
 export default function App() {
-  return <div>App</div>;
+  return (
+    <BrowserRouter>
+      <WizardShell />
+    </BrowserRouter>
+  );
 }
