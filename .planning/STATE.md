@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 ## Current Position
 
 Phase: 1 of 5 (Foundation & Risk Mitigation)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: Executing
-Last activity: 2026-02-18 — Completed 01-01 (Frontend Wizard Shell)
+Last activity: 2026-02-18 — Completed 01-02 (Backend Scaffold & 履歴書 Template)
 
-Progress: [███░░░░░░░] 7%
+Progress: [████░░░░░░] 13%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: ~8min
-- Total execution time: ~0.13 hours
+- Total plans completed: 2
+- Average duration: ~7min
+- Total execution time: ~0.23 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-foundation | 1 | ~8min | ~8min |
+| 01-foundation | 2 | ~14min | ~7min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~8min)
-- Trend: Starting
+- Last 5 plans: 01-01 (~8min), 01-02 (~6min)
+- Trend: Accelerating
 
 *Updated after each plan completion*
 
@@ -47,6 +47,10 @@ Recent decisions affecting current work:
 - [01-01]: Manually configured React 19 after Vite 8 create-vite defaulted to vanilla TS template
 - [01-01]: BrowserRouter wrapping for future route support; wizard uses Zustand state navigation
 - [01-01]: All UI text uses t() translation functions — zero hardcoded strings
+- [01-02]: Used fontTools.varLib.instancer to create static font instances from Noto Sans JP variable font
+- [01-02]: Font files (>5MB) excluded from git via .gitignore with download script provided
+- [01-02]: WeasyPrint 63.1 confirmed working on Windows via pip install
+- [01-02]: CSS tables with border-collapse: separate for all print layouts — zero flexbox/grid
 
 ### Pending Todos
 
@@ -54,12 +58,12 @@ None yet.
 
 ### Blockers/Concerns
 
-- JIS 履歴書 exact cell dimensions (mm) need a reference template — to be sourced in Phase 1
+- ~~JIS 履歴書 exact cell dimensions (mm) need a reference template~~ — RESOLVED: Complete MHLW-format template created in 01-02
 - Dify Cloud free tier limited to 200 message credits — Professional tier ($59/mo) needed for real usage
-- WeasyPrint CSS limitations (no flexbox/grid) — Playwright fallback if 履歴書 grid proves impossible
+- ~~WeasyPrint CSS limitations (no flexbox/grid)~~ — MITIGATED: CSS tables approach working, WeasyPrint rendering validation pending in 01-03
 
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 01-01-PLAN.md (Frontend Wizard Shell)
-Resume file: .planning/phases/01-foundation-risk-mitigation/01-01-SUMMARY.md
+Stopped at: Completed 01-02-PLAN.md (Backend Scaffold & 履歴書 Template)
+Resume file: .planning/phases/01-foundation-risk-mitigation/01-02-SUMMARY.md
