@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation & Risk Mitigation** - Project scaffolding, data schema, wizard shell, i18n, and JIS template validation in WeasyPrint
 - [x] **Phase 2: Upload & Extraction** - Resume file upload, Dify AI extraction, and side-by-side review/edit
-- [ ] **Phase 3: Translation & Data Processing** - Dify AI translation, Japanese-specific data processing, and side-by-side review/edit
+- [x] **Phase 3: Translation & Data Processing** - Dify AI translation, Japanese-specific data processing, and side-by-side review/edit
 - [ ] **Phase 4: Preview & PDF Generation** - Dynamic template rendering, HTML preview, photo crop, and PDF download
 - [ ] **Phase 5: Polish & Production Readiness** - Loading states, error handling, completeness indicator, and end-to-end hardening
 
@@ -65,9 +65,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Backend translation pipeline (JpResumeData schema, DifyClient.translate_resume(), POST /api/translate)
-- [ ] 03-02-PLAN.md — Frontend data layer (JpResumeData TS types, wareki.ts, credentials.ts, store expansion, translateResume API client)
-- [ ] 03-03-PLAN.md — ReviewTranslationStep UI (JpResumeFieldEditor, FieldTooltip culture tips, side-by-side layout, human verify)
+- [x] 03-01-PLAN.md — Backend translation pipeline (JpResumeData schema, DifyClient.translate_resume(), POST /api/translate)
+- [x] 03-02-PLAN.md — Frontend data layer (JpResumeData TS types, wareki.ts, credentials.ts, store expansion, translateResume API client)
+- [x] 03-03-PLAN.md — ReviewTranslationStep UI (JpResumeFieldEditor, FieldTooltip culture tips, side-by-side layout, human verify)
 
 ### Phase 4: Preview & PDF Generation
 **Goal**: Users can preview and download production-quality 履歴書 and 職務経歴書 as A4 PDFs with photo, correct fonts, and proper null-field handling
@@ -108,6 +108,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundation & Risk Mitigation | 3/3 | ✓ Complete | 2026-02-18 |
 | 2. Upload & Extraction | 3/3 | ✓ Complete | 2026-02-18 |
-| 3. Translation & Data Processing | 0/3 | Not started | - |
+| 3. Translation & Data Processing | 3/3 | ✓ Complete | 2026-02-18 |
 | 4. Preview & PDF Generation | 0/TBD | Not started | - |
 | 5. Polish & Production Readiness | 0/TBD | Not started | - |
