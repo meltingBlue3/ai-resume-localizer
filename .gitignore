@@ -7,6 +7,7 @@ build/
 .venv/
 venv/
 *.egg
+.pytest_cache/
 
 # Environment
 .env
@@ -24,6 +25,9 @@ Thumbs.db
 
 # Font files (large CJK fonts — use download script)
 backend/app/fonts/*.ttf
+
+# Test output (generated PDFs)
+backend/tests/output/
 
 # Node
 node_modules/
