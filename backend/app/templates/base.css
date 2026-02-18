@@ -1,0 +1,82 @@
+@page {
+    size: A4;
+    margin: 15mm 15mm 15mm 15mm;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    color: #000;
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+th, td {
+    border: 0.5pt solid #000;
+    padding: 2mm;
+    vertical-align: top;
+    font-weight: normal;
+    text-align: left;
+}
+
+td + td, th + th, td + th, th + td {
+    border-left: none;
+}
+
+tr + tr > td, tr + tr > th {
+    border-top: none;
+}
+
+.page {
+    width: 180mm;
+    position: relative;
+}
+
+.page-break {
+    page-break-before: always;
+}
+
+.photo-cell {
+    width: 30mm;
+    height: 40mm;
+    text-align: center;
+    vertical-align: middle;
+}
+
+ruby {
+    ruby-align: center;
+}
+
+rt {
+    font-size: 0.5em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.no-border {
+    border: none;
+}
+
+.section-header td {
+    font-weight: bold;
+    text-align: center;
+    background-color: #f5f5f5;
+}
