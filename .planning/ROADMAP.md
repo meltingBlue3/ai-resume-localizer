@@ -30,12 +30,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can view the entire UI in Chinese (primary) or Japanese (secondary) and switch languages at any time
   4. A static 履歴書 HTML template renders correctly as an A4 PDF via WeasyPrint with JIS-standard grid layout and all CJK characters displaying properly (no tofu glyphs)
   5. A static 職務経歴書 HTML template renders correctly as an A4 PDF via WeasyPrint with proper formatting
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
-- [ ] 01-03: TBD
+- [ ] 01-01-PLAN.md — Frontend wizard shell with i18n (Vite + React + Tailwind + Zustand + react-i18next)
+- [ ] 01-02-PLAN.md — Backend scaffold & 履歴書 HTML template (FastAPI + CJK fonts + MHLW-format grid)
+- [ ] 01-03-PLAN.md — 職務経歴書 template & PDF validation (WeasyPrint service + pytest + human verify)
 
 ### Phase 2: Upload & Extraction
 **Goal**: Users can upload a Chinese resume (PDF/DOCX) with optional photo and review AI-extracted structured data in a side-by-side editor
@@ -106,7 +106,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Risk Mitigation | 0/TBD | Not started | - |
+| 1. Foundation & Risk Mitigation | 0/3 | Planning complete | - |
 | 2. Upload & Extraction | 0/TBD | Not started | - |
 | 3. Translation & Data Processing | 0/TBD | Not started | - |
 | 4. Preview & PDF Generation | 0/TBD | Not started | - |
