@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企业招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** Phase 3 — Translation & Data Processing — COMPLETE
+**Current focus:** Phase 4 — Preview & PDF Generation — IN PROGRESS
 
 ## Current Position
 
-Phase: 3 of 5 (Translation & Data Processing) — COMPLETE
-Plan: 3 of 3 in current phase (03-01 complete, 03-02 complete, 03-03 complete)
-Status: Phase 3 complete — ready for Phase 4 planning
-Last activity: 2026-02-18 — Completed 03-03 (Review Translation UI)
+Phase: 4 of 5 (Preview & PDF Generation) — IN PROGRESS
+Plan: 1 of 3 in current phase (04-01 complete)
+Status: Executing Phase 4 — 04-01 complete, 04-02 next
+Last activity: 2026-02-18 — Completed 04-01 (Template Rendering & Preview/Download API)
 
-Progress: [██████░░░░] 66%
+Progress: [███████░░░] 73%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
+- Total plans completed: 10
 - Average duration: ~6.0min
-- Total execution time: ~0.93 hours
+- Total execution time: ~1.05 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [██████░░░░] 66%
 | 01-foundation | 3 | ~27min | ~9min |
 | 02-upload-extraction | 3 | ~15min | ~5min |
 | 03-translation-data-processing | 3 | ~15min | ~5min |
+| 04-preview-pdf-generation | 1 | ~7min | ~7min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (~8min), 03-02 (~4min), 03-01 (~4min), 03-03 (~7min)
-- Trend: UI plans slightly longer due to multi-file coordination
+- Last 5 plans: 03-02 (~4min), 03-01 (~4min), 03-03 (~7min), 04-01 (~7min)
+- Trend: Stable ~5-7min per plan
 
 *Updated after each plan completion*
 
@@ -79,6 +80,11 @@ Recent decisions affecting current work:
 - [03-03]: Culture tips on section headers (summary, motivation, education) and inline on name_katakana — context without clutter
 - [03-03]: Skills array as comma-separated string, responsibilities/achievements as newline-separated textarea
 - [03-03]: Human verification passed all 7 test cases — complete Phase 3 flow confirmed end-to-end
+- [04-01]: Jinja2 default filter with boolean=True catches None specifically (not falsy strings) — '未記入' shown for null fields
+- [04-01]: CSS inlined via string replacement in render_document_for_preview — lightweight, no dependency
+- [04-01]: Separate *_processed arrays (education_processed, work_history_processed, certifications_processed) with split year/month for rirekisho grid
+- [04-01]: Wareki year = gregorian_year - 2018 for Reiwa era (sufficient 2019-2099)
+- [04-01]: Shokumukeirekisho uses original work_history (full text dates), rirekisho uses processed version (split year/month cells)
 
 ### Pending Todos
 
@@ -94,5 +100,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 03-03-PLAN.md (Review Translation UI) — Phase 3 fully complete
-Resume file: .planning/phases/03-translation-data-processing/03-03-SUMMARY.md
+Stopped at: Completed 04-01-PLAN.md (Template Rendering & Preview/Download API)
+Resume file: .planning/phases/04-preview-pdf-generation/04-01-SUMMARY.md
