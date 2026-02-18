@@ -170,7 +170,7 @@
         </colgroup>
         <tr>
             <td class="title-text">履　歴　書</td>
-            <td class="date-text">令和7年　2月　18日現在</td>
+            <td class="date-text">{{ data.current_date_wareki }}</td>
         </tr>
     </table>
 
@@ -183,20 +183,22 @@
         </colgroup>
         <tr>
             <td class="furigana-label">ふりがな</td>
-            <td class="furigana-content">やまだ　たろう</td>
-            <td rowspan="3" class="photo-area">
-                写真を貼る位置<br><br>
-                縦40mm×横30mm<br><br>
-                裏面に氏名を記入
+            <td class="furigana-content">{{ data.personal_info.name_katakana | default('', true) }}</td>
+            {% if photo_base64 %}
+            <td rowspan="3" class="photo-area" style="border: none; padding: 0;">
+                <img src="data:image/jpeg;base64,{{ photo_base64 }}" style="width: 30mm; height: 40mm; object-fit: cover;">
             </td>
+            {% else %}
+            <td rowspan="3" class="photo-area">写真を貼る位置<br><br>縦40mm×横30mm<br><br>裏面に氏名を記入</td>
+            {% endif %}
         </tr>
         <tr>
             <td class="name-label">氏名</td>
-            <td class="name-content">山田　太郎</td>
+            <td class="name-content">{{ data.personal_info.name | default('未記入', true) }}</td>
         </tr>
         <tr class="dob-row">
             <td>生年月日</td>
-            <td>平成7年　4月　1日生　（満30歳）</td>
+            <td>{{ data.personal_info.birth_date | default('未記入', true) }}</td>
         </tr>
     </table>
 
@@ -208,18 +210,18 @@
         </colgroup>
         <tr class="address-furigana">
             <td>ふりがな</td>
-            <td>とうきょうとちよだくちよだ</td>
+            <td></td>
         </tr>
         <tr class="address-row">
-            <td style="vertical-align: middle;">現住所<br><span style="font-size: 8pt;">〒100-0001</span></td>
-            <td>東京都千代田区千代田1-1-1<br>千代田マンション 301号室</td>
+            <td style="vertical-align: middle;">現住所</td>
+            <td>{{ data.personal_info.address | default('未記入', true) }}</td>
         </tr>
         <tr class="address-furigana">
             <td>ふりがな</td>
             <td></td>
         </tr>
         <tr class="address-row">
-            <td style="vertical-align: middle;">連絡先<br><span style="font-size: 8pt;">〒</span></td>
+            <td style="vertical-align: middle;">連絡先</td>
             <td style="color: #999; font-size: 9pt;">（現住所以外に連絡を希望する場合のみ記入）</td>
         </tr>
     </table>
@@ -234,9 +236,9 @@
         </colgroup>
         <tr class="contact-row">
             <td style="text-align: center;">電話</td>
-            <td>090-1234-5678</td>
+            <td>{{ data.personal_info.phone | default('未記入', true) }}</td>
             <td style="text-align: center;">E-mail</td>
-            <td>yamada.taro@example.com</td>
+            <td>{{ data.personal_info.email | default('未記入', true) }}</td>
         </tr>
     </table>
 
@@ -262,37 +264,21 @@
                 <td>学　歴</td>
             </tr>
             <!-- Education entries -->
+            {% for entry in data.education_processed %}
             <tr class="history-row">
-                <td class="year-cell">平成23</td>
-                <td class="month-cell">3</td>
-                <td>東京都千代田区立千代田中学校　卒業</td>
+                <td class="year-cell">{{ entry.start_year }}</td>
+                <td class="month-cell">{{ entry.start_month }}</td>
+                <td>{{ entry.school | default('', true) }}{% if entry.degree %}　{{ entry.degree }}{% endif %}</td>
             </tr>
-            <tr class="history-row">
-                <td class="year-cell">平成23</td>
-                <td class="month-cell">4</td>
-                <td>東京都立日比谷高等学校　入学</td>
-            </tr>
-            <tr class="history-row">
-                <td class="year-cell">平成26</td>
-                <td class="month-cell">3</td>
-                <td>東京都立日比谷高等学校　卒業</td>
-            </tr>
-            <tr class="history-row">
-                <td class="year-cell">平成26</td>
-                <td class="month-cell">4</td>
-                <td>東京大学　工学部　入学</td>
-            </tr>
-            <tr class="history-row">
-                <td class="year-cell">平成30</td>
-                <td class="month-cell">3</td>
-                <td>東京大学　工学部　卒業</td>
-            </tr>
-            <!-- Blank education row -->
+            {% endfor %}
+            <!-- Pad empty education rows to maintain grid (6 rows total) -->
+            {% for i in range([6 - data.education_processed | length, 0] | max) %}
             <tr class="history-row">
                 <td class="year-cell"></td>
                 <td class="month-cell"></td>
                 <td></td>
             </tr>
+            {% endfor %}
             <!-- Work history label -->
             <tr class="history-section-label">
                 <td></td>
@@ -300,37 +286,21 @@
                 <td>職　歴</td>
             </tr>
             <!-- Work entries -->
+            {% for entry in data.work_history_processed %}
             <tr class="history-row">
-                <td class="year-cell">平成30</td>
-                <td class="month-cell">4</td>
-                <td>株式会社ABCテクノロジー　入社（システム開発部配属）</td>
+                <td class="year-cell">{{ entry.start_year }}</td>
+                <td class="month-cell">{{ entry.start_month }}</td>
+                <td>{{ entry.company | default('', true) }}{% if entry.title %}　{{ entry.title }}{% endif %}</td>
             </tr>
-            <tr class="history-row">
-                <td class="year-cell">令和2</td>
-                <td class="month-cell">10</td>
-                <td>同社　プロジェクトリーダーに昇進</td>
-            </tr>
-            <tr class="history-row">
-                <td class="year-cell">令和5</td>
-                <td class="month-cell">3</td>
-                <td>一身上の都合により退職</td>
-            </tr>
-            <tr class="history-row">
-                <td class="year-cell">令和5</td>
-                <td class="month-cell">4</td>
-                <td>株式会社グローバルソリューションズ　入社（エンジニアリング本部配属）</td>
-            </tr>
-            <tr class="history-row">
-                <td class="year-cell">令和7</td>
-                <td class="month-cell">1</td>
-                <td>一身上の都合により退職</td>
-            </tr>
-            <!-- Blank work rows -->
+            {% endfor %}
+            <!-- Pad empty work rows (6 rows total) -->
+            {% for i in range([6 - data.work_history_processed | length, 0] | max) %}
             <tr class="history-row">
                 <td class="year-cell"></td>
                 <td class="month-cell"></td>
                 <td></td>
             </tr>
+            {% endfor %}
             <!-- 以上 row -->
             <tr class="history-end">
                 <td></td>
@@ -362,37 +332,21 @@
             </tr>
         </thead>
         <tbody>
+            {% for entry in data.certifications_processed %}
             <tr class="license-row">
-                <td class="year-cell">平成27</td>
-                <td class="month-cell">8</td>
-                <td>普通自動車第一種運転免許　取得</td>
+                <td class="year-cell">{{ entry.date_year }}</td>
+                <td class="month-cell">{{ entry.date_month }}</td>
+                <td>{{ entry.name | default('', true) }}</td>
             </tr>
-            <tr class="license-row">
-                <td class="year-cell">平成29</td>
-                <td class="month-cell">11</td>
-                <td>基本情報技術者試験　合格</td>
-            </tr>
-            <tr class="license-row">
-                <td class="year-cell">令和元</td>
-                <td class="month-cell">6</td>
-                <td>応用情報技術者試験　合格</td>
-            </tr>
-            <tr class="license-row">
-                <td class="year-cell">令和3</td>
-                <td class="month-cell">12</td>
-                <td>TOEIC 850点</td>
-            </tr>
-            <tr class="license-row">
-                <td class="year-cell">令和4</td>
-                <td class="month-cell">7</td>
-                <td>日本語能力試験 N1　合格</td>
-            </tr>
-            <!-- Blank license rows -->
+            {% endfor %}
+            <!-- Pad empty license rows (6 rows total) -->
+            {% for i in range([6 - data.certifications_processed | length, 0] | max) %}
             <tr class="license-row">
                 <td class="year-cell"></td>
                 <td class="month-cell"></td>
                 <td></td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 
@@ -405,7 +359,7 @@
         <tr>
             <td class="motivation-label">志望動機・特技・<br>好きな学科・<br>アピールポイントなど</td>
             <td class="motivation-content">
-                貴社のグローバル展開に強い関心を持ち、これまでのエンジニアリング経験を活かして貢献したいと考え、応募いたしました。前職では、Webアプリケーション開発のプロジェクトリーダーとして、チーム5名を率い、大規模システムの設計・実装を担当しました。特に、マイクロサービスアーキテクチャの導入やCI/CDパイプラインの構築に取り組み、デリバリー速度を40%向上させた実績がございます。英語・日本語のビジネスレベルでのコミュニケーション能力を活かし、グローバルチームとの協業にも対応可能です。
+                {{ data.motivation | default('未記入', true) }}
             </td>
         </tr>
     </table>
@@ -421,7 +375,7 @@
         <tr>
             <td>
                 <span class="commute-label">通勤時間</span><br>
-                <span class="commute-value">約 1 時間 00 分</span>
+                <span class="commute-value">約　時間　分</span>
             </td>
             <td>
                 <span class="commute-label">扶養家族（配偶者を除く）</span><br>
@@ -447,7 +401,7 @@
         <tr>
             <td class="preferences-label">本人希望記入欄<br><span style="font-weight: normal; font-size: 7pt;">（特に給料・職種・<br>勤務時間・勤務地・<br>その他についての希望<br>などがあれば記入）</span></td>
             <td class="preferences-content">
-                貴社規定に従います。
+                {{ data.other | default('貴社規定に従います。', true) }}
             </td>
         </tr>
     </table>
