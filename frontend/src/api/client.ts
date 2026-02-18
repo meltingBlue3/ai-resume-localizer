@@ -36,3 +36,44 @@ export async function translateResume(cnResume: CnResumeData): Promise<JpResumeD
   const data = await response.json();
   return data.jp_resume as JpResumeData;
 }
+
+export async function previewDocument(
+  docType: 'rirekisho' | 'shokumukeirekisho',
+  jpResume: JpResumeData,
+  photoBase64?: string | null,
+): Promise<string> {
+  const response = await fetch(`${API_BASE}/preview/${docType}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      jp_resume: jpResume,
+      photo_base64: photoBase64 ?? null,
+    }),
+  });
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    throw new Error(errorBody?.detail ?? `Preview failed (${response.status})`);
+  }
+  const data = await response.json();
+  return data.html as string;
+}
+
+export async function downloadPdf(
+  docType: 'rirekisho' | 'shokumukeirekisho',
+  jpResume: JpResumeData,
+  photoBase64?: string | null,
+): Promise<Blob> {
+  const response = await fetch(`${API_BASE}/download/${docType}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      jp_resume: jpResume,
+      photo_base64: photoBase64 ?? null,
+    }),
+  });
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    throw new Error(errorBody?.detail ?? `Download failed (${response.status})`);
+  }
+  return response.blob();
+}

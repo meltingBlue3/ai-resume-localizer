@@ -15,6 +15,12 @@ interface ResumeState {
   isTranslating: boolean;
   translationError: string | null;
 
+  croppedPhotoBase64: string | null;
+  previewHtml: string | null;
+  activeDocTab: 'rirekisho' | 'shokumukeirekisho';
+  isPreviewLoading: boolean;
+  isDownloading: boolean;
+
   setResumeFile: (file: File | null) => void;
   setPhotoFile: (file: File | null) => void;
   setExtractionResult: (rawText: string, data: CnResumeData) => void;
@@ -24,6 +30,11 @@ interface ResumeState {
   setJpResumeData: (data: JpResumeData) => void;
   setIsTranslating: (loading: boolean) => void;
   setTranslationError: (error: string | null) => void;
+  setCroppedPhotoBase64: (base64: string | null) => void;
+  setPreviewHtml: (html: string | null) => void;
+  setActiveDocTab: (tab: 'rirekisho' | 'shokumukeirekisho') => void;
+  setIsPreviewLoading: (loading: boolean) => void;
+  setIsDownloading: (loading: boolean) => void;
   resetUpload: () => void;
 }
 
@@ -37,6 +48,11 @@ const initialState = {
   jpResumeData: null,
   isTranslating: false,
   translationError: null,
+  croppedPhotoBase64: null,
+  previewHtml: null,
+  activeDocTab: 'rirekisho' as const,
+  isPreviewLoading: false,
+  isDownloading: false,
 };
 
 export const useResumeStore = create<ResumeState>((set) => ({
@@ -59,5 +75,10 @@ export const useResumeStore = create<ResumeState>((set) => ({
   setJpResumeData: (data) => set({ jpResumeData: data }),
   setIsTranslating: (loading) => set({ isTranslating: loading }),
   setTranslationError: (error) => set({ translationError: error }),
+  setCroppedPhotoBase64: (base64) => set({ croppedPhotoBase64: base64 }),
+  setPreviewHtml: (html) => set({ previewHtml: html }),
+  setActiveDocTab: (tab) => set({ activeDocTab: tab }),
+  setIsPreviewLoading: (loading) => set({ isPreviewLoading: loading }),
+  setIsDownloading: (loading) => set({ isDownloading: loading }),
   resetUpload: () => set(initialState),
 }));
