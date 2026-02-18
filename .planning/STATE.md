@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 ## Current Position
 
 Phase: 2 of 5 (Upload & Extraction)
-Plan: 1 of 3 in current phase (1 complete)
+Plan: 2 of 3 in current phase (2 complete)
 Status: Executing Phase 2
-Last activity: 2026-02-18 — Completed 02-01 (Upload Pipeline & Data Models)
+Last activity: 2026-02-18 — Completed 02-02 (Frontend Upload UI & Store)
 
-Progress: [███░░░░░░░] 27%
+Progress: [████░░░░░░] 33%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: ~8min
-- Total execution time: ~0.52 hours
+- Total plans completed: 5
+- Average duration: ~7min
+- Total execution time: ~0.57 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation | 3 | ~27min | ~9min |
-| 02-upload-extraction | 1 | ~4min | ~4min |
+| 02-upload-extraction | 2 | ~7min | ~3.5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~8min), 01-02 (~6min), 01-03 (~13min), 02-01 (~4min)
-- Trend: Fast (02-01 straightforward model + service creation with no runtime blockers)
+- Last 5 plans: 01-02 (~6min), 01-03 (~13min), 02-01 (~4min), 02-02 (~3min)
+- Trend: Very fast (02-02 clean frontend store + components with zero type errors)
 
 *Updated after each plan completion*
 
@@ -60,6 +60,9 @@ Recent decisions affecting current work:
 - [02-01]: DOCX extractor iterates both paragraphs and tables for Chinese resume table layouts
 - [02-01]: DifyClient uses 90s timeout (under Cloudflare 100s limit) with 10s connect timeout
 - [02-01]: Upload endpoint returns 422 for empty text (scanned PDF), 503 for missing API key, 502/504 for Dify errors
+- [02-02]: react-dropzone v14 (not v15) to avoid breaking isDragReject API change
+- [02-02]: No persist middleware on useResumeStore — File objects are not serializable
+- [02-02]: Native fetch API with FormData for file upload — no axios needed
 
 ### Pending Todos
 
@@ -75,5 +78,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 02-01-PLAN.md (Upload Pipeline & Data Models)
-Resume file: .planning/phases/02-upload-extraction/02-01-SUMMARY.md
+Stopped at: Completed 02-02-PLAN.md (Frontend Upload UI & Store)
+Resume file: .planning/phases/02-upload-extraction/02-02-SUMMARY.md
