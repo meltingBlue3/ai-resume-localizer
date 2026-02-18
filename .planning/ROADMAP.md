@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation & Risk Mitigation** - Project scaffolding, data schema, wizard shell, i18n, and JIS template validation in WeasyPrint
 - [x] **Phase 2: Upload & Extraction** - Resume file upload, Dify AI extraction, and side-by-side review/edit
 - [x] **Phase 3: Translation & Data Processing** - Dify AI translation, Japanese-specific data processing, and side-by-side review/edit
-- [ ] **Phase 4: Preview & PDF Generation** - Dynamic template rendering, HTML preview, photo crop, and PDF download
+- [x] **Phase 4: Preview & PDF Generation** - Dynamic template rendering, HTML preview, photo crop, and PDF download
 - [ ] **Phase 5: Polish & Production Readiness** - Loading states, error handling, completeness indicator, and end-to-end hardening
 
 ## Phase Details
@@ -81,9 +81,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Backend Jinja2 template conversion + template renderer service + preview/download API endpoints
-- [ ] 04-02-PLAN.md — Frontend photo cropper (react-easy-crop), store/API client extensions for preview state
-- [ ] 04-03-PLAN.md — PreviewStep UI integration (two-panel layout, editing, photo crop, download) + human verification
+- [x] 04-01-PLAN.md — Backend Jinja2 template conversion + template renderer service + preview/download API endpoints
+- [x] 04-02-PLAN.md — Frontend photo cropper (react-easy-crop), store/API client extensions for preview state
+- [x] 04-03-PLAN.md — PreviewStep UI integration (two-panel layout, editing, photo crop, download) + human verification
 
 ### Phase 5: Polish & Production Readiness
 **Goal**: The application handles all edge cases gracefully with informative feedback, production-quality error states, and data completeness visibility
@@ -109,5 +109,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation & Risk Mitigation | 3/3 | ✓ Complete | 2026-02-18 |
 | 2. Upload & Extraction | 3/3 | ✓ Complete | 2026-02-18 |
 | 3. Translation & Data Processing | 3/3 | ✓ Complete | 2026-02-18 |
-| 4. Preview & PDF Generation | 0/TBD | Not started | - |
+| 4. Preview & PDF Generation | 3/3 | Complete | 2026-02-19 |
 | 5. Polish & Production Readiness | 0/TBD | Not started | - |

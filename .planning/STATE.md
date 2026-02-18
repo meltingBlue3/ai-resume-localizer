@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企业招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** Phase 4 — Preview & PDF Generation — IN PROGRESS
+**Current focus:** Phase 4 — Preview & PDF Generation — COMPLETE
 
 ## Current Position
 
-Phase: 4 of 5 (Preview & PDF Generation) — IN PROGRESS
-Plan: 3 of 3 in current phase (04-03 Task 1 complete, Task 2 checkpoint pending)
-Status: Executing Phase 4 — 04-03 Task 1 committed, awaiting human verification (Task 2)
-Last activity: 2026-02-19 — Completed 04-03 Task 1 (Preview UI), checkpoint reached
+Phase: 4 of 5 (Preview & PDF Generation) — COMPLETE
+Plan: 3 of 3 in current phase — all plans complete
+Status: Phase 4 complete — all 3 plans delivered and human-verified
+Last activity: 2026-02-19 — Phase 4 complete, all 8 test cases verified
 
-Progress: [████████░░] 80%
+Progress: [████████░░] 80% (Phases 1-4 complete, Phase 5 not started)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
+- Total plans completed: 12
 - Average duration: ~5.8min
-- Total execution time: ~1.12 hours
+- Total execution time: ~1.2 hours
 
 **By Phase:**
 
@@ -30,10 +30,10 @@ Progress: [████████░░] 80%
 | 01-foundation | 3 | ~27min | ~9min |
 | 02-upload-extraction | 3 | ~15min | ~5min |
 | 03-translation-data-processing | 3 | ~15min | ~5min |
-| 04-preview-pdf-generation | 2 | ~11min | ~5.5min |
+| 04-preview-pdf-generation | 3 | ~16min | ~5.3min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (~4min), 03-03 (~7min), 04-01 (~7min), 04-02 (~4min)
+- Last 5 plans: 03-01 (~4min), 03-03 (~7min), 04-01 (~7min), 04-02 (~4min), 04-03 (~5min)
 - Trend: Stable ~4-7min per plan
 
 *Updated after each plan completion*
@@ -80,6 +80,9 @@ Recent decisions affecting current work:
 - [03-03]: Culture tips on section headers (summary, motivation, education) and inline on name_katakana — context without clutter
 - [03-03]: Skills array as comma-separated string, responsibilities/achievements as newline-separated textarea
 - [03-03]: Human verification passed all 7 test cases — complete Phase 3 flow confirmed end-to-end
+- [04-03]: Human verification passed all 8 test cases — complete Phase 4 preview/download flow confirmed end-to-end
+- [04-03]: iframe srcdoc with pointer-events:none and ResizeObserver+transform:scale() for responsive A4 preview
+- [04-03]: 500ms debounce on preview fetching; programmatic anchor click with blob URL for PDF download
 - [04-01]: Jinja2 default filter with boolean=True catches None specifically (not falsy strings) — '未記入' shown for null fields
 - [04-01]: CSS inlined via string replacement in render_document_for_preview — lightweight, no dependency
 - [04-01]: Separate *_processed arrays (education_processed, work_history_processed, certifications_processed) with split year/month for rirekisho grid
@@ -103,5 +106,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: 04-03-PLAN.md Task 2 checkpoint (human-verify) — Task 1 committed as 2814109
-Resume file: .planning/phases/04-preview-pdf-generation/04-03-SUMMARY.md
+Stopped at: Completed 04-03-PLAN.md — Phase 4 fully complete
+Resume file: Phase 5 planning (not yet started)
