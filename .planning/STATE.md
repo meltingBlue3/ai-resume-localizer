@@ -5,34 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企业招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** Phase 2 — Upload & Extraction
+**Current focus:** Phase 2 — Upload & Extraction — COMPLETE
 
 ## Current Position
 
-Phase: 2 of 5 (Upload & Extraction)
-Plan: 2 of 3 in current phase (2 complete)
-Status: Executing Phase 2
-Last activity: 2026-02-18 — Completed 02-02 (Frontend Upload UI & Store)
+Phase: 2 of 5 (Upload & Extraction) — COMPLETE
+Plan: 3 of 3 in current phase (all complete)
+Status: Phase 2 Complete — Awaiting verification
+Last activity: 2026-02-18 — Completed 02-03 (Review UI with human verification)
 
-Progress: [████░░░░░░] 33%
+Progress: [████░░░░░░] 40%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
+- Total plans completed: 6
 - Average duration: ~7min
-- Total execution time: ~0.57 hours
+- Total execution time: ~0.72 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation | 3 | ~27min | ~9min |
-| 02-upload-extraction | 2 | ~7min | ~3.5min |
+| 02-upload-extraction | 3 | ~15min | ~5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (~6min), 01-03 (~13min), 02-01 (~4min), 02-02 (~3min)
-- Trend: Very fast (02-02 clean frontend store + components with zero type errors)
+- Last 5 plans: 01-03 (~13min), 02-01 (~4min), 02-02 (~3min), 02-03 (~8min)
+- Trend: Fast (02-03 included human checkpoint + 2 bug fixes)
 
 *Updated after each plan completion*
 
@@ -63,6 +63,10 @@ Recent decisions affecting current work:
 - [02-02]: react-dropzone v14 (not v15) to avoid breaking isDragReject API change
 - [02-02]: No persist middleware on useResumeStore — File objects are not serializable
 - [02-02]: Native fetch API with FormData for file upload — no axios needed
+- [02-03]: useState+useEffect for blob URLs instead of useMemo — avoids StrictMode URL revocation bug
+- [02-03]: react-pdf worker configured via new URL() + import.meta.url for Vite 7 compatibility
+- [02-03]: FONTCONFIG_FILE env var set before WeasyPrint import to resolve MSYS2 fontconfig on Windows
+- [02-03]: ResumeFieldEditor uses collapsible sections with immutable array update helpers
 
 ### Pending Todos
 
@@ -78,5 +82,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 02-02-PLAN.md (Frontend Upload UI & Store)
-Resume file: .planning/phases/02-upload-extraction/02-02-SUMMARY.md
+Stopped at: Completed 02-03-PLAN.md (Review UI — Side-by-Side Layout) — Phase 2 COMPLETE
+Resume file: .planning/phases/02-upload-extraction/02-03-SUMMARY.md
