@@ -13,7 +13,7 @@ Transform a Chinese resume into two production-quality Japanese PDF documents (�
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation & Risk Mitigation** - Project scaffolding, data schema, wizard shell, i18n, and JIS template validation in WeasyPrint
-- [ ] **Phase 2: Upload & Extraction** - Resume file upload, Dify AI extraction, and side-by-side review/edit
+- [x] **Phase 2: Upload & Extraction** - Resume file upload, Dify AI extraction, and side-by-side review/edit
 - [ ] **Phase 3: Translation & Data Processing** - Dify AI translation, Japanese-specific data processing, and side-by-side review/edit
 - [ ] **Phase 4: Preview & PDF Generation** - Dynamic template rendering, HTML preview, photo crop, and PDF download
 - [ ] **Phase 5: Polish & Production Readiness** - Loading states, error handling, completeness indicator, and end-to-end hardening
@@ -48,9 +48,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Backend pipeline: Pydantic data models, text extraction (PyMuPDF + python-docx), Dify client, POST /api/upload-and-extract endpoint
-- [ ] 02-02-PLAN.md — Upload UI: typed Zustand store, API client, react-dropzone file/photo upload, UploadStep replacement
-- [ ] 02-03-PLAN.md — Review UI: DocumentViewer (react-pdf + docx-preview), ResumeFieldEditor, side-by-side ReviewExtractionStep + human verify
+- [x] 02-01-PLAN.md — Backend pipeline: Pydantic data models, text extraction (PyMuPDF + python-docx), Dify client, POST /api/upload-and-extract endpoint
+- [x] 02-02-PLAN.md — Upload UI: typed Zustand store, API client, react-dropzone file/photo upload, UploadStep replacement
+- [x] 02-03-PLAN.md — Review UI: DocumentViewer (react-pdf + docx-preview), ResumeFieldEditor, side-by-side ReviewExtractionStep + human verify
 
 ### Phase 3: Translation & Data Processing
 **Goal**: Users can review and edit AI-translated Japanese resume data with furigana, credential mapping, keigo, era dates, and culture tips applied
@@ -107,7 +107,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Risk Mitigation | 3/3 | ✓ Complete | 2026-02-18 |
-| 2. Upload & Extraction | 0/3 | Not started | - |
+| 2. Upload & Extraction | 3/3 | ✓ Complete | 2026-02-18 |
 | 3. Translation & Data Processing | 0/TBD | Not started | - |
 | 4. Preview & PDF Generation | 0/TBD | Not started | - |
 | 5. Polish & Production Readiness | 0/TBD | Not started | - |
