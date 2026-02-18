@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="base.css">
+    <style>
+        /* ===== Page 1 & 2 common styles ===== */
+        .title-table td {
+            border: none;
+            padding: 0 0 3mm 0;
+        }
+        .title-text {
+            font-size: 18pt;
+            letter-spacing: 0.5em;
+            font-weight: bold;
+        }
+        .date-text {
+            text-align: right;
+            font-size: 10pt;
+            vertical-align: bottom;
+        }
+
+        /* ===== Personal info section ===== */
+        .furigana-label,
+        .furigana-content {
+            height: 8mm;
+            font-size: 8pt;
+            vertical-align: middle;
+            color: #333;
+        }
+        .name-label {
+            height: 18mm;
+            vertical-align: middle;
+        }
+        .name-content {
+            height: 18mm;
+            font-size: 16pt;
+            vertical-align: middle;
+        }
+        .photo-area {
+            width: 30mm;
+            height: 40mm;
+            border: 0.5pt dashed #999;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 7pt;
+            color: #999;
+        }
+        .dob-row td {
+            height: 8mm;
+            vertical-align: middle;
+        }
+
+        /* ===== Address section ===== */
+        .address-furigana td {
+            height: 7mm;
+            font-size: 8pt;
+            color: #333;
+            vertical-align: middle;
+        }
+        .address-row td {
+            height: 14mm;
+            vertical-align: top;
+        }
+        .contact-row td {
+            height: 8mm;
+            vertical-align: middle;
+        }
+
+        /* ===== Education / Work history ===== */
+        .history-header th {
+            height: 8mm;
+            text-align: center;
+            vertical-align: middle;
+            font-weight: bold;
+            background-color: #f5f5f5;
+        }
+        .history-section-label td {
+            height: 8mm;
+            text-align: center;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+        .history-row td {
+            height: 8mm;
+            vertical-align: middle;
+        }
+        .history-row .year-cell,
+        .history-row .month-cell {
+            text-align: center;
+        }
+        .history-end td {
+            height: 8mm;
+            vertical-align: middle;
+        }
+
+        /* ===== Page 2: Licenses section ===== */
+        .license-header th {
+            height: 8mm;
+            text-align: center;
+            vertical-align: middle;
+            font-weight: bold;
+            background-color: #f5f5f5;
+        }
+        .license-row td {
+            height: 8mm;
+            vertical-align: middle;
+        }
+        .license-row .year-cell,
+        .license-row .month-cell {
+            text-align: center;
+        }
+
+        /* ===== Motivation section ===== */
+        .motivation-label {
+            font-weight: bold;
+            vertical-align: top;
+            font-size: 9pt;
+            padding: 3mm 2mm;
+        }
+        .motivation-content {
+            height: 40mm;
+            vertical-align: top;
+            padding: 3mm;
+            line-height: 1.6;
+        }
+
+        /* ===== Commute / Dependents section ===== */
+        .commute-table td {
+            height: 14mm;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 9pt;
+        }
+        .commute-label {
+            font-size: 8pt;
+            font-weight: bold;
+        }
+        .commute-value {
+            font-size: 10.5pt;
+        }
+
+        /* ===== Preferences section ===== */
+        .preferences-label {
+            font-weight: bold;
+            vertical-align: top;
+            font-size: 9pt;
+            padding: 3mm 2mm;
+        }
+        .preferences-content {
+            height: 30mm;
+            vertical-align: top;
+            padding: 3mm;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 1                                                        -->
+<!-- ============================================================ -->
+<div class="page">
+
+    <!-- Title + Date -->
+    <table class="title-table">
+        <colgroup>
+            <col style="width: 60%;">
+            <col style="width: 40%;">
+        </colgroup>
+        <tr>
+            <td class="title-text">履　歴　書</td>
+            <td class="date-text">令和7年　2月　18日現在</td>
+        </tr>
+    </table>
+
+    <!-- Personal Info Section -->
+    <table>
+        <colgroup>
+            <col style="width: 18mm;">
+            <col>
+            <col style="width: 32mm;">
+        </colgroup>
+        <tr>
+            <td class="furigana-label">ふりがな</td>
+            <td class="furigana-content">やまだ　たろう</td>
+            <td rowspan="3" class="photo-area">
+                写真を貼る位置<br><br>
+                縦40mm×横30mm<br><br>
+                裏面に氏名を記入
+            </td>
+        </tr>
+        <tr>
+            <td class="name-label">氏名</td>
+            <td class="name-content">山田　太郎</td>
+        </tr>
+        <tr class="dob-row">
+            <td>生年月日</td>
+            <td>平成7年　4月　1日生　（満30歳）</td>
+        </tr>
+    </table>
+
+    <!-- Address Section -->
+    <table>
+        <colgroup>
+            <col style="width: 18mm;">
+            <col>
+        </colgroup>
+        <tr class="address-furigana">
+            <td>ふりがな</td>
+            <td>とうきょうとちよだくちよだ</td>
+        </tr>
+        <tr class="address-row">
+            <td style="vertical-align: middle;">現住所<br><span style="font-size: 8pt;">〒100-0001</span></td>
+            <td>東京都千代田区千代田1-1-1<br>千代田マンション 301号室</td>
+        </tr>
+        <tr class="address-furigana">
+            <td>ふりがな</td>
+            <td></td>
+        </tr>
+        <tr class="address-row">
+            <td style="vertical-align: middle;">連絡先<br><span style="font-size: 8pt;">〒</span></td>
+            <td style="color: #999; font-size: 9pt;">（現住所以外に連絡を希望する場合のみ記入）</td>
+        </tr>
+    </table>
+
+    <!-- Contact Row -->
+    <table>
+        <colgroup>
+            <col style="width: 18mm;">
+            <col style="width: 62mm;">
+            <col style="width: 18mm;">
+            <col>
+        </colgroup>
+        <tr class="contact-row">
+            <td style="text-align: center;">電話</td>
+            <td>090-1234-5678</td>
+            <td style="text-align: center;">E-mail</td>
+            <td>yamada.taro@example.com</td>
+        </tr>
+    </table>
+
+    <!-- Education & Work History Section -->
+    <table>
+        <colgroup>
+            <col style="width: 18mm;">
+            <col style="width: 12mm;">
+            <col>
+        </colgroup>
+        <thead>
+            <tr class="history-header">
+                <th>年</th>
+                <th>月</th>
+                <th>学歴・職歴</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Education label -->
+            <tr class="history-section-label">
+                <td></td>
+                <td></td>
+                <td>学　歴</td>
+            </tr>
+            <!-- Education entries -->
+            <tr class="history-row">
+                <td class="year-cell">平成23</td>
+                <td class="month-cell">3</td>
+                <td>東京都千代田区立千代田中学校　卒業</td>
+            </tr>
+            <tr class="history-row">
+                <td class="year-cell">平成23</td>
+                <td class="month-cell">4</td>
+                <td>東京都立日比谷高等学校　入学</td>
+            </tr>
+            <tr class="history-row">
+                <td class="year-cell">平成26</td>
+                <td class="month-cell">3</td>
+                <td>東京都立日比谷高等学校　卒業</td>
+            </tr>
+            <tr class="history-row">
+                <td class="year-cell">平成26</td>
+                <td class="month-cell">4</td>
+                <td>東京大学　工学部　入学</td>
+            </tr>
+            <tr class="history-row">
+                <td class="year-cell">平成30</td>
+                <td class="month-cell">3</td>
+                <td>東京大学　工学部　卒業</td>
+            </tr>
+            <!-- Blank education row -->
+            <tr class="history-row">
+                <td class="year-cell"></td>
+                <td class="month-cell"></td>
+                <td></td>
+            </tr>
+            <!-- Work history label -->
+            <tr class="history-section-label">
+                <td></td>
+                <td></td>
+                <td>職　歴</td>
+            </tr>
+            <!-- Work entries -->
+            <tr class="history-row">
+                <td class="year-cell">平成30</td>
+                <td class="month-cell">4</td>
+                <td>株式会社ABCテクノロジー　入社（システム開発部配属）</td>
+            </tr>
+            <tr class="history-row">
+                <td class="year-cell">令和2</td>
+                <td class="month-cell">10</td>
+                <td>同社　プロジェクトリーダーに昇進</td>
+            </tr>
+            <tr class="history-row">
+                <td class="year-cell">令和5</td>
+                <td class="month-cell">3</td>
+                <td>一身上の都合により退職</td>
+            </tr>
+            <tr class="history-row">
+                <td class="year-cell">令和5</td>
+                <td class="month-cell">4</td>
+                <td>株式会社グローバルソリューションズ　入社（エンジニアリング本部配属）</td>
+            </tr>
+            <tr class="history-row">
+                <td class="year-cell">令和7</td>
+                <td class="month-cell">1</td>
+                <td>一身上の都合により退職</td>
+            </tr>
+            <!-- Blank work rows -->
+            <tr class="history-row">
+                <td class="year-cell"></td>
+                <td class="month-cell"></td>
+                <td></td>
+            </tr>
+            <!-- 以上 row -->
+            <tr class="history-end">
+                <td></td>
+                <td></td>
+                <td style="text-align: right; padding-right: 10mm;">以上</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 2                                                        -->
+<!-- ============================================================ -->
+<div class="page page-break">
+
+    <!-- Licenses & Qualifications Section -->
+    <table>
+        <colgroup>
+            <col style="width: 18mm;">
+            <col style="width: 12mm;">
+            <col>
+        </colgroup>
+        <thead>
+            <tr class="license-header">
+                <th>年</th>
+                <th>月</th>
+                <th>免許・資格</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="license-row">
+                <td class="year-cell">平成27</td>
+                <td class="month-cell">8</td>
+                <td>普通自動車第一種運転免許　取得</td>
+            </tr>
+            <tr class="license-row">
+                <td class="year-cell">平成29</td>
+                <td class="month-cell">11</td>
+                <td>基本情報技術者試験　合格</td>
+            </tr>
+            <tr class="license-row">
+                <td class="year-cell">令和元</td>
+                <td class="month-cell">6</td>
+                <td>応用情報技術者試験　合格</td>
+            </tr>
+            <tr class="license-row">
+                <td class="year-cell">令和3</td>
+                <td class="month-cell">12</td>
+                <td>TOEIC 850点</td>
+            </tr>
+            <tr class="license-row">
+                <td class="year-cell">令和4</td>
+                <td class="month-cell">7</td>
+                <td>日本語能力試験 N1　合格</td>
+            </tr>
+            <!-- Blank license rows -->
+            <tr class="license-row">
+                <td class="year-cell"></td>
+                <td class="month-cell"></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Motivation / Skills Section -->
+    <table>
+        <colgroup>
+            <col style="width: 40mm;">
+            <col>
+        </colgroup>
+        <tr>
+            <td class="motivation-label">志望動機・特技・<br>好きな学科・<br>アピールポイントなど</td>
+            <td class="motivation-content">
+                貴社のグローバル展開に強い関心を持ち、これまでのエンジニアリング経験を活かして貢献したいと考え、応募いたしました。前職では、Webアプリケーション開発のプロジェクトリーダーとして、チーム5名を率い、大規模システムの設計・実装を担当しました。特に、マイクロサービスアーキテクチャの導入やCI/CDパイプラインの構築に取り組み、デリバリー速度を40%向上させた実績がございます。英語・日本語のビジネスレベルでのコミュニケーション能力を活かし、グローバルチームとの協業にも対応可能です。
+            </td>
+        </tr>
+    </table>
+
+    <!-- Commute / Dependents Section -->
+    <table class="commute-table">
+        <colgroup>
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+        </colgroup>
+        <tr>
+            <td>
+                <span class="commute-label">通勤時間</span><br>
+                <span class="commute-value">約 1 時間 00 分</span>
+            </td>
+            <td>
+                <span class="commute-label">扶養家族（配偶者を除く）</span><br>
+                <span class="commute-value">0 人</span>
+            </td>
+            <td>
+                <span class="commute-label">配偶者</span><br>
+                <span class="commute-value">無</span>
+            </td>
+            <td>
+                <span class="commute-label">配偶者の扶養義務</span><br>
+                <span class="commute-value">無</span>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Preferences Section -->
+    <table>
+        <colgroup>
+            <col style="width: 40mm;">
+            <col>
+        </colgroup>
+        <tr>
+            <td class="preferences-label">本人希望記入欄<br><span style="font-weight: normal; font-size: 7pt;">（特に給料・職種・<br>勤務時間・勤務地・<br>その他についての希望<br>などがあれば記入）</span></td>
+            <td class="preferences-content">
+                貴社規定に従います。
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
