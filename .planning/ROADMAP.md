@@ -12,7 +12,7 @@ Transform a Chinese resume into two production-quality Japanese PDF documents (�
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Risk Mitigation** - Project scaffolding, data schema, wizard shell, i18n, and JIS template validation in WeasyPrint
+- [x] **Phase 1: Foundation & Risk Mitigation** - Project scaffolding, data schema, wizard shell, i18n, and JIS template validation in WeasyPrint
 - [ ] **Phase 2: Upload & Extraction** - Resume file upload, Dify AI extraction, and side-by-side review/edit
 - [ ] **Phase 3: Translation & Data Processing** - Dify AI translation, Japanese-specific data processing, and side-by-side review/edit
 - [ ] **Phase 4: Preview & PDF Generation** - Dynamic template rendering, HTML preview, photo crop, and PDF download
@@ -33,9 +33,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Frontend wizard shell with i18n (Vite + React + Tailwind + Zustand + react-i18next)
-- [ ] 01-02-PLAN.md — Backend scaffold & 履歴書 HTML template (FastAPI + CJK fonts + MHLW-format grid)
-- [ ] 01-03-PLAN.md — 職務経歴書 template & PDF validation (WeasyPrint service + pytest + human verify)
+- [x] 01-01-PLAN.md — Frontend wizard shell with i18n (Vite + React + Tailwind + Zustand + react-i18next)
+- [x] 01-02-PLAN.md — Backend scaffold & 履歴書 HTML template (FastAPI + CJK fonts + MHLW-format grid)
+- [x] 01-03-PLAN.md — 職務経歴書 template & PDF validation (WeasyPrint service + pytest + human verify)
 
 ### Phase 2: Upload & Extraction
 **Goal**: Users can upload a Chinese resume (PDF/DOCX) with optional photo and review AI-extracted structured data in a side-by-side editor
@@ -106,7 +106,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Risk Mitigation | 0/3 | Planning complete | - |
+| 1. Foundation & Risk Mitigation | 3/3 | ✓ Complete | 2026-02-18 |
 | 2. Upload & Extraction | 0/TBD | Not started | - |
 | 3. Translation & Data Processing | 0/TBD | Not started | - |
 | 4. Preview & PDF Generation | 0/TBD | Not started | - |
