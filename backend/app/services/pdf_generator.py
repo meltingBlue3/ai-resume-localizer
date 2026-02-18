@@ -9,6 +9,9 @@ if sys.platform == "win32":
     _msys2_bin = Path(r"C:\msys64\ucrt64\bin")
     if _msys2_bin.is_dir():
         os.add_dll_directory(str(_msys2_bin))
+    _fontconfig = Path(r"C:\msys64\ucrt64\etc\fonts\fonts.conf")
+    if _fontconfig.is_file() and "FONTCONFIG_FILE" not in os.environ:
+        os.environ["FONTCONFIG_FILE"] = str(_fontconfig)
 
 from weasyprint import HTML, CSS
 from weasyprint.text.fonts import FontConfiguration
