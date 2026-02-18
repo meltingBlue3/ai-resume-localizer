@@ -16,12 +16,12 @@ provides:
   - "PreviewStep two-panel layout with inline editing and live preview"
   - "DownloadStep with download cards for both document types"
   - "Complete i18n keys for preview and download in zh and ja"
-affects: [05-polish]
+affects: [05-polish-production-readiness]
 
 # Tech tracking
 tech-stack:
   added: []
-  patterns: [iframe-srcdoc-preview, resize-observer-scaling, debounced-preview-fetch]
+  patterns: [iframe-srcdoc-preview, resize-observer-scaling, debounced-preview-fetch, programmatic-pdf-download]
 
 key-files:
   created:
@@ -37,28 +37,28 @@ key-decisions:
   - "PreviewPanel uses CSS transform scale with ResizeObserver for responsive A4 preview"
   - "500ms debounce on preview fetching to avoid excessive API calls during editing"
   - "Immediate fetch on initial mount (no debounce for first render)"
+  - "Programmatic anchor click with blob URL for PDF download with Japanese filenames"
 
 patterns-established:
   - "iframe srcdoc with pointer-events:none for non-interactive document preview"
   - "Two-panel layout: editor (w-2/5) + preview (w-3/5) with independent scrolling"
+  - "Preview pipeline: store data change -> debounce 500ms -> previewDocument API -> iframe srcdoc update"
 
 # Metrics
-duration: PENDING
-completed: PENDING
+duration: ~5min
+completed: 2026-02-19
 ---
 
 # Phase 4 Plan 03: Preview Step UI and Download Step Summary
 
-**PARTIAL -- Task 1 complete, Task 2 (human verification) pending**
-
-**Two-panel preview UI with iframe srcdoc A4 viewer, tab-based document switching, debounced live preview, photo crop integration, and PDF download flow**
+**Two-panel preview UI with iframe srcdoc A4 viewer, tab-based document switching, debounced live editing, photo crop integration, and PDF download -- all 8 test cases human-verified**
 
 ## Performance
 
-- **Duration:** PENDING (awaiting human verification)
+- **Duration:** ~5 min (Task 1 auto) + human verification
 - **Started:** 2026-02-19
-- **Completed:** PENDING
-- **Tasks:** 1/2 complete (Task 2 = human-verify checkpoint)
+- **Completed:** 2026-02-19
+- **Tasks:** 2/2 complete (1 auto + 1 human-verify)
 - **Files modified:** 6
 
 ## Accomplishments
@@ -70,11 +70,27 @@ completed: PENDING
 - Download flow: blob URL -> programmatic anchor click with Japanese filenames
 - DownloadStep with download cards for both document types, loading/error states
 - i18n keys added for preview section (tabs, upload, download, rendering, errors, photo cropper) and download step in both zh and ja
+- Human verified all 8 end-to-end test cases passing
 
 ## Task Commits
 
 1. **Task 1: Create PreviewPanel, PreviewToolbar, replace PreviewStep and DownloadStep, add i18n** - `2814109` (feat)
-2. **Task 2: Human verification of complete preview and PDF flow** - PENDING (checkpoint:human-verify)
+2. **Task 2: Human verification of complete preview and PDF flow** - verified (checkpoint:human-verify, no code commit)
+
+## Human Verification Results
+
+All 8 test cases passed:
+
+| # | Test Case | Result |
+|---|-----------|--------|
+| 1 | Preview with data -- actual translated data visible in JIS table format | PASS |
+| 2 | Tab switching -- rirekisho/shokumukeirekisho toggle works | PASS |
+| 3 | Null-field handling -- missing fields show "未記入" | PASS |
+| 4 | Inline editing with debounce -- field changes reflected in preview after ~500ms | PASS |
+| 5 | Photo upload + crop modal + preview embed -- 3:4 crop, photo in rirekisho | PASS |
+| 6 | PDF download with CJK fonts -- valid PDF, no tofu glyphs | PASS |
+| 7 | Download step with both document cards -- dual download working | PASS |
+| 8 | No-photo placeholder text -- "写真を貼る位置" shown when no photo | PASS |
 
 ## Files Created/Modified
 - `frontend/src/components/preview/PreviewPanel.tsx` - iframe srcdoc viewer with A4 scaling via ResizeObserver + CSS transform
@@ -92,7 +108,7 @@ completed: PENDING
 
 ## Deviations from Plan
 
-None - plan executed exactly as written. All 6 files were already partially implemented from prior plan work; this plan added i18n keys and updated PreviewPanel to use i18n instead of hardcoded strings.
+None - plan executed exactly as written.
 
 ## Issues Encountered
 
@@ -103,10 +119,16 @@ None.
 None - no external service configuration required.
 
 ## Next Phase Readiness
-- BLOCKED: Awaiting human verification (Task 2 checkpoint)
-- All UI components built and TypeScript-clean
-- Preview, editing, photo crop, and download flows ready for end-to-end testing
+- Phase 4 fully complete: all 3 plans delivered and human-verified
+- Full pipeline functional end-to-end: upload -> extract -> translate -> preview -> download
+- Ready for Phase 5 (Polish & Production Readiness): loading states, error handling, completeness indicator
+
+## Self-Check: PASSED
+
+- All 6 key files verified present on disk (PreviewPanel.tsx, PreviewToolbar.tsx, PreviewStep.tsx, DownloadStep.tsx, zh/wizard.json, ja/wizard.json)
+- Commit `2814109` verified in git log
+- Human verification: all 8 test cases confirmed passing
 
 ---
 *Phase: 04-preview-pdf-generation*
-*Status: CHECKPOINT -- awaiting human verification*
+*Completed: 2026-02-19*
