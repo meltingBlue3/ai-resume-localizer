@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Document, Page } from 'react-pdf';
 import { renderAsync } from 'docx-preview';
 
@@ -9,11 +9,15 @@ interface DocumentViewerProps {
 function PdfViewer({ file }: DocumentViewerProps) {
   const [numPages, setNumPages] = useState<number>(0);
   const [loading, setLoading] = useState(true);
-  const url = useMemo(() => URL.createObjectURL(file), [file]);
+  const [url, setUrl] = useState<string>('');
 
   useEffect(() => {
-    return () => URL.revokeObjectURL(url);
-  }, [url]);
+    const blobUrl = URL.createObjectURL(file);
+    setUrl(blobUrl);
+    return () => URL.revokeObjectURL(blobUrl);
+  }, [file]);
+
+  if (!url) return <LoadingSpinner />;
 
   return (
     <div className="flex flex-col items-center gap-4 p-4">
