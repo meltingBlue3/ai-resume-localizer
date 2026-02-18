@@ -2,7 +2,21 @@
   "steps": {
     "upload": {
       "title": "履歴書アップロード",
-      "description": "中国語の履歴書ファイルをアップロードしてください（PDF/Word対応）。証明写真も添付可能です"
+      "description": "中国語の履歴書ファイルをアップロードしてください（PDF/Word対応）。証明写真も添付可能です",
+      "dropzone": "履歴書ファイルをここにドラッグ＆ドロップ、またはクリックして選択",
+      "dropzoneActive": "ファイルをドロップしてアップロード",
+      "fileAccepted": "ファイル選択済み",
+      "changeFile": "ファイルを変更",
+      "supportedFormats": "PDF・DOCX形式対応、最大10MB",
+      "photoLabel": "証明写真（任意）",
+      "photoDropzone": "クリックして写真をアップロード",
+      "photoFormats": "JPG/PNG対応、最大5MB",
+      "extractButton": "履歴書情報を抽出",
+      "extracting": "AIが履歴書を分析中...",
+      "extractError": "抽出に失敗しました",
+      "retry": "再試行",
+      "fileTooLarge": "ファイルが大きすぎます（最大{{max}}MB）",
+      "invalidType": "対応していないファイル形式です"
     },
     "reviewExtraction": {
       "title": "抽出内容の確認",

@@ -1,13 +1,45 @@
 import { useTranslation } from 'react-i18next';
 import { useWizardStore } from '../stores/useWizardStore.ts';
+import { useResumeStore } from '../stores/useResumeStore.ts';
+import { uploadAndExtract } from '../api/client.ts';
+import FileDropzone from '../components/upload/FileDropzone.tsx';
+import PhotoDropzone from '../components/upload/PhotoDropzone.tsx';
 
 export default function UploadStep() {
   const { t } = useTranslation('wizard');
-  const stepData = useWizardStore((s) => s.stepData[0] as { notes?: string } | undefined);
-  const setStepData = useWizardStore((s) => s.setStepData);
+  const nextStep = useWizardStore((s) => s.nextStep);
+
+  const resumeFile = useResumeStore((s) => s.resumeFile);
+  const photoFile = useResumeStore((s) => s.photoFile);
+  const isExtracting = useResumeStore((s) => s.isExtracting);
+  const extractionError = useResumeStore((s) => s.extractionError);
+
+  const setResumeFile = useResumeStore((s) => s.setResumeFile);
+  const setPhotoFile = useResumeStore((s) => s.setPhotoFile);
+  const setExtracting = useResumeStore((s) => s.setExtracting);
+  const setExtractionResult = useResumeStore((s) => s.setExtractionResult);
+  const setExtractionError = useResumeStore((s) => s.setExtractionError);
+
+  const handleExtract = async () => {
+    if (!resumeFile) return;
+
+    setExtracting(true);
+    setExtractionError(null);
+
+    try {
+      const response = await uploadAndExtract(resumeFile);
+      setExtractionResult(response.raw_text, response.cn_resume_data);
+      nextStep();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      setExtractionError(message);
+      setExtracting(false);
+    }
+  };
 
   return (
     <div className="space-y-6">
+      {/* Step header */}
       <div className="flex items-start gap-4">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-100">
           <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -20,22 +52,63 @@ export default function UploadStep() {
         </div>
       </div>
 
-      <div className="rounded-lg border-2 border-dashed border-slate-200 bg-slate-50 p-8 text-center">
-        <p className="text-sm text-slate-400">{t('placeholder')}</p>
+      {/* Dropzones: two columns on lg, stacked on mobile */}
+      <div className="grid gap-6 lg:grid-cols-[1fr_auto]">
+        <FileDropzone
+          onFileAccepted={setResumeFile}
+          currentFile={resumeFile}
+          disabled={isExtracting}
+        />
+        <div className="lg:w-48">
+          <PhotoDropzone
+            onPhotoAccepted={setPhotoFile}
+            currentPhoto={photoFile}
+            disabled={isExtracting}
+          />
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="upload-notes" className="mb-1.5 block text-sm font-medium text-slate-700">
-          {t('inputLabel')}
-        </label>
-        <input
-          id="upload-notes"
-          type="text"
-          value={stepData?.notes ?? ''}
-          onChange={(e) => setStepData(0, { ...stepData, notes: e.target.value })}
-          placeholder={t('inputPlaceholder')}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm transition-colors focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none"
-        />
+      {/* Error banner */}
+      {extractionError && (
+        <div className="flex items-center justify-between rounded-lg border border-red-200 bg-red-50 px-4 py-3">
+          <div className="flex items-center gap-2">
+            <svg className="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+            <span className="text-sm text-red-700">
+              {t('steps.upload.extractError')}: {extractionError}
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={handleExtract}
+            className="text-sm font-medium text-red-600 hover:text-red-700"
+          >
+            {t('steps.upload.retry')}
+          </button>
+        </div>
+      )}
+
+      {/* Extract button */}
+      <div className="flex justify-center">
+        <button
+          type="button"
+          disabled={!resumeFile || isExtracting}
+          onClick={handleExtract}
+          className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-500/20 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {isExtracting ? (
+            <>
+              <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              {t('steps.upload.extracting')}
+            </>
+          ) : (
+            t('steps.upload.extractButton')
+          )}
+        </button>
       </div>
     </div>
   );
