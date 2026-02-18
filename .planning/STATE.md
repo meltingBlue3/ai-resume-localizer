@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企业招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** Phase 2 — Upload & Extraction — COMPLETE
+**Current focus:** Phase 3 — Translation & Data Processing — IN PROGRESS
 
 ## Current Position
 
-Phase: 2 of 5 (Upload & Extraction) — COMPLETE
-Plan: 3 of 3 in current phase (all complete)
-Status: Phase 2 Complete — Awaiting verification
-Last activity: 2026-02-18 — Completed 02-03 (Review UI with human verification)
+Phase: 3 of 5 (Translation & Data Processing)
+Plan: 2 of 3 in current phase (03-01 in parallel, 03-02 complete)
+Status: Executing Phase 3
+Last activity: 2026-02-18 — Completed 03-02 (Frontend Data Layer)
 
-Progress: [████░░░░░░] 40%
+Progress: [█████░░░░░] 53%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
-- Average duration: ~7min
-- Total execution time: ~0.72 hours
+- Total plans completed: 7
+- Average duration: ~6.5min
+- Total execution time: ~0.76 hours
 
 **By Phase:**
 
@@ -29,10 +29,11 @@ Progress: [████░░░░░░] 40%
 |-------|-------|-------|----------|
 | 01-foundation | 3 | ~27min | ~9min |
 | 02-upload-extraction | 3 | ~15min | ~5min |
+| 03-translation-data-processing | 1 | ~4min | ~4min |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (~13min), 02-01 (~4min), 02-02 (~3min), 02-03 (~8min)
-- Trend: Fast (02-03 included human checkpoint + 2 bug fixes)
+- Last 5 plans: 02-01 (~4min), 02-02 (~3min), 02-03 (~8min), 03-02 (~4min)
+- Trend: Consistently fast for data-layer plans
 
 *Updated after each plan completion*
 
@@ -67,6 +68,10 @@ Recent decisions affecting current work:
 - [02-03]: react-pdf worker configured via new URL() + import.meta.url for Vite 7 compatibility
 - [02-03]: FONTCONFIG_FILE env var set before WeasyPrint import to resolve MSYS2 fontconfig on Windows
 - [02-03]: ResumeFieldEditor uses collapsible sections with immutable array update helpers
+- [03-02]: Intl.DateTimeFormat('ja-JP-u-ca-japanese') for wareki — zero library dependency, browser-native
+- [03-02]: Gannen (元年) handled via Unicode Script=Han regex, not hardcoded era boundaries
+- [03-02]: Store keeps pure state; step component orchestrates API calls (no translate store action)
+- [03-02]: @radix-ui/react-tooltip pre-installed for 03-03 UI plan
 
 ### Pending Todos
 
@@ -82,5 +87,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 02-03-PLAN.md (Review UI — Side-by-Side Layout) — Phase 2 COMPLETE
-Resume file: .planning/phases/02-upload-extraction/02-03-SUMMARY.md
+Stopped at: Completed 03-02-PLAN.md (Frontend Data Layer for Translation)
+Resume file: .planning/phases/03-translation-data-processing/03-02-SUMMARY.md
