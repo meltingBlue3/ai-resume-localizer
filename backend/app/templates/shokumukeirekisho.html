@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="base.css">
+    <style>
+        /* ===== Title and header ===== */
+        .title-table td {
+            border: none;
+            padding: 0 0 3mm 0;
+        }
+        .title-text {
+            font-size: 18pt;
+            font-weight: bold;
+            text-align: center;
+        }
+        .header-date {
+            text-align: right;
+            font-size: 10pt;
+        }
+        .header-name {
+            text-align: right;
+            font-size: 11pt;
+        }
+
+        /* ===== Section headers ===== */
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            border-bottom: 1.5pt solid #000;
+            padding: 2mm 0;
+            margin: 0;
+        }
+        .section-title-row td {
+            border: none;
+            padding: 5mm 0 1mm 0;
+        }
+
+        /* ===== Career summary ===== */
+        .summary-row td {
+            border: none;
+            padding: 2mm 0;
+            line-height: 1.8;
+        }
+
+        /* ===== Work history blocks ===== */
+        .company-header-row td {
+            border: none;
+            padding: 4mm 0 1mm 0;
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .company-meta-table td {
+            border: none;
+            padding: 1mm 2mm;
+            font-size: 9.5pt;
+            vertical-align: top;
+        }
+        .company-meta-label {
+            width: 25mm;
+            font-weight: bold;
+            color: #333;
+        }
+        .work-detail-row td {
+            border: none;
+            padding: 1mm 0 1mm 4mm;
+            font-size: 10pt;
+        }
+        .subsection-label {
+            border: none;
+            padding: 3mm 0 1mm 0;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .bullet-row td {
+            border: none;
+            padding: 0.5mm 0 0.5mm 6mm;
+            font-size: 10pt;
+            line-height: 1.6;
+        }
+
+        /* ===== Skills table ===== */
+        .skills-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            text-align: center;
+            height: 8mm;
+            vertical-align: middle;
+        }
+        .skills-table td {
+            height: 8mm;
+            vertical-align: middle;
+            padding: 2mm 3mm;
+        }
+        .skills-category {
+            width: 35mm;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* ===== Certifications table ===== */
+        .cert-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            text-align: center;
+            height: 8mm;
+            vertical-align: middle;
+        }
+        .cert-table td {
+            height: 8mm;
+            vertical-align: middle;
+            padding: 2mm 3mm;
+        }
+        .cert-date {
+            width: 30mm;
+            text-align: center;
+        }
+
+        /* ===== Self-PR section ===== */
+        .selfpr-row td {
+            border: none;
+            padding: 2mm 0;
+            line-height: 1.8;
+            font-size: 10pt;
+        }
+
+        /* ===== Separator line ===== */
+        .separator-row td {
+            border: none;
+            padding: 0;
+            height: 2mm;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 1                                                        -->
+<!-- ============================================================ -->
+<div class="page">
+
+    <!-- Title -->
+    <table class="title-table">
+        <tr>
+            <td class="title-text">職 務 経 歴 書</td>
+        </tr>
+    </table>
+
+    <!-- Date and Name -->
+    <table class="title-table">
+        <colgroup>
+            <col style="width: 50%;">
+            <col style="width: 50%;">
+        </colgroup>
+        <tr>
+            <td></td>
+            <td class="header-date">令和7年　2月　18日現在</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="header-name">山田　太郎</td>
+        </tr>
+    </table>
+
+    <!-- ===== 職務要約 (Career Summary) ===== -->
+    <table class="title-table">
+        <tr class="section-title-row">
+            <td><span class="section-title">職務要約</span></td>
+        </tr>
+    </table>
+    <table class="title-table">
+        <tr class="summary-row">
+            <td>
+                エンジニアとして約7年間、Webアプリケーション開発に従事してまいりました。株式会社ABCテクノロジーにてフロントエンドからバックエンドまで幅広い技術スタックを経験し、プロジェクトリーダーとしてチーム5名のマネジメントも担当いたしました。その後、株式会社グローバルソリューションズにてシニアエンジニアとして大規模マイクロサービスの設計・実装に携わり、CI/CDパイプラインの構築によりデリバリー速度を40%向上させた実績がございます。技術力とマネジメント力の両面で貴社に貢献できると考えております。
+            </td>
+        </tr>
+    </table>
+
+    <!-- ===== 職務経歴 (Work History) ===== -->
+    <table class="title-table">
+        <tr class="section-title-row">
+            <td><span class="section-title">職務経歴</span></td>
+        </tr>
+    </table>
+
+    <!-- Company 1 -->
+    <table class="title-table">
+        <tr class="company-header-row">
+            <td>株式会社グローバルソリューションズ　（令和5年4月〜令和7年1月）</td>
+        </tr>
+    </table>
+    <table>
+        <colgroup>
+            <col style="width: 25mm;">
+            <col>
+        </colgroup>
+        <tr>
+            <td class="company-meta-label no-border">事業内容：</td>
+            <td class="no-border" style="padding: 1mm 2mm; font-size: 9.5pt;">ITコンサルティング、Webサービスの企画・開発・運営（従業員数：約500名）</td>
+        </tr>
+        <tr>
+            <td class="company-meta-label no-border">雇用形態：</td>
+            <td class="no-border" style="padding: 1mm 2mm; font-size: 9.5pt;">正社員</td>
+        </tr>
+        <tr>
+            <td class="company-meta-label no-border">職位：</td>
+            <td class="no-border" style="padding: 1mm 2mm; font-size: 9.5pt;">シニアソフトウェアエンジニア</td>
+        </tr>
+    </table>
+
+    <table class="title-table">
+        <tr>
+            <td class="subsection-label">【業務内容】</td>
+        </tr>
+    </table>
+    <table class="title-table">
+        <tr class="bullet-row"><td>・BtoB向けSaaS型プロジェクト管理ツールのバックエンド設計・開発</td></tr>
+        <tr class="bullet-row"><td>・マイクロサービスアーキテクチャの設計と既存モノリスからの段階的移行</td></tr>
+        <tr class="bullet-row"><td>・CI/CDパイプライン（GitHub Actions + ArgoCD）の構築・運用</td></tr>
+        <tr class="bullet-row"><td>・パフォーマンスチューニングおよびデータベース最適化（PostgreSQL）</td></tr>
+        <tr class="bullet-row"><td>・海外拠点（シンガポール）の開発チームとの英語による技術コミュニケーション</td></tr>
+    </table>
+
+    <table class="title-table">
+        <tr>
+            <td class="subsection-label">【実績・成果】</td>
+        </tr>
+    </table>
+    <table class="title-table">
+        <tr class="bullet-row"><td>・マイクロサービス移行により、デプロイ頻度を月2回→週3回に向上</td></tr>
+        <tr class="bullet-row"><td>・CI/CDパイプライン構築でリリースリードタイムを60%短縮</td></tr>
+        <tr class="bullet-row"><td>・APIレスポンスタイムの最適化（平均200ms→80ms、60%改善）</td></tr>
+    </table>
+
+    <!-- Company 2 -->
+    <table class="title-table">
+        <tr class="company-header-row">
+            <td>株式会社ABCテクノロジー　（平成30年4月〜令和5年3月）</td>
+        </tr>
+    </table>
+    <table>
+        <colgroup>
+            <col style="width: 25mm;">
+            <col>
+        </colgroup>
+        <tr>
+            <td class="company-meta-label no-border">事業内容：</td>
+            <td class="no-border" style="padding: 1mm 2mm; font-size: 9.5pt;">Webアプリケーションの受託開発・自社サービス開発（従業員数：約200名）</td>
+        </tr>
+        <tr>
+            <td class="company-meta-label no-border">雇用形態：</td>
+            <td class="no-border" style="padding: 1mm 2mm; font-size: 9.5pt;">正社員</td>
+        </tr>
+        <tr>
+            <td class="company-meta-label no-border">職位：</td>
+            <td class="no-border" style="padding: 1mm 2mm; font-size: 9.5pt;">フロントエンドエンジニア → プロジェクトリーダー（令和2年10月昇進）</td>
+        </tr>
+    </table>
+
+    <table class="title-table">
+        <tr>
+            <td class="subsection-label">【業務内容】</td>
+        </tr>
+    </table>
+    <table class="title-table">
+        <tr class="bullet-row"><td>・自社ECプラットフォームのフロントエンド開発（React / TypeScript）</td></tr>
+        <tr class="bullet-row"><td>・REST APIの設計・実装（Python / FastAPI）</td></tr>
+        <tr class="bullet-row"><td>・受託案件のプロジェクトリーダーとして顧客折衝・要件定義・進捗管理を担当</td></tr>
+        <tr class="bullet-row"><td>・チームメンバー5名の技術指導およびコードレビュー</td></tr>
+        <tr class="bullet-row"><td>・単体テスト・結合テストの自動化推進（Jest / pytest）</td></tr>
+    </table>
+
+    <table class="title-table">
+        <tr>
+            <td class="subsection-label">【実績・成果】</td>
+        </tr>
+    </table>
+    <table class="title-table">
+        <tr class="bullet-row"><td>・ECプラットフォームのページ表示速度を50%改善（LCP 4.2s→2.1s）</td></tr>
+        <tr class="bullet-row"><td>・テストカバレッジを30%→80%に向上、本番障害件数を年間15件→3件に削減</td></tr>
+        <tr class="bullet-row"><td>・プロジェクトリーダーとして3件の受託案件を予算内・納期内で完遂</td></tr>
+    </table>
+
+    <!-- ===== 活かせる経験・知識・技術 (Skills) ===== -->
+    <table class="title-table">
+        <tr class="section-title-row">
+            <td><span class="section-title">活かせる経験・知識・技術</span></td>
+        </tr>
+    </table>
+    <table class="skills-table">
+        <colgroup>
+            <col style="width: 35mm;">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>カテゴリ</th>
+                <th>詳細</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="skills-category">プログラミング言語</td>
+                <td>TypeScript、JavaScript、Python、Go</td>
+            </tr>
+            <tr>
+                <td class="skills-category">フレームワーク</td>
+                <td>React、Next.js、FastAPI、Express.js</td>
+            </tr>
+            <tr>
+                <td class="skills-category">データベース</td>
+                <td>PostgreSQL、MySQL、Redis、MongoDB</td>
+            </tr>
+            <tr>
+                <td class="skills-category">インフラ・DevOps</td>
+                <td>Docker、Kubernetes、AWS（EC2, ECS, RDS, S3）、GitHub Actions、ArgoCD</td>
+            </tr>
+            <tr>
+                <td class="skills-category">その他</td>
+                <td>Git、REST API設計、マイクロサービス、アジャイル開発（スクラム）、チームマネジメント</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ===== 資格 (Certifications) ===== -->
+    <table class="title-table">
+        <tr class="section-title-row">
+            <td><span class="section-title">資格</span></td>
+        </tr>
+    </table>
+    <table class="cert-table">
+        <colgroup>
+            <col style="width: 30mm;">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>取得年月</th>
+                <th>資格名</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="cert-date">平成29年11月</td>
+                <td>基本情報技術者試験</td>
+            </tr>
+            <tr>
+                <td class="cert-date">令和元年6月</td>
+                <td>応用情報技術者試験</td>
+            </tr>
+            <tr>
+                <td class="cert-date">令和3年12月</td>
+                <td>TOEIC 850点</td>
+            </tr>
+            <tr>
+                <td class="cert-date">令和4年7月</td>
+                <td>日本語能力試験 N1</td>
+            </tr>
+            <tr>
+                <td class="cert-date">令和5年3月</td>
+                <td>AWS Certified Solutions Architect – Associate</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ===== 自己PR (Self-PR) ===== -->
+    <table class="title-table">
+        <tr class="section-title-row">
+            <td><span class="section-title">自己PR</span></td>
+        </tr>
+    </table>
+    <table class="title-table">
+        <tr class="selfpr-row">
+            <td>
+                【技術力と課題解決力】<br>
+                フロントエンドからバックエンド、インフラまでフルスタックの技術力を持ち、技術選定から実装まで一貫して対応できます。特にパフォーマンス最適化においては、ECサイトのLCPを50%改善、API応答速度を60%改善するなど、定量的な成果を上げてまいりました。技術的な課題に対して仮説を立て、データに基づいて検証・改善するアプローチを大切にしております。
+            </td>
+        </tr>
+        <tr class="selfpr-row">
+            <td>
+                【マネジメント力とコミュニケーション力】<br>
+                プロジェクトリーダーとして5名のチームを率い、顧客折衝から進捗管理まで幅広く経験しました。メンバーの強みを活かしたタスク分配と、定期的な1on1を通じたモチベーション管理により、3件の受託案件すべてを予算内・納期内で完遂いたしました。海外拠点との英語でのコミュニケーション経験もあり、グローバルな環境での業務にも対応可能です。
+            </td>
+        </tr>
+        <tr class="selfpr-row">
+            <td>
+                【継続的な学習姿勢】<br>
+                新しい技術やベストプラクティスへのキャッチアップを常に心がけており、AWS認定資格の取得や技術ブログの執筆を通じて知識の定着・発信に努めております。今後はアーキテクト領域のスキルをさらに深め、より大規模なシステム設計に挑戦したいと考えております。
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
