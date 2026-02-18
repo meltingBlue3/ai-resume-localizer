@@ -11,6 +11,7 @@ import type {
 interface ResumeFieldEditorProps {
   data: CnResumeData;
   onChange: (data: CnResumeData) => void;
+  readOnly?: boolean;
 }
 
 function updateAt<T>(arr: T[], index: number, patch: Partial<T>): T[] {
@@ -59,18 +60,24 @@ function FieldInput({
   value,
   onChange,
   multiline = false,
+  readOnly = false,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   multiline?: boolean;
+  readOnly?: boolean;
 }) {
   const cls =
     'w-full rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-800 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none';
   return (
     <label className="block">
       <span className="mb-1 block text-xs font-medium text-slate-500">{label}</span>
-      {multiline ? (
+      {readOnly ? (
+        <p className={`text-sm text-gray-800 py-1 ${multiline ? 'whitespace-pre-wrap' : ''}`}>
+          {value || '\u00A0'}
+        </p>
+      ) : multiline ? (
         <textarea rows={3} className={cls} value={value} onChange={(e) => onChange(e.target.value)} />
       ) : (
         <input type="text" className={cls} value={value} onChange={(e) => onChange(e.target.value)} />
@@ -106,7 +113,7 @@ function RemoveButton({ label, onClick }: { label: string; onClick: () => void }
   );
 }
 
-export default function ResumeFieldEditor({ data, onChange }: ResumeFieldEditorProps) {
+export default function ResumeFieldEditor({ data, onChange, readOnly = false }: ResumeFieldEditorProps) {
   const { t } = useTranslation('wizard');
   const f = (key: string) => t(`steps.reviewExtraction.fields.${key}`);
   const s = (key: string) => t(`steps.reviewExtraction.sections.${key}`);
@@ -147,6 +154,7 @@ export default function ResumeFieldEditor({ data, onChange }: ResumeFieldEditorP
               label={label}
               value={(data[key] as string) ?? ''}
               onChange={(v) => set({ [key]: v || null })}
+              readOnly={readOnly}
             />
           ))}
         </div>
@@ -157,19 +165,21 @@ export default function ResumeFieldEditor({ data, onChange }: ResumeFieldEditorP
         <div className="space-y-3">
           {education.map((entry, i) => (
             <div key={i} className="space-y-2 rounded-md border border-slate-100 bg-slate-50 p-3">
-              <div className="flex justify-end">
-                <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ education: removeAt(education, i) })} />
-              </div>
+              {!readOnly && (
+                <div className="flex justify-end">
+                  <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ education: removeAt(education, i) })} />
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-2">
-                <FieldInput label={f('school')} value={entry.school ?? ''} onChange={(v) => set({ education: updateAt(education, i, { school: v || null }) })} />
-                <FieldInput label={f('major')} value={entry.major ?? ''} onChange={(v) => set({ education: updateAt(education, i, { major: v || null }) })} />
-                <FieldInput label={f('degree')} value={entry.degree ?? ''} onChange={(v) => set({ education: updateAt(education, i, { degree: v || null }) })} />
-                <FieldInput label={f('startDate')} value={entry.start_date ?? ''} onChange={(v) => set({ education: updateAt(education, i, { start_date: v || null }) })} />
-                <FieldInput label={f('endDate')} value={entry.end_date ?? ''} onChange={(v) => set({ education: updateAt(education, i, { end_date: v || null }) })} />
+                <FieldInput label={f('school')} value={entry.school ?? ''} onChange={(v) => set({ education: updateAt(education, i, { school: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('major')} value={entry.major ?? ''} onChange={(v) => set({ education: updateAt(education, i, { major: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('degree')} value={entry.degree ?? ''} onChange={(v) => set({ education: updateAt(education, i, { degree: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('startDate')} value={entry.start_date ?? ''} onChange={(v) => set({ education: updateAt(education, i, { start_date: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('endDate')} value={entry.end_date ?? ''} onChange={(v) => set({ education: updateAt(education, i, { end_date: v || null }) })} readOnly={readOnly} />
               </div>
             </div>
           ))}
-          <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ education: [...education, emptyEdu] })} />
+          {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ education: [...education, emptyEdu] })} />}
         </div>
       </CollapsibleSection>
 
@@ -178,20 +188,22 @@ export default function ResumeFieldEditor({ data, onChange }: ResumeFieldEditorP
         <div className="space-y-3">
           {workExp.map((entry, i) => (
             <div key={i} className="space-y-2 rounded-md border border-slate-100 bg-slate-50 p-3">
-              <div className="flex justify-end">
-                <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ work_experience: removeAt(workExp, i) })} />
-              </div>
+              {!readOnly && (
+                <div className="flex justify-end">
+                  <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ work_experience: removeAt(workExp, i) })} />
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-2">
-                <FieldInput label={f('company')} value={entry.company ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { company: v || null }) })} />
-                <FieldInput label={f('position')} value={entry.position ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { position: v || null }) })} />
-                <FieldInput label={f('department')} value={entry.department ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { department: v || null }) })} />
-                <FieldInput label={f('startDate')} value={entry.start_date ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { start_date: v || null }) })} />
-                <FieldInput label={f('endDate')} value={entry.end_date ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { end_date: v || null }) })} />
+                <FieldInput label={f('company')} value={entry.company ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { company: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('position')} value={entry.position ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { position: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('department')} value={entry.department ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { department: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('startDate')} value={entry.start_date ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { start_date: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('endDate')} value={entry.end_date ?? ''} onChange={(v) => set({ work_experience: updateAt(workExp, i, { end_date: v || null }) })} readOnly={readOnly} />
               </div>
-              <FieldInput label={f('description')} value={entry.description ?? ''} multiline onChange={(v) => set({ work_experience: updateAt(workExp, i, { description: v || null }) })} />
+              <FieldInput label={f('description')} value={entry.description ?? ''} multiline onChange={(v) => set({ work_experience: updateAt(workExp, i, { description: v || null }) })} readOnly={readOnly} />
             </div>
           ))}
-          <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ work_experience: [...workExp, emptyWork] })} />
+          {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ work_experience: [...workExp, emptyWork] })} />}
         </div>
       </CollapsibleSection>
 
@@ -201,15 +213,15 @@ export default function ResumeFieldEditor({ data, onChange }: ResumeFieldEditorP
           {skills.map((entry, i) => (
             <div key={i} className="flex items-end gap-2">
               <div className="flex-1">
-                <FieldInput label={f('skillName')} value={entry.name ?? ''} onChange={(v) => set({ skills: updateAt(skills, i, { name: v || null }) })} />
+                <FieldInput label={f('skillName')} value={entry.name ?? ''} onChange={(v) => set({ skills: updateAt(skills, i, { name: v || null }) })} readOnly={readOnly} />
               </div>
               <div className="flex-1">
-                <FieldInput label={f('skillLevel')} value={entry.level ?? ''} onChange={(v) => set({ skills: updateAt(skills, i, { level: v || null }) })} />
+                <FieldInput label={f('skillLevel')} value={entry.level ?? ''} onChange={(v) => set({ skills: updateAt(skills, i, { level: v || null }) })} readOnly={readOnly} />
               </div>
-              <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ skills: removeAt(skills, i) })} />
+              {!readOnly && <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ skills: removeAt(skills, i) })} />}
             </div>
           ))}
-          <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ skills: [...skills, emptySkill] })} />
+          {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ skills: [...skills, emptySkill] })} />}
         </div>
       </CollapsibleSection>
 
@@ -219,15 +231,15 @@ export default function ResumeFieldEditor({ data, onChange }: ResumeFieldEditorP
           {certs.map((entry, i) => (
             <div key={i} className="flex items-end gap-2">
               <div className="flex-1">
-                <FieldInput label={f('certName')} value={entry.name ?? ''} onChange={(v) => set({ certifications: updateAt(certs, i, { name: v || null }) })} />
+                <FieldInput label={f('certName')} value={entry.name ?? ''} onChange={(v) => set({ certifications: updateAt(certs, i, { name: v || null }) })} readOnly={readOnly} />
               </div>
               <div className="flex-1">
-                <FieldInput label={f('certDate')} value={entry.date ?? ''} onChange={(v) => set({ certifications: updateAt(certs, i, { date: v || null }) })} />
+                <FieldInput label={f('certDate')} value={entry.date ?? ''} onChange={(v) => set({ certifications: updateAt(certs, i, { date: v || null }) })} readOnly={readOnly} />
               </div>
-              <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ certifications: removeAt(certs, i) })} />
+              {!readOnly && <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ certifications: removeAt(certs, i) })} />}
             </div>
           ))}
-          <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ certifications: [...certs, emptyCert] })} />
+          {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ certifications: [...certs, emptyCert] })} />}
         </div>
       </CollapsibleSection>
 
@@ -245,21 +257,22 @@ export default function ResumeFieldEditor({ data, onChange }: ResumeFieldEditorP
                     updated[i] = v;
                     set({ languages: updated });
                   }}
+                  readOnly={readOnly}
                 />
               </div>
-              <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ languages: removeAt(langs, i) })} />
+              {!readOnly && <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ languages: removeAt(langs, i) })} />}
             </div>
           ))}
-          <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ languages: [...langs, ''] })} />
+          {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ languages: [...langs, ''] })} />}
         </div>
       </CollapsibleSection>
 
       {/* Other */}
       <CollapsibleSection title={s('other')}>
         <div className="space-y-3">
-          <FieldInput label={f('selfIntroduction')} value={data.self_introduction ?? ''} multiline onChange={(v) => set({ self_introduction: v || null })} />
-          <FieldInput label={f('careerObjective')} value={data.career_objective ?? ''} multiline onChange={(v) => set({ career_objective: v || null })} />
-          <FieldInput label={f('hobbies')} value={data.hobbies ?? ''} onChange={(v) => set({ hobbies: v || null })} />
+          <FieldInput label={f('selfIntroduction')} value={data.self_introduction ?? ''} multiline onChange={(v) => set({ self_introduction: v || null })} readOnly={readOnly} />
+          <FieldInput label={f('careerObjective')} value={data.career_objective ?? ''} multiline onChange={(v) => set({ career_objective: v || null })} readOnly={readOnly} />
+          <FieldInput label={f('hobbies')} value={data.hobbies ?? ''} onChange={(v) => set({ hobbies: v || null })} readOnly={readOnly} />
 
           {/* Project Experience */}
           <div>
@@ -267,19 +280,21 @@ export default function ResumeFieldEditor({ data, onChange }: ResumeFieldEditorP
             <div className="space-y-3">
               {projects.map((entry, i) => (
                 <div key={i} className="space-y-2 rounded-md border border-slate-100 bg-slate-50 p-3">
-                  <div className="flex justify-end">
-                    <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ project_experience: removeAt(projects, i) })} />
-                  </div>
+                  {!readOnly && (
+                    <div className="flex justify-end">
+                      <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ project_experience: removeAt(projects, i) })} />
+                    </div>
+                  )}
                   <div className="grid grid-cols-2 gap-2">
-                    <FieldInput label={f('company')} value={entry.company ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { company: v || null }) })} />
-                    <FieldInput label={f('position')} value={entry.position ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { position: v || null }) })} />
-                    <FieldInput label={f('startDate')} value={entry.start_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { start_date: v || null }) })} />
-                    <FieldInput label={f('endDate')} value={entry.end_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { end_date: v || null }) })} />
+                    <FieldInput label={f('company')} value={entry.company ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { company: v || null }) })} readOnly={readOnly} />
+                    <FieldInput label={f('position')} value={entry.position ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { position: v || null }) })} readOnly={readOnly} />
+                    <FieldInput label={f('startDate')} value={entry.start_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { start_date: v || null }) })} readOnly={readOnly} />
+                    <FieldInput label={f('endDate')} value={entry.end_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { end_date: v || null }) })} readOnly={readOnly} />
                   </div>
-                  <FieldInput label={f('description')} value={entry.description ?? ''} multiline onChange={(v) => set({ project_experience: updateAt(projects, i, { description: v || null }) })} />
+                  <FieldInput label={f('description')} value={entry.description ?? ''} multiline onChange={(v) => set({ project_experience: updateAt(projects, i, { description: v || null }) })} readOnly={readOnly} />
                 </div>
               ))}
-              <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ project_experience: [...projects, emptyWork] })} />
+              {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ project_experience: [...projects, emptyWork] })} />}
             </div>
           </div>
 
@@ -298,12 +313,13 @@ export default function ResumeFieldEditor({ data, onChange }: ResumeFieldEditorP
                         updated[i] = v;
                         set({ awards: updated });
                       }}
+                      readOnly={readOnly}
                     />
                   </div>
-                  <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ awards: removeAt(awards, i) })} />
+                  {!readOnly && <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ awards: removeAt(awards, i) })} />}
                 </div>
               ))}
-              <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ awards: [...awards, ''] })} />
+              {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ awards: [...awards, ''] })} />}
             </div>
           </div>
         </div>
