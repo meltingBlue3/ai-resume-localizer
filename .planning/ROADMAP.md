@@ -45,12 +45,12 @@ Plans:
   1. User can upload a Chinese resume in PDF or DOCX format and optionally attach a photo
   2. System extracts structured Chinese JSON from the uploaded resume via Dify workflow, normalizing varying formats into the canonical schema with missing fields marked as null
   3. User can review extracted data in a side-by-side view (original resume on left, structured fields on right) and edit any field before proceeding to translation
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
-- [ ] 02-03: TBD
+- [ ] 02-01-PLAN.md — Backend pipeline: Pydantic data models, text extraction (PyMuPDF + python-docx), Dify client, POST /api/upload-and-extract endpoint
+- [ ] 02-02-PLAN.md — Upload UI: typed Zustand store, API client, react-dropzone file/photo upload, UploadStep replacement
+- [ ] 02-03-PLAN.md — Review UI: DocumentViewer (react-pdf + docx-preview), ResumeFieldEditor, side-by-side ReviewExtractionStep + human verify
 
 ### Phase 3: Translation & Data Processing
 **Goal**: Users can review and edit AI-translated Japanese resume data with furigana, credential mapping, keigo, era dates, and culture tips applied
@@ -107,7 +107,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Risk Mitigation | 3/3 | ✓ Complete | 2026-02-18 |
-| 2. Upload & Extraction | 0/TBD | Not started | - |
+| 2. Upload & Extraction | 0/3 | Not started | - |
 | 3. Translation & Data Processing | 0/TBD | Not started | - |
 | 4. Preview & PDF Generation | 0/TBD | Not started | - |
 | 5. Polish & Production Readiness | 0/TBD | Not started | - |
