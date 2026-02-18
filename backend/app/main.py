@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 
+from app.api.router import api_router
 from app.services.pdf_generator import generate_pdf_from_template
 
 app = FastAPI(title="AI Resume Localizer")
@@ -12,6 +13,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(api_router)
 
 TEMPLATE_MAP = {
     "rirekisho": "rirekisho.html",
