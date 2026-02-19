@@ -2,7 +2,7 @@
 
 ## What This Is
 
-一个专业的Web应用，帮助用户将中文简历自动转换为符合日本标准的日文简历（履歴書 和 職務経歴書）。系统通过Dify AI工作流实现简历内容提取和日文翻译，通过HTML模板渲染生成符合JIS标准的PDF文件。面向需要将中文简历转化为日文简历的求职者和招聘机构。
+一个专业的Web应用，帮助用户将中文简历自动转换为符合日本标准的日文简历（履歴書 和 職務経歴書）。系统通过Dify AI工作流实现简历内容提取和日文翻译，通过Jinja2 HTML模板渲染生成符合JIS标准的PDF文件。支持Docker部署，面向需要将中文简历转化为日文简历的求职者和招聘机构。
 
 ## Core Value
 
@@ -12,20 +12,27 @@
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ 用户可上传中文简历（PDF/Word格式）并可选上传证件照 — v1.0
+- ✓ 系统通过Dify工作流提取简历结构化信息（JSON格式） — v1.0
+- ✓ 用户可在侧对侧界面中审核和编辑提取结果（左侧原始简历，右侧结构化字段） — v1.0
+- ✓ 系统通过Dify工作流将中文信息翻译为日文（双节点：核心翻译 + 本地化处理） — v1.0
+- ✓ 用户可在侧对侧界面中审核和编辑翻译结果（左侧中文，右侧可编辑日文） — v1.0
+- ✓ 系统生成符合JIS标准的履歴書 HTML预览 — v1.0
+- ✓ 系统生成标准的職務経歴書 HTML预览 — v1.0
+- ✓ 用户可下载履歴書和職務経歴書的PDF文件 — v1.0
+- ✓ Web界面为生产级质量，支持中文/日文双语 — v1.0
+- ✓ 未提供的信息标注为null，PDF生成时做兜底处理（显示"未記入"） — v1.0
+- ✓ 汉字名自动转换片假名，中文学历对应日文等级（本科→学士等） — v1.0
+- ✓ 日期转换为和暦格式（令和/平成/昭和），元年正确处理 — v1.0
+- ✓ 关键字段提供日本简历文化提示（tooltip） — v1.0
+- ✓ AI处理期间显示分阶段加载状态 — v1.0
+- ✓ API失败时展示可操作的分类错误信息，不崩溃不丢失数据 — v1.0
+- ✓ 任意时刻可查看简历字段填写完整度指示器 — v1.0
+- ✓ Docker部署支持（backend + frontend + nginx） — v1.0
 
 ### Active
 
-- [ ] 用户可上传中文简历（PDF/Word格式）并可选上传证件照
-- [ ] 系统通过Dify工作流提取简历结构化信息（JSON格式）
-- [ ] 用户可在侧对侧界面中审核和编辑提取结果（左侧原始简历，右侧结构化字段）
-- [ ] 系统通过Dify工作流将中文信息翻译为日文（双节点：核心翻译 + 本地化处理）
-- [ ] 用户可在侧对侧界面中审核和编辑翻译结果（左侧中文，右侧可编辑日文）
-- [ ] 系统生成符合JIS标准的履歴書 HTML预览
-- [ ] 系统生成標準的職務経歴書 HTML预览
-- [ ] 用户可下载履歴書和職務経歴書的PDF文件
-- [ ] Web界面为生产级质量，支持中文/日文双语
-- [ ] 未提供的信息标注为null，PDF生成时做兜底处理
+*(Next milestone requirements will be defined here)*
 
 ### Out of Scope
 
@@ -34,41 +41,42 @@
 - OAuth/第三方登录 — 不需要
 - 移动端App — Web优先
 - 实时协作编辑 — 单用户使用场景
+- OCR支持（扫描版PDF） — v2功能
+- 自定义简历模板 — 履歴書有唯一JIS标准格式
 
 ## Context
 
-- **业务背景**: 全球化招聘推进中，企业需要快速将中文简历转换为日本标准格式
-- **Dify平台**: 使用Dify Cloud（SaaS版）部署AI工作流，通过API调用
-- **两个Dify工作流**:
-  - 工作流1: 信息提取 — 从中文简历原始文本提取结构化JSON数据
-  - 工作流2: 日文翻译 — 双节点流水线（核心翻译 → 日本本地化），输出日文JSON
-  - 每个工作流配置独立的API Key
-- **PDF格式要求**: 严格遵循日本履歴書（JIS标准）和職務経歴書格式规范
-- **简历解析**: 可结合OCR技术处理扫描版PDF
-- **翻译质量**: 需符合日语商务文书规范，专业术语准确，日期格式/职位名称等本地化
-- **交付要求**: 源代码含中文注释，技术文档用中文
+- **当前状态**: v1.0 MVP已发布。~2,929行TypeScript/TSX + ~950行Python，147个文件。
+- **技术栈**: React 19 + Vite + Tailwind + Zustand + react-i18next（前端）；FastAPI + WeasyPrint + Jinja2 + Dify Client（后端）；nginx + Docker Compose（部署）
+- **两个Dify工作流**: 工作流1（信息提取）+ 工作流2（日文翻译，双节点）
+- **PDF格式**: WeasyPrint 63.1 + Noto Sans JP字体，CSS表格布局（无flexbox/grid），严格遵循JIS/MHLW格式规范
+- **已知限制**: Dify Cloud免费版限200条消息额度；Windows环境需要MSYS2 ucrt64的Pango/Cairo DLLs
+- **技术债务（低优先级）**: PhotoDropzone.tsx和photoFile存储字段在quick-005后成为死代码；预览步骤的"完成"按钮无实际操作
 
 ## Constraints
 
 - **AI平台**: Dify Cloud — 已确定使用Dify作为AI工作流平台
 - **前端**: React — 使用React构建前端应用
 - **后端**: Python（FastAPI）— 处理文件上传、调用Dify API、PDF生成
-- **PDF生成**: HTML/CSS → PDF — 通过HTML模板渲染后转PDF（如WeasyPrint/Playwright）
-- **简历格式**: JIS标准 — 履歴書采用JIS标准格式
-- **信息提取准确率**: ≥90%
-- **格式兼容性**: 能处理至少80%的常见中文简历格式
-- **翻译专业度**: 达到商务使用标准
+- **PDF生成**: HTML/CSS → PDF — 通过Jinja2模板渲染后用WeasyPrint转PDF
+- **简历格式**: JIS标准 — 履歴書采用JIS标准格式（2021年修订版）
+- **信息提取准确率**: ≥90%（依赖Dify工作流质量）
+- **格式兼容性**: 能处理至少80%的常见中文简历格式（PDF + DOCX）
+- **翻译专业度**: 达到商务使用标准（依赖Dify工作流质量）
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| 使用Dify Cloud而非自部署 | 降低运维复杂度，快速上线 | — Pending |
-| React前端 | 组件化开发，丰富的生态系统 | — Pending |
-| Python FastAPI后端 | 异步支持好，适合IO密集的API调用场景 | — Pending |
-| HTML-to-PDF生成方案 | 相比模板填充，CSS控制力更强，适合复杂的JIS表格布局 | — Pending |
-| 步骤式用户流程（4步） | 每步可审核修正，提升输出质量和用户信任 | — Pending |
-| 中日双语界面 | 目标用户群体涵盖中文和日文使用者 | — Pending |
+| 使用Dify Cloud而非自部署 | 降低运维复杂度，快速上线 | ✓ Good — API稳定，双工作流独立密钥管理清晰 |
+| React前端 + Zustand状态 | 组件化开发，状态跨步骤持久化不序列化File对象 | ✓ Good — 无persist middleware，避免File对象序列化问题 |
+| Python FastAPI后端 | 异步支持好，适合IO密集的API调用场景 | ✓ Good — Dify调用90s超时管理清晰 |
+| HTML-to-PDF（WeasyPrint + CSS表格） | CSS控制力强，适合复杂JIS表格布局；零flexbox/grid | ✓ Good — 双模板人工验证通过，字体嵌入正常 |
+| 步骤式用户流程（4步） | 每步可审核修正，提升输出质量和用户信任 | ✓ Good — DownloadStep合并进PreviewStep后更简洁 |
+| 中日双语界面（react-i18next） | 目标用户群体涵盖中文和日文使用者 | ✓ Good — 零硬编码字符串，语言切换即时生效 |
+| 和暦转换用Intl.DateTimeFormat | 零库依赖，浏览器原生；Gannen用Unicode正则 | ✓ Good — 元年/令和元年边界测试通过 |
+| iframe srcdoc预览 + allow-scripts | 自包含HTML（内联CSS），ResizeObserver缩放A4 | ✓ Good — quick-011修复srcdoc sandbox后正常渲染 |
+| Docker Compose多容器部署 | backend + frontend + nginx分离，nginx代理/api/* | ✓ Good — .mjs MIME类型（quick-009）修复后PDF.js worker正常 |
 
 ---
-*Last updated: 2026-02-18 after initialization*
+*Last updated: 2026-02-20 after v1.0 milestone*
