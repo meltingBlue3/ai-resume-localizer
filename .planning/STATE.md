@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 Phase: 5 of 5 (Polish & Production Readiness) — COMPLETE
 Plan: 2 of 2 in current phase — COMPLETE
 Status: All phases complete. Project fully implemented.
-Last activity: 2026-02-19 - Completed quick task 001: 前端问题：审核提取页面、审核翻译页面、预览简历页面，左右有对比的页面，宽度太窄，请尽量拉长宽度和高度
+Last activity: 2026-02-19 - Completed quick task 002: Fix panel height overflow so nav buttons always visible
 
 Progress: [██████████] 100% (All 5 phases complete, all 14 plans executed)
 
@@ -107,6 +107,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 001 | 前端问题：审核提取页面、审核翻译页面、预览简历页面，左右有对比的页面，宽度太窄，请尽量拉长宽度和高度 | 2026-02-19 | 83b2da3 | [001-widen-review-preview-pages](./quick/001-widen-review-preview-pages/) |
+| 002 | Fix panel height overflow so nav buttons always visible on review/preview steps | 2026-02-19 | 40aadad | [002-fix-panel-height-overflow](./quick/002-fix-panel-height-overflow/) |
 
 ### Blockers/Concerns
 
@@ -118,5 +119,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 05-02-PLAN.md — All phases complete
+Stopped at: Completed quick task 002 — Fix panel height overflow
 Resume file: N/A — project fully implemented
