@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 Phase: 5 of 5 (Polish & Production Readiness) — COMPLETE
 Plan: 2 of 2 in current phase — COMPLETE
 Status: All phases complete. Project fully implemented.
-Last activity: 2026-02-20 - Completed quick task 009: Fix Docker PDF worker MIME type error
+Last activity: 2026-02-20 - Completed quick task 011: Fix blocked script execution in about:srcdoc
 
 Progress: [██████████] 100% (All 5 phases complete, all 14 plans executed)
 
@@ -115,6 +115,7 @@ None yet.
 | 007 | Fix wareki conversion for YYYY-MM date format (frontend + backend) | 2026-02-19 | 6a2f601 | [7-fix-wareki-conversion-for-yyyy-mm-date-f](./quick/7-fix-wareki-conversion-for-yyyy-mm-date-f/) |
 | 008 | Docker support with multi-container compose (backend + frontend + nginx) | 2026-02-20 | 0b32c06 | [8-docker](./quick/8-docker/) |
 | 009 | Fix nginx .mjs MIME type for PDF.js worker in Docker | 2026-02-20 | b6bf4ab | [9-fix-docker-pdf-worker-mime-type-error-ng](./quick/9-fix-docker-pdf-worker-mime-type-error-ng/) |
+| 011 | Fix blocked script execution in about:srcdoc iframe | 2026-02-20 | 684af5c | [11-blocked-script-execution-in-about-srcdoc](./quick/11-blocked-script-execution-in-about-srcdoc/) |
 
 ### Blockers/Concerns
 
@@ -126,5 +127,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed quick task 009 — Fix Docker PDF worker MIME type error
+Stopped at: Completed quick task 011 — Fix blocked script execution in about:srcdoc
 Resume file: N/A — project fully implemented
