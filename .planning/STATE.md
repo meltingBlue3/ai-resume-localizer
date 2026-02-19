@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 Phase: 5 of 5 (Polish & Production Readiness) — COMPLETE
 Plan: 2 of 2 in current phase — COMPLETE
 Status: All phases complete. Project fully implemented.
-Last activity: 2026-02-20 - Completed quick task 008: Docker support with multi-container compose
+Last activity: 2026-02-20 - Completed quick task 009: Fix Docker PDF worker MIME type error
 
 Progress: [██████████] 100% (All 5 phases complete, all 14 plans executed)
 
@@ -114,6 +114,7 @@ None yet.
 | 006 | Fix PDF year cells (strip trailing 年) and two-row education/work format | 2026-02-19 | 6ecae56 | [6-fix-pdf-generation-date-year-month-in-ta](./quick/6-fix-pdf-generation-date-year-month-in-ta/) |
 | 007 | Fix wareki conversion for YYYY-MM date format (frontend + backend) | 2026-02-19 | 6a2f601 | [7-fix-wareki-conversion-for-yyyy-mm-date-f](./quick/7-fix-wareki-conversion-for-yyyy-mm-date-f/) |
 | 008 | Docker support with multi-container compose (backend + frontend + nginx) | 2026-02-20 | 0b32c06 | [8-docker](./quick/8-docker/) |
+| 009 | Fix nginx .mjs MIME type for PDF.js worker in Docker | 2026-02-20 | b6bf4ab | [9-fix-docker-pdf-worker-mime-type-error-ng](./quick/9-fix-docker-pdf-worker-mime-type-error-ng/) |
 
 ### Blockers/Concerns
 
@@ -125,5 +126,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Completed quick task 008 — Docker support with multi-container compose
+Stopped at: Completed quick task 009 — Fix Docker PDF worker MIME type error
 Resume file: N/A — project fully implemented
