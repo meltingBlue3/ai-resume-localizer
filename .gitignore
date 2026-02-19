@@ -34,3 +34,9 @@ node_modules/
 
 # Build output
 frontend/dist/
+
+# Claude
+.claude/
+
+# TypeScript incremental build cache
+*.tsbuildinfo

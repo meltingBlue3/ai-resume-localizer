@@ -1,0 +1,307 @@
+app:
+  description: 将中文简历纯文本解析为符合日本简历标准的结构化JSON数据，供后端 /api/upload-and-extract 接口消费
+  icon: 📄
+  icon_background: '#E8F4FD'
+  mode: workflow
+  name: 中文简历结构化提取
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.3
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions: []
+      allowed_file_types: []
+      allowed_file_upload_methods: []
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+          - local_file
+          - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+      - data:
+          isInIteration: false
+          sourceType: start
+          targetType: llm
+        id: 1740000000001-source-1740000000002-target
+        selected: false
+        source: '1740000000001'
+        sourceHandle: source
+        target: '1740000000002'
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          sourceType: llm
+          targetType: code
+        id: 1740000000002-source-1740000000003-target
+        selected: false
+        source: '1740000000002'
+        sourceHandle: source
+        target: '1740000000003'
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          sourceType: code
+          targetType: end
+        id: 1740000000003-source-1740000000004-target
+        selected: false
+        source: '1740000000003'
+        sourceHandle: source
+        target: '1740000000004'
+        targetHandle: target
+        type: custom
+        zIndex: 0
+    nodes:
+      # ── Node 1: Start ────────────────────────────────────────────────────────
+      - data:
+          desc: 接收由后端 text_extractor 提取的中文简历纯文本
+          selected: false
+          title: 开始
+          type: start
+          variables:
+            - label: 简历文本
+              max_length: 15000
+              options: []
+              required: true
+              type: paragraph
+              variable: resume_text
+        height: 90
+        id: '1740000000001'
+        position:
+          x: 80
+          y: 282
+        positionAbsolute:
+          x: 80
+          y: 282
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 244
+
+      # ── Node 2: LLM ──────────────────────────────────────────────────────────
+      - data:
+          context:
+            enabled: false
+            variable_selector: []
+          desc: 使用大模型从简历文本中提取所有关键字段，输出纯JSON
+          model:
+            completion_params:
+              frequency_penalty: 0
+              max_tokens: 4096
+              presence_penalty: 0
+              temperature: 0.1
+              top_p: 1
+            mode: chat
+            # 导入后请在 Dify UI 中切换为已配置的模型（如 gpt-4o / claude-3-5-sonnet）
+            name: gpt-4o
+            provider: openai
+          prompt_template:
+            - id: a1b2c3d4-0001-0001-0001-000000000001
+              role: system
+              text: |
+                你是一位专业的中文简历解析专家。你的任务是从用户提供的中文简历文本中，准确提取所有关键信息，并以严格合法的 JSON 格式输出，不得添加任何解释文字或 markdown 代码块标记。
+
+                ## 输出 JSON 结构
+
+                输出必须是以下结构的 JSON 对象，所有字段均可为 null：
+
+                {
+                  "name": "姓名",
+                  "phone": "电话号码",
+                  "email": "邮箱地址",
+                  "date_of_birth": "出生日期，格式 YYYY-MM-DD 或 YYYY-MM",
+                  "address": "居住地址",
+                  "nationality": "国籍",
+                  "gender": "性别",
+                  "education": [
+                    {
+                      "school": "学校名称",
+                      "major": "专业",
+                      "degree": "学历/学位，如本科/硕士/博士",
+                      "start_date": "开始时间，格式 YYYY-MM",
+                      "end_date": "结束时间，格式 YYYY-MM"
+                    }
+                  ],
+                  "work_experience": [
+                    {
+                      "company": "公司名称",
+                      "position": "职位名称",
+                      "department": "部门",
+                      "start_date": "开始时间，格式 YYYY-MM",
+                      "end_date": "结束时间，格式 YYYY-MM，在职则填 null",
+                      "description": "工作内容描述"
+                    }
+                  ],
+                  "skills": [
+                    {
+                      "name": "技能名称",
+                      "level": "掌握程度，如精通/熟练/了解"
+                    }
+                  ],
+                  "certifications": [
+                    {
+                      "name": "证书名称",
+                      "date": "获得日期，格式 YYYY-MM"
+                    }
+                  ],
+                  "languages": ["语言能力，如普通话、英语 CET-6"],
+                  "self_introduction": "自我介绍段落",
+                  "career_objective": "求职意向",
+                  "project_experience": [
+                    {
+                      "company": null,
+                      "position": "项目中担任的角色",
+                      "department": null,
+                      "start_date": "开始时间，格式 YYYY-MM",
+                      "end_date": "结束时间，格式 YYYY-MM",
+                      "description": "项目描述"
+                    }
+                  ],
+                  "awards": ["获奖记录，每条为字符串"],
+                  "hobbies": "兴趣爱好"
+                }
+
+                ## 提取规则
+
+                1. 简历中未明确提及的字段必须填 null，不可填空字符串 ""
+                2. 列表字段若无内容，填 [] 或 null
+                3. 日期统一转换为 YYYY-MM 格式（如"2020年3月"→"2020-03"）
+                4. 工作经历和教育经历按时间倒序排列（最近的在前）
+                5. 技能提取时保留原始的掌握程度描述
+                6. 只输出 JSON 对象本身，禁止添加任何解释、前缀或 markdown 标记
+            - id: a1b2c3d4-0001-0001-0001-000000000002
+              role: user
+              text: "请解析以下中文简历文本：\n\n{{#1740000000001.resume_text#}}"
+          selected: false
+          title: LLM 提取简历信息
+          type: llm
+          variables: []
+          vision:
+            enabled: false
+        height: 98
+        id: '1740000000002'
+        position:
+          x: 420
+          y: 282
+        positionAbsolute:
+          x: 420
+          y: 282
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 244
+
+      # ── Node 3: Code ─────────────────────────────────────────────────────────
+      - data:
+          code: |
+            import re
+            import json
+
+            def main(llm_text: str) -> dict:
+                text = llm_text.strip()
+
+                # Strip markdown code block wrappers that some models add
+                text = re.sub(r'^```(?:json)?\s*\n?', '', text)
+                text = re.sub(r'\n?```\s*$', '', text)
+                text = text.strip()
+
+                # Validate the output is parseable JSON before passing downstream
+                try:
+                    json.loads(text)
+                except json.JSONDecodeError as e:
+                    raise ValueError(
+                        f"LLM returned invalid JSON: {e}\n"
+                        f"Content preview: {text[:300]}"
+                    )
+
+                return {"result": text}
+          code_language: python3
+          desc: 清洗 LLM 输出，去除 markdown 代码块标记，并验证 JSON 合法性
+          outputs:
+            result:
+              children: null
+              type: string
+          selected: false
+          title: 清洗 JSON 输出
+          type: code
+          variables:
+            - value_selector:
+                - '1740000000002'
+                - text
+              variable: llm_text
+        height: 54
+        id: '1740000000003'
+        position:
+          x: 760
+          y: 282
+        positionAbsolute:
+          x: 760
+          y: 282
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 244
+
+      # ── Node 4: End ──────────────────────────────────────────────────────────
+      - data:
+          desc: 输出结构化简历 JSON，变量名 structured_resume 供后端 DifyClient 读取
+          outputs:
+            - value_selector:
+                - '1740000000003'
+                - result
+              variable: structured_resume
+          selected: false
+          title: 结束
+          type: end
+        height: 90
+        id: '1740000000004'
+        position:
+          x: 1100
+          y: 282
+        positionAbsolute:
+          x: 1100
+          y: 282
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 244
+
+    viewport:
+      x: 0
+      y: 0
+      zoom: 0.9
