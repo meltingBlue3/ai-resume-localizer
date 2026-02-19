@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Upload & Extraction** - Resume file upload, Dify AI extraction, and side-by-side review/edit
 - [x] **Phase 3: Translation & Data Processing** - Dify AI translation, Japanese-specific data processing, and side-by-side review/edit
 - [x] **Phase 4: Preview & PDF Generation** - Dynamic template rendering, HTML preview, photo crop, and PDF download
-- [ ] **Phase 5: Polish & Production Readiness** - Loading states, error handling, completeness indicator, and end-to-end hardening
+- [x] **Phase 5: Polish & Production Readiness** - Loading states, error handling, completeness indicator, and end-to-end hardening
 
 ## Phase Details
 
@@ -96,8 +96,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — Utility modules (errorClassifier, completeness) + reusable UI components (ErrorBanner, CompletenessIndicator) + i18n keys
-- [ ] 05-02-PLAN.md — Integrate loading stages, classified errors, and completeness into all step components + human verify
+- [x] 05-01-PLAN.md — Utility modules (errorClassifier, completeness) + reusable UI components (ErrorBanner, CompletenessIndicator) + i18n keys
+- [x] 05-02-PLAN.md — Integrate loading stages, classified errors, and completeness into all step components + human verify
 
 ## Progress
 
@@ -109,5 +109,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation & Risk Mitigation | 3/3 | ✓ Complete | 2026-02-18 |
 | 2. Upload & Extraction | 3/3 | ✓ Complete | 2026-02-18 |
 | 3. Translation & Data Processing | 3/3 | ✓ Complete | 2026-02-18 |
-| 4. Preview & PDF Generation | 3/3 | Complete | 2026-02-19 |
-| 5. Polish & Production Readiness | 0/TBD | Not started | - |
+| 4. Preview & PDF Generation | 3/3 | ✓ Complete | 2026-02-19 |
+| 5. Polish & Production Readiness | 2/2 | ✓ Complete | 2026-02-19 |
