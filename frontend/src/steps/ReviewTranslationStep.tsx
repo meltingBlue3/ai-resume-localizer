@@ -74,7 +74,7 @@ export default function ReviewTranslationStep() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-16rem)]">
+    <div className="flex flex-col h-[calc(100vh-13rem)]">
       {/* Top bar */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-start gap-4">
