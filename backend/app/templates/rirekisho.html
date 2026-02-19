@@ -263,16 +263,21 @@
                 <td></td>
                 <td>学　歴</td>
             </tr>
-            <!-- Education entries -->
+            <!-- Education entries (two rows per entry: 入学 + 卒業) -->
             {% for entry in data.education_processed %}
             <tr class="history-row">
                 <td class="year-cell">{{ entry.start_year }}</td>
                 <td class="month-cell">{{ entry.start_month }}</td>
-                <td>{{ entry.school | default('', true) }}{% if entry.degree %}　{{ entry.degree }}{% endif %}</td>
+                <td>{{ entry.school | default('', true) }}{% if entry.major %}　{{ entry.major }}{% endif %}　入学</td>
+            </tr>
+            <tr class="history-row">
+                <td class="year-cell">{{ entry.end_year }}</td>
+                <td class="month-cell">{{ entry.end_month }}</td>
+                <td>{{ entry.school | default('', true) }}{% if entry.degree %}　{{ entry.degree }}{% endif %}　卒業</td>
             </tr>
             {% endfor %}
             <!-- Pad empty education rows to maintain grid (6 rows total) -->
-            {% for i in range([6 - data.education_processed | length, 0] | max) %}
+            {% for i in range([6 - data.education_processed | length * 2, 0] | max) %}
             <tr class="history-row">
                 <td class="year-cell"></td>
                 <td class="month-cell"></td>
@@ -285,16 +290,27 @@
                 <td></td>
                 <td>職　歴</td>
             </tr>
-            <!-- Work entries -->
+            <!-- Work entries (two rows per entry: 入社 + 退社/現在に至る) -->
             {% for entry in data.work_history_processed %}
             <tr class="history-row">
                 <td class="year-cell">{{ entry.start_year }}</td>
                 <td class="month-cell">{{ entry.start_month }}</td>
-                <td>{{ entry.company | default('', true) }}{% if entry.title %}　{{ entry.title }}{% endif %}</td>
+                <td>{{ entry.company | default('', true) }}　入社</td>
+            </tr>
+            <tr class="history-row">
+                {% if entry.end_year %}
+                <td class="year-cell">{{ entry.end_year }}</td>
+                <td class="month-cell">{{ entry.end_month }}</td>
+                <td>{{ entry.company | default('', true) }}　退社</td>
+                {% else %}
+                <td class="year-cell"></td>
+                <td class="month-cell"></td>
+                <td>　　　　　（現在に至る）</td>
+                {% endif %}
             </tr>
             {% endfor %}
             <!-- Pad empty work rows (6 rows total) -->
-            {% for i in range([6 - data.work_history_processed | length, 0] | max) %}
+            {% for i in range([6 - data.work_history_processed | length * 2, 0] | max) %}
             <tr class="history-row">
                 <td class="year-cell"></td>
                 <td class="month-cell"></td>
