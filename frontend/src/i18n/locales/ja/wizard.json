@@ -2,7 +2,7 @@
   "steps": {
     "upload": {
       "title": "履歴書アップロード",
-      "description": "中国語の履歴書ファイルをアップロードしてください（PDF/Word対応）。証明写真も添付可能です",
+      "description": "中国語の履歴書ファイルをアップロードしてください（PDF/Word対応）",
       "dropzone": "履歴書ファイルをここにドラッグ＆ドロップ、またはクリックして選択",
       "dropzoneActive": "ファイルをドロップしてアップロード",
       "fileAccepted": "ファイル選択済み",
