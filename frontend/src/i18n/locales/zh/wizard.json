@@ -164,6 +164,49 @@
       "cancel": "取消"
     }
   },
+  "progress": {
+    "uploading": "正在上传文件...",
+    "extractingText": "正在提取文本内容...",
+    "aiAnalyzing": "AI 正在分析简历结构...",
+    "almostDone": "即将完成，请稍候...",
+    "translating": "正在翻译为日文...",
+    "aiTranslating": "AI 正在进行专业翻译...",
+    "localizing": "正在进行日本本地化处理...",
+    "translationAlmostDone": "翻译即将完成..."
+  },
+  "errors": {
+    "network": {
+      "title": "网络连接失败",
+      "message": "无法连接到服务器，请检查网络连接后重试"
+    },
+    "timeout": {
+      "title": "请求超时",
+      "message": "AI处理时间较长，请稍后重试。如持续超时，可能需要简化简历内容"
+    },
+    "server": {
+      "title": "服务器错误",
+      "message": "AI服务暂时不可用，请稍后重试"
+    },
+    "validation": {
+      "title": "数据验证失败",
+      "message": "提交的数据格式有误，请检查简历文件是否正确"
+    },
+    "config": {
+      "title": "服务未配置",
+      "message": "AI服务尚未正确配置，请联系管理员"
+    },
+    "unknown": {
+      "title": "未知错误",
+      "message": "发生意外错误，请重试或刷新页面"
+    },
+    "retry": "重试",
+    "dismiss": "关闭",
+    "showDetails": "查看详情",
+    "hideDetails": "隐藏详情"
+  },
+  "completeness": {
+    "label": "已填写 {{filled}}/{{total}} 项（{{percentage}}%）"
+  },
   "placeholder": "此步骤将在后续阶段实现",
   "inputLabel": "测试输入",
   "inputPlaceholder": "在此输入内容以测试数据持久化..."

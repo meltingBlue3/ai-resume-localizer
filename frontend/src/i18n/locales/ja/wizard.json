@@ -164,6 +164,49 @@
       "cancel": "キャンセル"
     }
   },
+  "progress": {
+    "uploading": "ファイルをアップロード中...",
+    "extractingText": "テキストを抽出中...",
+    "aiAnalyzing": "AIが履歴書を分析中...",
+    "almostDone": "まもなく完了します...",
+    "translating": "日本語に翻訳中...",
+    "aiTranslating": "AIが翻訳を処理中...",
+    "localizing": "日本語ローカライズ処理中...",
+    "translationAlmostDone": "翻訳がまもなく完了します..."
+  },
+  "errors": {
+    "network": {
+      "title": "ネットワーク接続エラー",
+      "message": "サーバーに接続できません。ネットワーク接続を確認して再試行してください"
+    },
+    "timeout": {
+      "title": "リクエストタイムアウト",
+      "message": "AI処理に時間がかかっています。しばらくしてから再試行してください"
+    },
+    "server": {
+      "title": "サーバーエラー",
+      "message": "AIサービスが一時的に利用できません。しばらくしてから再試行してください"
+    },
+    "validation": {
+      "title": "データ検証エラー",
+      "message": "送信されたデータの形式に問題があります。履歴書ファイルを確認してください"
+    },
+    "config": {
+      "title": "サービス未設定",
+      "message": "AIサービスが正しく設定されていません。管理者に連絡してください"
+    },
+    "unknown": {
+      "title": "不明なエラー",
+      "message": "予期しないエラーが発生しました。再試行するかページを更新してください"
+    },
+    "retry": "再試行",
+    "dismiss": "閉じる",
+    "showDetails": "詳細を表示",
+    "hideDetails": "詳細を非表示"
+  },
+  "completeness": {
+    "label": "{{filled}}/{{total}} 項目入力済み（{{percentage}}%）"
+  },
   "placeholder": "このステップは今後のフェーズで実装されます",
   "inputLabel": "テスト入力",
   "inputPlaceholder": "データ永続性をテストするためにここに入力してください..."
