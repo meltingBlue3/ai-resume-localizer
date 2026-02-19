@@ -21,11 +21,12 @@ export default function WizardShell() {
   const { t } = useTranslation();
   const currentStep = useWizardStore((s) => s.currentStep);
   const StepComponent = steps[currentStep];
+  const isWideStep = currentStep >= 1 && currentStep <= 3;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+        <div className={`mx-auto flex items-center justify-between px-6 py-4 transition-all duration-300 ${isWideStep ? 'max-w-[90rem]' : 'max-w-4xl'}`}>
           <h1 className="text-lg font-bold text-slate-800">
             {t('appTitle')}
           </h1>
@@ -33,12 +34,12 @@ export default function WizardShell() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-6 py-8">
+      <main className={`mx-auto transition-all duration-300 ${isWideStep ? 'max-w-[90rem] px-4 py-4' : 'max-w-4xl px-6 py-8'}`}>
         <div className="mb-8">
           <StepIndicator />
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
+        <div className={`rounded-xl border border-slate-200 bg-white shadow-sm ${isWideStep ? 'p-4' : 'p-8'}`}>
           <StepComponent />
         </div>
 
