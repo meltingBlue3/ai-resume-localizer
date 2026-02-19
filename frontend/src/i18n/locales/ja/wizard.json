@@ -69,16 +69,8 @@
       "description": "AI翻訳された日本語の内容を確認・編集し、翻訳の正確性を確保してください"
     },
     "preview": {
-      "title": "プレビュー",
-      "description": "生成された日本語の履歴書と職務経歴書をプレビューします"
-    },
-    "download": {
-      "title": "ダウンロード",
-      "description": "最終的なPDF履歴書ファイルをダウンロードします",
-      "ready": "書類の準備が完了しました",
-      "readyDescription": "日本語の履歴書が作成されました。下のボタンからPDFをダウンロードしてください",
-      "rirekishoCard": "履歴書（JIS標準形式）",
-      "shokumukeirekishoCard": "職務経歴書（逆編年体形式）"
+      "title": "プレビュー・ダウンロード",
+      "description": "生成された日本語の履歴書と職務経歴書をプレビュー・ダウンロードします"
     }
   },
   "reviewTranslation": {

@@ -69,16 +69,8 @@
       "description": "查看并编辑AI翻译的日文内容，确保翻译准确"
     },
     "preview": {
-      "title": "预览简历",
-      "description": "预览生成的日文履歴書和職務経歴書"
-    },
-    "download": {
-      "title": "下载",
-      "description": "下载最终的PDF简历文件",
-      "ready": "文件已准备就绪",
-      "readyDescription": "您的日文简历已生成完毕，点击下方按钮下载PDF文件",
-      "rirekishoCard": "履历书（JIS标准格式）",
-      "shokumukeirekishoCard": "职务经历书（时间倒序格式）"
+      "title": "预览与下载",
+      "description": "预览并下载生成的日文履歴書和職務経歴書"
     }
   },
   "reviewTranslation": {
