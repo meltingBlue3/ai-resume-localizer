@@ -24,8 +24,8 @@ export default function WizardShell() {
   const isWideStep = currentStep >= 1 && currentStep <= 3;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
+    <div className={`bg-gradient-to-b from-slate-50 to-slate-100 ${isWideStep ? 'h-screen flex flex-col overflow-hidden' : 'min-h-screen'}`}>
+      <header className="shrink-0 border-b border-slate-200 bg-white/80 backdrop-blur-sm">
         <div className={`mx-auto flex items-center justify-between px-6 py-4 transition-all duration-300 ${isWideStep ? 'max-w-[90rem]' : 'max-w-4xl'}`}>
           <h1 className="text-lg font-bold text-slate-800">
             {t('appTitle')}
@@ -34,16 +34,18 @@ export default function WizardShell() {
         </div>
       </header>
 
-      <main className={`mx-auto transition-all duration-300 ${isWideStep ? 'max-w-[90rem] px-4 py-4' : 'max-w-4xl px-6 py-8'}`}>
-        <div className="mb-8">
+      <main className={`mx-auto transition-all duration-300 ${isWideStep ? 'max-w-[90rem] px-4 py-4 flex-1 flex flex-col overflow-hidden' : 'max-w-4xl px-6 py-8'}`}>
+        <div className={`shrink-0 ${isWideStep ? 'mb-4' : 'mb-8'}`}>
           <StepIndicator />
         </div>
 
-        <div className={`rounded-xl border border-slate-200 bg-white shadow-sm ${isWideStep ? 'p-4' : 'p-8'}`}>
+        <div className={`rounded-xl border border-slate-200 bg-white shadow-sm ${isWideStep ? 'p-4 flex-1 overflow-hidden flex flex-col min-h-0' : 'p-8'}`}>
           <StepComponent />
         </div>
 
-        <StepNavigation />
+        <div className="shrink-0">
+          <StepNavigation />
+        </div>
       </main>
     </div>
   );
