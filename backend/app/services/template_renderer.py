@@ -23,6 +23,8 @@ def _parse_date_parts(date_str: str | None) -> dict:
 
     Handles formats like '令和5年4月', '2023年4月', '令和5年 4月', '平成30年3月'.
     Returns dict with 'year' and 'month' keys.
+    Year values are returned without trailing '年' (e.g. '令和5' not '令和5年').
+    Western years (2019+) are converted to Reiwa wareki format.
     """
     if not date_str:
         return {"year": "", "month": ""}
@@ -30,7 +32,17 @@ def _parse_date_parts(date_str: str | None) -> dict:
     # Try matching patterns like '令和5年4月' or '令和5年 4月'
     match = re.match(r"(.+年)\s*(\d+)月?", date_str)
     if match:
-        return {"year": match.group(1), "month": match.group(2)}
+        year_str = match.group(1).rstrip("年")
+        month_str = match.group(2)
+
+        # Convert western year to wareki if purely numeric
+        if year_str.isdigit():
+            western_year = int(year_str)
+            if western_year >= 2019:
+                year_str = f"令和{western_year - 2018}"
+            # Pre-2019 numeric years left as-is (Dify should provide wareki)
+
+        return {"year": year_str, "month": month_str}
 
     # If no match, put full string in year, leave month empty
     return {"year": date_str, "month": ""}
