@@ -5,22 +5,22 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企业招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** Phase 4 — Preview & PDF Generation — COMPLETE
+**Current focus:** Phase 5 — Polish & Production Readiness — IN PROGRESS
 
 ## Current Position
 
-Phase: 4 of 5 (Preview & PDF Generation) — COMPLETE
-Plan: 3 of 3 in current phase — all plans complete
-Status: Phase 4 complete — all 3 plans delivered and human-verified
-Last activity: 2026-02-19 — Phase 4 complete, all 8 test cases verified
+Phase: 5 of 5 (Polish & Production Readiness) — IN PROGRESS
+Plan: 1 of 2 in current phase — Plan 01 complete
+Status: Plan 05-01 complete — utilities and components ready for integration
+Last activity: 2026-02-19 — Plan 05-01 complete (error classifier, completeness, UI components, i18n)
 
-Progress: [████████░░] 80% (Phases 1-4 complete, Phase 5 not started)
+Progress: [█████████░] 90% (Phases 1-4 complete, Phase 5 Plan 1 of 2 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
-- Average duration: ~5.8min
+- Total plans completed: 13
+- Average duration: ~5.5min
 - Total execution time: ~1.2 hours
 
 **By Phase:**
@@ -31,10 +31,11 @@ Progress: [████████░░] 80% (Phases 1-4 complete, Phase 5 not
 | 02-upload-extraction | 3 | ~15min | ~5min |
 | 03-translation-data-processing | 3 | ~15min | ~5min |
 | 04-preview-pdf-generation | 3 | ~16min | ~5.3min |
+| 05-polish-production-readiness | 1/2 | ~2min | ~2min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (~4min), 03-03 (~7min), 04-01 (~7min), 04-02 (~4min), 04-03 (~5min)
-- Trend: Stable ~4-7min per plan
+- Last 5 plans: 03-03 (~7min), 04-01 (~7min), 04-02 (~4min), 04-03 (~5min), 05-01 (~2min)
+- Trend: Stable ~2-7min per plan
 
 *Updated after each plan completion*
 
@@ -91,6 +92,9 @@ Recent decisions affecting current work:
 - [04-02]: Raw base64 (no data URI prefix) sent to backend -- backend adds prefix in Jinja2 templates
 - [04-02]: 354x472px target dimensions (30mm x 40mm at 300 DPI) for Japanese passport photo standard
 - [04-02]: JPEG quality 0.85 balances file size and photo clarity
+- [05-01]: Duck-typing via 'personal_info' property to distinguish JpResumeData from CnResumeData
+- [05-01]: Array fields counted as binary (has entries or not) for completeness -- 15 total fields each for Jp and Cn
+- [05-01]: Error fallback uses errors.unknown i18n keys rather than reusing errors.server
 
 ### Pending Todos
 
@@ -106,5 +110,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 04-03-PLAN.md — Phase 4 fully complete
-Resume file: Phase 5 planning (not yet started)
+Stopped at: Completed 05-01-PLAN.md — utilities, components, and i18n keys ready
+Resume file: 05-02-PLAN.md (integration into step components)
