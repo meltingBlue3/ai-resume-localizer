@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 Phase: 5 of 5 (Polish & Production Readiness) — COMPLETE
 Plan: 2 of 2 in current phase — COMPLETE
 Status: All phases complete. Project fully implemented.
-Last activity: 2026-02-19 - Completed quick task 003: Remove redundant DownloadStep from wizard
+Last activity: 2026-02-19 - Completed quick task 004: Fix WizardShell main collapse
 
 Progress: [██████████] 100% (All 5 phases complete, all 14 plans executed)
 
@@ -109,6 +109,7 @@ None yet.
 | 001 | 前端问题：审核提取页面、审核翻译页面、预览简历页面，左右有对比的页面，宽度太窄，请尽量拉长宽度和高度 | 2026-02-19 | 83b2da3 | [001-widen-review-preview-pages](./quick/001-widen-review-preview-pages/) |
 | 002 | Fix panel height overflow so nav buttons always visible on review/preview steps | 2026-02-19 | 40aadad | [002-fix-panel-height-overflow](./quick/002-fix-panel-height-overflow/) |
 | 003 | Remove redundant DownloadStep -- PreviewStep already has download toolbar | 2026-02-19 | 5a5a1eb | [003-remove-download-step](./quick/003-remove-download-step/) |
+| 004 | Fix WizardShell main element collapsing to content width on narrow steps | 2026-02-19 | 8538f09 | [004-fix-wizardshell-main-collapse](./quick/004-fix-wizardshell-main-collapse/) |
 
 ### Blockers/Concerns
 
@@ -120,5 +121,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed quick task 003 — Remove redundant DownloadStep
+Stopped at: Completed quick task 004 — Fix WizardShell main collapse
 Resume file: N/A — project fully implemented
