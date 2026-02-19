@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企业招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** Phase 5 — Polish & Production Readiness — IN PROGRESS
+**Current focus:** All 5 phases COMPLETE
 
 ## Current Position
 
-Phase: 5 of 5 (Polish & Production Readiness) — IN PROGRESS
-Plan: 1 of 2 in current phase — Plan 01 complete
-Status: Plan 05-01 complete — utilities and components ready for integration
-Last activity: 2026-02-19 — Plan 05-01 complete (error classifier, completeness, UI components, i18n)
+Phase: 5 of 5 (Polish & Production Readiness) — COMPLETE
+Plan: 2 of 2 in current phase — COMPLETE
+Status: All phases complete. Project fully implemented.
+Last activity: 2026-02-19 — Plan 05-02 complete (human verification passed, Phase 5 done)
 
-Progress: [█████████░] 90% (Phases 1-4 complete, Phase 5 Plan 1 of 2 complete)
+Progress: [██████████] 100% (All 5 phases complete, all 14 plans executed)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
-- Average duration: ~5.5min
-- Total execution time: ~1.2 hours
+- Total plans completed: 14
+- Average duration: ~5.4min
+- Total execution time: ~1.3 hours
 
 **By Phase:**
 
@@ -31,11 +31,11 @@ Progress: [█████████░] 90% (Phases 1-4 complete, Phase 5 Pla
 | 02-upload-extraction | 3 | ~15min | ~5min |
 | 03-translation-data-processing | 3 | ~15min | ~5min |
 | 04-preview-pdf-generation | 3 | ~16min | ~5.3min |
-| 05-polish-production-readiness | 1/2 | ~2min | ~2min |
+| 05-polish-production-readiness | 2/2 | ~10min | ~5min |
 
 **Recent Trend:**
-- Last 5 plans: 03-03 (~7min), 04-01 (~7min), 04-02 (~4min), 04-03 (~5min), 05-01 (~2min)
-- Trend: Stable ~2-7min per plan
+- Last 5 plans: 04-01 (~7min), 04-02 (~4min), 04-03 (~5min), 05-01 (~2min), 05-02 (~8min)
+- Trend: Stable ~2-8min per plan
 
 *Updated after each plan completion*
 
@@ -95,6 +95,8 @@ Recent decisions affecting current work:
 - [05-01]: Duck-typing via 'personal_info' property to distinguish JpResumeData from CnResumeData
 - [05-01]: Array fields counted as binary (has entries or not) for completeness -- 15 total fields each for Jp and Cn
 - [05-01]: Error fallback uses errors.unknown i18n keys rather than reusing errors.server
+- [05-02]: Shared useProgressStages hook in frontend/src/hooks/ — avoids code duplication across UploadStep and ReviewTranslationStep
+- [05-02]: lastDocType tracked via useRef for retry callback in PreviewStep and DownloadStep error banners
 
 ### Pending Todos
 
@@ -110,5 +112,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed 05-01-PLAN.md — utilities, components, and i18n keys ready
-Resume file: 05-02-PLAN.md (integration into step components)
+Stopped at: Completed 05-02-PLAN.md — All phases complete
+Resume file: N/A — project fully implemented
