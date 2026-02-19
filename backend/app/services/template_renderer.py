@@ -21,10 +21,11 @@ env = Environment(
 def _parse_date_parts(date_str: str | None) -> dict:
     """Parse a Japanese date string into year and month components.
 
-    Handles formats like '令和5年4月', '2023年4月', '令和5年 4月', '平成30年3月'.
+    Handles formats like '令和5年4月', '2023年4月', '令和5年 4月', '平成30年3月',
+    'YYYY-MM', 'YYYY/MM' (ISO formats from Dify LLM output).
     Returns dict with 'year' and 'month' keys.
     Year values are returned without trailing '年' (e.g. '令和5' not '令和5年').
-    Western years (2019+) are converted to Reiwa wareki format.
+    Western years are converted to wareki with month-aware era boundaries.
     """
     if not date_str:
         return {"year": "", "month": ""}
@@ -38,9 +39,36 @@ def _parse_date_parts(date_str: str | None) -> dict:
         # Convert western year to wareki if purely numeric
         if year_str.isdigit():
             western_year = int(year_str)
-            if western_year >= 2019:
-                year_str = f"令和{western_year - 2018}"
-            # Pre-2019 numeric years left as-is (Dify should provide wareki)
+            month_int = int(month_str)
+            if western_year > 2019 or (western_year == 2019 and month_int >= 5):
+                era_year = western_year - 2018
+                year_str = "令和元" if era_year == 1 else f"令和{era_year}"
+            elif western_year >= 1989:
+                era_year = western_year - 1988
+                year_str = "平成元" if era_year == 1 else f"平成{era_year}"
+            else:
+                era_year = western_year - 1925
+                year_str = "昭和元" if era_year == 1 else f"昭和{era_year}"
+
+        return {"year": year_str, "month": month_str}
+
+    # Handle YYYY-MM or YYYY/MM ISO format (from Dify LLM output)
+    iso_match = re.match(r"(\d{4})[-/](\d{1,2})", date_str)
+    if iso_match:
+        western_year = int(iso_match.group(1))
+        month_int = int(iso_match.group(2))
+        month_str = str(month_int)  # strip leading zeros
+
+        # Month-aware era boundary detection
+        if western_year > 2019 or (western_year == 2019 and month_int >= 5):
+            era_year = western_year - 2018
+            year_str = "令和元" if era_year == 1 else f"令和{era_year}"
+        elif western_year >= 1989:
+            era_year = western_year - 1988
+            year_str = "平成元" if era_year == 1 else f"平成{era_year}"
+        else:
+            era_year = western_year - 1925
+            year_str = "昭和元" if era_year == 1 else f"昭和{era_year}"
 
         return {"year": year_str, "month": month_str}
 
