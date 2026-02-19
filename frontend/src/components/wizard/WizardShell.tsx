@@ -31,7 +31,7 @@ export default function WizardShell() {
         </div>
       </header>
 
-      <main className={`mx-auto transition-all duration-300 ${isWideStep ? 'max-w-[90rem] px-4 py-4 flex-1 flex flex-col overflow-hidden' : 'max-w-4xl px-6 py-8'}`}>
+      <main className={`mx-auto transition-all duration-300 ${isWideStep ? 'w-full max-w-[90rem] px-4 py-4 flex-1 flex flex-col overflow-hidden' : 'max-w-4xl px-6 py-8'}`}>
         <div className={`shrink-0 ${isWideStep ? 'mb-4' : 'mb-8'}`}>
           <StepIndicator />
         </div>
