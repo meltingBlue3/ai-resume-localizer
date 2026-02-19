@@ -40,9 +40,9 @@ export default function ReviewExtractionStep() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col h-full">
       {/* Step header */}
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-4 shrink-0 mb-4">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-emerald-100">
           <svg className="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
@@ -55,7 +55,7 @@ export default function ReviewExtractionStep() {
       </div>
 
       {/* Side-by-side panels */}
-      <div className="grid h-[calc(100vh-14rem)] grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="grid flex-1 min-h-0 grid-cols-1 gap-4 lg:grid-cols-2">
         {/* Left: Original document */}
         <div className="flex flex-col overflow-hidden rounded-lg border border-slate-200">
           <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5">

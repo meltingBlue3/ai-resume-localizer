@@ -74,9 +74,9 @@ export default function ReviewTranslationStep() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-13rem)]">
+    <div className="flex flex-col h-full">
       {/* Top bar */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 shrink-0">
         <div className="flex items-start gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-violet-100">
             <svg className="h-6 w-6 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -117,7 +117,7 @@ export default function ReviewTranslationStep() {
 
       {/* Error banner */}
       {classifiedError && (
-        <div className="mb-4">
+        <div className="mb-4 shrink-0">
           <ErrorBanner
             error={classifiedError}
             onRetry={handleTranslate}
