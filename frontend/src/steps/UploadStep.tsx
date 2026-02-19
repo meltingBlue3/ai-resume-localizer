@@ -4,7 +4,6 @@ import { useWizardStore } from '../stores/useWizardStore.ts';
 import { useResumeStore } from '../stores/useResumeStore.ts';
 import { uploadAndExtract } from '../api/client.ts';
 import FileDropzone from '../components/upload/FileDropzone.tsx';
-import PhotoDropzone from '../components/upload/PhotoDropzone.tsx';
 import { classifyError, type ClassifiedError } from '../utils/errorClassifier';
 import { ErrorBanner } from '../components/ui/ErrorBanner';
 import { useProgressStages, type ProgressStage } from '../hooks/useProgressStages';
@@ -21,11 +20,9 @@ export default function UploadStep() {
   const nextStep = useWizardStore((s) => s.nextStep);
 
   const resumeFile = useResumeStore((s) => s.resumeFile);
-  const photoFile = useResumeStore((s) => s.photoFile);
   const isExtracting = useResumeStore((s) => s.isExtracting);
 
   const setResumeFile = useResumeStore((s) => s.setResumeFile);
-  const setPhotoFile = useResumeStore((s) => s.setPhotoFile);
   const setExtracting = useResumeStore((s) => s.setExtracting);
   const setExtractionResult = useResumeStore((s) => s.setExtractionResult);
   const setExtractionError = useResumeStore((s) => s.setExtractionError);
@@ -68,21 +65,11 @@ export default function UploadStep() {
         </div>
       </div>
 
-      {/* Dropzones: two columns on lg, stacked on mobile */}
-      <div className="grid gap-6 lg:grid-cols-[1fr_auto]">
-        <FileDropzone
-          onFileAccepted={setResumeFile}
-          currentFile={resumeFile}
-          disabled={isExtracting}
-        />
-        <div className="lg:w-48">
-          <PhotoDropzone
-            onPhotoAccepted={setPhotoFile}
-            currentPhoto={photoFile}
-            disabled={isExtracting}
-          />
-        </div>
-      </div>
+      <FileDropzone
+        onFileAccepted={setResumeFile}
+        currentFile={resumeFile}
+        disabled={isExtracting}
+      />
 
       {/* Error banner */}
       {classifiedError && (
