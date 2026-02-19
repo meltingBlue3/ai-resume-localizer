@@ -62,7 +62,7 @@ export default function PreviewPanel({ html, isLoading }: PreviewPanelProps) {
       >
         <iframe
           srcDoc={html}
-          sandbox="allow-same-origin"
+          sandbox="allow-same-origin allow-scripts"
           title="Resume Preview"
           style={{
             width: '210mm',
