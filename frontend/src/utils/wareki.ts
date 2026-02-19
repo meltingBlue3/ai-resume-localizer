@@ -1,5 +1,5 @@
 /**
- * Converts a Gregorian date string (YYYY/MM or YYYY) to Japanese era format (和暦).
+ * Converts a Gregorian date string (YYYY/MM, YYYY-MM, or YYYY) to Japanese era format (和暦).
  * Dates are stored as Gregorian; wareki is computed on display only.
  *
  * Era boundaries:
@@ -10,7 +10,7 @@
 export function toWareki(gregorianDate: string | null | undefined): string {
   if (!gregorianDate) return '';
 
-  const parts = gregorianDate.split('/');
+  const parts = gregorianDate.split(/[-/]/);
   const year = parseInt(parts[0], 10);
   const month = parts[1] ? parseInt(parts[1], 10) : 1;
 
