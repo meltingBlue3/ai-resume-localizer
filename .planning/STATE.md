@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 Phase: 5 of 5 (Polish & Production Readiness) — COMPLETE
 Plan: 2 of 2 in current phase — COMPLETE
 Status: All phases complete. Project fully implemented.
-Last activity: 2026-02-19 - Completed quick task 006: Fix PDF generation date year/month in rirekisho
+Last activity: 2026-02-19 - Completed quick task 007: Fix wareki conversion for YYYY-MM date format
 
 Progress: [██████████] 100% (All 5 phases complete, all 14 plans executed)
 
@@ -112,6 +112,7 @@ None yet.
 | 004 | Fix WizardShell main element collapsing to content width on narrow steps | 2026-02-19 | 8538f09 | [004-fix-wizardshell-main-collapse](./quick/004-fix-wizardshell-main-collapse/) |
 | 005 | Remove PhotoDropzone from UploadStep — photo upload only via PreviewStep | 2026-02-19 | b70e51a | [005-remove-photo-upload-from-uploadstep-keep](./quick/5-remove-photo-upload-from-uploadstep-keep/) |
 | 006 | Fix PDF year cells (strip trailing 年) and two-row education/work format | 2026-02-19 | 6ecae56 | [6-fix-pdf-generation-date-year-month-in-ta](./quick/6-fix-pdf-generation-date-year-month-in-ta/) |
+| 007 | Fix wareki conversion for YYYY-MM date format (frontend + backend) | 2026-02-19 | 6a2f601 | [7-fix-wareki-conversion-for-yyyy-mm-date-f](./quick/7-fix-wareki-conversion-for-yyyy-mm-date-f/) |
 
 ### Blockers/Concerns
 
@@ -123,5 +124,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed quick task 006 — Fix PDF generation date year/month in rirekisho
+Stopped at: Completed quick task 007 — Fix wareki conversion for YYYY-MM date format
 Resume file: N/A — project fully implemented
