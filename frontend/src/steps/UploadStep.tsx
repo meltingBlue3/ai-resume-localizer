@@ -1,9 +1,20 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useWizardStore } from '../stores/useWizardStore.ts';
 import { useResumeStore } from '../stores/useResumeStore.ts';
 import { uploadAndExtract } from '../api/client.ts';
 import FileDropzone from '../components/upload/FileDropzone.tsx';
 import PhotoDropzone from '../components/upload/PhotoDropzone.tsx';
+import { classifyError, type ClassifiedError } from '../utils/errorClassifier';
+import { ErrorBanner } from '../components/ui/ErrorBanner';
+import { useProgressStages, type ProgressStage } from '../hooks/useProgressStages';
+
+const EXTRACTION_STAGES: readonly ProgressStage[] = [
+  { delay: 0, key: 'progress.uploading' },
+  { delay: 2000, key: 'progress.extractingText' },
+  { delay: 5000, key: 'progress.aiAnalyzing' },
+  { delay: 15000, key: 'progress.almostDone' },
+];
 
 export default function UploadStep() {
   const { t } = useTranslation('wizard');
@@ -12,7 +23,6 @@ export default function UploadStep() {
   const resumeFile = useResumeStore((s) => s.resumeFile);
   const photoFile = useResumeStore((s) => s.photoFile);
   const isExtracting = useResumeStore((s) => s.isExtracting);
-  const extractionError = useResumeStore((s) => s.extractionError);
 
   const setResumeFile = useResumeStore((s) => s.setResumeFile);
   const setPhotoFile = useResumeStore((s) => s.setPhotoFile);
@@ -20,11 +30,16 @@ export default function UploadStep() {
   const setExtractionResult = useResumeStore((s) => s.setExtractionResult);
   const setExtractionError = useResumeStore((s) => s.setExtractionError);
 
+  const [classifiedError, setClassifiedError] = useState<ClassifiedError | null>(null);
+
+  const currentStage = useProgressStages(isExtracting, EXTRACTION_STAGES);
+
   const handleExtract = async () => {
     if (!resumeFile) return;
 
     setExtracting(true);
     setExtractionError(null);
+    setClassifiedError(null);
 
     try {
       const response = await uploadAndExtract(resumeFile);
@@ -33,6 +48,7 @@ export default function UploadStep() {
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       setExtractionError(message);
+      setClassifiedError(classifyError(err));
       setExtracting(false);
     }
   };
@@ -69,24 +85,12 @@ export default function UploadStep() {
       </div>
 
       {/* Error banner */}
-      {extractionError && (
-        <div className="flex items-center justify-between rounded-lg border border-red-200 bg-red-50 px-4 py-3">
-          <div className="flex items-center gap-2">
-            <svg className="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-            </svg>
-            <span className="text-sm text-red-700">
-              {t('steps.upload.extractError')}: {extractionError}
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={handleExtract}
-            className="text-sm font-medium text-red-600 hover:text-red-700"
-          >
-            {t('steps.upload.retry')}
-          </button>
-        </div>
+      {classifiedError && (
+        <ErrorBanner
+          error={classifiedError}
+          onRetry={handleExtract}
+          onDismiss={() => { setClassifiedError(null); setExtractionError(null); }}
+        />
       )}
 
       {/* Extract button */}
@@ -103,7 +107,7 @@ export default function UploadStep() {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
-              {t('steps.upload.extracting')}
+              {t(currentStage ?? 'steps.upload.extracting')}
             </>
           ) : (
             t('steps.upload.extractButton')

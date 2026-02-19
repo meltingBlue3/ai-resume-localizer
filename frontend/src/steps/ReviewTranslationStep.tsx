@@ -1,9 +1,22 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useWizardStore } from '../stores/useWizardStore';
 import { useResumeStore } from '../stores/useResumeStore';
 import { translateResume } from '../api/client';
 import ResumeFieldEditor from '../components/review/ResumeFieldEditor';
 import JpResumeFieldEditor from '../components/review/JpResumeFieldEditor';
+import { classifyError, type ClassifiedError } from '../utils/errorClassifier';
+import { ErrorBanner } from '../components/ui/ErrorBanner';
+import { computeCompleteness } from '../utils/completeness';
+import { CompletenessIndicator } from '../components/ui/CompletenessIndicator';
+import { useProgressStages, type ProgressStage } from '../hooks/useProgressStages';
+
+const TRANSLATION_STAGES: readonly ProgressStage[] = [
+  { delay: 0, key: 'progress.translating' },
+  { delay: 2000, key: 'progress.aiTranslating' },
+  { delay: 8000, key: 'progress.localizing' },
+  { delay: 20000, key: 'progress.translationAlmostDone' },
+];
 
 export default function ReviewTranslationStep() {
   const { t } = useTranslation('wizard');
@@ -14,8 +27,12 @@ export default function ReviewTranslationStep() {
   const setJpResumeData = useResumeStore((s) => s.setJpResumeData);
   const isTranslating = useResumeStore((s) => s.isTranslating);
   const setIsTranslating = useResumeStore((s) => s.setIsTranslating);
-  const translationError = useResumeStore((s) => s.translationError);
   const setTranslationError = useResumeStore((s) => s.setTranslationError);
+
+  const [classifiedError, setClassifiedError] = useState<ClassifiedError | null>(null);
+
+  const currentStage = useProgressStages(isTranslating, TRANSLATION_STAGES);
+  const completeness = jpResumeData ? computeCompleteness(jpResumeData) : null;
 
   if (!cnResumeData) {
     return (
@@ -44,11 +61,13 @@ export default function ReviewTranslationStep() {
     if (!cnResumeData) return;
     setIsTranslating(true);
     setTranslationError(null);
+    setClassifiedError(null);
     try {
       const result = await translateResume(cnResumeData);
       setJpResumeData(result);
     } catch (err) {
       setTranslationError(err instanceof Error ? err.message : 'Translation failed');
+      setClassifiedError(classifyError(err));
     } finally {
       setIsTranslating(false);
     }
@@ -69,6 +88,11 @@ export default function ReviewTranslationStep() {
             {jpResumeData && (
               <p className="mt-1 text-sm text-slate-500">{t('reviewTranslation.editHint')}</p>
             )}
+            {completeness && (
+              <div className="mt-2 w-64">
+                <CompletenessIndicator {...completeness} />
+              </div>
+            )}
           </div>
         </div>
         <button
@@ -84,7 +108,7 @@ export default function ReviewTranslationStep() {
             </svg>
           )}
           {isTranslating
-            ? t('reviewTranslation.translating')
+            ? t(currentStage ?? 'reviewTranslation.translating')
             : jpResumeData
               ? t('reviewTranslation.retranslateButton')
               : t('reviewTranslation.translateButton')}
@@ -92,9 +116,13 @@ export default function ReviewTranslationStep() {
       </div>
 
       {/* Error banner */}
-      {translationError && (
-        <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          {translationError}
+      {classifiedError && (
+        <div className="mb-4">
+          <ErrorBanner
+            error={classifiedError}
+            onRetry={handleTranslate}
+            onDismiss={() => { setClassifiedError(null); setTranslationError(null); }}
+          />
         </div>
       )}
 
@@ -121,7 +149,9 @@ export default function ReviewTranslationStep() {
             ) : (
               <div className="flex h-full items-center justify-center">
                 <p className="text-sm text-slate-400">
-                  {isTranslating ? t('reviewTranslation.translating') : t('reviewTranslation.translateButton')}
+                  {isTranslating
+                    ? t(currentStage ?? 'reviewTranslation.translating')
+                    : t('reviewTranslation.translateButton')}
                 </p>
               </div>
             )}
