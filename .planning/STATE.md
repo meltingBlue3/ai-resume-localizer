@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 Phase: 5 of 5 (Polish & Production Readiness) — COMPLETE
 Plan: 2 of 2 in current phase — COMPLETE
 Status: All phases complete. Project fully implemented.
-Last activity: 2026-02-19 - Completed quick task 007: Fix wareki conversion for YYYY-MM date format
+Last activity: 2026-02-20 - Completed quick task 008: Docker support with multi-container compose
 
 Progress: [██████████] 100% (All 5 phases complete, all 14 plans executed)
 
@@ -113,6 +113,7 @@ None yet.
 | 005 | Remove PhotoDropzone from UploadStep — photo upload only via PreviewStep | 2026-02-19 | b70e51a | [005-remove-photo-upload-from-uploadstep-keep](./quick/5-remove-photo-upload-from-uploadstep-keep/) |
 | 006 | Fix PDF year cells (strip trailing 年) and two-row education/work format | 2026-02-19 | 6ecae56 | [6-fix-pdf-generation-date-year-month-in-ta](./quick/6-fix-pdf-generation-date-year-month-in-ta/) |
 | 007 | Fix wareki conversion for YYYY-MM date format (frontend + backend) | 2026-02-19 | 6a2f601 | [7-fix-wareki-conversion-for-yyyy-mm-date-f](./quick/7-fix-wareki-conversion-for-yyyy-mm-date-f/) |
+| 008 | Docker support with multi-container compose (backend + frontend + nginx) | 2026-02-20 | 0b32c06 | [8-docker](./quick/8-docker/) |
 
 ### Blockers/Concerns
 
@@ -123,6 +124,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-19
-Stopped at: Completed quick task 007 — Fix wareki conversion for YYYY-MM date format
+Last session: 2026-02-20
+Stopped at: Completed quick task 008 — Docker support with multi-container compose
 Resume file: N/A — project fully implemented
