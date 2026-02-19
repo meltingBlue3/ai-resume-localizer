@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-18)
 Phase: 5 of 5 (Polish & Production Readiness) — COMPLETE
 Plan: 2 of 2 in current phase — COMPLETE
 Status: All phases complete. Project fully implemented.
-Last activity: 2026-02-19 - Completed quick task 004: Fix WizardShell main collapse
+Last activity: 2026-02-19 - Completed quick task 005: Remove PhotoDropzone from UploadStep
 
 Progress: [██████████] 100% (All 5 phases complete, all 14 plans executed)
 
@@ -110,6 +110,7 @@ None yet.
 | 002 | Fix panel height overflow so nav buttons always visible on review/preview steps | 2026-02-19 | 40aadad | [002-fix-panel-height-overflow](./quick/002-fix-panel-height-overflow/) |
 | 003 | Remove redundant DownloadStep -- PreviewStep already has download toolbar | 2026-02-19 | 5a5a1eb | [003-remove-download-step](./quick/003-remove-download-step/) |
 | 004 | Fix WizardShell main element collapsing to content width on narrow steps | 2026-02-19 | 8538f09 | [004-fix-wizardshell-main-collapse](./quick/004-fix-wizardshell-main-collapse/) |
+| 005 | Remove PhotoDropzone from UploadStep — photo upload only via PreviewStep | 2026-02-19 | b70e51a | [005-remove-photo-upload-from-uploadstep-keep](./quick/5-remove-photo-upload-from-uploadstep-keep/) |
 
 ### Blockers/Concerns
 
@@ -121,5 +122,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-19
-Stopped at: Completed quick task 004 — Fix WizardShell main collapse
+Stopped at: Completed quick task 005 — Remove PhotoDropzone from UploadStep
 Resume file: N/A — project fully implemented
