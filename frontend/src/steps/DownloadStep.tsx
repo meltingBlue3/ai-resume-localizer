@@ -1,17 +1,21 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useResumeStore } from '../stores/useResumeStore';
 import { downloadPdf } from '../api/client';
+import { classifyError, type ClassifiedError } from '../utils/errorClassifier';
+import { ErrorBanner } from '../components/ui/ErrorBanner';
 
 export default function DownloadStep() {
   const { t } = useTranslation('wizard');
   const jpResumeData = useResumeStore((s) => s.jpResumeData);
   const croppedPhotoBase64 = useResumeStore((s) => s.croppedPhotoBase64);
   const [downloadingType, setDownloadingType] = useState<string | null>(null);
-  const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [downloadError, setDownloadError] = useState<ClassifiedError | null>(null);
+  const lastDocTypeRef = useRef<'rirekisho' | 'shokumukeirekisho'>('rirekisho');
 
   const handleDownload = async (docType: 'rirekisho' | 'shokumukeirekisho') => {
     if (!jpResumeData) return;
+    lastDocTypeRef.current = docType;
     setDownloadingType(docType);
     setDownloadError(null);
     try {
@@ -25,7 +29,7 @@ export default function DownloadStep() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (err) {
-      setDownloadError(err instanceof Error ? err.message : 'Download failed');
+      setDownloadError(classifyError(err));
     } finally {
       setDownloadingType(null);
     }
@@ -48,9 +52,11 @@ export default function DownloadStep() {
 
       {/* Error banner */}
       {downloadError && (
-        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          {t('preview.downloadError', 'Download failed')}: {downloadError}
-        </div>
+        <ErrorBanner
+          error={downloadError}
+          onRetry={() => handleDownload(lastDocTypeRef.current)}
+          onDismiss={() => setDownloadError(null)}
+        />
       )}
 
       {/* Download cards */}

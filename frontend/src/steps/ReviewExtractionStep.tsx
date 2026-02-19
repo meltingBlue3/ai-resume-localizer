@@ -3,6 +3,8 @@ import { useWizardStore } from '../stores/useWizardStore.ts';
 import { useResumeStore } from '../stores/useResumeStore.ts';
 import DocumentViewer from '../components/review/DocumentViewer.tsx';
 import ResumeFieldEditor from '../components/review/ResumeFieldEditor.tsx';
+import { computeCompleteness } from '../utils/completeness';
+import { CompletenessIndicator } from '../components/ui/CompletenessIndicator';
 
 export default function ReviewExtractionStep() {
   const { t } = useTranslation('wizard');
@@ -11,6 +13,8 @@ export default function ReviewExtractionStep() {
   const resumeFile = useResumeStore((s) => s.resumeFile);
   const cnResumeData = useResumeStore((s) => s.cnResumeData);
   const setCnResumeData = useResumeStore((s) => s.setCnResumeData);
+
+  const completeness = cnResumeData ? computeCompleteness(cnResumeData) : null;
 
   if (!resumeFile || !cnResumeData) {
     return (
@@ -65,7 +69,14 @@ export default function ReviewExtractionStep() {
         {/* Right: Extracted data editor */}
         <div className="flex flex-col overflow-hidden rounded-lg border border-slate-200">
           <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5">
-            <h3 className="text-sm font-semibold text-slate-700">{t('steps.reviewExtraction.extractedData')}</h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-slate-700">{t('steps.reviewExtraction.extractedData')}</h3>
+              {completeness && (
+                <div className="w-48">
+                  <CompletenessIndicator {...completeness} />
+                </div>
+              )}
+            </div>
           </div>
           <div className="flex-1 overflow-y-auto p-4">
             <ResumeFieldEditor data={cnResumeData} onChange={setCnResumeData} />

@@ -7,6 +7,10 @@ import PreviewPanel from '../components/preview/PreviewPanel';
 import PreviewToolbar from '../components/preview/PreviewToolbar';
 import PhotoCropper from '../components/preview/PhotoCropper';
 import JpResumeFieldEditor from '../components/review/JpResumeFieldEditor';
+import { classifyError, type ClassifiedError } from '../utils/errorClassifier';
+import { ErrorBanner } from '../components/ui/ErrorBanner';
+import { computeCompleteness } from '../utils/completeness';
+import { CompletenessIndicator } from '../components/ui/CompletenessIndicator';
 
 export default function PreviewStep() {
   const { t } = useTranslation('wizard');
@@ -25,8 +29,8 @@ export default function PreviewStep() {
   const isDownloading = useResumeStore((s) => s.isDownloading);
   const setIsDownloading = useResumeStore((s) => s.setIsDownloading);
 
-  const [previewError, setPreviewError] = useState<string | null>(null);
-  const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [previewError, setPreviewError] = useState<ClassifiedError | null>(null);
+  const [downloadError, setDownloadError] = useState<ClassifiedError | null>(null);
 
   // Photo upload state
   const [showCropper, setShowCropper] = useState(false);
@@ -36,6 +40,8 @@ export default function PreviewStep() {
   // Track initial mount to skip debounce on first render
   const initialFetchDone = useRef(false);
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const completeness = jpResumeData ? computeCompleteness(jpResumeData) : null;
 
   // Fetch preview function
   const fetchPreview = useCallback(async (
@@ -50,7 +56,7 @@ export default function PreviewStep() {
       const html = await previewDocument(docTab, data, photo);
       setPreviewHtml(html);
     } catch (err) {
-      setPreviewError(err instanceof Error ? err.message : 'Preview failed');
+      setPreviewError(classifyError(err));
       setPreviewHtml(null);
     } finally {
       setIsPreviewLoading(false);
@@ -112,8 +118,11 @@ export default function PreviewStep() {
   };
 
   // Download handler
+  const lastDocTypeRef = useRef<'rirekisho' | 'shokumukeirekisho'>('rirekisho');
+
   const handleDownload = async (docType: 'rirekisho' | 'shokumukeirekisho') => {
     if (!jpResumeData) return;
+    lastDocTypeRef.current = docType;
     setIsDownloading(true);
     setDownloadError(null);
     try {
@@ -127,7 +136,7 @@ export default function PreviewStep() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (err) {
-      setDownloadError(err instanceof Error ? err.message : 'Download failed');
+      setDownloadError(classifyError(err));
     } finally {
       setIsDownloading(false);
     }
@@ -170,18 +179,31 @@ export default function PreviewStep() {
         <div>
           <h2 className="text-xl font-semibold text-slate-800">{t('steps.preview.title')}</h2>
           <p className="mt-1 text-sm text-slate-500">{t('steps.preview.description')}</p>
+          {completeness && (
+            <div className="mt-2 w-64">
+              <CompletenessIndicator {...completeness} />
+            </div>
+          )}
         </div>
       </div>
 
       {/* Error banners */}
       {previewError && (
-        <div className="mb-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          {t('preview.previewError', 'Preview generation failed')}: {previewError}
+        <div className="mb-3">
+          <ErrorBanner
+            error={previewError}
+            onRetry={() => fetchPreview(activeDocTab, jpResumeData, croppedPhotoBase64)}
+            onDismiss={() => setPreviewError(null)}
+          />
         </div>
       )}
       {downloadError && (
-        <div className="mb-3 rounded-lg border border-orange-200 bg-orange-50 px-4 py-3 text-sm text-orange-700">
-          {t('preview.downloadError', 'Download failed')}: {downloadError}
+        <div className="mb-3">
+          <ErrorBanner
+            error={downloadError}
+            onRetry={() => handleDownload(lastDocTypeRef.current)}
+            onDismiss={() => setDownloadError(null)}
+          />
         </div>
       )}
 
