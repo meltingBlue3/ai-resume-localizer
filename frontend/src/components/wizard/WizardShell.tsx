@@ -7,14 +7,11 @@ import UploadStep from '../../steps/UploadStep.tsx';
 import ReviewExtractionStep from '../../steps/ReviewExtractionStep.tsx';
 import ReviewTranslationStep from '../../steps/ReviewTranslationStep.tsx';
 import PreviewStep from '../../steps/PreviewStep.tsx';
-import DownloadStep from '../../steps/DownloadStep.tsx';
-
 const steps = [
   UploadStep,
   ReviewExtractionStep,
   ReviewTranslationStep,
   PreviewStep,
-  DownloadStep,
 ];
 
 export default function WizardShell() {

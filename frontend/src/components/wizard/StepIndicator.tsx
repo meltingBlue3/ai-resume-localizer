@@ -6,7 +6,6 @@ const stepKeys = [
   'reviewExtraction',
   'reviewTranslation',
   'preview',
-  'download',
 ] as const;
 
 export default function StepIndicator() {

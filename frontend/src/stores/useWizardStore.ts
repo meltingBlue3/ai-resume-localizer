@@ -12,7 +12,7 @@ interface WizardState {
 
 export const useWizardStore = create<WizardState>((set, get) => ({
   currentStep: 0,
-  totalSteps: 5,
+  totalSteps: 4,
   stepData: {},
   setStep: (step) => {
     if (step >= 0 && step < get().totalSteps) {
