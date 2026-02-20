@@ -7,6 +7,7 @@ from app.config import settings
 from app.models.api import UploadAndExtractResponse
 from app.models.resume import CnResumeData
 from app.services.dify_client import DifyClient, DifyWorkflowError
+from app.services.ocr_service import OCRError, OCRService
 from app.services.text_extractor import extract_text_from_docx, extract_text_from_pdf
 
 logger = logging.getLogger(__name__)
@@ -19,6 +20,7 @@ ALLOWED_CONTENT_TYPES = {
 }
 
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
+MAX_OCR_FILE_SIZE = 5 * 1024 * 1024  # 5 MB for OCR processing
 
 
 @router.post("/api/upload-and-extract", response_model=UploadAndExtractResponse)
@@ -40,10 +42,45 @@ async def upload_and_extract(file: UploadFile):
     else:
         raw_text = extract_text_from_docx(content)
 
+    # OCR detection and processing for image-based PDFs
+    ocr_service = OCRService()
+    if file.content_type == "application/pdf" and ocr_service.is_image_based(raw_text):
+        logger.info("OCR processing triggered for image-based PDF")
+
+        # Check file size for OCR
+        if len(content) > MAX_OCR_FILE_SIZE:
+            raise HTTPException(
+                status_code=422,
+                detail="File exceeds 5 MB limit for scanned document processing.",
+            )
+
+        try:
+            raw_text = await ocr_service.process_pdf(content, raw_text)
+        except OCRError as exc:
+            error_msg = str(exc)
+            logger.error("OCR failed: %s", error_msg)
+
+            # Map OCR errors to appropriate HTTP status codes
+            if "not installed" in error_msg.lower():
+                raise HTTPException(
+                    status_code=503,
+                    detail="Scanned document processing is not available.",
+                ) from exc
+            elif "timed out" in error_msg.lower():
+                raise HTTPException(
+                    status_code=504,
+                    detail="Scanned document processing timed out.",
+                ) from exc
+            else:
+                raise HTTPException(
+                    status_code=422,
+                    detail=f"Could not extract text from scanned document: {error_msg}",
+                ) from exc
+
     if not raw_text.strip():
         raise HTTPException(
             status_code=422,
-            detail="No text could be extracted. The file may be scanned/image-based.",
+            detail="No text could be extracted. The file may be empty or corrupted.",
         )
 
     if not settings.dify_extraction_api_key:
