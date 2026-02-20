@@ -50,7 +50,10 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
   2. As a backend safety net, any residual CoT tags in API responses are stripped before JSON parsing, and parsing does not fail on clean-format resumes
   3. Extraction results for a complete Chinese resume show fewer null fields than before (measurably better field coverage)
   4. Translated Japanese output reads as natural business Japanese — keigo usage is appropriate, phrasing does not feel machine-literal
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 07-01-PLAN.md — Update Dify extraction and translation workflow YMLs with CoT stripping and improved prompts
+- [ ] 07-02-PLAN.md — Add backend CoT stripping safety net to DifyClient
 
 ### Phase 8: OCR Support
 **Goal**: Users with scanned or image-based PDF resumes can complete the full conversion flow with no special steps
@@ -74,5 +77,5 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 | 4. Preview & PDF Generation | v1.0 | 3/3 | Complete | 2026-02-19 |
 | 5. Polish & Production Readiness | v1.0 | 2/2 | Complete | 2026-02-19 |
 | 6. Tech Debt Cleanup | v1.1 | 0/1 | Not started | - |
-| 7. Workflow Quality | v1.1 | 0/TBD | Not started | - |
+| 7. Workflow Quality | v1.1 | 0/2 | Not started | - |
 | 8. OCR Support | v1.1 | 0/TBD | Not started | - |
