@@ -17,7 +17,7 @@ Requirements for v1.1 Quality & OCR milestone. Each maps to roadmap phases (star
 - [ ] **WKFL-01**: Dify extraction workflow strips `<think>...</think>` chain-of-thought tokens before outputting, so backend always receives clean structured JSON
 - [ ] **WKFL-02**: Dify extraction prompts improved — better field coverage, fewer null fields for complete resumes
 - [ ] **WKFL-03**: Dify translation prompts improved — more natural business Japanese, better keigo usage
-- [ ] **WKFL-04**: Backend API layer strips any residual CoT tags as a safety net before JSON parsing
+- [x] **WKFL-04**: Backend API layer strips any residual CoT tags as a safety net before JSON parsing
 
 ### OCR Support (OCRR)
 
@@ -70,7 +70,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | WKFL-01 | Phase 7 | Pending |
 | WKFL-02 | Phase 7 | Pending |
 | WKFL-03 | Phase 7 | Pending |
-| WKFL-04 | Phase 7 | Pending |
+| WKFL-04 | Phase 7 | Complete |
 | OCRR-01 | Phase 8 | Pending |
 | OCRR-02 | Phase 8 | Pending |
 | OCRR-03 | Phase 8 | Pending |
