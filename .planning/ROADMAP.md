@@ -38,7 +38,8 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
   1. `PhotoDropzone.tsx` no longer exists in the codebase and `photoFile` field is absent from the Zustand store
   2. The preview step 完了 button either routes the user to a meaningful next destination or is not rendered — it never appears as a non-functional element
   3. The application builds and all existing flows work without errors after the removal
-**Plans**: TBD
+**Plans:** 1 plan
+- [ ] 06-01-PLAN.md — Remove dead PhotoDropzone code, photoFile store field, and fix non-functional finish button on preview step
 
 ### Phase 7: Workflow Quality
 **Goal**: The Dify extraction and translation workflows produce clean, complete output that the backend can reliably parse
@@ -72,6 +73,6 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 | 3. Translation & Data Processing | v1.0 | 3/3 | Complete | 2026-02-18 |
 | 4. Preview & PDF Generation | v1.0 | 3/3 | Complete | 2026-02-19 |
 | 5. Polish & Production Readiness | v1.0 | 2/2 | Complete | 2026-02-19 |
-| 6. Tech Debt Cleanup | v1.1 | 0/TBD | Not started | - |
+| 6. Tech Debt Cleanup | v1.1 | 0/1 | Not started | - |
 | 7. Workflow Quality | v1.1 | 0/TBD | Not started | - |
 | 8. OCR Support | v1.1 | 0/TBD | Not started | - |
