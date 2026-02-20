@@ -1,12 +1,18 @@
 app:
-  description: 将中文简历结构化 JSON 翻译为符合日本商务文书规范的日文简历 JSON，供后端 /api/translate 接口消费。采用双 LLM 节点流水线：核心翻译 + 日本本地化。
-  icon: 🇯🇵
+  description: "\u5C06\u4E2D\u6587\u7B80\u5386\u7ED3\u6784\u5316 JSON \u7FFB\u8BD1\u4E3A\u7B26\u5408\u65E5\u672C\u5546\u52A1\u6587\u4E66\u89C4\u8303\u7684\u65E5\u6587\u7B80\u5386 JSON\uFF0C\u4F9B\u540E\u7AEF /api/translate \u63A5\u53E3\u6D88\u8D39\u3002\u5355 LLM \u8282\u70B9\u6D41\u6C34\u7EBF\uFF1A\u7FFB\u8BD1 + \u672C\u5730\u5316\u5408\u5E76\u5904\u7406\u3002"
+  icon: "\U0001F916"
   icon_background: '#FDE8E8'
   mode: workflow
-  name: 日文简历翻译与本地化
+  name: "\u65E5\u6587\u7B80\u5386\u7FFB\u8BD1\u4E0E\u672C\u5730\u53161"
   use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openrouter:0.0.35@89dd7d9ef460b2b687728168080132806c5e31ce7cf3c2f70c9e4a10a5750190
+    version: null
 kind: app
-version: 0.1.3
+version: 0.5.0
 workflow:
   conversation_variables: []
   environment_variables: []
@@ -17,18 +23,22 @@ workflow:
       allowed_file_upload_methods: []
       enabled: false
       fileUploadConfig:
+        attachment_image_file_size_limit: 2
         audio_file_size_limit: 50
         batch_count_limit: 5
         file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
         image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
         video_file_size_limit: 100
         workflow_file_upload_limit: 10
       image:
         enabled: false
         number_limits: 3
         transfer_methods:
-          - local_file
-          - remote_url
+        - local_file
+        - remote_url
       number_limits: 3
     opening_statement: ''
     retriever_resource:
@@ -46,389 +56,310 @@ workflow:
       voice: ''
   graph:
     edges:
-      - data:
-          isInIteration: false
-          sourceType: start
-          targetType: llm
-        id: 1740100000001-source-1740100000002-target
-        selected: false
-        source: '1740100000001'
-        sourceHandle: source
-        target: '1740100000002'
-        targetHandle: target
-        type: custom
-        zIndex: 0
-      - data:
-          isInIteration: false
-          sourceType: llm
-          targetType: llm
-        id: 1740100000002-source-1740100000003-target
-        selected: false
-        source: '1740100000002'
-        sourceHandle: source
-        target: '1740100000003'
-        targetHandle: target
-        type: custom
-        zIndex: 0
-      - data:
-          isInIteration: false
-          sourceType: llm
-          targetType: code
-        id: 1740100000003-source-1740100000004-target
-        selected: false
-        source: '1740100000003'
-        sourceHandle: source
-        target: '1740100000004'
-        targetHandle: target
-        type: custom
-        zIndex: 0
-      - data:
-          isInIteration: false
-          sourceType: code
-          targetType: end
-        id: 1740100000004-source-1740100000005-target
-        selected: false
-        source: '1740100000004'
-        sourceHandle: source
-        target: '1740100000005'
-        targetHandle: target
-        type: custom
-        zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1740100000001-source-1740100000002-target
+      selected: false
+      source: '1740100000001'
+      sourceHandle: source
+      target: '1740100000002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1740100000002-source-17715808726430-target
+      selected: false
+      source: '1740100000002'
+      sourceHandle: source
+      target: '17715808726430'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: code
+      id: 17715808726430-source-1740100000004-target
+      selected: false
+      source: '17715808726430'
+      sourceHandle: source
+      target: '1740100000004'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1740100000004-source-1740100000005-target
+      selected: false
+      source: '1740100000004'
+      sourceHandle: source
+      target: '1740100000005'
+      targetHandle: target
+      type: custom
+      zIndex: 0
     nodes:
-      # ── Node 1: Start ────────────────────────────────────────────────────────
-      - data:
-          desc: 接收后端 DifyClient.translate_resume() 传入的 CnResumeData JSON 字符串
-          selected: false
-          title: 开始
-          type: start
-          variables:
-            - label: 中文简历JSON
-              max_length: 20000
-              options: []
-              required: true
-              type: paragraph
-              variable: cn_resume_json
-        height: 90
-        id: '1740100000001'
-        position:
-          x: 80
-          y: 282
-        positionAbsolute:
-          x: 80
-          y: 282
+    - data:
+        desc: "\u63A5\u6536\u540E\u7AEF DifyClient.translate_resume() \u4F20\u5165\u7684 CnResumeData JSON \u5B57\u7B26\u4E32"
         selected: false
-        sourcePosition: right
-        targetPosition: left
-        type: custom
-        width: 244
-
-      # ── Node 2: LLM 核心翻译 ─────────────────────────────────────────────────
-      - data:
-          context:
-            enabled: false
-            variable_selector: []
-          desc: 将中文简历 JSON 翻译为日语，同时将 CnResumeData 结构映射为 JpResumeData 结构
-          model:
-            completion_params:
-              frequency_penalty: 0
-              max_tokens: 8192
-              presence_penalty: 0
-              temperature: 0.15
-              top_p: 1
-            mode: chat
-            # 导入后请在 Dify UI 中切换为已配置的模型（如 gpt-4o / claude-3-5-sonnet）
-            name: gpt-4o
-            provider: openai
-          prompt_template:
-            - id: b2c3d4e5-0002-0001-0001-000000000001
-              role: system
-              text: |
-                あなたは中国語から日本語への専門的な履歴書翻訳者です。ユーザーから提供される中国語の履歴書 JSON（CnResumeData 形式）を、日本語の履歴書 JSON（JpResumeData 形式）に翻訳・変換してください。
-
-                ## 入力形式（CnResumeData）
-
-                入力は以下の構造を持つ JSON です：
-                - name, phone, email, date_of_birth, address, nationality, gender（個人情報）
-                - education[]: school, major, degree, start_date, end_date
-                - work_experience[]: company, position, department, start_date, end_date, description
-                - skills[]: name, level
-                - certifications[]: name, date
-                - languages[]
-                - self_introduction, career_objective
-                - project_experience[]: company, position, department, start_date, end_date, description
-                - awards[], hobbies
-
-                ## 出力形式（JpResumeData）
-
-                出力は以下の構造に厳密に従った JSON オブジェクトです：
-
-                {
-                  "personal_info": {
-                    "name": "氏名（漢字のまま日本語表記に自然に変換。中国人名はそのまま漢字で可）",
-                    "name_katakana": null,
-                    "birth_date": "生年月日、YYYY-MM-DD 形式",
-                    "gender": "性別（男性/女性）",
-                    "nationality": "国籍（日本語表記）",
-                    "address": "住所（日本語表記）",
-                    "phone": "電話番号",
-                    "email": "メールアドレス",
-                    "linkedin": null,
-                    "website": null
-                  },
-                  "summary": "職務要約（self_introduction を基に、日本の職務経歴書向けの簡潔な要約文を生成）",
-                  "work_history": [
-                    {
-                      "company": "会社名（日本語表記）",
-                      "title": "職種・役職名（日本語表記）",
-                      "start_date": "YYYY-MM",
-                      "end_date": "YYYY-MM または null（在職中）",
-                      "location": null,
-                      "responsibilities": ["業務内容を箇条書きに分解（description から）"],
-                      "achievements": ["成果・実績があれば抽出"]
-                    }
-                  ],
-                  "education": [
-                    {
-                      "school": "学校名（日本語表記）",
-                      "degree": "学位（中国語の学歴を日本の同等表記に変換）",
-                      "major": "専攻（日本語表記）",
-                      "start_date": "YYYY-MM",
-                      "end_date": "YYYY-MM",
-                      "gpa": null,
-                      "notes": null
-                    }
-                  ],
-                  "skills": [
-                    {
-                      "category": "カテゴリ名（例：プログラミング言語、フレームワーク、ツール）",
-                      "skills": ["スキル名のリスト"]
-                    }
-                  ],
-                  "certifications": [
-                    {
-                      "name": "資格名（日本語表記）",
-                      "issuer": "発行機関",
-                      "date": "YYYY-MM",
-                      "score": null
-                    }
-                  ],
-                  "motivation": "志望動機（career_objective を基に日本の転職市場向けに生成）",
-                  "strengths": "自己PR（self_introduction と skills を基に生成）",
-                  "other": "その他（awards, hobbies, languages などを統合）"
-                }
-
-                ## 翻訳ルール
-
-                1. **自然な日本語**: 直訳ではなく、日本のビジネス文書として自然な表現にする
-                2. **構造変換**: CnResumeData のフィールドを JpResumeData のフィールドに正しくマッピングする
-                   - work_experience → work_history（description を responsibilities リストに分解）
-                   - project_experience → work_history に統合（末尾に追加）
-                   - self_introduction → summary（簡潔な要約に変換）+ strengths（自己PR に変換）
-                   - career_objective → motivation（志望動機に変換）
-                   - awards + hobbies + languages → other（統合して記述）
-                3. **name_katakana は null のまま残す**（次の処理ステップで生成）
-                4. **日付は YYYY-MM 形式を維持**する（和暦変換はフロントエンドで行う）
-                5. **null の維持**: 入力で null のフィールドは出力でも null とする
-                6. **時系列**: work_history と education は時間逆順（最新が先）
-                7. **スキル分類**: skills は技術カテゴリ別にグループ化する
-                8. JSON オブジェクトのみ出力し、説明文や markdown 記法は一切付けないこと
-            - id: b2c3d4e5-0002-0001-0001-000000000002
-              role: user
-              text: "以下の中国語履歴書 JSON を日本語に翻訳してください：\n\n{{#1740100000001.cn_resume_json#}}"
-          selected: false
-          title: LLM 核心翻訳
-          type: llm
-          variables: []
-          vision:
-            enabled: false
-        height: 98
-        id: '1740100000002'
-        position:
-          x: 420
-          y: 282
-        positionAbsolute:
-          x: 420
-          y: 282
+        title: "\u5F00\u59CB"
+        type: start
+        variables:
+        - label: "\u4E2D\u6587\u7B80\u5386JSON"
+          max_length: 20000
+          options: []
+          required: true
+          type: paragraph
+          variable: cn_resume_json
+      height: 168
+      id: '1740100000001'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: "\u4E2D\u6587\u7B80\u5386 JSON \u3092\u65E5\u672C\u8A9E\u306B\u7FFB\u8A33\u3057\u3001CnResumeData \u3092 JpResumeData \u306B\u5909\u63DB\u3059\u308B\uFF08\u7FFB\u8A33 + \u672C\u5730\u5316\u5408\u4F75\uFF09"
+        model:
+          completion_params:
+            temperature: 0.15
+            top_p: 1
+          mode: chat
+          name: openai/gpt-5-mini
+          provider: langgenius/openrouter/openrouter
+        prompt_template:
+        - id: b2c3d4e5-0002-0001-0001-000000000001
+          role: system
+          text: "あなたは中国語から日本語への専門的な履歴書翻訳者です。ユーザーから提供される中国語の履歴書 JSON（CnResumeData 形式）を、日本語の履歴書 JSON（JpResumeData 形式）に翻訳・変換してください。\n\n\
+            ## 核心原則\n\n\
+            原文に書かれていない事実、数字、経験を追加してはいけません。翻訳は原文の内容のみに基づくこと。\n\
+            「貢献」「成長」「チームワーク」などのマーケティング的表現を追加しないこと。原文にない概念は翻訳に含めない。\n\
+            文の再構成は許可するが、内容の追加は禁止。日本のビジネス文書の文体に合わせて文構造を調整してよい。\n\
+            数値は文脈から推論可能な場合のみ許可（例：日付範囲から算出した年数）。定量データの捏造は禁止。\n\n\
+            ## 入力形式（CnResumeData）\n\n\
+            入力は以下の構造を持つ JSON です：\n\
+            - name, phone, email, date_of_birth, address, nationality, gender（個人情報）\n\
+            - education[]: school, major, degree, start_date, end_date\n\
+            - work_experience[]: company, position, department, start_date, end_date, description\n\
+            - skills[]: name, level\n\
+            - certifications[]: name, date\n\
+            - languages[]\n\
+            - self_introduction, career_objective\n\
+            - project_experience[]: company, position, department, start_date, end_date, description\n\
+            - awards[], hobbies\n\n\
+            ## 出力形式（JpResumeData）\n\n\
+            出力は以下の構造に厳密に従った JSON オブジェクトです：\n\n\
+            {\n\
+            \  \"personal_info\": {\n\
+            \    \"name\": \"氏名（漢字のまま。中国人名はそのまま漢字で可）\",\n\
+            \    \"name_katakana\": \"カタカナ読み（中国語の人名のピンイン読みに基づきカタカナに変換。姓と名の間に全角スペース。例：張偉→チョウ イ、李明→リ メイ）\",\n\
+            \    \"birth_date\": \"生年月日、YYYY-MM-DD 形式\",\n\
+            \    \"gender\": \"性別（男性/女性）\",\n\
+            \    \"nationality\": \"国籍（日本語表記）\",\n\
+            \    \"address\": \"住所（日本語表記）\",\n\
+            \    \"phone\": \"電話番号\",\n\
+            \    \"email\": \"メールアドレス\",\n\
+            \    \"linkedin\": null,\n\
+            \    \"website\": null\n\
+            \  },\n\
+            \  \"summary\": \"職務要約\",\n\
+            \  \"work_history\": [\n\
+            \    {\n\
+            \      \"company\": \"会社名（日本語表記）\",\n\
+            \      \"title\": \"職種・役職名（日本語表記）\",\n\
+            \      \"start_date\": \"YYYY-MM\",\n\
+            \      \"end_date\": \"YYYY-MM または null（在職中）\",\n\
+            \      \"location\": null,\n\
+            \      \"responsibilities\": [\"業務内容を箇条書きに分解（description から）\"],\n\
+            \      \"achievements\": [\"成果・実績があれば抽出\"]\n\
+            \    }\n\
+            \  ],\n\
+            \  \"education\": [\n\
+            \    {\n\
+            \      \"school\": \"学校名（日本語表記）\",\n\
+            \      \"degree\": \"学位\",\n\
+            \      \"major\": \"専攻（日本語表記）\",\n\
+            \      \"start_date\": \"YYYY-MM\",\n\
+            \      \"end_date\": \"YYYY-MM\",\n\
+            \      \"gpa\": null,\n\
+            \      \"notes\": null\n\
+            \    }\n\
+            \  ],\n\
+            \  \"skills\": [\n\
+            \    {\n\
+            \      \"category\": \"カテゴリ名（例：プログラミング言語、フレームワーク、ツール）\",\n\
+            \      \"skills\": [\"スキル名のリスト\"]\n\
+            \    }\n\
+            \  ],\n\
+            \  \"certifications\": [\n\
+            \    {\n\
+            \      \"name\": \"資格名（日本で認知される正式名称に変換。例：CET-4→CET-4（大学英語四級））\",\n\
+            \      \"issuer\": \"発行機関\",\n\
+            \      \"date\": \"YYYY-MM\",\n\
+            \      \"score\": null\n\
+            \    }\n\
+            \  ],\n\
+            \  \"motivation\": \"志望動機\",\n\
+            \  \"strengths\": \"自己PR\",\n\
+            \  \"other\": \"その他（awards, hobbies, languages などを統合）\"\n\
+            }\n\n\
+            ## 翻訳・変換ルール\n\n\
+            ### 文体\n\
+            - です/ます体を全体で使用\n\
+            - motivation セクションのみ軽い謙譲語を使用（「〜させていただきたい」等）。過度に堅い表現は避ける\n\n\
+            ### 構造変換\n\
+            - work_experience → work_history（description を responsibilities リストに分解）\n\
+            - project_experience → work_history に統合（末尾に追加）\n\
+            - self_introduction → summary の翻訳元。self_introduction の内容を日本語に翻訳する。原文にない情報を追加しない\n\
+            - career_objective → motivation の翻訳元。career_objective の内容を日本語に翻訳する。原文にない情報を追加しない\n\
+            - self_introduction と skills → strengths の翻訳元。self_introduction と skills の内容に基づいて日本語に翻訳する。原文にない情報を追加しない\n\
+            - awards + hobbies + languages → other（統合して記述）\n\n\
+            ### 学歴マッピング\n\
+            - 专科 / 大专 → 短期大学卒業\n\
+            - 本科 → 学士\n\
+            - 硕士 → 修士\n\
+            - 博士 → 博士\n\
+            - 上記以外はそのまま維持\n\n\
+            ### スキル分類\n\
+            - skills は技術カテゴリ別にグループ化する（プログラミング言語、フレームワーク、ツール等）\n\n\
+            ### その他\n\
+            - null の維持: 入力で null のフィールドは出力でも null とする\n\
+            - 日付は YYYY-MM 形式を維持する（和暦変換はフロントエンドで行う）\n\
+            - work_history と education は時間逆順（最新が先）\n\
+            - responsibilities の各項目は日本の職務経歴書で一般的な表現にする（「〜を担当しました」「〜の設計・開発を行いました」等）\n\
+            - 技術用語は日本のIT業界で通用する表記にする\n\n\
+            JSON オブジェクトのみ出力。<think> タグや思考過程、markdown 記法は一切出力しない。\n"
+        - id: b2c3d4e5-0002-0001-0001-000000000002
+          role: user
+          text: "以下の中国語履歴書 JSON を日本語に翻訳してください：\n\n\
+            {{#1740100000001.cn_resume_json#}}"
+        selected: true
+        title: "LLM \u7FFB\u8A33\u30FB\u672C\u5730\u5316"
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 147
+      id: '1740100000002'
+      position:
+        x: 368
+        y: 282
+      positionAbsolute:
+        x: 368
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        code: "import re\n\ndef main(llm_text: str) -> dict:\n    text = re.sub(r'<think>[\\s\\S]*?</think>',\
+          \ '', llm_text, flags=re.DOTALL)\n    return {\"result\": text.strip()}\n"
+        code_language: python3
+        desc: "LLM \u51FA\u529B\u304B\u3089 <think> \u30BF\u30B0\u3092\u9664\u53BB"
+        outputs:
+          result:
+            children: null
+            type: string
         selected: false
-        sourcePosition: right
-        targetPosition: left
-        type: custom
-        width: 244
-
-      # ── Node 3: LLM 日本本地化 ───────────────────────────────────────────────
-      - data:
-          context:
-            enabled: false
-            variable_selector: []
-          desc: 日本のビジネス文書規範に基づく本地化処理（敬語・振り仮名・学歴マッピング等）
-          model:
-            completion_params:
-              frequency_penalty: 0
-              max_tokens: 8192
-              presence_penalty: 0
-              temperature: 0.1
-              top_p: 1
-            mode: chat
-            # 导入后请在 Dify UI 中切换为已配置的模型（如 gpt-4o / claude-3-5-sonnet）
-            name: gpt-4o
-            provider: openai
-          prompt_template:
-            - id: b2c3d4e5-0003-0001-0001-000000000001
-              role: system
-              text: |
-                あなたは日本のビジネス文書の専門家です。前のステップで中国語から翻訳された日本語の履歴書 JSON を受け取り、日本の転職市場・ビジネス慣習に完全に適合するよう本地化処理を行ってください。
-
-                ## 処理タスク
-
-                以下のすべてのタスクを実行し、修正済みの完全な JpResumeData JSON を出力してください。
-
-                ### 1. 片仮名読み仮名の生成
-                - personal_info.name から中国語の人名を読み取り、適切なカタカナ読みを生成して personal_info.name_katakana に設定する
-                - 中国語の姓名のピンイン読みに基づき、日本語のカタカナに変換する
-                - 例：「張偉」→「チョウ イ」、「李明」→「リ メイ」、「王小红」→「オウ ショウコウ」
-                - 姓と名の間に全角スペースを入れる
-
-                ### 2. 学歴の日本語等価表記マッピング
-                education 内の degree フィールドを日本の標準表記に変換する：
-                - 专科 / 大专 → 短期大学卒業
-                - 本科 → 学士
-                - 硕士 → 修士
-                - 博士 → 博士
-                - 上記以外はそのまま維持
-                - school 名は「〇〇大学」の形式が望ましい
-
-                ### 3. 敬語・文体の統一
-                - work_history の responsibilities と achievements → です/ます体で記述
-                - summary（職務要約）→ です/ます体
-                - motivation（志望動機）→ 謙譲語を適切に使用（「〜させていただきたい」「〜に貢献できればと存じます」等）
-                - strengths（自己PR）→ です/ます体で、具体的な実績を交えた表現
-
-                ### 4. 職務内容の日本語ビジネス表現への最適化
-                - responsibilities の各項目は「〜を担当しました」「〜の設計・開発を行いました」等、日本の職務経歴書で一般的な表現にする
-                - 曖昧な表現は具体的なビジネス用語に置き換える
-                - 技術用語は日本のIT業界で通用する表記にする（例：「ソフトウェア開発」「要件定義」「基本設計」等）
-
-                ### 5. 資格名の日本語表記
-                - certifications の name を日本で認知される正式名称に変換する
-                - 中国の資格で日本に直接対応するものがない場合は、原文を日本語訳した上で括弧内に補足を入れる
-                - 語学資格は日本で認知されるレベル表記に調整する（例：CET-4 → 「CET-4（大学英語四級）」）
-
-                ### 6. summary・motivation・strengths の品質向上
-                - summary: 3〜5文程度で、経験年数・専門分野・強みを端的にまとめる
-                - motivation: 日本の企業文化を意識し、「貢献」「成長」「チームワーク」を織り交ぜた志望動機にする
-                - strengths: 具体的なエピソードや数値を含む自己PRにする
-
-                ### 7. other フィールドの整理
-                - 語学能力・受賞歴・趣味を統合して自然な文章にまとめる
-                - 語学能力は「日本語能力試験N1」等の形式で記載
-
-                ## 出力ルール
-
-                1. 入力と同じ JpResumeData 構造を維持する（フィールドの追加・削除はしない）
-                2. null のフィールドは null のまま残す
-                3. 日付形式は YYYY-MM のまま変更しない
-                4. JSON オブジェクトのみ出力し、説明文や markdown 記法は一切付けないこと
-            - id: b2c3d4e5-0003-0001-0001-000000000002
-              role: user
-              text: "以下の翻訳済み履歴書 JSON に対して、日本のビジネス文書規範に基づく本地化処理を行ってください：\n\n{{#1740100000002.text#}}"
-          selected: false
-          title: LLM 日本本地化
-          type: llm
-          variables: []
-          vision:
-            enabled: false
-        height: 98
-        id: '1740100000003'
-        position:
-          x: 760
-          y: 282
-        positionAbsolute:
-          x: 760
-          y: 282
+        title: "CoT \u30B9\u30C8\u30EA\u30C3\u30D7"
+        type: code
+        variables:
+        - value_selector:
+          - '1740100000002'
+          - text
+          variable: llm_text
+      height: 95
+      id: '17715808726430'
+      position:
+        x: 655
+        y: 282
+      positionAbsolute:
+        x: 655
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        code: "import json\nimport re\n\ndef main(llm_text: str) -> dict:\n    text\
+          \ = llm_text.strip()\n\n    text = re.sub(r'^```(?:json)?\\s*\\n?', '', text)\n\
+          \    text = re.sub(r'\\n?```\\s*$', '', text)\n    text = text.strip()\n\n\
+          \    start = text.find('{')\n    if start == -1:\n        raise ValueError(\"\
+          No JSON object found in LLM output\")\n\n    text = text[start:]\n\n    decoder\
+          \ = json.JSONDecoder()\n\n    try:\n        parsed, _ = decoder.raw_decode(text)\n\
+          \    except json.JSONDecodeError as e:\n        raise ValueError(\n      \
+          \      f\"LLM returned invalid JSON: {e}\\n\"\n            f\"Content preview:\
+          \ {text[:500]}\"\n        )\n\n    return {\"result\": json.dumps(parsed,\
+          \ ensure_ascii=False)}\n"
+        code_language: python3
+        desc: "\u6E05\u6D17 LLM \u8F93\u51FA\uFF0C\u53BB\u9664 markdown \u4EE3\u7801\u5757\u6807\u8BB0\uFF0C\u5E76\u9A8C\u8BC1 JSON \u5408\u6CD5\u6027"
+        outputs:
+          result:
+            children: null
+            type: string
         selected: false
-        sourcePosition: right
-        targetPosition: left
-        type: custom
-        width: 244
-
-      # ── Node 4: Code 清洗 JSON ──────────────────────────────────────────────
-      - data:
-          code: |
-            import re
-            import json
-
-            def main(llm_text: str) -> dict:
-                text = llm_text.strip()
-
-                # Strip markdown code block wrappers that some models add
-                text = re.sub(r'^```(?:json)?\s*\n?', '', text)
-                text = re.sub(r'\n?```\s*$', '', text)
-                text = text.strip()
-
-                # Validate the output is parseable JSON before passing downstream
-                try:
-                    json.loads(text)
-                except json.JSONDecodeError as e:
-                    raise ValueError(
-                        f"LLM returned invalid JSON: {e}\n"
-                        f"Content preview: {text[:300]}"
-                    )
-
-                return {"result": text}
-          code_language: python3
-          desc: 清洗 LLM 输出，去除 markdown 代码块标记，并验证 JSON 合法性
-          outputs:
-            result:
-              children: null
-              type: string
-          selected: false
-          title: 清洗 JSON 输出
-          type: code
-          variables:
-            - value_selector:
-                - '1740100000003'
-                - text
-              variable: llm_text
-        height: 54
-        id: '1740100000004'
-        position:
-          x: 1100
-          y: 282
-        positionAbsolute:
-          x: 1100
-          y: 282
+        title: "\u6E05\u6D17 JSON \u8F93\u51FA"
+        type: code
+        variables:
+        - value_selector:
+          - '17715808726430'
+          - result
+          variable: llm_text
+      height: 95
+      id: '1740100000004'
+      position:
+        x: 942
+        y: 282
+      positionAbsolute:
+        x: 942
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        desc: "\u8F93\u51FA\u672C\u5730\u5316\u540E\u7684\u65E5\u6587\u7B80\u5386 JSON\uFF0C\u53D8\u91CF\u540D jp_resume_json \u4F9B\u540E\u7AEF DifyClient \u8BFB\u53D6"
+        outputs:
+        - value_selector:
+          - '1740100000004'
+          - result
+          variable: jp_resume_json
         selected: false
-        sourcePosition: right
-        targetPosition: left
-        type: custom
-        width: 244
-
-      # ── Node 5: End ──────────────────────────────────────────────────────────
-      - data:
-          desc: 输出本地化后的日文简历 JSON，变量名 jp_resume_json 供后端 DifyClient 读取
-          outputs:
-            - value_selector:
-                - '1740100000004'
-                - result
-              variable: jp_resume_json
-          selected: false
-          title: 结束
-          type: end
-        height: 90
-        id: '1740100000005'
-        position:
-          x: 1440
-          y: 282
-        positionAbsolute:
-          x: 1440
-          y: 282
-        selected: false
-        sourcePosition: right
-        targetPosition: left
-        type: custom
-        width: 244
-
+        title: "\u7ED3\u675F"
+        type: end
+      height: 147
+      id: '1740100000005'
+      position:
+        x: 1229
+        y: 282
+      positionAbsolute:
+        x: 1229
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
     viewport:
-      x: 0
-      y: 0
-      zoom: 0.8
+      x: 238.91883361773603
+      y: 302.4399185578825
+      zoom: 0.5278031643091579
+  rag_pipeline_variables: []
