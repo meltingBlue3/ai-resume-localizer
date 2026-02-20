@@ -52,8 +52,8 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
   4. Translated Japanese output reads as natural business Japanese — keigo usage is appropriate, phrasing does not feel machine-literal
 **Plans:** 2 plans
 Plans:
-- [ ] 07-01-PLAN.md — Update Dify extraction and translation workflow YMLs with CoT stripping and improved prompts
-- [ ] 07-02-PLAN.md — Add backend CoT stripping safety net to DifyClient
+- [ ] 07-01-PLAN.md — Rewrite Dify extraction and translation workflow YMLs with CoT stripping, constrained prompts, sorting code node, and merged single-LLM translation
+- [ ] 07-02-PLAN.md — Add backend CoT stripping safety net to DifyClient with unit tests
 
 ### Phase 8: OCR Support
 **Goal**: Users with scanned or image-based PDF resumes can complete the full conversion flow with no special steps
