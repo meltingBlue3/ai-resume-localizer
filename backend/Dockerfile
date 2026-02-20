@@ -13,6 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     shared-mime-info \
     fonts-noto-cjk-extra \
     gcc \
+    tesseract-ocr \
+    tesseract-ocr-jpn \
+    tesseract-ocr-chi-sim \
+    poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
