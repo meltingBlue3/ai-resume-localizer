@@ -1,5 +1,5 @@
 export interface ClassifiedError {
-  type: 'network' | 'timeout' | 'server' | 'validation' | 'config';
+  type: 'network' | 'timeout' | 'server' | 'validation' | 'config' | 'ocr';
   titleKey: string;
   messageKey: string;
   rawMessage: string;
@@ -41,6 +41,17 @@ export function classifyError(error: unknown): ClassifiedError {
       messageKey: 'errors.timeout.message',
       rawMessage,
       retryable: true,
+    };
+  }
+
+  // OCR-specific errors (503 for OCR service unavailable, OCR in message)
+  if (rawMessage.includes('OCR') || rawMessage.includes('503')) {
+    return {
+      type: 'ocr',
+      titleKey: 'errors.ocr.title',
+      messageKey: 'errors.ocr.message',
+      rawMessage,
+      retryable: false,
     };
   }
 
