@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 
 import httpx
 
@@ -21,6 +22,19 @@ class DifyClient:
             headers={"Authorization": f"Bearer {api_key}"},
             timeout=httpx.Timeout(90.0, connect=10.0),
         )
+
+    def _strip_cot_tags(self, text: str) -> str:
+        """Strip <think>...</think> chain-of-thought tags from text.
+
+        Defence-in-depth: reasoning models may emit CoT blocks even when
+        instructed not to.  Stripping them here prevents JSON parse failures.
+        """
+        result = re.sub(r"<think>[\s\S]*?</think>", "", text, flags=re.DOTALL)
+        if result != text:
+            logger.warning(
+                "CoT safety net activated: stripped <think> tags from Dify response"
+            )
+        return result.strip()
 
     async def extract_resume(self, resume_text: str, user: str = "default") -> dict:
         """Send resume text to Dify extraction workflow and return structured data.
@@ -56,6 +70,7 @@ class DifyClient:
             )
 
         if isinstance(structured, str):
+            structured = self._strip_cot_tags(structured)
             try:
                 structured = json.loads(structured)
             except json.JSONDecodeError as exc:
@@ -99,6 +114,7 @@ class DifyClient:
             )
 
         if isinstance(jp_resume_json, str):
+            jp_resume_json = self._strip_cot_tags(jp_resume_json)
             try:
                 jp_resume_json = json.loads(jp_resume_json)
             except json.JSONDecodeError as exc:
