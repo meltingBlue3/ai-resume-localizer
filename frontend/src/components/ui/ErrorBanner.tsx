@@ -37,6 +37,11 @@ const typeStyles: Record<
     bg: 'bg-purple-50',
     text: 'text-purple-800',
   },
+  ocr: {
+    border: 'border-slate-300',
+    bg: 'bg-slate-50',
+    text: 'text-slate-800',
+  },
 };
 
 export function ErrorBanner({ error, onRetry, onDismiss }: ErrorBannerProps) {
