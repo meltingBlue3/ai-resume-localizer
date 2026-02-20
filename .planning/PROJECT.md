@@ -32,7 +32,13 @@
 
 ### Active
 
-*(Next milestone requirements will be defined here)*
+<!-- v1.1 milestone — tech debt, workflow quality, OCR -->
+
+- [ ] 清理死代码（PhotoDropzone.tsx、photoFile字段、预览完了按钮）— v1.1
+- [ ] Dify工作流剥离 `<think>...</think>` CoT输出，确保后端收到纯净JSON — v1.1
+- [ ] 改进提取和翻译工作流的提示词质量 — v1.1
+- [ ] 后端API层在JSON解析前剥离残留CoT标签 — v1.1
+- [ ] OCR支持：系统检测图像型PDF并在FastAPI后端进行OCR预处理 — v1.1
 
 ### Out of Scope
 
@@ -41,7 +47,6 @@
 - OAuth/第三方登录 — 不需要
 - 移动端App — Web优先
 - 实时协作编辑 — 单用户使用场景
-- OCR支持（扫描版PDF） — v2功能
 - 自定义简历模板 — 履歴書有唯一JIS标准格式
 
 ## Context
@@ -78,5 +83,14 @@
 | iframe srcdoc预览 + allow-scripts | 自包含HTML（内联CSS），ResizeObserver缩放A4 | ✓ Good — quick-011修复srcdoc sandbox后正常渲染 |
 | Docker Compose多容器部署 | backend + frontend + nginx分离，nginx代理/api/* | ✓ Good — .mjs MIME类型（quick-009）修复后PDF.js worker正常 |
 
+## Current Milestone: v1.1 Quality & OCR
+
+**Goal:** 清理技术债务、提升AI工作流质量、添加扫描版PDF的OCR支持
+
+**Target features:**
+- Tech debt: 死代码清理 + 预览完了按钮修复
+- Workflow: 剥离CoT `<think>` 输出 + 改进提示词
+- OCR: 扫描版PDF检测 + FastAPI后端预处理
+
 ---
-*Last updated: 2026-02-20 after v1.0 milestone*
+*Last updated: 2026-02-20 after v1.1 milestone start*
