@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libglib2.0-0 \
     libgobject-2.0-0 \
     shared-mime-info \
-    fonts-noto-cjk-extra \
+    fonts-noto-cjk \
     gcc \
     tesseract-ocr \
     tesseract-ocr-jpn \
