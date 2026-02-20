@@ -54,6 +54,12 @@ None.
 - Dify Cloud free tier limited to 200 message credits — Professional tier ($59/mo) needed for real usage
 - OCR accuracy on low-quality scans is inherently limited; v1.1 scope is best-effort with local OCR only
 
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 12 | 由于新增了ocr，更新docker支持 | 2026-02-20 | a94e7a1 | [12-ocr-docker](./quick/12-ocr-docker/) |
+
 ## Session Continuity
 
 Last session: 2026-02-20
