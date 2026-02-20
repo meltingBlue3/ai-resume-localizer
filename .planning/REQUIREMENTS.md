@@ -21,9 +21,9 @@ Requirements for v1.1 Quality & OCR milestone. Each maps to roadmap phases (star
 
 ### OCR Support (OCRR)
 
-- [ ] **OCRR-01**: System detects whether an uploaded PDF has extractable text or is image/scan-based
-- [ ] **OCRR-02**: User can upload a scanned or image-based PDF and have its content successfully extracted via OCR preprocessing
-- [ ] **OCRR-03**: OCR output is passed to the Dify extraction workflow as text input — same downstream flow as text-based PDFs
+- [x] **OCRR-01**: System detects whether an uploaded PDF has extractable text or is image/scan-based
+- [x] **OCRR-02**: User can upload a scanned or image-based PDF and have its content successfully extracted via OCR preprocessing
+- [x] **OCRR-03**: OCR output is passed to the Dify extraction workflow as text input — same downstream flow as text-based PDFs
 
 ## Future Requirements
 
@@ -71,9 +71,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | WKFL-02 | Phase 7 | Complete |
 | WKFL-03 | Phase 7 | Complete |
 | WKFL-04 | Phase 7 | Complete |
-| OCRR-01 | Phase 8 | Pending |
-| OCRR-02 | Phase 8 | Pending |
-| OCRR-03 | Phase 8 | Pending |
+| OCRR-01 | Phase 8 | Complete |
+| OCRR-02 | Phase 8 | Complete |
+| OCRR-03 | Phase 8 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 9 total

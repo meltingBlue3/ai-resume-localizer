@@ -65,7 +65,7 @@ Plans:
   3. OCR-extracted text flows into the Dify extraction workflow identically to text extracted from a native PDF — no separate code path or UI change is required
 **Plans:** 2 plans
 Plans:
-- [ ] 08-01-PLAN.md — Integrate Tesseract OCR service with detection threshold and upload route
+- [x] 08-01-PLAN.md — Integrate Tesseract OCR service with detection threshold and upload route
 - [ ] 08-02-PLAN.md — Add OCR error classification, i18n messages, and unit tests
 
 ## Progress
@@ -81,4 +81,4 @@ Plans:
 | 5. Polish & Production Readiness | v1.0 | 2/2 | Complete | 2026-02-19 |
 | 6. Tech Debt Cleanup | v1.1 | 1/1 | Complete | 2026-02-20 |
 | 7. Workflow Quality | v1.1 | 2/2 | Complete | 2026-02-20 |
-| 8. OCR Support | v1.1 | 0/2 | Not started | - |
+| 8. OCR Support | v1.1 | 1/2 | In Progress | - |
