@@ -65,21 +65,21 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TECH-01 | — | Pending |
-| TECH-02 | — | Pending |
-| WKFL-01 | — | Pending |
-| WKFL-02 | — | Pending |
-| WKFL-03 | — | Pending |
-| WKFL-04 | — | Pending |
-| OCRR-01 | — | Pending |
-| OCRR-02 | — | Pending |
-| OCRR-03 | — | Pending |
+| TECH-01 | Phase 6 | Pending |
+| TECH-02 | Phase 6 | Pending |
+| WKFL-01 | Phase 7 | Pending |
+| WKFL-02 | Phase 7 | Pending |
+| WKFL-03 | Phase 7 | Pending |
+| WKFL-04 | Phase 7 | Pending |
+| OCRR-01 | Phase 8 | Pending |
+| OCRR-02 | Phase 8 | Pending |
+| OCRR-03 | Phase 8 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 9 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 9 ⚠️
+- Mapped to phases: 9 (complete)
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-20*
-*Last updated: 2026-02-20 after initial definition*
+*Last updated: 2026-02-20 after v1.1 roadmap creation*
