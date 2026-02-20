@@ -21,13 +21,15 @@ export default function StepNavigation() {
           </button>
         )}
       </div>
-      <button
-        type="button"
-        onClick={nextStep}
-        className="rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-700"
-      >
-        {isLast ? t('finish') : t('next')}
-      </button>
+      {!isLast && (
+        <button
+          type="button"
+          onClick={nextStep}
+          className="rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-700"
+        >
+          {t('next')}
+        </button>
+      )}
     </div>
   );
 }
