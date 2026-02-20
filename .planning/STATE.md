@@ -12,20 +12,20 @@ See: .planning/PROJECT.md (updated 2026-02-20)
 ```
 Milestone : v1.1 Quality & OCR
 Phase     : 6 — Tech Debt Cleanup
-Plan      : —
-Status    : Not started (roadmap created, awaiting plan-phase 6)
-Progress  : [░░░░░░░░░░] 0% (0/3 phases complete)
+Plan      : 1 of 1 complete
+Status    : Phase 6 Plan 1 complete — dead code removal and UI fix
+Progress  : [███░░░░░░░] 33% (0/3 phases complete, phase 6 plan 1/1 done)
 ```
 
-Last activity: 2026-02-20 — v1.1 roadmap created (Phases 6–8)
+Last activity: 2026-02-20 — Completed 06-01 (dead code & UI cleanup)
 
 ## Performance Metrics
 
 | Metric | v1.0 | v1.1 Target |
 |--------|------|-------------|
 | Phases complete | 5/5 | 0/3 |
-| Plans complete | 14/14 | 0/TBD |
-| Requirements mapped | 17/17 | 0/9 |
+| Plans complete | 14/14 | 1/TBD |
+| Requirements mapped | 17/17 | 2/9 |
 
 ## Accumulated Context
 
@@ -36,6 +36,7 @@ All major decisions logged in PROJECT.md Key Decisions table.
 **v1.1 specific:**
 - OCR library: local only (no Google Vision / Azure) per out-of-scope declaration in REQUIREMENTS.md
 - CoT stripping: both in Dify workflow (WKFL-01) and as backend safety net (WKFL-04) — defense in depth
+- Hide forward button entirely on last wizard step rather than disabling it (06-01)
 
 ### Pending Todos
 
@@ -49,5 +50,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: v1.1 roadmap created
-Resume: Run `/gsd:plan-phase 6` to begin Phase 6 Tech Debt Cleanup
+Stopped at: Completed 06-01-PLAN.md
+Resume: Phase 6 has only 1 plan -- proceed to plan-phase 7 or execute next milestone phase

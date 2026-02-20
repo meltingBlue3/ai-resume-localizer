@@ -9,8 +9,8 @@ Requirements for v1.1 Quality & OCR milestone. Each maps to roadmap phases (star
 
 ### Tech Debt (TECH)
 
-- [ ] **TECH-01**: Dead component `PhotoDropzone.tsx` and `photoFile` store field are removed from the codebase
-- [ ] **TECH-02**: Preview step 完了 button either navigates to a meaningful destination or is removed if no next step exists
+- [x] **TECH-01**: Dead component `PhotoDropzone.tsx` and `photoFile` store field are removed from the codebase
+- [x] **TECH-02**: Preview step 完了 button either navigates to a meaningful destination or is removed if no next step exists
 
 ### Workflow Quality (WKFL)
 
@@ -65,8 +65,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TECH-01 | Phase 6 | Pending |
-| TECH-02 | Phase 6 | Pending |
+| TECH-01 | Phase 6 | Complete |
+| TECH-02 | Phase 6 | Complete |
 | WKFL-01 | Phase 7 | Pending |
 | WKFL-02 | Phase 7 | Pending |
 | WKFL-03 | Phase 7 | Pending |
