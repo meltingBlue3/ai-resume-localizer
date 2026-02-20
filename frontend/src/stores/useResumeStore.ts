@@ -3,7 +3,6 @@ import type { CnResumeData, JpResumeData } from '../types/resume';
 
 interface ResumeState {
   resumeFile: File | null;
-  photoFile: File | null;
 
   rawText: string | null;
   cnResumeData: CnResumeData | null;
@@ -22,7 +21,6 @@ interface ResumeState {
   isDownloading: boolean;
 
   setResumeFile: (file: File | null) => void;
-  setPhotoFile: (file: File | null) => void;
   setExtractionResult: (rawText: string, data: CnResumeData) => void;
   setCnResumeData: (data: CnResumeData) => void;
   setExtracting: (loading: boolean) => void;
@@ -40,7 +38,6 @@ interface ResumeState {
 
 const initialState = {
   resumeFile: null,
-  photoFile: null,
   rawText: null,
   cnResumeData: null,
   isExtracting: false,
@@ -59,7 +56,6 @@ export const useResumeStore = create<ResumeState>((set) => ({
   ...initialState,
 
   setResumeFile: (file) => set({ resumeFile: file }),
-  setPhotoFile: (file) => set({ photoFile: file }),
 
   setExtractionResult: (rawText, data) =>
     set({
