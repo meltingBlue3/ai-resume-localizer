@@ -3,7 +3,7 @@
 ## Milestones
 
 - ✅ **v1.0 MVP** — Phases 1–5 (shipped 2026-02-20)
-- 🚧 **v1.1 Quality & OCR** — Phases 6–8 (in progress)
+- ✅ **v1.1 Quality & OCR** — Phases 6–8 (shipped 2026-02-20)
 
 ## Phases
 
@@ -20,13 +20,13 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 
 </details>
 
-### 🚧 v1.1 Quality & OCR (In Progress)
+### ✅ v1.1 Quality & OCR (Complete)
 
 **Milestone Goal:** Clean up tech debt, improve AI workflow output quality, and add OCR support for scanned PDFs so the system handles image-based resumes with no change to the downstream flow.
 
-- [ ] **Phase 6: Tech Debt Cleanup** - Remove dead PhotoDropzone code and fix the dangling preview 完了 button
-- [ ] **Phase 7: Workflow Quality** - Strip CoT tokens from Dify output and improve extraction/translation prompts
-- [ ] **Phase 8: OCR Support** - Detect image-based PDFs and preprocess them via OCR before passing text to Dify
+- [x] **Phase 6: Tech Debt Cleanup** - Remove dead PhotoDropzone code and fix the dangling preview 完了 button
+- [x] **Phase 7: Workflow Quality** - Strip CoT tokens from Dify output and improve extraction/translation prompts
+- [x] **Phase 8: OCR Support** - Detect image-based PDFs and preprocess them via OCR before passing text to Dify
 
 ## Phase Details
 
@@ -66,7 +66,7 @@ Plans:
 **Plans:** 2 plans
 Plans:
 - [x] 08-01-PLAN.md — Integrate Tesseract OCR service with detection threshold and upload route
-- [ ] 08-02-PLAN.md — Add OCR error classification, i18n messages, and unit tests
+- [x] 08-02-PLAN.md — Add OCR error classification, i18n messages, and unit tests
 
 ## Progress
 
@@ -81,4 +81,4 @@ Plans:
 | 5. Polish & Production Readiness | v1.0 | 2/2 | Complete | 2026-02-19 |
 | 6. Tech Debt Cleanup | v1.1 | 1/1 | Complete | 2026-02-20 |
 | 7. Workflow Quality | v1.1 | 2/2 | Complete | 2026-02-20 |
-| 8. OCR Support | v1.1 | 1/2 | In Progress | - |
+| 8. OCR Support | v1.1 | 2/2 | Complete | 2026-02-20 |
