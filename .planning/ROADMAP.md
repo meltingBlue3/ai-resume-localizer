@@ -51,11 +51,11 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. Language certifications (JLPT, HSK, TOEIC, etc.) appear inside the `certificates` array rather than as standalone entries or in a separate language section
   3. Translation workflow no longer outputs `linkedin`, `website`, `gpa`, or `notes` fields in its JSON response
   4. All Dify prompt changes follow DESIGN_PRINCIPLES.md conventions (constraint-style prompts, no CoT leakage)
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 09-01: TBD
-- [ ] 09-02: TBD
+- [ ] 09-01-PLAN.md — Workflow prompts & data models (extraction other field, language cert consolidation, translation field removal)
+- [ ] 09-02-PLAN.md — Frontend UI cleanup (editor components, i18n labels, completeness utility)
 
 ### Phase 10: Work-Project Separation
 **Goal**: Work history and project experience are clearly separated in data extraction, translation, and both PDF templates
