@@ -50,7 +50,7 @@ class CnResumeData(BaseModel):
     career_objective: str | None = None
     project_experience: list[WorkEntry] | None = None
     awards: list[str] | None = None
-    hobbies: str | None = None
+    other: str | None = None
 
 
 # --- Japanese resume models (translated output) ---
@@ -65,8 +65,6 @@ class JpPersonalInfo(BaseModel):
     address: str | None = None
     phone: str | None = None
     email: str | None = None
-    linkedin: str | None = None
-    website: str | None = None
 
 
 class JpEducationEntry(BaseModel):
@@ -75,8 +73,6 @@ class JpEducationEntry(BaseModel):
     major: str | None = None
     start_date: str | None = None
     end_date: str | None = None
-    gpa: str | None = None
-    notes: str | None = None
 
 
 class JpWorkEntry(BaseModel):

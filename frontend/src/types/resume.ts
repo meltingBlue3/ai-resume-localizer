@@ -44,7 +44,7 @@ export interface CnResumeData {
   career_objective: string | null;
   project_experience: WorkEntry[] | null;
   awards: string[] | null;
-  hobbies: string | null;
+  other: string | null;
 }
 
 export interface UploadAndExtractResponse {
@@ -61,8 +61,6 @@ export interface JpPersonalInfo {
   address?: string | null;
   phone?: string | null;
   email?: string | null;
-  linkedin?: string | null;
-  website?: string | null;
 }
 
 export interface JpEducationEntry {
@@ -71,8 +69,6 @@ export interface JpEducationEntry {
   major?: string | null;
   start_date?: string | null;
   end_date?: string | null;
-  gpa?: string | null;
-  notes?: string | null;
 }
 
 export interface JpWorkEntry {

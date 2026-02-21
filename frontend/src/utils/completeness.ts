@@ -69,7 +69,7 @@ function countCnFields(data: CnResumeData): { filled: number; total: number } {
   // Text fields (3)
   if (isFilled(data.self_introduction)) filled++;
   if (isFilled(data.career_objective)) filled++;
-  if (isFilled(data.hobbies)) filled++;
+  if (isFilled(data.other)) filled++;
 
   return { filled, total };
 }

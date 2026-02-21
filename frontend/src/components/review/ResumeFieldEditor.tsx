@@ -272,7 +272,7 @@ export default function ResumeFieldEditor({ data, onChange, readOnly = false }: 
         <div className="space-y-3">
           <FieldInput label={f('selfIntroduction')} value={data.self_introduction ?? ''} multiline onChange={(v) => set({ self_introduction: v || null })} readOnly={readOnly} />
           <FieldInput label={f('careerObjective')} value={data.career_objective ?? ''} multiline onChange={(v) => set({ career_objective: v || null })} readOnly={readOnly} />
-          <FieldInput label={f('hobbies')} value={data.hobbies ?? ''} onChange={(v) => set({ hobbies: v || null })} readOnly={readOnly} />
+          <FieldInput label={f('other')} value={data.other ?? ''} multiline onChange={(v) => set({ other: v || null })} readOnly={readOnly} />
 
           {/* Project Experience */}
           <div>
