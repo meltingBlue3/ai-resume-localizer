@@ -45,7 +45,7 @@ export function classifyError(error: unknown): ClassifiedError {
   }
 
   // OCR-specific errors (503 for OCR service unavailable, OCR in message)
-  if (rawMessage.includes('OCR') || rawMessage.includes('503')) {
+  if (rawMessage.includes('OCR') || rawMessage.includes('503') || rawMessage.includes('Scanned document')) {
     return {
       type: 'ocr',
       titleKey: 'errors.ocr.title',
