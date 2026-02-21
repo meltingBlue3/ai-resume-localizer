@@ -17,7 +17,7 @@ Status    : Awaiting next milestone
 Progress  : [██████████] 100% (v1.0 + v1.1 complete)
 ```
 
-Last activity: 2026-02-21 — Completed v1.1 Quality & OCR milestone
+Last activity: 2026-02-21 — Completed quick task 16: 更新 DESIGN_PRINCIPLES.md 设计原则
 
 ## Performance Metrics
 
@@ -56,6 +56,7 @@ None.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 16 | 更新 DESIGN_PRINCIPLES.md 设计原则 | 2026-02-21 | 4169a78 | [16-design-principles-md](./quick/16-design-principles-md/) |
 | 15 | Fix OCR error classification | 2026-02-21 | 6fc36fe | [15-fix-ocr-error-classification](./quick/15-fix-ocr-error-classification/) |
 | 14 | Fix double scrollbar on preview page | 2026-02-21 | 8bb5080 | [14-fix-double-scrollbar-on-preview-page](./quick/14-fix-double-scrollbar-on-preview-page/) |
 | 13 | Clear stale resume data between operations | 2026-02-21 | dbee7c3 | [13-clear-stale-resume-data](./quick/13-clear-stale-resume-data/) |
