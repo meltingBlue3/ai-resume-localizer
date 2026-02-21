@@ -66,11 +66,11 @@ Plans:
   2. Translation workflow preserves the work/project separation and correctly maps fields for both templates
   3. Rirekisho (履歴書) work history section shows only company names, positions, and dates -- no project details
   4. Shokumukeirekisho (職務経歴書) includes company-internal projects under the relevant employment entry, and personal projects in a separate section
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 10-01: TBD
-- [ ] 10-02: TBD
+- [ ] 10-01-PLAN.md — Data models & translation workflow (add JpProjectEntry, update JpWorkEntry/JpResumeData, project classification rules)
+- [ ] 10-02-PLAN.md — Template updates (shokumukeirekisho project sections, rirekisho verification)
 
 ### Phase 11: Template Polish
 **Goal**: Both PDF templates render all fields correctly with proper Japanese formatting conventions
