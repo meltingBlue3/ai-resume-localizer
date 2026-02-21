@@ -2,34 +2,30 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-20)
+See: .planning/PROJECT.md (updated 2026-02-21)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企业招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** v1.1 Quality & OCR — Phase 8: OCR Support
+**Current focus:** No active milestone — ready for next planning cycle
 
 ## Current Position
 
 ```
-Milestone : v1.1 Quality & OCR
-Phase     : 8 — OCR Support (Complete)
-Plan      : 2 of 2 complete
-Status    : Phase 8 complete — OCR integration and error handling
-Progress  : [███░░░░░░░] 33% (1/3 phases complete)
+Milestone : None (v1.1 completed 2026-02-21)
+Phase     : —
+Plan      : —
+Status    : Awaiting next milestone
+Progress  : [██████████] 100% (v1.0 + v1.1 complete)
 ```
 
-Last activity: 2026-02-21 — Completed quick task 15 (fix OCR error classification)
+Last activity: 2026-02-21 — Completed v1.1 Quality & OCR milestone
 
 ## Performance Metrics
 
-| Metric | v1.0 | v1.1 Target |
-|--------|------|-------------|
-| Phases complete | 5/5 | 0/3 |
-| Plans complete | 14/14 | 2/TBD |
-| Requirements mapped | 17/17 | 3/9 |
-| Phase 08-ocr-support P01 | 5min | 2 tasks | 3 files |
-| Phase 08-ocr-support P02 | 6min | 2 tasks | 4 files |
-| Phase 13 P01 | 4min | 3 tasks | 3 files |
-| Phase quick-15 P01 | 2min | 1 tasks | 1 files |
+| Metric | v1.0 | v1.1 |
+|--------|------|------|
+| Phases complete | 5/5 | 3/3 |
+| Plans complete | 14/14 | 5/5 |
+| Requirements mapped | 17/17 | 9/9 |
 
 ## Accumulated Context
 
@@ -38,7 +34,7 @@ Last activity: 2026-02-21 — Completed quick task 15 (fix OCR error classificat
 All major decisions logged in PROJECT.md Key Decisions table.
 
 **v1.1 specific:**
-- OCR library: local only (no Google Vision / Azure) per out-of-scope declaration in REQUIREMENTS.md
+- OCR library: local only (no Google Vision / Azure) per out-of-scope declaration
 - CoT stripping: both in Dify workflow (WKFL-01) and as backend safety net (WKFL-04) — defense in depth
 - Hide forward button entirely on last wizard step rather than disabling it (06-01)
 - CoT stripping uses re.sub with DOTALL for multiline think tags; logs warning not error (07-02)
@@ -68,5 +64,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-21
-Stopped at: Completed quick task 15 (fix OCR error classification)
-Resume: errorClassifier.ts now matches "Scanned document" pattern for OCR service unavailable errors
+Stopped at: Completed v1.1 Quality & OCR milestone
+Resume: Run `/gsd-new-milestone` to start planning next features

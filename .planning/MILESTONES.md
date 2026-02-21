@@ -19,3 +19,13 @@
 **Archive:** `.planning/milestones/v1.0-ROADMAP.md`
 
 ---
+
+## v1.1 Quality & OCR (Shipped: 2026-02-21)
+
+**Phases completed:** 8 phases, 19 plans, 0 tasks
+
+**Key accomplishments:**
+- (none recorded)
+
+---
+
