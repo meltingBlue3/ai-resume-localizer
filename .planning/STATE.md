@@ -5,27 +5,27 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企業招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** v1.2 PDF Quality & Workflow Fixes
+**Current focus:** v1.2 Phase 9 — Workflow Data Cleanup
 
 ## Current Position
 
 ```
 Milestone : v1.2 PDF Quality & Workflow Fixes
-Phase     : Not started (defining requirements)
-Plan      : —
-Status    : Defining requirements
+Phase     : 9 of 11 (Workflow Data Cleanup)
+Plan      : — (not yet planned)
+Status    : Ready to plan
 Progress  : [░░░░░░░░░░] 0%
 ```
 
-Last activity: 2026-02-22 — Milestone v1.2 started
+Last activity: 2026-02-22 — Roadmap created for v1.2 (3 phases, 13 requirements)
 
 ## Performance Metrics
 
-| Metric | v1.0 | v1.1 |
-|--------|------|------|
-| Phases complete | 5/5 | 3/3 |
-| Plans complete | 14/14 | 5/5 |
-| Requirements mapped | 17/17 | 9/9 |
+| Metric | v1.0 | v1.1 | v1.2 |
+|--------|------|------|------|
+| Phases complete | 5/5 | 3/3 | 0/3 |
+| Plans complete | 14/14 | 5/5 | 0/? |
+| Requirements mapped | 17/17 | 9/9 | 13/13 |
 
 ## Accumulated Context
 
@@ -34,14 +34,9 @@ Last activity: 2026-02-22 — Milestone v1.2 started
 All major decisions logged in PROJECT.md Key Decisions table.
 
 **v1.1 specific:**
-- OCR library: local only (no Google Vision / Azure) per out-of-scope declaration
-- CoT stripping: both in Dify workflow (WKFL-01) and as backend safety net (WKFL-04) — defense in depth
-- Hide forward button entirely on last wizard step rather than disabling it (06-01)
-- CoT stripping uses re.sub with DOTALL for multiline think tags; logs warning not error (07-02)
-- OCR detection threshold: 100 characters for image-based PDF classification (08-01)
-- OCR timeout: 30 seconds with asyncio.wait_for; 5MB file size limit (08-01)
-- OCR errors use generic user-facing messages without "OCR" terminology (08-01)
-- OCR errors classified as 'ocr' type with 503 status mapped to OCR when in OCR context (08-02)
+- CoT stripping: dual defense (Dify workflow + backend safety net)
+- OCR: local Tesseract only, 100-char threshold, 30s timeout
+- OCR errors use generic user-facing messages
 
 ### Pending Todos
 
@@ -49,21 +44,18 @@ None.
 
 ### Blockers/Concerns
 
-- Dify Cloud free tier limited to 200 message credits — Professional tier ($59/mo) needed for real usage
-- OCR accuracy on low-quality scans is inherently limited; v1.1 scope is best-effort with local OCR only
+- Dify Cloud free tier limited to 200 message credits
+- DESIGN_PRINCIPLES.md must be followed for all Dify prompt changes in v1.2
 
 ### Quick Tasks Completed
 
-| # | Description | Date | Commit | Directory |
-|---|-------------|------|--------|-----------|
-| 16 | 更新 DESIGN_PRINCIPLES.md 设计原则 | 2026-02-21 | 4169a78 | [16-design-principles-md](./quick/16-design-principles-md/) |
-| 15 | Fix OCR error classification | 2026-02-21 | 6fc36fe | [15-fix-ocr-error-classification](./quick/15-fix-ocr-error-classification/) |
-| 14 | Fix double scrollbar on preview page | 2026-02-21 | 8bb5080 | [14-fix-double-scrollbar-on-preview-page](./quick/14-fix-double-scrollbar-on-preview-page/) |
-| 13 | Clear stale resume data between operations | 2026-02-21 | dbee7c3 | [13-clear-stale-resume-data](./quick/13-clear-stale-resume-data/) |
-| 12 | 由于新增了ocr，更新docker支持 | 2026-02-20 | a94e7a1 | [12-ocr-docker](./quick/12-ocr-docker/) |
+| # | Description | Date | Commit |
+|---|-------------|------|--------|
+| 16 | Update DESIGN_PRINCIPLES.md | 2026-02-21 | 4169a78 |
+| 15 | Fix OCR error classification | 2026-02-21 | 6fc36fe |
 
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Starting v1.2 milestone — defining requirements
-Resume: Continue with requirements definition and roadmap creation
+Stopped at: Roadmap created for v1.2 milestone
+Resume: Run `/gsd:plan-phase 9` to plan first phase

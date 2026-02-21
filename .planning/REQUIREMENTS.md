@@ -1,7 +1,7 @@
 # Requirements: AI Resume Localizer
 
 **Defined:** 2026-02-22
-**Core Value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企業招聘标准的PDF简历（履歴書 + 職務経歴書）
+**Core Value:** 用户上传一份中文简历，经过結構化提取、日文翻译、人工審核修正后，得到两份符合日本企業招聘标准的PDF简历（履歴書 + 職務経歴書）
 
 ## v1.2 Requirements
 
@@ -41,7 +41,7 @@ None deferred — all identified issues are in v1.2 scope.
 | Feature | Reason |
 |---------|--------|
 | 新しい簡歴テンプレートデザイン | JIS標準フォーマットに準拠、カスタムデザインなし |
-| 批量简历转换 | v2機能 |
+| 批量简历转換 | v2機能 |
 | 新しいAI機能の追加 | v1.2はプロンプト修正のみ、新機能なし |
 
 ## Traceability
@@ -50,25 +50,25 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RKTPL-01 | — | Pending |
-| RKTPL-02 | — | Pending |
-| RKTPL-03 | — | Pending |
-| RKTPL-04 | — | Pending |
-| RKTPL-05 | — | Pending |
-| RKTPL-06 | — | Pending |
-| SKTPL-01 | — | Pending |
-| SKTPL-02 | — | Pending |
-| EXTR-01 | — | Pending |
-| EXTR-02 | — | Pending |
-| EXTR-03 | — | Pending |
-| TRAN-01 | — | Pending |
-| TRAN-02 | — | Pending |
+| RKTPL-01 | Phase 11 | Pending |
+| RKTPL-02 | Phase 11 | Pending |
+| RKTPL-03 | Phase 11 | Pending |
+| RKTPL-04 | Phase 10 | Pending |
+| RKTPL-05 | Phase 11 | Pending |
+| RKTPL-06 | Phase 11 | Pending |
+| SKTPL-01 | Phase 10 | Pending |
+| SKTPL-02 | Phase 11 | Pending |
+| EXTR-01 | Phase 9 | Pending |
+| EXTR-02 | Phase 9 | Pending |
+| EXTR-03 | Phase 10 | Pending |
+| TRAN-01 | Phase 9 | Pending |
+| TRAN-02 | Phase 10 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13 (awaiting roadmap)
+- Mapped to phases: 13
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-22*
-*Last updated: 2026-02-22 after initial definition*
+*Last updated: 2026-02-22 after roadmap creation*
