@@ -161,7 +161,7 @@ workflow:
             - languages[]\n\
             - self_introduction, career_objective\n\
             - project_experience[]: company, position, department, start_date, end_date, description\n\
-            - awards[], hobbies\n\n\
+            - awards[], other\n\n\
             ## 出力形式（JpResumeData）\n\n\
             出力は以下の構造に厳密に従った JSON オブジェクトです：\n\n\
             {\n\
@@ -173,9 +173,7 @@ workflow:
             \    \"nationality\": \"国籍（日本語表記）\",\n\
             \    \"address\": \"住所（日本語表記）\",\n\
             \    \"phone\": \"電話番号\",\n\
-            \    \"email\": \"メールアドレス\",\n\
-            \    \"linkedin\": null,\n\
-            \    \"website\": null\n\
+            \    \"email\": \"メールアドレス\"\n\
             \  },\n\
             \  \"summary\": \"職務要約\",\n\
             \  \"work_history\": [\n\
@@ -195,9 +193,7 @@ workflow:
             \      \"degree\": \"学位\",\n\
             \      \"major\": \"専攻（日本語表記）\",\n\
             \      \"start_date\": \"YYYY-MM\",\n\
-            \      \"end_date\": \"YYYY-MM\",\n\
-            \      \"gpa\": null,\n\
-            \      \"notes\": null\n\
+            \      \"end_date\": \"YYYY-MM\"\n\
             \    }\n\
             \  ],\n\
             \  \"skills\": [\n\
@@ -216,7 +212,7 @@ workflow:
             \  ],\n\
             \  \"motivation\": \"志望動機\",\n\
             \  \"strengths\": \"自己PR\",\n\
-            \  \"other\": \"その他（awards, hobbies, languages などを統合）\"\n\
+            \  \"other\": \"その他（awards, other, languages などを統合）\"\n\
             }\n\n\
             ## 翻訳・変換ルール\n\n\
             ### 文体\n\
@@ -228,7 +224,7 @@ workflow:
             - self_introduction → summary の翻訳元。self_introduction の内容を日本語に翻訳する。原文にない情報を追加しない\n\
             - career_objective → motivation の翻訳元。career_objective の内容を日本語に翻訳する。原文にない情報を追加しない\n\
             - self_introduction と skills → strengths の翻訳元。self_introduction と skills の内容に基づいて日本語に翻訳する。原文にない情報を追加しない\n\
-            - awards + hobbies + languages → other（統合して記述）\n\n\
+            - awards + other（その他情報） + languages → other（統合して記述）\n\n\
             ### 学歴マッピング\n\
             - 专科 / 大专 → 短期大学卒業\n\
             - 本科 → 学士\n\
