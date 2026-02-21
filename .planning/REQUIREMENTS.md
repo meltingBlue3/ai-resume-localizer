@@ -23,13 +23,13 @@ Requirements for v1.2 PDF Quality & Workflow Fixes. Each maps to roadmap phases.
 
 ### 提取工作流
 
-- [ ] **EXTR-01**: `other`フィールドを新規追加して抽出する
-- [ ] **EXTR-02**: 言語資格を証書フィールドに統合して抽出する
+- [x] **EXTR-01**: `other`フィールドを新規追加して抽出する
+- [x] **EXTR-02**: 言語資格を証書フィールドに統合して抽出する
 - [ ] **EXTR-03**: PDF出力の問題修正に対応するフィールドマッピングを更新する
 
 ### 翻訳工作流
 
-- [ ] **TRAN-01**: 未使用フィールド（linkedin, website, gpa, notes）を削除する
+- [x] **TRAN-01**: 未使用フィールド（linkedin, website, gpa, notes）を削除する
 - [ ] **TRAN-02**: PDF出力の問題修正に対応するフィールド変換ロジックを修正する
 
 ## Future Requirements
@@ -58,10 +58,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | RKTPL-06 | Phase 11 | Pending |
 | SKTPL-01 | Phase 10 | Pending |
 | SKTPL-02 | Phase 11 | Pending |
-| EXTR-01 | Phase 9 | Pending |
-| EXTR-02 | Phase 9 | Pending |
+| EXTR-01 | Phase 9 | Complete |
+| EXTR-02 | Phase 9 | Complete |
 | EXTR-03 | Phase 10 | Pending |
-| TRAN-01 | Phase 9 | Pending |
+| TRAN-01 | Phase 9 | Complete |
 | TRAN-02 | Phase 10 | Pending |
 
 **Coverage:**
