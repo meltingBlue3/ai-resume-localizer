@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface PreviewPanelProps {
@@ -12,6 +12,20 @@ export default function PreviewPanel({ html, isLoading }: PreviewPanelProps) {
   const { t } = useTranslation('wizard');
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const [iframeHeight, setIframeHeight] = useState('297mm');
+
+  const handleIframeLoad = useCallback((e: React.SyntheticEvent<HTMLIFrameElement>) => {
+    const iframe = e.currentTarget;
+    try {
+      const doc = iframe.contentDocument;
+      if (doc) {
+        const height = doc.documentElement.scrollHeight;
+        setIframeHeight(`${height}px`);
+      }
+    } catch {
+      // Cross-origin fallback — keep default min-height
+    }
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -64,12 +78,14 @@ export default function PreviewPanel({ html, isLoading }: PreviewPanelProps) {
           srcDoc={html}
           sandbox="allow-same-origin allow-scripts"
           title="Resume Preview"
+          onLoad={handleIframeLoad}
           style={{
             width: '210mm',
-            minHeight: '297mm',
+            height: iframeHeight,
             border: 'none',
             display: 'block',
             pointerEvents: 'none',
+            overflow: 'hidden',
           }}
         />
       </div>
