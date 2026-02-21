@@ -17,7 +17,7 @@ Status    : Phase 8 complete — OCR integration and error handling
 Progress  : [███░░░░░░░] 33% (1/3 phases complete)
 ```
 
-Last activity: 2026-02-21 — Completed quick task 14 (fix double scrollbar on preview page)
+Last activity: 2026-02-21 — Completed quick task 15 (fix OCR error classification)
 
 ## Performance Metrics
 
@@ -29,6 +29,7 @@ Last activity: 2026-02-21 — Completed quick task 14 (fix double scrollbar on p
 | Phase 08-ocr-support P01 | 5min | 2 tasks | 3 files |
 | Phase 08-ocr-support P02 | 6min | 2 tasks | 4 files |
 | Phase 13 P01 | 4min | 3 tasks | 3 files |
+| Phase quick-15 P01 | 2min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -59,6 +60,7 @@ None.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 15 | Fix OCR error classification | 2026-02-21 | 6fc36fe | [15-fix-ocr-error-classification](./quick/15-fix-ocr-error-classification/) |
 | 14 | Fix double scrollbar on preview page | 2026-02-21 | 8bb5080 | [14-fix-double-scrollbar-on-preview-page](./quick/14-fix-double-scrollbar-on-preview-page/) |
 | 13 | Clear stale resume data between operations | 2026-02-21 | dbee7c3 | [13-clear-stale-resume-data](./quick/13-clear-stale-resume-data/) |
 | 12 | 由于新增了ocr，更新docker支持 | 2026-02-20 | a94e7a1 | [12-ocr-docker](./quick/12-ocr-docker/) |
@@ -66,5 +68,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-21
-Stopped at: Completed quick task 14 (fix double scrollbar on preview page)
-Resume: PreviewPanel iframe uses dynamic height measurement via onLoad + scrollHeight; single scrollbar UX
+Stopped at: Completed quick task 15 (fix OCR error classification)
+Resume: errorClassifier.ts now matches "Scanned document" pattern for OCR service unavailable errors
