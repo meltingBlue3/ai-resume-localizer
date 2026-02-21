@@ -1,63 +1,48 @@
 # Requirements: AI Resume Localizer
 
-**Defined:** 2026-02-20
-**Core Value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企业招聘标准的PDF简历（履歴書 + 職務経歴書）
+**Defined:** 2026-02-22
+**Core Value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企業招聘标准的PDF简历（履歴書 + 職務経歴書）
 
-## v1.1 Requirements
+## v1.2 Requirements
 
-Requirements for v1.1 Quality & OCR milestone. Each maps to roadmap phases (starting from Phase 6).
+Requirements for v1.2 PDF Quality & Workflow Fixes. Each maps to roadmap phases.
 
-### Tech Debt (TECH)
+### 履歴書テンプレート
 
-- [x] **TECH-01**: Dead component `PhotoDropzone.tsx` and `photoFile` store field are removed from the codebase
-- [x] **TECH-02**: Preview step 完了 button either navigates to a meaningful destination or is removed if no next step exists
+- [ ] **RKTPL-01**: 履歴書の姓名に全角スペースを挿入して表示する
+- [ ] **RKTPL-02**: 履歴書の住所に郵便番号を表示する
+- [ ] **RKTPL-03**: 履歴書の職歴に役職名を表示する
+- [ ] **RKTPL-04**: 履歴書の職歴からプロジェクト経歴を分離する（職歴は会社・役職のみ）
+- [ ] **RKTPL-05**: 通勤時間・扶養家族・配偶者フィールドをテンプレートから削除する
+- [ ] **RKTPL-06**: 本人希望記入欄を改善する（給料・職種等の希望を記入、なければ「貴社の規定に従います」）
 
-### Workflow Quality (WKFL)
+### 職務経歴書テンプレート
 
-- [x] **WKFL-01**: Dify extraction workflow strips `<think>...</think>` chain-of-thought tokens before outputting, so backend always receives clean structured JSON
-- [x] **WKFL-02**: Dify extraction prompts improved — better field coverage, fewer null fields for complete resumes
-- [x] **WKFL-03**: Dify translation prompts improved — more natural business Japanese, better keigo usage
-- [x] **WKFL-04**: Backend API layer strips any residual CoT tags as a safety net before JSON parsing
+- [ ] **SKTPL-01**: 職務経歴書の職務経歴にプロジェクト経歴を含める（会社内プロジェクト→該当経歴内、個人プロジェクト→別セクション）
+- [ ] **SKTPL-02**: 終了日がない場合「現在」を表示する（"none"ではなく）
 
-### OCR Support (OCRR)
+### 提取工作流
 
-- [x] **OCRR-01**: System detects whether an uploaded PDF has extractable text or is image/scan-based
-- [x] **OCRR-02**: User can upload a scanned or image-based PDF and have its content successfully extracted via OCR preprocessing
-- [x] **OCRR-03**: OCR output is passed to the Dify extraction workflow as text input — same downstream flow as text-based PDFs
+- [ ] **EXTR-01**: `other`フィールドを新規追加して抽出する
+- [ ] **EXTR-02**: 言語資格を証書フィールドに統合して抽出する
+- [ ] **EXTR-03**: PDF出力の問題修正に対応するフィールドマッピングを更新する
+
+### 翻訳工作流
+
+- [ ] **TRAN-01**: 未使用フィールド（linkedin, website, gpa, notes）を削除する
+- [ ] **TRAN-02**: PDF出力の問題修正に対応するフィールド変換ロジックを修正する
 
 ## Future Requirements
 
-Deferred from v1.0 — still pending.
-
-### Batch Processing
-
-- **BATC-01**: User can upload multiple resume files for batch conversion
-- **BATC-02**: System processes multiple resumes with a queue and progress tracking
-
-### User Accounts
-
-- **ACCT-01**: User can create an account and save resume conversion history
-- **ACCT-02**: User can re-edit previously converted resumes
-
-### Additional Documents
-
-- **ADOC-01**: System generates 送付状 (cover letter) from resume context
-- **ADOC-02**: System supports multiple 職務経歴書 layout variants (functional, career-based)
+None deferred — all identified issues are in v1.2 scope.
 
 ## Out of Scope
 
-Explicitly excluded. Documented to prevent scope creep.
-
 | Feature | Reason |
 |---------|--------|
-| Real-time collaborative editing | WebSocket complexity not justified for single-user use case |
-| Direct job board submission | Fragile APIs, partnership requirements, massive integration surface |
-| ATS optimization scoring | Irrelevant for JIS-format resumes in Japanese hiring culture |
-| Template gallery / custom designs | 履歴書 has ONE correct JIS format; creative templates hurt applicants |
-| Handwriting font simulation | Digital submission is now standard; fake handwriting looks unprofessional |
-| Mobile app | Web-first approach; mobile can be considered after validation |
-| User authentication | Adds auth/data storage/compliance complexity without justification |
-| Cloud OCR APIs (Google Vision, Azure) | External dependency and cost; local OCR sufficient for v1.1 |
+| 新しい簡歴テンプレートデザイン | JIS標準フォーマットに準拠、カスタムデザインなし |
+| 批量简历转换 | v2機能 |
+| 新しいAI機能の追加 | v1.2はプロンプト修正のみ、新機能なし |
 
 ## Traceability
 
@@ -65,21 +50,25 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TECH-01 | Phase 6 | Complete |
-| TECH-02 | Phase 6 | Complete |
-| WKFL-01 | Phase 7 | Complete |
-| WKFL-02 | Phase 7 | Complete |
-| WKFL-03 | Phase 7 | Complete |
-| WKFL-04 | Phase 7 | Complete |
-| OCRR-01 | Phase 8 | Complete |
-| OCRR-02 | Phase 8 | Complete |
-| OCRR-03 | Phase 8 | Complete |
+| RKTPL-01 | — | Pending |
+| RKTPL-02 | — | Pending |
+| RKTPL-03 | — | Pending |
+| RKTPL-04 | — | Pending |
+| RKTPL-05 | — | Pending |
+| RKTPL-06 | — | Pending |
+| SKTPL-01 | — | Pending |
+| SKTPL-02 | — | Pending |
+| EXTR-01 | — | Pending |
+| EXTR-02 | — | Pending |
+| EXTR-03 | — | Pending |
+| TRAN-01 | — | Pending |
+| TRAN-02 | — | Pending |
 
 **Coverage:**
-- v1.1 requirements: 9 total
-- Mapped to phases: 9 (complete)
-- Unmapped: 0
+- v1.2 requirements: 13 total
+- Mapped to phases: 0
+- Unmapped: 13 (awaiting roadmap)
 
 ---
-*Requirements defined: 2026-02-20*
-*Last updated: 2026-02-20 after v1.1 roadmap creation*
+*Requirements defined: 2026-02-22*
+*Last updated: 2026-02-22 after initial definition*
