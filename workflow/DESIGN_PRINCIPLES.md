@@ -7,7 +7,8 @@
 
 ### 1. LLM as Constrained Parser, Not Intelligent Enhancer
 - LLM extracts only what is explicitly present in the source text
-- No inference, no completion, no "reasonable" expansion
+- LLM MAY optimize expression for clarity and readability, but MUST maintain semantic consistency with the original
+- No inference, no completion, no "reasonable" expansion of facts
 - If information is missing from the source, output null — never fabricate
 
 ### 2. No Content Addition in Translation
@@ -21,7 +22,7 @@
 - Null normalization (至今/在职 → null) → LLM does this during extraction
 - Date format validation → code layer
 - JSON schema validation → code layer
-- CoT tag stripping → both Dify prompt fix AND backend safety net
+- CoT tag stripping → code node in workflow (prompts cannot reliably fix this issue)
 
 ### 4. Minimize LLM Passes
 - Each additional LLM pass increases semantic drift risk
@@ -49,7 +50,7 @@
 | Translate Chinese → Japanese | LLM | Requires language understanding |
 | Degree mapping (本科→学士) | LLM | Part of translation context |
 | Katakana generation | LLM | Requires phonetic knowledge |
-| Strip CoT tags | Both | Dify prompt + backend safety net |
+| Strip CoT tags | Code | Prompts cannot reliably fix; use code node |
 | Validate JSON structure | Code | Deterministic |
 | Convert null end_date → 現在 | Code | Deterministic downstream |
 
