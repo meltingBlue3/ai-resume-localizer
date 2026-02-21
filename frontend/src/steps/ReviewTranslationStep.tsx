@@ -28,6 +28,7 @@ export default function ReviewTranslationStep() {
   const isTranslating = useResumeStore((s) => s.isTranslating);
   const setIsTranslating = useResumeStore((s) => s.setIsTranslating);
   const setTranslationError = useResumeStore((s) => s.setTranslationError);
+  const clearTranslationOnly = useResumeStore((s) => s.clearTranslationOnly);
 
   const [classifiedError, setClassifiedError] = useState<ClassifiedError | null>(null);
 
@@ -59,6 +60,7 @@ export default function ReviewTranslationStep() {
 
   const handleTranslate = async () => {
     if (!cnResumeData) return;
+    clearTranslationOnly();
     setIsTranslating(true);
     setTranslationError(null);
     setClassifiedError(null);
