@@ -34,6 +34,8 @@ interface ResumeState {
   setIsPreviewLoading: (loading: boolean) => void;
   setIsDownloading: (loading: boolean) => void;
   resetUpload: () => void;
+  clearExtractionAndTranslation: () => void;
+  clearTranslationOnly: () => void;
 }
 
 const initialState = {
@@ -77,4 +79,20 @@ export const useResumeStore = create<ResumeState>((set) => ({
   setIsPreviewLoading: (loading) => set({ isPreviewLoading: loading }),
   setIsDownloading: (loading) => set({ isDownloading: loading }),
   resetUpload: () => set(initialState),
+  clearExtractionAndTranslation: () =>
+    set({
+      rawText: null,
+      cnResumeData: null,
+      jpResumeData: null,
+      translationError: null,
+      croppedPhotoBase64: null,
+      previewHtml: null,
+    }),
+  clearTranslationOnly: () =>
+    set({
+      jpResumeData: null,
+      translationError: null,
+      croppedPhotoBase64: null,
+      previewHtml: null,
+    }),
 }));
