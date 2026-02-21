@@ -26,6 +26,7 @@ export default function UploadStep() {
   const setExtracting = useResumeStore((s) => s.setExtracting);
   const setExtractionResult = useResumeStore((s) => s.setExtractionResult);
   const setExtractionError = useResumeStore((s) => s.setExtractionError);
+  const clearExtractionAndTranslation = useResumeStore((s) => s.clearExtractionAndTranslation);
 
   const [classifiedError, setClassifiedError] = useState<ClassifiedError | null>(null);
 
@@ -34,6 +35,7 @@ export default function UploadStep() {
   const handleExtract = async () => {
     if (!resumeFile) return;
 
+    clearExtractionAndTranslation();
     setExtracting(true);
     setExtractionError(null);
     setClassifiedError(null);
