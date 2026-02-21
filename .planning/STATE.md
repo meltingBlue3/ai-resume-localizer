@@ -17,7 +17,7 @@ Status    : Phase 8 complete — OCR integration and error handling
 Progress  : [███░░░░░░░] 33% (1/3 phases complete)
 ```
 
-Last activity: 2026-02-20 — Completed quick task 12 (OCR Docker dependencies)
+Last activity: 2026-02-21 — Completed quick task 13 (clear stale resume data)
 
 ## Performance Metrics
 
@@ -28,6 +28,7 @@ Last activity: 2026-02-20 — Completed quick task 12 (OCR Docker dependencies)
 | Requirements mapped | 17/17 | 3/9 |
 | Phase 08-ocr-support P01 | 5min | 2 tasks | 3 files |
 | Phase 08-ocr-support P02 | 6min | 2 tasks | 4 files |
+| Phase 13 P01 | 4min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -58,10 +59,11 @@ None.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 13 | Clear stale resume data between operations | 2026-02-21 | dbee7c3 | [13-clear-stale-resume-data](./quick/13-clear-stale-resume-data/) |
 | 12 | 由于新增了ocr，更新docker支持 | 2026-02-20 | a94e7a1 | [12-ocr-docker](./quick/12-ocr-docker/) |
 
 ## Session Continuity
 
-Last session: 2026-02-20
-Stopped at: Completed quick task 12 (OCR Docker dependencies)
-Resume: Dockerfile updated with OCR packages; build verification deferred (network infrastructure issues)
+Last session: 2026-02-21
+Stopped at: Completed quick task 13 (clear stale resume data)
+Resume: ResumeStore has clear actions; UploadStep and ReviewTranslationStep clear stale data before operations
