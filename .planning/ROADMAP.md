@@ -36,7 +36,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 
 **Milestone Goal:** Fix PDF output quality issues and update Dify workflow prompts to produce correct field structures for template rendering.
 
-- [ ] **Phase 9: Workflow Data Cleanup** — Add missing fields, consolidate language certs, remove unused fields in Dify prompts
+- [x] **Phase 9: Workflow Data Cleanup** — Add missing fields, consolidate language certs, remove unused fields in Dify prompts
 - [ ] **Phase 10: Work-Project Separation** — Separate work history from project experience across both workflows and both templates
 - [ ] **Phase 11: Template Polish** — Fix remaining rirekisho layout issues and shokumukeirekisho end-date display
 
@@ -54,8 +54,8 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 **Plans**: 2 plans
 
 Plans:
-- [ ] 09-01-PLAN.md — Workflow prompts & data models (extraction other field, language cert consolidation, translation field removal)
-- [ ] 09-02-PLAN.md — Frontend UI cleanup (editor components, i18n labels, completeness utility)
+- [x] 09-01-PLAN.md — Workflow prompts & data models (extraction other field, language cert consolidation, translation field removal)
+- [x] 09-02-PLAN.md — Frontend UI cleanup (editor components, i18n labels, completeness utility)
 
 ### Phase 10: Work-Project Separation
 **Goal**: Work history and project experience are clearly separated in data extraction, translation, and both PDF templates
@@ -104,6 +104,6 @@ Plans:
 | 6. Tech Debt Cleanup | v1.1 | 1/1 | Complete | 2026-02-20 |
 | 7. Workflow Quality | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 8. OCR Support | v1.1 | 2/2 | Complete | 2026-02-20 |
-| 9. Workflow Data Cleanup | v1.2 | 0/? | Not started | - |
+| 9. Workflow Data Cleanup | v1.2 | 2/2 | Complete | 2026-02-22 |
 | 10. Work-Project Separation | v1.2 | 0/? | Not started | - |
 | 11. Template Polish | v1.2 | 0/? | Not started | - |
