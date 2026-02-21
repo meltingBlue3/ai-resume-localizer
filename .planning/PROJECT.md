@@ -41,7 +41,18 @@
 
 ### Active
 
-(No active requirements — run `/gsd-new-milestone` to plan next features)
+**v1.2 PDF Quality & Workflow Fixes:**
+- [ ] 履歴書：姓名全角空格分隔
+- [ ] 履歴書：住所に郵便番号を追加
+- [ ] 履歴書：職歴に役職名を追加
+- [ ] 履歴書/職務経歴書：職歴と個人プロジェクトを分離（職務経歴書は会社内プロジェクトを含む）
+- [ ] 履歴書：通勤時間・扶養家族・配偶者フィールドを削除
+- [ ] 履歴書：本人希望記入欄を改善（「貴社の規定に従います」デフォルト）
+- [ ] 職務経歴書：終了日なしの場合「現在」を表示（"none"ではなく）
+- [ ] 提取工作流：新增`other`字段
+- [ ] 提取工作流：语言证书提取到certificates
+- [ ] 翻译工作流：删除未使用字段（linkedin, website, gpa, notes）
+- [ ] Dify工作流提示词按DESIGN_PRINCIPLES.md规范修改
 
 ### Out of Scope
 
@@ -55,7 +66,7 @@
 
 ## Context
 
-- **当前状态**: v1.1 Quality & OCR 已发布。~100K行代码（TypeScript + Python），支持扫描版PDF的OCR处理。
+- **当前状态**: v1.2 PDF Quality & Workflow Fixes 开发中。~100K行代码（TypeScript + Python），支持扫描版PDF的OCR处理。
 - **技术栈**: React 19 + Vite + Tailwind + Zustand + react-i18next（前端）；FastAPI + WeasyPrint + Jinja2 + Dify Client + Tesseract OCR（后端）；nginx + Docker Compose（部署）
 - **Dify工作流**: 提取工作流（CoT剥离 + 约束式提示 + 日期排序）；翻译工作流（单LLM节点 + 本地化集成）
 - **PDF格式**: WeasyPrint 63.1 + Noto Sans JP字体，CSS表格布局（无flexbox/grid），严格遵循JIS/MHLW格式规范
@@ -96,4 +107,4 @@
 
 ---
 
-*Last updated: 2026-02-21 after v1.1 milestone completion*
+*Last updated: 2026-02-22 after v1.2 milestone started*
