@@ -17,7 +17,7 @@ Status    : Phase 8 complete — OCR integration and error handling
 Progress  : [███░░░░░░░] 33% (1/3 phases complete)
 ```
 
-Last activity: 2026-02-21 — Completed quick task 13 (clear stale resume data)
+Last activity: 2026-02-21 — Completed quick task 14 (fix double scrollbar on preview page)
 
 ## Performance Metrics
 
@@ -59,11 +59,12 @@ None.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 14 | Fix double scrollbar on preview page | 2026-02-21 | 8bb5080 | [14-fix-double-scrollbar-on-preview-page](./quick/14-fix-double-scrollbar-on-preview-page/) |
 | 13 | Clear stale resume data between operations | 2026-02-21 | dbee7c3 | [13-clear-stale-resume-data](./quick/13-clear-stale-resume-data/) |
 | 12 | 由于新增了ocr，更新docker支持 | 2026-02-20 | a94e7a1 | [12-ocr-docker](./quick/12-ocr-docker/) |
 
 ## Session Continuity
 
 Last session: 2026-02-21
-Stopped at: Completed quick task 13 (clear stale resume data)
-Resume: ResumeStore has clear actions; UploadStep and ReviewTranslationStep clear stale data before operations
+Stopped at: Completed quick task 14 (fix double scrollbar on preview page)
+Resume: PreviewPanel iframe uses dynamic height measurement via onLoad + scrollHeight; single scrollbar UX
