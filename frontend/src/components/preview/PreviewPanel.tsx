@@ -18,10 +18,27 @@ export default function PreviewPanel({ html, isLoading }: PreviewPanelProps) {
     const iframe = e.currentTarget;
     try {
       const doc = iframe.contentDocument;
-      if (doc) {
-        const height = doc.documentElement.scrollHeight;
-        setIframeHeight(`${height}px`);
+      if (! doc) return;
+
+      const measure = () => {
+        const h = doc.documentElement.scrollHeight;
+        if (h > 0) setIframeHeight(`${h}px`);
+      };
+
+      // Measure immediately
+      measure();
+
+      // Re-measure after fonts load
+      if (doc.fonts?.ready){
+        doc.fonts.ready.then(measure);
       }
+
+      // Observe content size changes (images, lazy content)
+      const ro = new ResizeObserver(measure);
+      ro.observe(doc.documentElement);
+
+      // Cleanup on next load
+      iframe.addEventListener('load', () => ro.disconnect(), { once: true });
     } catch {
       // Cross-origin fallback — keep default min-height
     }
