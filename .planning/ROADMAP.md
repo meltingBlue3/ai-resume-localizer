@@ -38,7 +38,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 
 - [x] **Phase 9: Workflow Data Cleanup** — Add missing fields, consolidate language certs, remove unused fields in Dify prompts
 - [x] **Phase 10: Work-Project Separation** — Separate work history from project experience across both workflows and both templates (completed 2026-02-22)
-- [ ] **Phase 11: Template Polish** — Fix remaining rirekisho layout issues and shokumukeirekisho end-date display
+- [x] **Phase 11: Template Polish** — Fix remaining rirekisho layout issues and shokumukeirekisho end-date display (completed 2026-02-22)
 
 ## Phase Details
 
@@ -106,4 +106,4 @@ Plans:
 | 8. OCR Support | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 9. Workflow Data Cleanup | v1.2 | 2/2 | Complete | 2026-02-22 |
 | 10. Work-Project Separation | v1.2 | 2/2 | Complete    | 2026-02-22 |
-| 11. Template Polish | 1/2 | In Progress|  | - |
+| 11. Template Polish | 2/2 | Complete   | 2026-02-22 | - |

@@ -11,10 +11,10 @@ Requirements for v1.2 PDF Quality & Workflow Fixes. Each maps to roadmap phases.
 
 - [x] **RKTPL-01**: 履歴書の姓名に全角スペースを挿入して表示する
 - [x] **RKTPL-02**: 履歴書の住所に郵便番号を表示する
-- [ ] **RKTPL-03**: 履歴書の職歴に役職名を表示する
+- [x] **RKTPL-03**: 履歴書の職歴に役職名を表示する
 - [x] **RKTPL-04**: 履歴書の職歴からプロジェクト経歴を分離する（職歴は会社・役職のみ）
-- [ ] **RKTPL-05**: 通勤時間・扶養家族・配偶者フィールドをテンプレートから削除する
-- [ ] **RKTPL-06**: 本人希望記入欄を改善する（給料・職種等の希望を記入、なければ「貴社の規定に従います」）
+- [x] **RKTPL-05**: 通勤時間・扶養家族・配偶者フィールドをテンプレートから削除する
+- [x] **RKTPL-06**: 本人希望記入欄を改善する（給料・職種等の希望を記入、なければ「貴社の規定に従います」）
 
 ### 職務経歴書テンプレート
 
@@ -52,10 +52,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | RKTPL-01 | Phase 11 | Complete |
 | RKTPL-02 | Phase 11 | Complete |
-| RKTPL-03 | Phase 11 | Pending |
+| RKTPL-03 | Phase 11 | Complete |
 | RKTPL-04 | Phase 10 | Complete |
-| RKTPL-05 | Phase 11 | Pending |
-| RKTPL-06 | Phase 11 | Pending |
+| RKTPL-05 | Phase 11 | Complete |
+| RKTPL-06 | Phase 11 | Complete |
 | SKTPL-01 | Phase 10 | Complete |
 | SKTPL-02 | Phase 11 | Complete |
 | EXTR-01 | Phase 9 | Complete |

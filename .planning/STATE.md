@@ -11,20 +11,20 @@ See: .planning/PROJECT.md (updated 2026-02-22)
 
 ```
 Milestone : v1.2 PDF Quality & Workflow Fixes
-Phase     : 11 of 11 (Template Polish) — IN PROGRESS
-Plan      : 1 of 2 complete
-Status    : In Progress
-Progress  : [█████████░] 92%
+Phase     : 11 of 11 (Template Polish) — COMPLETE
+Plan      : 2 of 2 complete
+Status    : Complete
+Progress  : [██████████] 100%
 ```
 
-Last activity: 2026-02-22 — Completed 11-01 (postal_code, name formatting, end_date normalization)
+Last activity: 2026-02-22 — Completed 11-02 (rirekisho template polish: name formatting, postal code, position, remove unused fields)
 
 ## Performance Metrics
 
 | Metric | v1.0 | v1.1 | v1.2 |
 |--------|------|------|------|
-| Phases complete | 5/5 | 3/3 | 2/3 |
-| Plans complete | 14/14 | 5/5 | 4/? |
+| Phases complete | 5/5 | 3/3 | 3/3 |
+| Plans complete | 14/14 | 5/5 | 5/5 |
 | Requirements mapped | 17/17 | 9/9 | 13/13 |
 
 **Phase 10 metrics:**
@@ -37,6 +37,7 @@ Last activity: 2026-02-22 — Completed 11-01 (postal_code, name formatting, end
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | P01 | 13min | 4 | 3 |
+| P02 | 4min | 2 | 1 |
 
 ## Accumulated Context
 
@@ -59,6 +60,8 @@ All major decisions logged in PROJECT.md Key Decisions table.
 - postal_code field added to JpPersonalInfo; Dify workflow extracts from address field
 - Name formatting with U+3000 (full-width space) separator for Japanese resume display
 - end_date normalization: "none"/"null" strings converted to None in prepare_context() for proper 現在 display
+- Rirekisho template: removed commute/dependents/spouse section entirely (not needed for modern resumes)
+- Rirekisho template: position/title displayed after company name in work history entries
 
 ### Pending Todos
 
@@ -79,5 +82,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped At: Completed 11-01-PLAN.md (Phase 11 in progress)
-Resume: 11-02 or milestone completion
+Stopped At: Completed 11-02-PLAN.md (Phase 11 complete)
+Resume: Milestone completion or v1.3 planning
