@@ -87,8 +87,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 11-01-PLAN.md — Backend data model & workflow updates (postal_code field, name formatting, end_date normalization)
-- [ ] 11-02-PLAN.md — Rirekisho template polish (name, postal code, position, remove unused fields, fix defaults)
+- [ ] 11-01-PLAN.md — Backend data model & workflow updates (postal_code, name formatting, end_date normalization, shokumukeirekisho 現在 display)
+- [ ] 11-02-PLAN.md — Rirekisho template polish (name, postal code, position, remove unused fields)
 
 ## Progress
 
