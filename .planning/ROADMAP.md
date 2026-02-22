@@ -106,4 +106,4 @@ Plans:
 | 8. OCR Support | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 9. Workflow Data Cleanup | v1.2 | 2/2 | Complete | 2026-02-22 |
 | 10. Work-Project Separation | v1.2 | 2/2 | Complete    | 2026-02-22 |
-| 11. Template Polish | 2/2 | Complete   | 2026-02-22 | - |
+| 11. Template Polish | 2/2 | Complete    | 2026-02-22 | - |
