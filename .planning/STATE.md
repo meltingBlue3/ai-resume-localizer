@@ -5,26 +5,26 @@
 See: .planning/PROJECT.md (updated 2026-02-22)
 
 **Core value:** 用户上传一份中文简历，经过结构化提取、日文翻译、人工审核修正后，得到两份符合日本企業招聘标准的PDF简历（履歴書 + 職務経歴書）
-**Current focus:** v1.2 Phase 10 — Work-Project Separation
+**Current focus:** v1.2 Phase 11 — Template Polish
 
 ## Current Position
 
 ```
 Milestone : v1.2 PDF Quality & Workflow Fixes
-Phase     : 10 of 11 (Work-Project Separation) — COMPLETE
-Plan      : 2 of 2 complete
-Status    : Complete
-Progress  : [████████░░] 83%
+Phase     : 11 of 11 (Template Polish) — IN PROGRESS
+Plan      : 1 of 2 complete
+Status    : In Progress
+Progress  : [█████████░] 92%
 ```
 
-Last activity: 2026-02-22 — Completed 10-02 (template rendering for projects)
+Last activity: 2026-02-22 — Completed 11-01 (postal_code, name formatting, end_date normalization)
 
 ## Performance Metrics
 
 | Metric | v1.0 | v1.1 | v1.2 |
 |--------|------|------|------|
-| Phases complete | 5/5 | 3/3 | 1/3 |
-| Plans complete | 14/14 | 5/5 | 3/? |
+| Phases complete | 5/5 | 3/3 | 2/3 |
+| Plans complete | 14/14 | 5/5 | 4/? |
 | Requirements mapped | 17/17 | 9/9 | 13/13 |
 
 **Phase 10 metrics:**
@@ -32,6 +32,11 @@ Last activity: 2026-02-22 — Completed 10-02 (template rendering for projects)
 |------|----------|-------|-------|
 | P01 | 21min | 3 | 3 |
 | P02 | 3min | 3 | 1 |
+
+**Phase 11 metrics:**
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| P01 | 13min | 4 | 3 |
 
 ## Accumulated Context
 
@@ -51,6 +56,9 @@ All major decisions logged in PROJECT.md Key Decisions table.
 - JpProjectEntry model added for project data; projects field added to JpWorkEntry (embedded) and JpResumeData (top-level)
 - Translation workflow updated with project classification rules (会社内プロジェクト vs 個人プロジェクト)
 - Shokumukeirekisho template renders company-internal projects within work blocks (参画プロジェクト) and personal projects as separate section (個人プロジェクト)
+- postal_code field added to JpPersonalInfo; Dify workflow extracts from address field
+- Name formatting with U+3000 (full-width space) separator for Japanese resume display
+- end_date normalization: "none"/"null" strings converted to None in prepare_context() for proper 現在 display
 
 ### Pending Todos
 
@@ -71,5 +79,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped At: Completed 10-02-PLAN.md (Phase 10 complete)
-Resume: Phase 11 or milestone completion
+Stopped At: Completed 11-01-PLAN.md (Phase 11 in progress)
+Resume: 11-02 or milestone completion
