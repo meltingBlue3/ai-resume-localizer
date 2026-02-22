@@ -105,6 +105,21 @@ def prepare_context(jp_resume: JpResumeData) -> dict:
     if data.get("certifications") is None:
         data["certifications"] = []
 
+    # Format name with full-width space (U+3000) separator
+    if data.get("personal_info") and data["personal_info"].get("name"):
+        parts = data["personal_info"]["name"].split()
+        if len(parts) >= 2:
+            data["personal_info"]["name_formatted"] = "\u3000".join(parts[:2])
+        else:
+            data["personal_info"]["name_formatted"] = data["personal_info"]["name"]
+
+    # Normalize "none"/"null" strings to None for end_date
+    for entry in data["work_history"]:
+        if entry.get("end_date"):
+            end_val = entry["end_date"]
+            if isinstance(end_val, str) and end_val.lower() in ("none", "null", ""):
+                entry["end_date"] = None
+
     # Process education entries with year/month extraction
     education_processed = []
     for entry in data["education"]:
