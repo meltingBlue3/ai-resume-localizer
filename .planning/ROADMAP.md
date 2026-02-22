@@ -84,11 +84,11 @@ Plans:
   5. Rirekisho personal wishes section defaults to "貴社の規定に従います" when the user has not entered specific preferences
   6. Shokumukeirekisho displays "現在" for ongoing positions instead of "none" or blank when no end date exists
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 11-01: TBD
-- [ ] 11-02: TBD
+- [ ] 11-01-PLAN.md — Backend data model & workflow updates (postal_code field, name formatting, end_date normalization)
+- [ ] 11-02-PLAN.md — Rirekisho template polish (name, postal code, position, remove unused fields, fix defaults)
 
 ## Progress
 
@@ -105,5 +105,5 @@ Plans:
 | 7. Workflow Quality | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 8. OCR Support | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 9. Workflow Data Cleanup | v1.2 | 2/2 | Complete | 2026-02-22 |
-| 10. Work-Project Separation | 2/2 | Complete    | 2026-02-22 | - |
-| 11. Template Polish | v1.2 | 0/? | Not started | - |
+| 10. Work-Project Separation | v1.2 | 2/2 | Complete    | 2026-02-22 |
+| 11. Template Polish | v1.2 | 0/2 | Not started | - |
