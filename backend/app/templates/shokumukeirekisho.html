@@ -216,6 +216,34 @@
         {% endfor %}
     </table>
     {% endif %}
+    {% if job.projects %}
+    <table class="title-table">
+        <tr>
+            <td class="subsection-label">【参画プロジェクト】</td>
+        </tr>
+    </table>
+    {% for project in job.projects %}
+    <table class="title-table">
+        <tr class="work-detail-row">
+            <td>
+                <strong>{{ project.name | default('') }}</strong>
+                {% if project.role %}（{{ project.role }}）{% endif %}
+                {% if project.start_date %}　{{ project.start_date }}{% if project.end_date %}〜{{ project.end_date }}{% else %}〜現在{% endif %}{% endif %}
+            </td>
+        </tr>
+    </table>
+    {% if project.description %}
+    <table class="title-table">
+        <tr class="bullet-row"><td>　{{ project.description }}</td></tr>
+    </table>
+    {% endif %}
+    {% if project.technologies %}
+    <table class="title-table">
+        <tr class="bullet-row"><td>　使用技術：{{ project.technologies | join('、') }}</td></tr>
+    </table>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
     {% endfor %}
 
     <!-- ===== 活かせる経験・知識・技術 (Skills) ===== -->
