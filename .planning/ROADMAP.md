@@ -105,5 +105,5 @@ Plans:
 | 7. Workflow Quality | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 8. OCR Support | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 9. Workflow Data Cleanup | v1.2 | 2/2 | Complete | 2026-02-22 |
-| 10. Work-Project Separation | v1.2 | 0/? | Not started | - |
+| 10. Work-Project Separation | 1/2 | In Progress|  | - |
 | 11. Template Polish | v1.2 | 0/? | Not started | - |

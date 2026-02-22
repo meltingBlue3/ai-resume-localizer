@@ -11,21 +11,26 @@ See: .planning/PROJECT.md (updated 2026-02-22)
 
 ```
 Milestone : v1.2 PDF Quality & Workflow Fixes
-Phase     : 9 of 11 (Workflow Data Cleanup) — COMPLETE
-Plan      : 2 of 2 complete
-Status    : Phase Complete
-Progress  : [██████████] 100%
+Phase     : 10 of 11 (Work-Project Separation) — IN PROGRESS
+Plan      : 1 of 2 complete
+Status    : In Progress
+Progress  : [████████░░] 82%
 ```
 
-Last activity: 2026-02-22 — Completed 09-02 (frontend UI verification: all changes done in 09-01)
+Last activity: 2026-02-22 — Completed 10-01 (project data models and translation workflow)
 
 ## Performance Metrics
 
 | Metric | v1.0 | v1.1 | v1.2 |
 |--------|------|------|------|
 | Phases complete | 5/5 | 3/3 | 1/3 |
-| Plans complete | 14/14 | 5/5 | 2/? |
+| Plans complete | 14/14 | 5/5 | 3/? |
 | Requirements mapped | 17/17 | 9/9 | 13/13 |
+
+**Phase 10 metrics:**
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| P01 | 21min | 3 | 3 |
 
 ## Accumulated Context
 
@@ -42,6 +47,8 @@ All major decisions logged in PROJECT.md Key Decisions table.
 - hobbies renamed to other across entire stack (broader catch-all for misc resume info)
 - languages field: spoken ability only; language certs (JLPT, HSK, TOEIC, etc.) go to certifications
 - Plan 09-02 required no code changes: all frontend work was completed in 09-01 auto-fix deviations
+- JpProjectEntry model added for project data; projects field added to JpWorkEntry (embedded) and JpResumeData (top-level)
+- Translation workflow updated with project classification rules (会社内プロジェクト vs 個人プロジェクト)
 
 ### Pending Todos
 
@@ -62,5 +69,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 09-02-PLAN.md (Phase 9 complete)
-Resume: Begin Phase 10 planning (Work-Project Separation)
+Stopped at: Completed 10-01-PLAN.md
+Resume: Continue with 10-02-PLAN.md (template rendering updates)
