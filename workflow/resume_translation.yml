@@ -183,9 +183,19 @@ workflow:
             \      \"start_date\": \"YYYY-MM\",\n\
             \      \"end_date\": \"YYYY-MM または null（在職中）\",\n\
             \      \"location\": null,\n\
-            \      \"responsibilities\": [\"業務内容を箇条書きに分解（description から）\"],\n\
-            \      \"achievements\": [\"成果・実績があれば抽出\"]\n\
-            \    }\n\
+             \      \"responsibilities\": [\"業務内容を箇条書きに分解（description から）\"],\n\
+             \      \"achievements\": [\"成果・実績があれば抽出\"],\n\
+             \      \"projects\": [\n\
+             \        {\n\
+             \          \"name\": \"プロジェクト名\",\n\
+             \          \"role\": \"役割\",\n\
+             \          \"start_date\": \"YYYY-MM\",\n\
+             \          \"end_date\": \"YYYY-MM または null\",\n\
+             \          \"description\": \"プロジェクト概要\",\n\
+             \          \"technologies\": [\"技術1\", \"技術2\"]\n\
+             \        }\n\
+             \      ]\n\
+             \    }\n\
             \  ],\n\
             \  \"education\": [\n\
             \    {\n\
@@ -212,20 +222,43 @@ workflow:
             \  ],\n\
             \  \"motivation\": \"志望動機\",\n\
             \  \"strengths\": \"自己PR\",\n\
-            \  \"other\": \"その他（awards, other, languages などを統合）\"\n\
-            }\n\n\
+             \  \"other\": \"その他（awards, other, languages などを統合）\",\n\
+             \  \"projects\": [\n\
+             \    {\n\
+             \      \"name\": \"個人プロジェクト名\",\n\
+             \      \"role\": \"役割\",\n\
+             \      \"start_date\": \"YYYY-MM\",\n\
+             \      \"end_date\": \"YYYY-MM\",\n\
+             \      \"description\": \"概要\",\n\
+             \      \"technologies\": [\"技術\"]\n\
+             \    }\n\
+             \  ]\n\
+             }\n\n\
             ## 翻訳・変換ルール\n\n\
             ### 文体\n\
             - です/ます体を全体で使用\n\
             - motivation セクションのみ軽い謙譲語を使用（「〜させていただきたい」等）。過度に堅い表現は避ける\n\n\
-            ### 構造変換\n\
-            - work_experience → work_history（description を responsibilities リストに分解）\n\
-            - project_experience → work_history に統合（末尾に追加）\n\
-            - self_introduction → summary の翻訳元。self_introduction の内容を日本語に翻訳する。原文にない情報を追加しない\n\
+             ### 構造変換\n\
+             - work_experience → work_history（description を responsibilities リストに分解）\n\
+             - self_introduction → summary の翻訳元。self_introduction の内容を日本語に翻訳する。原文にない情報を追加しない\n\
             - career_objective → motivation の翻訳元。career_objective の内容を日本語に翻訳する。原文にない情報を追加しない\n\
             - self_introduction と skills → strengths の翻訳元。self_introduction と skills の内容に基づいて日本語に翻訳する。原文にない情報を追加しない\n\
-            - awards + other（その他情報） + languages → other（統合して記述）\n\n\
-            ### 学歴マッピング\n\
+             - awards + other（その他情報） + languages → other（統合して記述）\n\n\
+             ### プロジェクト分類ルール\n\n\
+             project_experience は以下のルールで分類・変換する：\n\n\
+             1. **会社内プロジェクト**: project_experience[].company が work_experience[].company と一致する場合\n\
+                - 該当する work_history エントリの projects[] 配列に埋め込む\n\
+                - 変換: position → role, description → description\n\
+                - 技術用語が記述されていれば technologies[] に抽出\n\n\
+             2. **個人プロジェクト**: project_experience[].company が null または work_experience に一致する会社がない場合\n\
+                - 親の projects[] 配列（JpResumeData レベル）に格納\n\
+                - 変換: position → role, description → description\n\
+                - 技術用語が記述されていれば technologies[] に抽出\n\n\
+             3. **分類の原則**:\n\
+                - company フィールドが存在しない、または空の場合は個人プロジェクトとみなす\n\
+                - 会社名の一致判定は部分一致ではなく完全一致で行う\n\
+                - 原文にない情報を追加しない（核心原則準拠）\n\n\
+             ### 学歴マッピング\n\
             - 专科 / 大专 → 短期大学卒業\n\
             - 本科 → 学士\n\
             - 硕士 → 修士\n\
