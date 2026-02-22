@@ -75,6 +75,15 @@ class JpEducationEntry(BaseModel):
     end_date: str | None = None
 
 
+class JpProjectEntry(BaseModel):
+    name: str | None = None
+    role: str | None = None
+    start_date: str | None = None
+    end_date: str | None = None
+    description: str | None = None
+    technologies: list[str] | None = None
+
+
 class JpWorkEntry(BaseModel):
     company: str | None = None
     title: str | None = None
@@ -83,6 +92,7 @@ class JpWorkEntry(BaseModel):
     location: str | None = None
     responsibilities: list[str] | None = None
     achievements: list[str] | None = None
+    projects: list[JpProjectEntry] | None = None
 
 
 class JpSkillEntry(BaseModel):
@@ -107,3 +117,4 @@ class JpResumeData(BaseModel):
     motivation: str | None = None
     strengths: str | None = None
     other: str | None = None
+    projects: list[JpProjectEntry] | None = None

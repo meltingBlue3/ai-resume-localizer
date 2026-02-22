@@ -71,6 +71,15 @@ export interface JpEducationEntry {
   end_date?: string | null;
 }
 
+export interface JpProjectEntry {
+  name?: string | null;
+  role?: string | null;
+  start_date?: string | null;
+  end_date?: string | null;
+  description?: string | null;
+  technologies?: string[] | null;
+}
+
 export interface JpWorkEntry {
   company?: string | null;
   title?: string | null;
@@ -79,6 +88,7 @@ export interface JpWorkEntry {
   location?: string | null;
   responsibilities?: string[] | null;
   achievements?: string[] | null;
+  projects?: JpProjectEntry[] | null;
 }
 
 export interface JpSkillEntry {
@@ -103,4 +113,5 @@ export interface JpResumeData {
   motivation?: string | null;
   strengths?: string | null;
   other?: string | null;
+  projects?: JpProjectEntry[] | null;
 }
