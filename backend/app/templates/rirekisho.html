@@ -194,7 +194,7 @@
         </tr>
         <tr>
             <td class="name-label">氏名</td>
-            <td class="name-content">{{ data.personal_info.name | default('未記入', true) }}</td>
+            <td class="name-content">{{ data.personal_info.name_formatted | default(data.personal_info.name, true) | default('未記入', true) }}</td>
         </tr>
         <tr class="dob-row">
             <td>生年月日</td>
@@ -214,7 +214,7 @@
         </tr>
         <tr class="address-row">
             <td style="vertical-align: middle;">現住所</td>
-            <td>{{ data.personal_info.address | default('未記入', true) }}</td>
+            <td>{% if data.personal_info.postal_code %}〒{{ data.personal_info.postal_code }}　{% endif %}{{ data.personal_info.address | default('未記入', true) }}</td>
         </tr>
         <tr class="address-furigana">
             <td>ふりがな</td>
