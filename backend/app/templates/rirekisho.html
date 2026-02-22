@@ -125,21 +125,6 @@
             line-height: 1.6;
         }
 
-        /* ===== Commute / Dependents section ===== */
-        .commute-table td {
-            height: 14mm;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 9pt;
-        }
-        .commute-label {
-            font-size: 8pt;
-            font-weight: bold;
-        }
-        .commute-value {
-            font-size: 10.5pt;
-        }
-
         /* ===== Preferences section ===== */
         .preferences-label {
             font-weight: bold;
@@ -295,13 +280,13 @@
             <tr class="history-row">
                 <td class="year-cell">{{ entry.start_year }}</td>
                 <td class="month-cell">{{ entry.start_month }}</td>
-                <td>{{ entry.company | default('', true) }}　入社</td>
+                <td>{{ entry.company | default('', true) }}{% if entry.title %}　{{ entry.title }}{% endif %}　入社</td>
             </tr>
             <tr class="history-row">
                 {% if entry.end_year %}
                 <td class="year-cell">{{ entry.end_year }}</td>
                 <td class="month-cell">{{ entry.end_month }}</td>
-                <td>{{ entry.company | default('', true) }}　退社</td>
+                <td>{{ entry.company | default('', true) }}{% if entry.title %}　{{ entry.title }}{% endif %}　退社</td>
                 {% else %}
                 <td class="year-cell"></td>
                 <td class="month-cell"></td>
@@ -380,34 +365,6 @@
         </tr>
     </table>
 
-    <!-- Commute / Dependents Section -->
-    <table class="commute-table">
-        <colgroup>
-            <col style="width: 25%;">
-            <col style="width: 25%;">
-            <col style="width: 25%;">
-            <col style="width: 25%;">
-        </colgroup>
-        <tr>
-            <td>
-                <span class="commute-label">通勤時間</span><br>
-                <span class="commute-value">約　時間　分</span>
-            </td>
-            <td>
-                <span class="commute-label">扶養家族（配偶者を除く）</span><br>
-                <span class="commute-value">0 人</span>
-            </td>
-            <td>
-                <span class="commute-label">配偶者</span><br>
-                <span class="commute-value">無</span>
-            </td>
-            <td>
-                <span class="commute-label">配偶者の扶養義務</span><br>
-                <span class="commute-value">無</span>
-            </td>
-        </tr>
-    </table>
-
     <!-- Preferences Section -->
     <table>
         <colgroup>
@@ -417,7 +374,7 @@
         <tr>
             <td class="preferences-label">本人希望記入欄<br><span style="font-weight: normal; font-size: 7pt;">（特に給料・職種・<br>勤務時間・勤務地・<br>その他についての希望<br>などがあれば記入）</span></td>
             <td class="preferences-content">
-                {{ data.other | default('貴社規定に従います。', true) }}
+                {{ data.other | default('貴社の規定に従います', true) }}
             </td>
         </tr>
     </table>
