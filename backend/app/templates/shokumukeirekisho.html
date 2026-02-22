@@ -246,6 +246,36 @@
     {% endif %}
     {% endfor %}
 
+    <!-- ===== 個人プロジェクト (Personal Projects) ===== -->
+    {% if data.projects %}
+    <table class="title-table">
+        <tr class="section-title-row">
+            <td><span class="section-title">個人プロジェクト</span></td>
+        </tr>
+    </table>
+    {% for project in data.projects %}
+    <table class="title-table">
+        <tr class="company-header-row">
+            <td>
+                <strong>{{ project.name | default('未記入') }}</strong>
+                {% if project.role %}（{{ project.role }}）{% endif %}
+                {% if project.start_date %}　{{ project.start_date }}{% if project.end_date %}〜{{ project.end_date }}{% else %}〜現在{% endif %}{% endif %}
+            </td>
+        </tr>
+    </table>
+    {% if project.description %}
+    <table class="title-table">
+        <tr class="bullet-row"><td>　{{ project.description }}</td></tr>
+    </table>
+    {% endif %}
+    {% if project.technologies %}
+    <table class="title-table">
+        <tr class="bullet-row"><td>　使用技術：{{ project.technologies | join('、') }}</td></tr>
+    </table>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
     <!-- ===== 活かせる経験・知識・技術 (Skills) ===== -->
     <table class="title-table">
         <tr class="section-title-row">
