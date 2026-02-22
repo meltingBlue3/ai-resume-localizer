@@ -37,7 +37,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 **Milestone Goal:** Fix PDF output quality issues and update Dify workflow prompts to produce correct field structures for template rendering.
 
 - [x] **Phase 9: Workflow Data Cleanup** — Add missing fields, consolidate language certs, remove unused fields in Dify prompts
-- [ ] **Phase 10: Work-Project Separation** — Separate work history from project experience across both workflows and both templates
+- [x] **Phase 10: Work-Project Separation** — Separate work history from project experience across both workflows and both templates (completed 2026-02-22)
 - [ ] **Phase 11: Template Polish** — Fix remaining rirekisho layout issues and shokumukeirekisho end-date display
 
 ## Phase Details
@@ -105,5 +105,5 @@ Plans:
 | 7. Workflow Quality | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 8. OCR Support | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 9. Workflow Data Cleanup | v1.2 | 2/2 | Complete | 2026-02-22 |
-| 10. Work-Project Separation | 1/2 | In Progress|  | - |
+| 10. Work-Project Separation | 2/2 | Complete   | 2026-02-22 | - |
 | 11. Template Polish | v1.2 | 0/? | Not started | - |

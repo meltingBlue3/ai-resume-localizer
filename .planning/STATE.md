@@ -11,13 +11,13 @@ See: .planning/PROJECT.md (updated 2026-02-22)
 
 ```
 Milestone : v1.2 PDF Quality & Workflow Fixes
-Phase     : 10 of 11 (Work-Project Separation) — IN PROGRESS
-Plan      : 1 of 2 complete
-Status    : In Progress
-Progress  : [████████░░] 82%
+Phase     : 10 of 11 (Work-Project Separation) — COMPLETE
+Plan      : 2 of 2 complete
+Status    : Complete
+Progress  : [████████░░] 83%
 ```
 
-Last activity: 2026-02-22 — Completed 10-01 (project data models and translation workflow)
+Last activity: 2026-02-22 — Completed 10-02 (template rendering for projects)
 
 ## Performance Metrics
 
@@ -31,6 +31,7 @@ Last activity: 2026-02-22 — Completed 10-01 (project data models and translati
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | P01 | 21min | 3 | 3 |
+| P02 | 3min | 3 | 1 |
 
 ## Accumulated Context
 
@@ -49,6 +50,7 @@ All major decisions logged in PROJECT.md Key Decisions table.
 - Plan 09-02 required no code changes: all frontend work was completed in 09-01 auto-fix deviations
 - JpProjectEntry model added for project data; projects field added to JpWorkEntry (embedded) and JpResumeData (top-level)
 - Translation workflow updated with project classification rules (会社内プロジェクト vs 個人プロジェクト)
+- Shokumukeirekisho template renders company-internal projects within work blocks (参画プロジェクト) and personal projects as separate section (個人プロジェクト)
 
 ### Pending Todos
 
@@ -69,5 +71,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-22
-Stopped at: Completed 10-01-PLAN.md
-Resume: Continue with 10-02-PLAN.md (template rendering updates)
+Stopped At: Completed 10-02-PLAN.md (Phase 10 complete)
+Resume: Phase 11 or milestone completion
