@@ -63,6 +63,7 @@ class JpPersonalInfo(BaseModel):
     gender: str | None = None
     nationality: str | None = None
     address: str | None = None
+    postal_code: str | None = None
     phone: str | None = None
     email: str | None = None
 
