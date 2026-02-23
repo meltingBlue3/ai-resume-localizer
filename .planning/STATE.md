@@ -76,7 +76,7 @@ None.
 
 | # | Description | Date | Commit |
 |---|-------------|------|--------|
-| 18 | Fix PDF display issues (contact info, project dates, personal projects UI) | 2026-02-23 | 90ffbee |
+| 18 | Fix PDF display issues (contact info, project dates, personal projects UI) | 2026-02-23 | e2f760b |
 | 17 | 更新dify工作流提示词和中文日文输出json字段 | 2026-02-23 | 08a56ca |
 | 16 | Update DESIGN_PRINCIPLES.md | 2026-02-21 | 4169a78 |
 | 15 | Fix OCR error classification | 2026-02-21 | 6fc36fe |
