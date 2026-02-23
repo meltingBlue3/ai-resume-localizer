@@ -124,6 +124,26 @@ def prepare_context(jp_resume: JpResumeData) -> dict:
             if isinstance(end_val, str) and end_val.lower() in ("none", "null", ""):
                 entry["end_date"] = None
 
+    # Normalize "none"/"null" strings to None for project end_dates (embedded in work_history)
+    for entry in data["work_history"]:
+        if entry.get("projects"):
+            for project in entry["projects"]:
+                if project.get("end_date"):
+                    end_val = project["end_date"]
+                    if isinstance(end_val, str) and end_val.lower() in (
+                        "none",
+                        "null",
+                        "",
+                    ):
+                        project["end_date"] = None
+
+    # Normalize "none"/"null" strings to None for personal_projects end_dates
+    for project in data["personal_projects"]:
+        if project.get("end_date"):
+            end_val = project["end_date"]
+            if isinstance(end_val, str) and end_val.lower() in ("none", "null", ""):
+                project["end_date"] = None
+
     # Process education entries with year/month extraction
     education_processed = []
     for entry in data["education"]:

@@ -207,7 +207,7 @@
         </tr>
         <tr class="address-row">
             <td style="vertical-align: middle;">連絡先</td>
-            <td style="color: #999; font-size: 9pt;">（現住所以外に連絡を希望する場合のみ記入）</td>
+            <td>{% if data.personal_info.emergency_contact_address %}{{ data.personal_info.emergency_contact_address }}{% else %}<span style="color: #999; font-size: 9pt;">（現住所以外に連絡を希望する場合のみ記入）</span>{% endif %}</td>
         </tr>
     </table>
 
