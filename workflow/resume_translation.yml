@@ -176,7 +176,7 @@ workflow:
             \ が null、または一致する会社がない場合は、ルートレベルの `personal_projects` 配列に格納してください。\n  </project_routing>\n\
             </localization_rules>\n\n<output_schema_JpResumeData>\n{\n  \"personal_info\"\
             : {\n    \"name\": \"氏名（漢字のまま）\",\n    \"name_katakana\": \"カタカナ読み（ピンインベース）\"\
-            ,\n    \"birth_date\": \"YYYY-MM-DD\",\n    \"age\": \"満年齢（数値のみ、例：24）\"\
+            ,\n    \"birth_date\": \"YYYY-MM-DD\",\n    \"age\": \"満年齢（数字の文字列、例：\"24\"）\"\
             ,\n    \"gender\": \"男性/女性/null\",\n    \"nationality\": \"国籍（日本語表記）\"\
             ,\n    \"address\": \"現住所（日本語表記）\",\n    \"emergency_contact_address\"\
             : \"連絡先（入力にあれば翻訳、なければnull）\",\n    \"phone\": \"電話番号\",\n    \"email\"\
