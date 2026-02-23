@@ -170,6 +170,11 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
           <FieldInput label={f('address')} value={pi.address ?? ''} onChange={(v) => setPI({ address: v || null })} />
           <FieldInput label={f('phone')} value={pi.phone ?? ''} onChange={(v) => setPI({ phone: v || null })} />
           <FieldInput label={f('email')} value={pi.email ?? ''} onChange={(v) => setPI({ email: v || null })} />
+          <FieldInput label={f('age')} value={pi.age ?? ''} onChange={(v) => setPI({ age: v || null })} />
+          <FieldInput label={f('emergencyContactAddress')} value={pi.emergency_contact_address ?? ''} onChange={(v) => setPI({ emergency_contact_address: v || null })} />
+          <FieldInput label={f('maritalStatus')} value={pi.marital_status ?? ''} onChange={(v) => setPI({ marital_status: v || null })} />
+          <FieldInput label={f('dependentsCount')} value={pi.dependents_count ?? ''} onChange={(v) => setPI({ dependents_count: v || null })} />
+          <FieldInput label={f('commuteTime')} value={pi.commute_time ?? ''} onChange={(v) => setPI({ commute_time: v || null })} />
         </div>
       </CollapsibleSection>
 
@@ -331,12 +336,20 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
 
       {/* Other */}
       <CollapsibleSection title={s('other')}>
-        <FieldInput
-          label={f('other')}
-          value={data.other ?? ''}
-          onChange={(v) => setData({ other: v || null })}
-          multiline
-        />
+        <div className="space-y-3">
+          <FieldInput
+            label={f('desiredConditions')}
+            value={data.desired_conditions ?? ''}
+            onChange={(v) => setData({ desired_conditions: v || null })}
+            multiline
+          />
+          <FieldInput
+            label={f('other')}
+            value={data.other ?? ''}
+            onChange={(v) => setData({ other: v || null })}
+            multiline
+          />
+        </div>
       </CollapsibleSection>
     </div>
   );

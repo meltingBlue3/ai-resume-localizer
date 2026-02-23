@@ -14,10 +14,10 @@ function isFilled(value: unknown): boolean {
 }
 
 function countJpFields(data: JpResumeData): { filled: number; total: number } {
-  const total = 15;
+  const total = 17;
   let filled = 0;
 
-  // personal_info fields (7)
+  // personal_info fields (12)
   const pi = data.personal_info;
   if (pi) {
     if (isFilled(pi.name)) filled++;
@@ -27,6 +27,11 @@ function countJpFields(data: JpResumeData): { filled: number; total: number } {
     if (isFilled(pi.address)) filled++;
     if (isFilled(pi.phone)) filled++;
     if (isFilled(pi.email)) filled++;
+    if (isFilled(pi.age)) filled++;
+    if (isFilled(pi.emergency_contact_address)) filled++;
+    if (isFilled(pi.marital_status)) filled++;
+    if (isFilled(pi.dependents_count)) filled++;
+    if (isFilled(pi.commute_time)) filled++;
   }
 
   // Top-level text fields (3)
@@ -47,10 +52,10 @@ function countJpFields(data: JpResumeData): { filled: number; total: number } {
 }
 
 function countCnFields(data: CnResumeData): { filled: number; total: number } {
-  const total = 15;
+  const total = 16;
   let filled = 0;
 
-  // Top-level personal fields (7)
+  // Top-level personal fields (13)
   if (isFilled(data.name)) filled++;
   if (isFilled(data.phone)) filled++;
   if (isFilled(data.email)) filled++;
@@ -58,6 +63,12 @@ function countCnFields(data: CnResumeData): { filled: number; total: number } {
   if (isFilled(data.address)) filled++;
   if (isFilled(data.nationality)) filled++;
   if (isFilled(data.gender)) filled++;
+  if (isFilled(data.age)) filled++;
+  if (isFilled(data.emergency_contact_address)) filled++;
+  if (isFilled(data.commute_time)) filled++;
+  if (isFilled(data.marital_status)) filled++;
+  if (isFilled(data.dependents_count)) filled++;
+  if (isFilled(data.expected_salary)) filled++;
 
   // Array fields — count as 1 each if has entries (5)
   if (isFilled(data.education)) filled++;
@@ -66,9 +77,8 @@ function countCnFields(data: CnResumeData): { filled: number; total: number } {
   if (isFilled(data.certifications)) filled++;
   if (isFilled(data.languages)) filled++;
 
-  // Text fields (3)
+  // Text fields (2)
   if (isFilled(data.self_introduction)) filled++;
-  if (isFilled(data.career_objective)) filled++;
   if (isFilled(data.other)) filled++;
 
   return { filled, total };
@@ -78,7 +88,7 @@ export function computeCompleteness(
   data: JpResumeData | CnResumeData | null,
 ): CompletenessResult {
   if (!data) {
-    return { filled: 0, total: 15, percentage: 0 };
+    return { filled: 0, total: 17, percentage: 0 };
   }
 
   // Duck-typing: JpResumeData has personal_info, CnResumeData does not

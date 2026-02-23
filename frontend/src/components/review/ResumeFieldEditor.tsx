@@ -128,6 +128,12 @@ export default function ResumeFieldEditor({ data, onChange, readOnly = false }: 
     { key: 'address', label: f('address') },
     { key: 'nationality', label: f('nationality') },
     { key: 'gender', label: f('gender') },
+    { key: 'age', label: f('age') },
+    { key: 'emergency_contact_address', label: f('emergencyContactAddress') },
+    { key: 'commute_time', label: f('commuteTime') },
+    { key: 'marital_status', label: f('maritalStatus') },
+    { key: 'dependents_count', label: f('dependentsCount') },
+    { key: 'expected_salary', label: f('expectedSalary') },
   ];
 
   const education = data.education ?? [];
@@ -136,7 +142,7 @@ export default function ResumeFieldEditor({ data, onChange, readOnly = false }: 
   const certs = data.certifications ?? [];
   const langs = data.languages ?? [];
   const projects = data.project_experience ?? [];
-  const awards = data.awards ?? [];
+  const portfolioLinks = data.portfolio_links ?? [];
 
   const emptyEdu: EducationEntry = { school: null, major: null, degree: null, start_date: null, end_date: null };
   const emptyWork: WorkEntry = { company: null, position: null, department: null, start_date: null, end_date: null, description: null };
@@ -271,7 +277,6 @@ export default function ResumeFieldEditor({ data, onChange, readOnly = false }: 
       <CollapsibleSection title={s('other')}>
         <div className="space-y-3">
           <FieldInput label={f('selfIntroduction')} value={data.self_introduction ?? ''} multiline onChange={(v) => set({ self_introduction: v || null })} readOnly={readOnly} />
-          <FieldInput label={f('careerObjective')} value={data.career_objective ?? ''} multiline onChange={(v) => set({ career_objective: v || null })} readOnly={readOnly} />
           <FieldInput label={f('other')} value={data.other ?? ''} multiline onChange={(v) => set({ other: v || null })} readOnly={readOnly} />
 
           {/* Project Experience */}
@@ -298,28 +303,28 @@ export default function ResumeFieldEditor({ data, onChange, readOnly = false }: 
             </div>
           </div>
 
-          {/* Awards */}
+          {/* Portfolio Links */}
           <div>
-            <p className="mb-2 text-xs font-medium text-slate-500">{f('awards')}</p>
+            <p className="mb-2 text-xs font-medium text-slate-500">{f('portfolioLinks')}</p>
             <div className="space-y-2">
-              {awards.map((award, i) => (
+              {portfolioLinks.map((link, i) => (
                 <div key={i} className="flex items-end gap-2">
                   <div className="flex-1">
                     <FieldInput
-                      label={`${f('awards')} ${i + 1}`}
-                      value={award}
+                      label={`${f('portfolioLinks')} ${i + 1}`}
+                      value={link}
                       onChange={(v) => {
-                        const updated = [...awards];
+                        const updated = [...portfolioLinks];
                         updated[i] = v;
-                        set({ awards: updated });
+                        set({ portfolio_links: updated });
                       }}
                       readOnly={readOnly}
                     />
                   </div>
-                  {!readOnly && <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ awards: removeAt(awards, i) })} />}
+                  {!readOnly && <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ portfolio_links: removeAt(portfolioLinks, i) })} />}
                 </div>
               ))}
-              {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ awards: [...awards, ''] })} />}
+              {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ portfolio_links: [...portfolioLinks, ''] })} />}
             </div>
           </div>
         </div>
