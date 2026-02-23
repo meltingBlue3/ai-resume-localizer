@@ -33,6 +33,13 @@ export interface CnResumeData {
   address: string | null;
   nationality: string | null;
   gender: string | null;
+  age: string | null;
+  emergency_contact_address: string | null;
+  commute_time: string | null;
+  marital_status: string | null;
+  dependents_count: string | null;
+  expected_salary: string | null;
+  portfolio_links: string[] | null;
 
   education: EducationEntry[] | null;
   work_experience: WorkEntry[] | null;
@@ -41,9 +48,7 @@ export interface CnResumeData {
   languages: string[] | null;
 
   self_introduction: string | null;
-  career_objective: string | null;
   project_experience: WorkEntry[] | null;
-  awards: string[] | null;
   other: string | null;
 }
 
@@ -59,8 +64,14 @@ export interface JpPersonalInfo {
   gender?: string | null;
   nationality?: string | null;
   address?: string | null;
+  postal_code?: string | null;
   phone?: string | null;
   email?: string | null;
+  age?: string | null;
+  emergency_contact_address?: string | null;
+  marital_status?: string | null;
+  dependents_count?: string | null;
+  commute_time?: string | null;
 }
 
 export interface JpEducationEntry {
@@ -113,5 +124,7 @@ export interface JpResumeData {
   motivation?: string | null;
   strengths?: string | null;
   other?: string | null;
-  projects?: JpProjectEntry[] | null;
+  personal_projects?: JpProjectEntry[] | null;
+  desired_conditions?: string | null;
+  portfolio_links?: string[] | null;
 }
