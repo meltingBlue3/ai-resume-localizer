@@ -17,7 +17,7 @@ Status    : Complete
 Progress  : [██████████] 100%
 ```
 
-Last activity: 2026-02-22 — Completed 11-02 (rirekisho template polish: name formatting, postal code, position, remove unused fields)
+Last activity: 2026-02-23 - Completed quick task 17: 更新dify工作流提示词和中文日文输出json字段
 
 ## Performance Metrics
 
@@ -76,6 +76,7 @@ None.
 
 | # | Description | Date | Commit |
 |---|-------------|------|--------|
+| 17 | 更新dify工作流提示词和中文日文输出json字段 | 2026-02-23 | 08a56ca |
 | 16 | Update DESIGN_PRINCIPLES.md | 2026-02-21 | 4169a78 |
 | 15 | Fix OCR error classification | 2026-02-21 | 6fc36fe |
 
