@@ -109,7 +109,7 @@
       "phone": "電話",
       "email": "メール",
       "age": "満年齢",
-      "emergencyContactAddress": "緊急連絡先",
+      "emergencyContactAddress": "連絡先",
       "commuteTime": "通勤時間",
       "maritalStatus": "未婚/既婚",
       "dependentsCount": "扶養家族数",
@@ -131,7 +131,7 @@
       "issuer": "発行機関",
       "date": "取得日",
       "score": "スコア",
-      "desiredConditions": "希望条件",
+      "desiredConditions": "本人希望記入欄",
       "other": "その他"
     }
   },
