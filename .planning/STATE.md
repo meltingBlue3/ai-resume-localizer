@@ -17,7 +17,7 @@ Status    : Complete
 Progress  : [██████████] 100%
 ```
 
-Last activity: 2026-02-23 - Completed quick task 17: 更新dify工作流提示词和中文日文输出json字段
+Last activity: 2026-02-23 - Completed quick task 18: Fix PDF display issues (contact info, project dates, personal projects UI)
 
 ## Performance Metrics
 
@@ -76,12 +76,13 @@ None.
 
 | # | Description | Date | Commit |
 |---|-------------|------|--------|
+| 18 | Fix PDF display issues (contact info, project dates, personal projects UI) | 2026-02-23 | 90ffbee |
 | 17 | 更新dify工作流提示词和中文日文输出json字段 | 2026-02-23 | 08a56ca |
 | 16 | Update DESIGN_PRINCIPLES.md | 2026-02-21 | 4169a78 |
 | 15 | Fix OCR error classification | 2026-02-21 | 6fc36fe |
 
 ## Session Continuity
 
-Last session: 2026-02-22
-Stopped At: Completed 11-02-PLAN.md (Phase 11 complete)
-Resume: Milestone completion or v1.3 planning
+Last session: 2026-02-23
+Stopped At: Completed quick task 18 (Fix PDF display issues)
+Resume: Continue with v1.2 maintenance or v1.3 planning
