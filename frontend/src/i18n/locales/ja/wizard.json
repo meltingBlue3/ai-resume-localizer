@@ -41,6 +41,13 @@
         "address": "住所",
         "nationality": "国籍",
         "gender": "性別",
+        "age": "満年齢",
+        "emergencyContactAddress": "緊急連絡先",
+        "commuteTime": "通勤時間",
+        "maritalStatus": "未婚/既婚",
+        "dependentsCount": "扶養家族数",
+        "expectedSalary": "希望給与",
+        "portfolioLinks": "ポートフォリオリンク",
         "school": "学校",
         "major": "専攻",
         "degree": "学位",
@@ -55,9 +62,7 @@
         "certName": "資格名",
         "certDate": "取得日",
         "selfIntroduction": "自己PR",
-        "careerObjective": "希望職種",
         "projectExperience": "プロジェクト経験",
-        "awards": "受賞歴",
         "other": "その他"
       }
     },
@@ -103,6 +108,11 @@
       "address": "住所",
       "phone": "電話",
       "email": "メール",
+      "age": "満年齢",
+      "emergencyContactAddress": "緊急連絡先",
+      "commuteTime": "通勤時間",
+      "maritalStatus": "未婚/既婚",
+      "dependentsCount": "扶養家族数",
       "summary": "職務概要",
       "motivation": "志望動機",
       "strengths": "自己PR",
@@ -121,6 +131,7 @@
       "issuer": "発行機関",
       "date": "取得日",
       "score": "スコア",
+      "desiredConditions": "希望条件",
       "other": "その他"
     }
   },

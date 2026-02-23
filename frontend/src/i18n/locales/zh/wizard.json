@@ -41,6 +41,13 @@
         "address": "地址",
         "nationality": "国籍",
         "gender": "性别",
+        "age": "年龄",
+        "emergencyContactAddress": "紧急联系地址",
+        "commuteTime": "通勤时间",
+        "maritalStatus": "婚姻状况",
+        "dependentsCount": "扶养人数",
+        "expectedSalary": "期望薪资",
+        "portfolioLinks": "作品集链接",
         "school": "学校",
         "major": "专业",
         "degree": "学位",
@@ -55,9 +62,7 @@
         "certName": "证书名称",
         "certDate": "获取日期",
         "selfIntroduction": "自我评价",
-        "careerObjective": "求职意向",
         "projectExperience": "项目经历",
-        "awards": "获奖情况",
         "other": "其他信息"
       }
     },
@@ -103,6 +108,11 @@
       "address": "地址",
       "phone": "电话",
       "email": "邮箱",
+      "age": "年龄",
+      "emergencyContactAddress": "紧急联系地址",
+      "commuteTime": "通勤时间",
+      "maritalStatus": "婚姻状况",
+      "dependentsCount": "扶养人数",
       "summary": "职务概要",
       "motivation": "志望动机",
       "strengths": "自我PR",
@@ -121,6 +131,7 @@
       "issuer": "颁发机构",
       "date": "取得日期",
       "score": "成绩/分数",
+      "desiredConditions": "希望条件",
       "other": "其他信息"
     }
   },
