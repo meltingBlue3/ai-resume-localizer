@@ -37,6 +37,13 @@ class CnResumeData(BaseModel):
     address: str | None = None
     nationality: str | None = None
     gender: str | None = None
+    age: str | None = None
+    emergency_contact_address: str | None = None
+    commute_time: str | None = None
+    marital_status: str | None = None
+    dependents_count: str | None = None
+    expected_salary: str | None = None
+    portfolio_links: list[str] | None = None
 
     # Professional
     education: list[EducationEntry] | None = None
@@ -47,9 +54,7 @@ class CnResumeData(BaseModel):
 
     # Content
     self_introduction: str | None = None
-    career_objective: str | None = None
     project_experience: list[WorkEntry] | None = None
-    awards: list[str] | None = None
     other: str | None = None
 
 
@@ -66,6 +71,11 @@ class JpPersonalInfo(BaseModel):
     postal_code: str | None = None
     phone: str | None = None
     email: str | None = None
+    age: str | None = None
+    emergency_contact_address: str | None = None
+    marital_status: str | None = None
+    dependents_count: str | None = None
+    commute_time: str | None = None
 
 
 class JpEducationEntry(BaseModel):
@@ -118,4 +128,6 @@ class JpResumeData(BaseModel):
     motivation: str | None = None
     strengths: str | None = None
     other: str | None = None
-    projects: list[JpProjectEntry] | None = None
+    personal_projects: list[JpProjectEntry] | None = None
+    desired_conditions: str | None = None
+    portfolio_links: list[str] | None = None
