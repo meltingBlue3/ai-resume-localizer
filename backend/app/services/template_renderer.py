@@ -104,6 +104,10 @@ def prepare_context(jp_resume: JpResumeData) -> dict:
         data["skills"] = []
     if data.get("certifications") is None:
         data["certifications"] = []
+    if data.get("personal_projects") is None:
+        data["personal_projects"] = []
+    if data.get("portfolio_links") is None:
+        data["portfolio_links"] = []
 
     # Format name with full-width space (U+3000) separator
     if data.get("personal_info") and data["personal_info"].get("name"):

@@ -247,13 +247,13 @@
     {% endfor %}
 
     <!-- ===== 個人プロジェクト (Personal Projects) ===== -->
-    {% if data.projects %}
+    {% if data.personal_projects %}
     <table class="title-table">
         <tr class="section-title-row">
             <td><span class="section-title">個人プロジェクト</span></td>
         </tr>
     </table>
-    {% for project in data.projects %}
+    {% for project in data.personal_projects %}
     <table class="title-table">
         <tr class="company-header-row">
             <td>

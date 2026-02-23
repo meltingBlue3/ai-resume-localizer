@@ -374,7 +374,7 @@
         <tr>
             <td class="preferences-label">本人希望記入欄<br><span style="font-weight: normal; font-size: 7pt;">（特に給料・職種・<br>勤務時間・勤務地・<br>その他についての希望<br>などがあれば記入）</span></td>
             <td class="preferences-content">
-                {{ data.other | default('貴社の規定に従います', true) }}
+                {{ data.desired_conditions | default(data.other, true) | default('貴社の規定に従います', true) }}
             </td>
         </tr>
     </table>
