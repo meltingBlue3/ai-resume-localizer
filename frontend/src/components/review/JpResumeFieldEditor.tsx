@@ -146,7 +146,7 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
   const emptyEdu: JpEducationEntry = { school: null, degree: null, major: null, start_date: null, end_date: null };
   const emptyWork: JpWorkEntry = { company: null, title: null, start_date: null, end_date: null, responsibilities: [], achievements: [] };
   const emptySkill: JpSkillEntry = { category: null, skills: [] };
-  const emptyCert: JpCertificationEntry = { name: null, issuer: null, date: null, score: null };
+  const emptyCert: JpCertificationEntry = { name: null, date: null };
 
   return (
     <div className="space-y-3">
@@ -319,14 +319,12 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <FieldInput label={f('certName')} value={entry.name ?? ''} onChange={(v) => setData({ certifications: updateAt(certs, i, { name: v || null }) })} />
-                <FieldInput label={f('issuer')} value={entry.issuer ?? ''} onChange={(v) => setData({ certifications: updateAt(certs, i, { issuer: v || null }) })} />
                 <FieldInput
                   label={f('date')}
                   value={entry.date ?? ''}
                   onChange={(v) => setData({ certifications: updateAt(certs, i, { date: v || null }) })}
                   helperText={warekiHelper(entry.date)}
                 />
-                <FieldInput label={f('score')} value={entry.score ?? ''} onChange={(v) => setData({ certifications: updateAt(certs, i, { score: v || null }) })} />
               </div>
             </div>
           ))}
