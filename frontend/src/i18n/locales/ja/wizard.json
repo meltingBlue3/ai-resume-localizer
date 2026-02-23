@@ -97,6 +97,7 @@
       "workHistory": "職務経歴",
       "skills": "スキル",
       "certifications": "資格・免許",
+      "personalProjects": "個人プロジェクト",
       "other": "その他"
     },
     "fields": {
@@ -132,6 +133,10 @@
       "date": "取得日",
       "score": "スコア",
       "desiredConditions": "本人希望記入欄",
+      "projectName": "プロジェクト名",
+      "projectRole": "役割",
+      "projectDescription": "説明",
+      "projectTechnologies": "使用技術",
       "other": "その他"
     }
   },

@@ -97,6 +97,7 @@
       "workHistory": "职务经历",
       "skills": "技能",
       "certifications": "资格/证书",
+      "personalProjects": "个人项目",
       "other": "其他"
     },
     "fields": {
@@ -132,6 +133,10 @@
       "date": "取得日期",
       "score": "成绩/分数",
       "desiredConditions": "希望条件",
+      "projectName": "项目名称",
+      "projectRole": "角色",
+      "projectDescription": "描述",
+      "projectTechnologies": "使用技术",
       "other": "其他信息"
     }
   },
