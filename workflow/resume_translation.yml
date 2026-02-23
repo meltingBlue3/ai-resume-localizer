@@ -1,9 +1,10 @@
 app:
-  description: "\u5C06\u4E2D\u6587\u7B80\u5386\u7ED3\u6784\u5316 JSON \u7FFB\u8BD1\u4E3A\u7B26\u5408\u65E5\u672C\u5546\u52A1\u6587\u4E66\u89C4\u8303\u7684\u65E5\u6587\u7B80\u5386 JSON\uFF0C\u4F9B\u540E\u7AEF /api/translate \u63A5\u53E3\u6D88\u8D39\u3002\u5355 LLM \u8282\u70B9\u6D41\u6C34\u7EBF\uFF1A\u7FFB\u8BD1 + \u672C\u5730\u5316\u5408\u5E76\u5904\u7406\u3002"
-  icon: "\U0001F916"
+  description: 将中文简历结构化 JSON 翻译为符合日本商务文书规范的日文简历 JSON，供后端 /api/translate 接口消费。单 LLM
+    节点流水线：翻译 + 本地化合并处理。
+  icon: 🤖
   icon_background: '#FDE8E8'
   mode: workflow
-  name: "\u65E5\u6587\u7B80\u5386\u7FFB\u8BD1\u4E0E\u672C\u5730\u53161"
+  name: 日文简历翻译与本地化v1.2
   use_icon_as_answer_icon: false
 dependencies:
 - current_identifier: null
@@ -106,25 +107,25 @@ workflow:
       zIndex: 0
     nodes:
     - data:
-        desc: "\u63A5\u6536\u540E\u7AEF DifyClient.translate_resume() \u4F20\u5165\u7684 CnResumeData JSON \u5B57\u7B26\u4E32"
+        desc: 接收后端 DifyClient.translate_resume() 传入的 CnResumeData JSON 字符串
         selected: false
-        title: "\u5F00\u59CB"
+        title: 开始
         type: start
         variables:
-        - label: "\u4E2D\u6587\u7B80\u5386JSON"
+        - label: 中文简历JSON
           max_length: 20000
           options: []
           required: true
           type: paragraph
           variable: cn_resume_json
-      height: 168
+      height: 153
       id: '1740100000001'
       position:
-        x: 80
-        y: 282
+        x: 80.947322854069
+        y: 261
       positionAbsolute:
-        x: 80
-        y: 282
+        x: 80.947322854069
+        y: 261
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -134,161 +135,91 @@ workflow:
         context:
           enabled: false
           variable_selector: []
-        desc: "\u4E2D\u6587\u7B80\u5386 JSON \u3092\u65E5\u672C\u8A9E\u306B\u7FFB\u8A33\u3057\u3001CnResumeData \u3092 JpResumeData \u306B\u5909\u63DB\u3059\u308B\uFF08\u7FFB\u8A33 + \u672C\u5730\u5316\u5408\u4F75\uFF09"
+        desc: 中文简历 JSON を日本語に翻訳し、CnResumeData を JpResumeData に変換する（翻訳 + 本地化合併）
         model:
           completion_params:
             temperature: 0.15
             top_p: 1
           mode: chat
-          name: openai/gpt-5-mini
+          name: google/gemini-3-flash-preview
           provider: langgenius/openrouter/openrouter
         prompt_template:
         - id: b2c3d4e5-0002-0001-0001-000000000001
           role: system
-          text: "あなたは中国語から日本語への専門的な履歴書翻訳者です。ユーザーから提供される中国語の履歴書 JSON（CnResumeData 形式）を、日本語の履歴書 JSON（JpResumeData 形式）に翻訳・変換してください。\n\n\
-            ## 核心原則\n\n\
-            原文に書かれていない事実、数字、経験を追加してはいけません。翻訳は原文の内容のみに基づくこと。\n\
-            「貢献」「成長」「チームワーク」などのマーケティング的表現を追加しないこと。原文にない概念は翻訳に含めない。\n\
-            文の再構成は許可するが、内容の追加は禁止。日本のビジネス文書の文体に合わせて文構造を調整してよい。\n\
-            数値は文脈から推論可能な場合のみ許可（例：日付範囲から算出した年数）。定量データの捏造は禁止。\n\n\
-            ## 入力形式（CnResumeData）\n\n\
-            入力は以下の構造を持つ JSON です：\n\
-            - name, phone, email, date_of_birth, address, nationality, gender（個人情報）\n\
-            - education[]: school, major, degree, start_date, end_date\n\
-            - work_experience[]: company, position, department, start_date, end_date, description\n\
-            - skills[]: name, level\n\
-            - certifications[]: name, date\n\
-            - languages[]\n\
-            - self_introduction, career_objective\n\
-            - project_experience[]: company, position, department, start_date, end_date, description\n\
-            - awards[], other\n\n\
-            ## 出力形式（JpResumeData）\n\n\
-            出力は以下の構造に厳密に従った JSON オブジェクトです：\n\n\
-            {\n\
-            \  \"personal_info\": {\n\
-            \    \"name\": \"氏名（漢字のまま。中国人名はそのまま漢字で可）\",\n\
-            \    \"name_katakana\": \"カタカナ読み（中国語の人名のピンイン読みに基づきカタカナに変換。姓と名の間に全角スペース。例：張偉→チョウ イ、李明→リ メイ）\",\n\
-            \    \"birth_date\": \"生年月日、YYYY-MM-DD 形式\",\n\
-            \    \"gender\": \"性別（男性/女性）\",\n\
-            \    \"nationality\": \"国籍（日本語表記）\",\n\
-             \    \"address\": \"住所（日本語表記）\",\n\
-             \    \"postal_code\": \"郵便番号（住所から抽出。例：123-4567。不明な場合はnull）\",\n\
-             \    \"phone\": \"電話番号\",\n\
-            \    \"email\": \"メールアドレス\"\n\
-            \  },\n\
-            \  \"summary\": \"職務要約\",\n\
-            \  \"work_history\": [\n\
-            \    {\n\
-            \      \"company\": \"会社名（日本語表記）\",\n\
-            \      \"title\": \"職種・役職名（日本語表記）\",\n\
-            \      \"start_date\": \"YYYY-MM\",\n\
-            \      \"end_date\": \"YYYY-MM または null（在職中）\",\n\
-            \      \"location\": null,\n\
-             \      \"responsibilities\": [\"業務内容を箇条書きに分解（description から）\"],\n\
-             \      \"achievements\": [\"成果・実績があれば抽出\"],\n\
-             \      \"projects\": [\n\
-             \        {\n\
-             \          \"name\": \"プロジェクト名\",\n\
-             \          \"role\": \"役割\",\n\
-             \          \"start_date\": \"YYYY-MM\",\n\
-             \          \"end_date\": \"YYYY-MM または null\",\n\
-             \          \"description\": \"プロジェクト概要\",\n\
-             \          \"technologies\": [\"技術1\", \"技術2\"]\n\
-             \        }\n\
-             \      ]\n\
-             \    }\n\
-            \  ],\n\
-            \  \"education\": [\n\
-            \    {\n\
-            \      \"school\": \"学校名（日本語表記）\",\n\
-            \      \"degree\": \"学位\",\n\
-            \      \"major\": \"専攻（日本語表記）\",\n\
-            \      \"start_date\": \"YYYY-MM\",\n\
-            \      \"end_date\": \"YYYY-MM\"\n\
-            \    }\n\
-            \  ],\n\
-            \  \"skills\": [\n\
-            \    {\n\
-            \      \"category\": \"カテゴリ名（例：プログラミング言語、フレームワーク、ツール）\",\n\
-            \      \"skills\": [\"スキル名のリスト\"]\n\
-            \    }\n\
-            \  ],\n\
-            \  \"certifications\": [\n\
-            \    {\n\
-            \      \"name\": \"資格名（日本で認知される正式名称に変換。例：CET-4→CET-4（大学英語四級））\",\n\
-            \      \"issuer\": \"発行機関\",\n\
-            \      \"date\": \"YYYY-MM\",\n\
-            \      \"score\": null\n\
-            \    }\n\
-            \  ],\n\
-            \  \"motivation\": \"志望動機\",\n\
-            \  \"strengths\": \"自己PR\",\n\
-             \  \"other\": \"その他（awards, other, languages などを統合）\",\n\
-             \  \"projects\": [\n\
-             \    {\n\
-             \      \"name\": \"個人プロジェクト名\",\n\
-             \      \"role\": \"役割\",\n\
-             \      \"start_date\": \"YYYY-MM\",\n\
-             \      \"end_date\": \"YYYY-MM\",\n\
-             \      \"description\": \"概要\",\n\
-             \      \"technologies\": [\"技術\"]\n\
-             \    }\n\
-             \  ]\n\
-             }\n\n\
-            ## 翻訳・変換ルール\n\n\
-            ### 文体\n\
-            - です/ます体を全体で使用\n\
-            - motivation セクションのみ軽い謙譲語を使用（「〜させていただきたい」等）。過度に堅い表現は避ける\n\n\
-             ### 構造変換\n\
-             - work_experience → work_history（description を responsibilities リストに分解）\n\
-             - self_introduction → summary の翻訳元。self_introduction の内容を日本語に翻訳する。原文にない情報を追加しない\n\
-            - career_objective → motivation の翻訳元。career_objective の内容を日本語に翻訳する。原文にない情報を追加しない\n\
-            - self_introduction と skills → strengths の翻訳元。self_introduction と skills の内容に基づいて日本語に翻訳する。原文にない情報を追加しない\n\
-             - awards + other（その他情報） + languages → other（統合して記述）\n\n\
-             ### プロジェクト分類ルール\n\n\
-             project_experience は以下のルールで分類・変換する：\n\n\
-             1. **会社内プロジェクト**: project_experience[].company が work_experience[].company と一致する場合\n\
-                - 該当する work_history エントリの projects[] 配列に埋め込む\n\
-                - 変換: position → role, description → description\n\
-                - 技術用語が記述されていれば technologies[] に抽出\n\n\
-             2. **個人プロジェクト**: project_experience[].company が null または work_experience に一致する会社がない場合\n\
-                - 親の projects[] 配列（JpResumeData レベル）に格納\n\
-                - 変換: position → role, description → description\n\
-                - 技術用語が記述されていれば technologies[] に抽出\n\n\
-             3. **分類の原則**:\n\
-                - company フィールドが存在しない、または空の場合は個人プロジェクトとみなす\n\
-                - 会社名の一致判定は部分一致ではなく完全一致で行う\n\
-                - 原文にない情報を追加しない（核心原則準拠）\n\n\
-             ### 学歴マッピング\n\
-            - 专科 / 大专 → 短期大学卒業\n\
-            - 本科 → 学士\n\
-            - 硕士 → 修士\n\
-            - 博士 → 博士\n\
-            - 上記以外はそのまま維持\n\n\
-             ### スキル分類\n\
-             - skills は技術カテゴリ別にグループ化する（プログラミング言語、フレームワーク、ツール等）\n\n\
-             ### 郵便番号\n\
-             - address フィールドに含まれる郵便番号を抽出し、postal_code に出力\n\
-             - 形式：XXX-XXXX（ハイフン区切り）\n\
-             - 郵便番号が不明な場合は null とする\n\n\
-             ### その他\n\
-            - null の維持: 入力で null のフィールドは出力でも null とする\n\
-            - 日付は YYYY-MM 形式を維持する（和暦変換はフロントエンドで行う）\n\
-            - work_history と education は時間逆順（最新が先）\n\
-            - responsibilities の各項目は日本の職務経歴書で一般的な表現にする（「〜を担当しました」「〜の設計・開発を行いました」等）\n\
-            - 技術用語は日本のIT業界で通用する表記にする\n\n\
-            JSON オブジェクトのみ出力。<think> タグや思考過程、markdown 記法は一切出力しない。\n"
+          text: "<system_role>\nあなたは、中国語の履歴書データ（JSON）を、日本のビジネス標準である「履歴書」および「職務経歴書」に準拠した日本語の履歴書データ（JpResumeData\
+            \ JSON）に翻訳・変換するプロフェッショナルなローカライゼーションエンジンです。\n</system_role>\n\n<core_principles>\n\
+            \  <rule>原文の忠実性：原文に書かれていない事実、経験、技術スタック、定量データ（数字）を捏造・追加してはいけません。</rule>\n\
+            \  <rule>表現の最適化：「貢献」「成長」などの誇張されたマーケティング的表現は避け、日本のビジネス文書にふさわしい客観的で謙虚な表現に調整してください。</rule>\n\
+            \  <rule>厳格なJSON出力：マークダウン記法（```jsonなど）や、<think>タグ、思考過程、説明文は一切出力せず、純粋なJSON文字列のみを出力してください。</rule>\n\
+            </core_principles>\n\n<localization_rules>\n  <tone_and_style>\n    -\
+            \ 客観的事実（work_historyのresponsibilities, projectsのdescriptionなど）：簡潔な「体言止め」または「〜を担当」「〜に従事」などの表現を使用してください（例：「APIの設計と開発を担当。」）。\n\
+            \    - 主観的記述（motivation志望動機, strengths自己PRなど）：「です・ます調」を使用し、適切な敬語（謙譲語・丁寧語）を用いてください。\n\
+            \  </tone_and_style>\n\n  <name_katakana_conversion>\n    - 中国語の人名（漢字）は、ピンイン読みに基づいて自然なカタカナに変換してください。姓と名の間に全角スペースを入れてください（例：张思源\
+            \ → チョウ スーユエン、李明 → リ ミン）。\n  </name_katakana_conversion>\n\n  <education_mapping>\n\
+            \    - 专科 / 大专 → 短期大学卒業 または 専門学校卒業（文脈による）\n    - 本科 → 学士\n    - 硕士 → 修士\n\
+            \    - 博士 → 博士\n  </education_mapping>\n\n  <skill_level_mapping>\n  \
+            \  - 中国語のスキル熟練度（精通、熟練、熟悉、了解など）は、日本のIT業界で客観的・標準的な表現に変換して結合してください。\n   \
+            \ - 「精通」「深い理解」 → 「専門レベル（独力で設計・構築可能）」\n    - 「熟練」「掌握」「経験豊富」 → 「実務経験あり（独力で対応可能）」\n\
+            \    - 「熟悉」「良好」「日常使用」 → 「基礎知識あり（実務適用可能）」\n    - 「了解」「初歩」「基礎」 → 「学習中（基礎概念の理解）」\n\
+            \    - ※原文に熟練度の記載がない場合は、スキル名のみを出力してください（例：Java）。\n  </skill_level_mapping>\n\
+            \n  <desired_conditions_handling>\n    - 日本の履歴書特有の「本人希望記入欄（desired_conditions）」を生成してください。\n\
+            \    - 入力データの「career_objective（求職意向）」や「expected_salary（希望給与）」などに具体的な希望（職種、勤務地、給与など）が記載されている場合は、それを簡潔で丁寧な日本語に翻訳してください（例：「職種：Webエンジニアを希望いたします。」）。\n\
+            \    - 最後に必ず「その他については、貴社規定に従います。」と付け加えてください。\n    - もし入力データに特別な希望が一切記載されていない場合、あるいは\
+            \ null の場合は、推測せず、絶対に「貴社規定に従います。」という一文のみを出力してください。\n  </desired_conditions_handling>\n\
+            \n  <missing_data_handling>\n    - 入力JSONで null または空配列 [] のフィールドは、出力でも厳密に\
+            \ null または [] を維持してください。\n    - 【重要】もし入力に `self_introduction` がない場合、`work_experience`\
+            \ と `project_experience` の内容を分析し、日本の職務経歴書に必須の「職務要約（200〜250文字程度）」を自動生成して\
+            \ `summary` に格納してください。\n  </missing_data_handling>\n\n  <project_routing>\n\
+            \    - 入力の `project_experience` は、`associated_company` フィールドをチェックしてください。\n\
+            \    - 企業プロジェクト：`associated_company` が `work_experience` の会社名と一致する場合、該当する\
+            \ `work_history` 内の `projects` 配列にネストして格納してください。\n    - 個人/その他プロジェクト：`associated_company`\
+            \ が null、または一致する会社がない場合は、ルートレベルの `personal_projects` 配列に格納してください。\n  </project_routing>\n\
+            </localization_rules>\n\n<output_schema_JpResumeData>\n{\n  \"personal_info\"\
+            : {\n    \"name\": \"氏名（漢字のまま）\",\n    \"name_katakana\": \"カタカナ読み（ピンインベース）\"\
+            ,\n    \"birth_date\": \"YYYY-MM-DD\",\n    \"age\": \"満年齢（数値のみ、例：24）\"\
+            ,\n    \"gender\": \"男性/女性/null\",\n    \"nationality\": \"国籍（日本語表記）\"\
+            ,\n    \"address\": \"現住所（日本語表記）\",\n    \"emergency_contact_address\"\
+            : \"連絡先（入力にあれば翻訳、なければnull）\",\n    \"phone\": \"電話番号\",\n    \"email\"\
+            : \"メールアドレス\",\n    \"marital_status\": \"未婚/既婚/null\",\n    \"dependents_count\"\
+            : \"扶養家族数（数値またはnull）\",\n    \"commute_time\": \"通勤時間（入力にあれば翻訳、なければnull）\"\
+            \n  },\n  \"summary\": \"職務要約（self_introductionの翻訳、または経歴からの自動要約）\",\n\
+            \  \"work_history\": [\n    {\n      \"company\": \"会社名（日本語表記）\",\n  \
+            \    \"title\": \"職種・役職名（日本語表記）\",\n      \"start_date\": \"YYYY-MM\"\
+            ,\n      \"end_date\": \"YYYY-MM または null（在職中）\",\n      \"responsibilities\"\
+            : [\"業務内容を体言止めで箇条書きに分解\"],\n      \"achievements\": [\"成果・実績があれば抽出\"],\n\
+            \      \"projects\": [\n        {\n          \"name\": \"プロジェクト名\",\n\
+            \          \"role\": \"役割（日本語表記）\",\n          \"start_date\": \"YYYY-MM\"\
+            ,\n          \"end_date\": \"YYYY-MM または null\",\n          \"description\"\
+            : \"プロジェクト概要（体言止め）\",\n          \"technologies\": [\"技術1\", \"技術2\"]\n\
+            \        }\n      ]\n    }\n  ],\n  \"education\": [\n    {\n      \"\
+            school\": \"学校名（日本語表記）\",\n      \"degree\": \"学位（マッピングルール適用）\",\n   \
+            \   \"major\": \"専攻（日本語表記）\",\n      \"start_date\": \"YYYY-MM\",\n  \
+            \    \"end_date\": \"YYYY-MM\"\n    }\n  ],\n  \"skills\": [\n    {\n\
+            \      \"category\": \"カテゴリ名（例：言語、フレームワーク、DB、インフラ）\",\n      \"skills\"\
+            : [\"スキル名のリスト（マッピングルールを適用して結合。例：Java(基礎知識あり)、Git(実務経験あり)）\"]\n    }\n\
+            \  ],\n  \"certifications\": [\n    {\n      \"name\": \"資格名（日本で認知される名称。例：CET-4→実用英語技能検定準1級相当/大学英語四級）\"\
+            ,\n      \"date\": \"YYYY-MM\"\n    }\n  ],\n  \"motivation\": \"志望動機（career_objectiveの翻訳、です・ます調）\"\
+            ,\n  \"desired_conditions\": \"本人希望記入欄（特別な希望がない場合は「貴社規定に従います。」と出力）\",\n\
+            \  \"strengths\": \"自己PR（skills等から補足して翻訳、です・ます調）\",\n  \"portfolio_links\"\
+            : [\"GitHubやポートフォリオのURL\"],\n  \"personal_projects\": [\n    {\n     \
+            \ \"name\": \"個人プロジェクト名\",\n      \"role\": \"役割\",\n      \"start_date\"\
+            : \"YYYY-MM\",\n      \"end_date\": \"YYYY-MM\",\n      \"description\"\
+            : \"概要\",\n      \"technologies\": [\"技術\"]\n    }\n  ],\n  \"other\"\
+            : \"その他特記事項（awardsやotherを統合して日本語翻訳）\"\n}\n</output_schema_JpResumeData>\n"
         - id: b2c3d4e5-0002-0001-0001-000000000002
           role: user
-          text: "以下の中国語履歴書 JSON を日本語に翻訳してください：\n\n\
-            {{#1740100000001.cn_resume_json#}}"
+          text: '<input_json>
+
+            {{#1740100000001.cn_resume_json#}}
+
+            </input_json>'
         selected: true
-        title: "LLM \u7FFB\u8A33\u30FB\u672C\u5730\u5316"
+        title: LLM 翻訳・本地化
         type: llm
         variables: []
         vision:
           enabled: false
-      height: 147
+      height: 148
       id: '1740100000002'
       position:
         x: 368
@@ -300,25 +231,26 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 241
+      width: 242
     - data:
-        code: "import re\n\ndef main(llm_text: str) -> dict:\n    text = re.sub(r'<think>[\\s\\S]*?</think>',\
-          \ '', llm_text, flags=re.DOTALL)\n    return {\"result\": text.strip()}\n"
+        code: "import re\n\ndef main(llm_text: str) -> dict:\n    text = re.sub(r'<think>[\\\
+          s\\S]*?</think>', '', llm_text, flags=re.DOTALL)\n    return {\"result\"\
+          : text.strip()}\n"
         code_language: python3
-        desc: "LLM \u51FA\u529B\u304B\u3089 <think> \u30BF\u30B0\u3092\u9664\u53BB"
+        desc: LLM 出力から <think> タグを除去
         outputs:
           result:
             children: null
             type: string
         selected: false
-        title: "CoT \u30B9\u30C8\u30EA\u30C3\u30D7"
+        title: CoT ストリップ
         type: code
         variables:
         - value_selector:
           - '1740100000002'
           - text
           variable: llm_text
-      height: 95
+      height: 80
       id: '17715808726430'
       position:
         x: 655
@@ -330,33 +262,33 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 241
+      width: 242
     - data:
         code: "import json\nimport re\n\ndef main(llm_text: str) -> dict:\n    text\
-          \ = llm_text.strip()\n\n    text = re.sub(r'^```(?:json)?\\s*\\n?', '', text)\n\
-          \    text = re.sub(r'\\n?```\\s*$', '', text)\n    text = text.strip()\n\n\
-          \    start = text.find('{')\n    if start == -1:\n        raise ValueError(\"\
-          No JSON object found in LLM output\")\n\n    text = text[start:]\n\n    decoder\
-          \ = json.JSONDecoder()\n\n    try:\n        parsed, _ = decoder.raw_decode(text)\n\
-          \    except json.JSONDecodeError as e:\n        raise ValueError(\n      \
-          \      f\"LLM returned invalid JSON: {e}\\n\"\n            f\"Content preview:\
-          \ {text[:500]}\"\n        )\n\n    return {\"result\": json.dumps(parsed,\
+          \ = llm_text.strip()\n\n    text = re.sub(r'^```(?:json)?\\s*\\n?', '',\
+          \ text)\n    text = re.sub(r'\\n?```\\s*$', '', text)\n    text = text.strip()\n\
+          \n    start = text.find('{')\n    if start == -1:\n        raise ValueError(\"\
+          No JSON object found in LLM output\")\n\n    text = text[start:]\n\n   \
+          \ decoder = json.JSONDecoder()\n\n    try:\n        parsed, _ = decoder.raw_decode(text)\n\
+          \    except json.JSONDecodeError as e:\n        raise ValueError(\n    \
+          \        f\"LLM returned invalid JSON: {e}\\n\"\n            f\"Content\
+          \ preview: {text[:500]}\"\n        )\n\n    return {\"result\": json.dumps(parsed,\
           \ ensure_ascii=False)}\n"
         code_language: python3
-        desc: "\u6E05\u6D17 LLM \u8F93\u51FA\uFF0C\u53BB\u9664 markdown \u4EE3\u7801\u5757\u6807\u8BB0\uFF0C\u5E76\u9A8C\u8BC1 JSON \u5408\u6CD5\u6027"
+        desc: 清洗 LLM 输出，去除 markdown 代码块标记，并验证 JSON 合法性
         outputs:
           result:
             children: null
             type: string
         selected: false
-        title: "\u6E05\u6D17 JSON \u8F93\u51FA"
+        title: 清洗 JSON 输出
         type: code
         variables:
         - value_selector:
           - '17715808726430'
           - result
           variable: llm_text
-      height: 95
+      height: 96
       id: '1740100000004'
       position:
         x: 942
@@ -368,18 +300,18 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 241
+      width: 242
     - data:
-        desc: "\u8F93\u51FA\u672C\u5730\u5316\u540E\u7684\u65E5\u6587\u7B80\u5386 JSON\uFF0C\u53D8\u91CF\u540D jp_resume_json \u4F9B\u540E\u7AEF DifyClient \u8BFB\u53D6"
+        desc: 输出本地化后的日文简历 JSON，变量名 jp_resume_json 供后端 DifyClient 读取
         outputs:
         - value_selector:
           - '1740100000004'
           - result
           variable: jp_resume_json
         selected: false
-        title: "\u7ED3\u675F"
+        title: 结束
         type: end
-      height: 147
+      height: 133
       id: '1740100000005'
       position:
         x: 1229
@@ -391,9 +323,9 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 241
+      width: 242
     viewport:
-      x: 238.91883361773603
-      y: 302.4399185578825
-      zoom: 0.5278031643091579
+      x: -142.06854363472576
+      y: 103.62119447651708
+      zoom: 1.0556063286183153
   rag_pipeline_variables: []

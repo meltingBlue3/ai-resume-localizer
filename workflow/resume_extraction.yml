@@ -1,9 +1,9 @@
 app:
   description: 将中文简历纯文本解析为符合日本简历标准的结构化JSON数据，供后端 /api/upload-and-extract 接口消费
-  icon: "\U0001F916"
+  icon: 🤖
   icon_background: '#E8F4FD'
   mode: workflow
-  name: "\u4E2D\u6587\u7B80\u5386\u7ED3\u6784\u5316\u63D0\u53D61"
+  name: 中文简历结构化提取v1.2
   use_icon_as_answer_icon: false
 dependencies:
 - current_identifier: null
@@ -118,18 +118,18 @@ workflow:
       zIndex: 0
     nodes:
     - data:
-        desc: "\u63A5\u6536\u7531\u540E\u7AEF text_extractor \u63D0\u53D6\u7684\u4E2D\u6587\u7B80\u5386\u7EAF\u6587\u672C"
+        desc: 接收由后端 text_extractor 提取的中文简历纯文本
         selected: false
-        title: "\u5F00\u59CB"
+        title: 开始
         type: start
         variables:
-        - label: "\u7B80\u5386\u6587\u672C"
+        - label: 简历文本
           max_length: 15000
           options: []
           required: true
           type: paragraph
           variable: resume_text
-      height: 152
+      height: 153
       id: '1740000000001'
       position:
         x: 80
@@ -146,98 +146,65 @@ workflow:
         context:
           enabled: false
           variable_selector: []
-        desc: "\u4ECE\u7B80\u5386\u6587\u672C\u4E2D\u63D0\u53D6\u660E\u786E\u8BB0\u8F7D\u7684\u4FE1\u606F\uFF0C\u8F93\u51FA\u7EAF JSON"
+        desc: 从简历文本中提取明确记载的信息，输出纯 JSON
         model:
           completion_params:
             temperature: 0.1
             top_p: 1
           mode: chat
-          name: openai/gpt-5-mini
+          name: google/gemini-3-flash-preview
           provider: langgenius/openrouter/openrouter
         prompt_template:
         - id: a1b2c3d4-0001-0001-0001-000000000001
           role: system
-          text: "你是一位中文简历解析专家。你的任务是从用户提供的中文简历文本中，提取简历中明确记载的信息。\n\n\
-            ## 核心原则\n\n\
-            只提取简历文本中明确写出的内容。简历中未出现的信息必须填 null，绝对不可推测、补充或生成任何原文中不存在的内容。\n\n\
-            ## 输出 JSON 结构\n\n\
-            输出必须是以下结构的 JSON 对象，所有字段均可为 null：\n\n\
-            {\n\
-            \  \"name\": \"姓名\",\n\
-            \  \"phone\": \"电话号码\",\n\
-            \  \"email\": \"邮箱地址\",\n\
-            \  \"date_of_birth\": \"出生日期，格式 YYYY-MM-DD 或 YYYY-MM\",\n\
-            \  \"address\": \"居住地址\",\n\
-            \  \"nationality\": \"国籍\",\n\
-            \  \"gender\": \"性别\",\n\
-            \  \"education\": [\n\
-            \    {\n\
-            \      \"school\": \"学校名称\",\n\
-            \      \"major\": \"专业\",\n\
-            \      \"degree\": \"学历/学位，如本科/硕士/博士\",\n\
-            \      \"start_date\": \"开始时间\",\n\
-            \      \"end_date\": \"结束时间\"\n\
-            \    }\n\
-            \  ],\n\
-            \  \"work_experience\": [\n\
-            \    {\n\
-            \      \"company\": \"公司名称\",\n\
-            \      \"position\": \"职位名称\",\n\
-            \      \"department\": \"部门\",\n\
-            \      \"start_date\": \"开始时间\",\n\
-            \      \"end_date\": \"结束时间，在职则填 null\",\n\
-            \      \"description\": \"工作内容描述\"\n\
-            \    }\n\
-            \  ],\n\
-            \  \"skills\": [\n\
-            \    {\n\
-            \      \"name\": \"技能名称\",\n\
-            \      \"level\": \"掌握程度，如精通/熟练/了解\"\n\
-            \    }\n\
-            \  ],\n\
-            \  \"certifications\": [\n\
-            \    {\n\
-            \      \"name\": \"证书名称\",\n\
-            \      \"date\": \"获得日期\"\n\
-            \    }\n\
-            \  ],\n\
-            \  \"languages\": [\"语言名称和口语能力，如普通话、英语 流利\"],\n\
-            \  \"self_introduction\": \"自我介绍段落\",\n\
-            \  \"career_objective\": \"求职意向\",\n\
-            \  \"project_experience\": [\n\
-            \    {\n\
-            \      \"company\": null,\n\
-            \      \"position\": \"项目中担任的角色\",\n\
-            \      \"department\": null,\n\
-            \      \"start_date\": \"开始时间\",\n\
-            \      \"end_date\": \"结束时间\",\n\
-            \      \"description\": \"项目描述\"\n\
-            \    }\n\
-            \  ],\n\
-            \  \"awards\": [\"获奖记录，每条为字符串\"],\n\
-            \  \"other\": \"その他の情報。趣味、自己PR、志望動機以外の補足情報など、他のフィールドに該当しない内容をまとめて記載\"\n\
-            }\n\n\
-            ## 提取规则\n\n\
-            1. 简历中未明确提及的字段必须填 null，不可填空字符串 \"\"\n\
-            2. 列表字段若无内容，填 [] 或 null\n\
-            3. 日期严格按照原文记载输出。如果简历只写了\"2020年\"没有月份，则输出\"2020\"，不要补充月份。格式尽量为 YYYY-MM，但不完整日期按原样输出\n\
-            4. 在职/至今/当前/空白结束日期统一输出为 null\n\
-            5. 技能提取时保留原始的掌握程度描述\n\
-            6. 根据内容判断属于 work_experience 还是 project_experience，不要仅依赖简历中的段落标题\n\
-            7. 如果在简历任意位置发现公认的语言能力证书（如 CET-4、CET-6、JLPT N1-N5、HSK、TOEIC、TOEFL、IELTS 等），必须提取到 certifications 中，即使它们出现在\"语言能力\"段落下。languages 字段仅用于记录语言名称和口语能力描述（如\"普通话\"、\"英语 流利\"），不包含具体考试成绩和证书。\n\
-            8. 不要输出任何 markdown 代码块标记，不要输出解释文字，只输出纯 JSON\n\
-            9. 不要输出 <think> 或任何思考过程标记\n"
+          text: "<system_role>\n你是一个高精度的简历数据结构化抽取引擎。你的任务是将带有 OCR 噪音的中文简历文本，提取、重组并优化为高质量的\
+            \ JSON 格式数据。\n</system_role>\n\n<core_rules>\n  <rule_1_noise_reduction>\n\
+            \    输入文本可能来自 OCR 或 PDF 解析，存在换行错乱、页眉混入、信息乱序等物理噪音。请你基于语义逻辑，自动拼接断开的句子，忽略页码和无意义的乱码字符。\n\
+            \  </rule_1_noise_reduction>\n  \n  <rule_2_expression_optimization>\n\
+            \    在提取工作经验和项目经验时，请对候选人的原始表述进行专业化润色：\n    - 将口语化、流水账式的描述，提炼为专业的、结构化的要点（推荐使用“核心职责”与“取得成果”的维度）。\n\
+            \    - 纠正明显的语病和错别字。\n    - **红线警告**：绝对禁止捏造原文中不存在的技术栈、虚构数据指标或捏造工作经历。只能“提炼和润色”，不能“无中生有”，不能“夸大”。\n\
+            \  </rule_2_expression_optimization>\n\n  <rule_3_strict_json>\n    不要输出任何\
+            \ markdown 标记（如 ```json）、不要输出 <think> 等思考过程，不要包含任何解释性文字。必须严格按照下面的 JSON\
+            \ 结构输出。\n  </rule_3_strict_json>\n</core_rules>\n\n<extraction_guidelines>\n\
+            \  - 空值：未提及的字段填 null，空列表填 []。\n  - 日期：尝试格式化为 YYYY-MM，如只有年份则填 YYYY。在职/至今填\
+            \ null。\n  - 边界：商业公司的履历放入 work_experience；具体的开发系统、分析模型、独立课题等放入 project_experience。若工作内嵌套了项目，需拆分。\n\
+            \  - 证书与技能：将提及的所有资格认证（语言、IT、职业认证）强制提取到 certifications 中。所有工具、语言、专业方法论提取到\
+            \ skills 中。\n</extraction_guidelines>\n\n<output_schema>\n{\n  \"name\"\
+            : \"姓名\",\n  \"phone\": \"电话号码\",\n  \"email\": \"邮箱地址\",\n  \"date_of_birth\"\
+            : \"YYYY-MM-DD 或 YYYY-MM\",\n  \"age\": \"年龄\"\n  \"address\": \"居住地址\"\
+            ,\n  \"nationality\": \"国籍\",\n  \"gender\": \"性别\",\n  \"emergency_contact_address\"\
+            : \"紧急联系地址（日本简历中的連絡先）\",\n  \"commute_time\": \"通勤时间\",\n  \"marital_status\"\
+            : \"婚姻状况（已婚/未婚）\",\n  \"dependents_count\": \"扶养人数（除配偶外的家属人数）\",\n  \"\
+            expected_salary\": \"期望薪资\",\n  \"education\": [\n    {\n      \"school\"\
+            : \"学校名称\",\n      \"major\": \"专业\",\n      \"degree\": \"学历/学位\",\n\
+            \      \"start_date\": \"YYYY-MM\",\n      \"end_date\": \"YYYY-MM\"\n\
+            \    }\n  ],\n  \"work_experience\": [\n    {\n      \"company\": \"公司或组织名称\"\
+            ,\n      \"position\": \"职位名称\",\n      \"department\": \"部门\",\n    \
+            \  \"start_date\": \"YYYY-MM\",\n      \"end_date\": \"YYYY-MM\",\n  \
+            \    \"description\": \"经专业润色后的工作职责与业绩描述\"\n    }\n  ],\n  \"project_experience\"\
+            : [\n    {\n      \"project_name\": \"项目名称\",\n      \"associated_company\"\
+            : \"所属公司/组织（无法推断填 null）\",\n      \"role\": \"担任角色\",\n      \"start_date\"\
+            : \"YYYY-MM\",\n      \"end_date\": \"YYYY-MM\",\n      \"description\"\
+            : \"经专业润色后的项目背景、使用的技术/工具及最终成果\"\n    }\n  ],\n  \"skills\": [\n    {\n\
+            \      \"name\": \"技能名称\",\n      \"level\": \"掌握程度（原文无则填 null）\"\n  \
+            \  }\n  ],\n  \"certifications\": [\n    {\n      \"name\": \"证书名称\",\n\
+            \      \"date\": \"获得日期（尽可能提取）\"\n    }\n  ],\n  \"languages\": [\"语言名称及能力描述\"\
+            ],\n  \"self_introduction\": \"经润色后的自我评价，去除假大空的废话\",\n  \"portfolio_links\"\
+            : [\"个人主页、作品集、GitHub等链接\"],\n  \"other\": \"其他补充信息（纯中文）\"\n}\n</output_schema>"
         - id: a1b2c3d4-0001-0001-0001-000000000002
           role: user
-          text: "请解析以下中文简历文本：\n\n\
-            {{#1740000000001.resume_text#}}"
-        selected: true
-        title: "LLM \u63D0\u53D6\u7B80\u5386\u4FE1\u606F"
+          text: '<input_resume_text>
+
+            {{#1740000000001.resume_text#}}
+
+            </input_resume_text>'
+        selected: false
+        title: LLM 提取简历信息
         type: llm
         variables: []
         vision:
           enabled: false
-      height: 131
+      height: 132
       id: '1740000000002'
       position:
         x: 368
@@ -249,26 +216,26 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 241
+      width: 242
     - data:
         code: "import re\n\ndef main(llm_text: str) -> dict:\n    # Strip <think>...</think>\
           \ blocks (including multiline)\n    text = re.sub(r'<think>[\\s\\S]*?</think>',\
           \ '', llm_text, flags=re.DOTALL)\n    return {\"result\": text.strip()}\n"
         code_language: python3
-        desc: "LLM \u51FA\u529B\u304B\u3089 <think> \u30BF\u30B0\u3092\u9664\u53BB"
+        desc: LLM 出力から <think> タグを除去
         outputs:
           result:
             children: null
             type: string
         selected: false
-        title: "CoT \u30B9\u30C8\u30EA\u30C3\u30D7"
+        title: CoT ストリップ
         type: code
         variables:
         - value_selector:
           - '1740000000002'
           - text
           variable: llm_text
-      height: 95
+      height: 80
       id: '1740000000005'
       position:
         x: 655
@@ -280,34 +247,34 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 241
+      width: 242
     - data:
         code: "import json\nimport re\n\ndef main(llm_text: str) -> dict:\n    text\
-          \ = llm_text.strip()\n\n    # 1\uFE0F\u20E3 \u53BB\u6389 markdown \u4EE3\u7801\u5757\uFF08\u5982\u679C\u5B58\u5728\uFF09\n    text = re.sub(r'^```(?:json)?\\\
+          \ = llm_text.strip()\n\n    # 1️⃣ 去掉 markdown 代码块（如果存在）\n    text = re.sub(r'^```(?:json)?\\\
           s*\\n?', '', text)\n    text = re.sub(r'\\n?```\\s*$', '', text)\n    text\
-          \ = text.strip()\n\n    # 2\uFE0F\u20E3 \u627E\u5230\u7B2C\u4E00\u4E2A '{'\n    start = text.find('{')\n  \
+          \ = text.strip()\n\n    # 2️⃣ 找到第一个 '{'\n    start = text.find('{')\n  \
           \  if start == -1:\n        raise ValueError(\"No JSON object found in LLM\
-          \ output\")\n\n    text = text[start:]\n\n    # 3\uFE0F\u20E3 \u4F7F\u7528 JSONDecoder \u89E3\u6790\u9996\u4E2A\u5408\u6CD5\
+          \ output\")\n\n    text = text[start:]\n\n    # 3️⃣ 使用 JSONDecoder 解析首个合法\
           \ JSON\n    decoder = json.JSONDecoder()\n\n    try:\n        parsed, _\
           \ = decoder.raw_decode(text)\n    except json.JSONDecodeError as e:\n  \
           \      raise ValueError(\n            f\"LLM returned invalid JSON: {e}\\\
           n\"\n            f\"Content preview: {text[:500]}\"\n        )\n\n    return\
           \ {\"result\": json.dumps(parsed, ensure_ascii=False)}\n"
         code_language: python3
-        desc: "\u6E05\u6D17 LLM \u8F93\u51FA\uFF0C\u53BB\u9664 markdown \u4EE3\u7801\u5757\u6807\u8BB0\uFF0C\u5E76\u9A8C\u8BC1 JSON \u5408\u6CD5\u6027"
+        desc: 清洗 LLM 输出，去除 markdown 代码块标记，并验证 JSON 合法性
         outputs:
           result:
             children: null
             type: string
         selected: false
-        title: "\u6E05\u6D17 JSON \u8F93\u51FA"
+        title: 清洗 JSON 输出
         type: code
         variables:
         - value_selector:
           - '1740000000005'
           - result
           variable: llm_text
-      height: 95
+      height: 96
       id: '1740000000003'
       position:
         x: 942
@@ -319,7 +286,7 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 241
+      width: 242
     - data:
         code: "import json\n\ndef main(json_str: str) -> dict:\n    data = json.loads(json_str)\n\
           \n    def sort_key(entry):\n        \"\"\"Sort by start_date descending.\
@@ -330,20 +297,20 @@ workflow:
           \ = sorted(items, key=sort_key, reverse=True)\n\n    return {\"result\"\
           : json.dumps(data, ensure_ascii=False)}\n"
         code_language: python3
-        desc: "\u6309 start_date \u964D\u5E8F\u6392\u5217\u5DE5\u4F5C\u7ECF\u9A8C\u3001\u6559\u80B2\u548C\u9879\u76EE\u7ECF\u9A8C"
+        desc: 按 start_date 降序排列工作经验、教育和项目经验
         outputs:
           result:
             children: null
             type: string
         selected: false
-        title: "\u65E5\u4ED8\u30BD\u30FC\u30C8"
+        title: 日付ソート
         type: code
         variables:
         - value_selector:
           - '1740000000003'
           - result
           variable: json_str
-      height: 95
+      height: 96
       id: '1740000000006'
       position:
         x: 1229
@@ -355,18 +322,18 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 241
+      width: 242
     - data:
-        desc: "\u8F93\u51FA\u7ED3\u6784\u5316\u7B80\u5386 JSON\uFF0C\u53D8\u91CF\u540D structured_resume \u4F9B\u540E\u7AEF DifyClient \u8BFB\u53D6"
+        desc: 输出结构化简历 JSON，变量名 structured_resume 供后端 DifyClient 读取
         outputs:
         - value_selector:
           - '1740000000006'
           - result
           variable: structured_resume
         selected: false
-        title: "\u7ED3\u675F"
+        title: 结束
         type: end
-      height: 147
+      height: 149
       id: '1740000000004'
       position:
         x: 1516
@@ -378,9 +345,9 @@ workflow:
       sourcePosition: right
       targetPosition: left
       type: custom
-      width: 241
+      width: 242
     viewport:
-      x: 125.27298703059557
-      y: 141.3473576661098
-      zoom: 0.783495506966512
+      x: -267.7201008123827
+      y: 229.1983273936014
+      zoom: 0.9253024439904598
   rag_pipeline_variables: []
