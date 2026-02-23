@@ -287,6 +287,28 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
         </div>
       </CollapsibleSection>
 
+      {/* Personal Projects */}
+      <CollapsibleSection title={s('personalProjects')}>
+        <div className="space-y-3">
+          {(data.personal_projects ?? []).map((project, i) => (
+            <div key={i} className="space-y-2 rounded-md border border-slate-100 bg-slate-50 p-3">
+              <div className="flex justify-end">
+                <RemoveButton label={t('reviewTranslation.removeEntry')} onClick={() => setData({ personal_projects: removeAt(data.personal_projects ?? [], i) })} />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <FieldInput label={f('projectName')} value={project.name ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { name: v || null }) })} />
+                <FieldInput label={f('projectRole')} value={project.role ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { role: v || null }) })} />
+                <FieldInput label={f('startDate')} value={project.start_date ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { start_date: v || null }) })} />
+                <FieldInput label={f('endDate')} value={project.end_date ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { end_date: v || null }) })} />
+              </div>
+              <FieldInput label={f('projectDescription')} value={project.description ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { description: v || null }) })} multiline />
+              <FieldInput label={f('projectTechnologies')} value={(project.technologies ?? []).join(', ')} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { technologies: v ? v.split(',').map((s) => s.trim()) : [] }) })} />
+            </div>
+          ))}
+          <AddButton label={t('reviewTranslation.addEntry')} onClick={() => setData({ personal_projects: [...(data.personal_projects ?? []), { name: null, role: null, start_date: null, end_date: null, description: null, technologies: null }] })} />
+        </div>
+      </CollapsibleSection>
+      
       {/* Skills */}
       <CollapsibleSection title={<FieldTooltip content={tip('skills')}>{s('skills')}</FieldTooltip>}>
         <div className="space-y-2">
@@ -347,28 +369,6 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
             onChange={(v) => setData({ other: v || null })}
             multiline
           />
-        </div>
-      </CollapsibleSection>
-
-      {/* Personal Projects */}
-      <CollapsibleSection title={s('personalProjects')}>
-        <div className="space-y-3">
-          {(data.personal_projects ?? []).map((project, i) => (
-            <div key={i} className="space-y-2 rounded-md border border-slate-100 bg-slate-50 p-3">
-              <div className="flex justify-end">
-                <RemoveButton label={t('reviewTranslation.removeEntry')} onClick={() => setData({ personal_projects: removeAt(data.personal_projects ?? [], i) })} />
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <FieldInput label={f('projectName')} value={project.name ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { name: v || null }) })} />
-                <FieldInput label={f('projectRole')} value={project.role ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { role: v || null }) })} />
-                <FieldInput label={f('startDate')} value={project.start_date ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { start_date: v || null }) })} />
-                <FieldInput label={f('endDate')} value={project.end_date ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { end_date: v || null }) })} />
-              </div>
-              <FieldInput label={f('projectDescription')} value={project.description ?? ''} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { description: v || null }) })} multiline />
-              <FieldInput label={f('projectTechnologies')} value={(project.technologies ?? []).join(', ')} onChange={(v) => setData({ personal_projects: updateAt(data.personal_projects ?? [], i, { technologies: v ? v.split(',').map((s) => s.trim()) : [] }) })} />
-            </div>
-          ))}
-          <AddButton label={t('reviewTranslation.addEntry')} onClick={() => setData({ personal_projects: [...(data.personal_projects ?? []), { name: null, role: null, start_date: null, end_date: null, description: null, technologies: null }] })} />
         </div>
       </CollapsibleSection>
     </div>
