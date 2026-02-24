@@ -107,3 +107,19 @@ Plans:
 | 9. Workflow Data Cleanup | v1.2 | 2/2 | Complete | 2026-02-22 |
 | 10. Work-Project Separation | v1.2 | 2/2 | Complete    | 2026-02-22 |
 | 11. Template Polish | 2/2 | Complete    | 2026-02-22 | - |
+
+### Phase 12: Replace WeasyPrint with Playwright
+
+**Goal:** Replace WeasyPrint with Playwright for PDF generation, simplifying dependencies and improving rendering reliability
+**Depends on:** Phase 11 (Template Polish - complete)
+**Requirements:** (infrastructure change - no functional requirements)
+**Success Criteria** (what must be TRUE):
+  1. Docker image builds without WeasyPrint-related errors
+  2. `generate_pdf()` function works with same API contract
+  3. PDF output renders CJK characters correctly
+  4. PDF output is A4 format with backgrounds printed
+  5. No WeasyPrint packages in final Docker image
+**Plans:** 1 plan
+
+Plans:
+- [ ] 12-01-PLAN.md — Core implementation (requirements.txt, Dockerfile, pdf_generator.py rewrite)
