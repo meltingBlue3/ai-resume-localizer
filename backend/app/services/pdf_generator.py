@@ -1,14 +1,14 @@
 import logging
 from pathlib import Path
 
-from playwright.sync_api import sync_playwright
+from playwright.async_api import async_playwright
 
 from app.config import TEMPLATES_DIR
 
 logger = logging.getLogger(__name__)
 
 
-def generate_pdf(html_content: str, base_css_path: Path | None = None) -> bytes:
+async def generate_pdf(html_content: str, base_css_path: Path | None = None) -> bytes:
     """Render HTML content to PDF bytes using Playwright headless Chrome.
 
     Args:
@@ -27,13 +27,13 @@ def generate_pdf(html_content: str, base_css_path: Path | None = None) -> bytes:
     else:
         html_with_css = html_content
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page()
-        page.set_content(html_with_css)
+    async with async_playwright() as p:
+        browser = await p.chromium.launch()
+        page = await browser.new_page()
+        await page.set_content(html_with_css)
 
         try:
-            pdf_bytes = page.pdf(
+            pdf_bytes = await page.pdf(
                 format="A4",
                 print_background=True,
             )
@@ -41,12 +41,12 @@ def generate_pdf(html_content: str, base_css_path: Path | None = None) -> bytes:
             logger.exception("Playwright PDF generation failed")
             raise
         finally:
-            browser.close()
+            await browser.close()
 
     return pdf_bytes
 
 
-def generate_pdf_from_template(template_name: str) -> bytes:
+async def generate_pdf_from_template(template_name: str) -> bytes:
     """Read an HTML template file and render it to PDF.
 
     Args:
@@ -58,4 +58,4 @@ def generate_pdf_from_template(template_name: str) -> bytes:
     template_path = TEMPLATES_DIR / template_name
     html_content = template_path.read_text(encoding="utf-8")
     base_css_path = TEMPLATES_DIR / "base.css"
-    return generate_pdf(html_content, base_css_path=base_css_path)
+    return await generate_pdf(html_content, base_css_path=base_css_path)

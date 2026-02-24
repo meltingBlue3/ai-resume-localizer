@@ -74,9 +74,7 @@ async def download_document(doc_type: str, request: PreviewRequest):
         )
 
     try:
-        html = render_document(
-            template_name, request.jp_resume, request.photo_base64
-        )
+        html = render_document(template_name, request.jp_resume, request.photo_base64)
     except Exception:
         logger.exception("Template rendering failed for %s", doc_type)
         raise HTTPException(
@@ -85,7 +83,7 @@ async def download_document(doc_type: str, request: PreviewRequest):
         )
 
     try:
-        pdf_bytes = generate_pdf(html)
+        pdf_bytes = await generate_pdf(html)
     except Exception:
         logger.exception("PDF generation failed for %s", doc_type)
         raise HTTPException(
