@@ -29,3 +29,13 @@
 
 ---
 
+
+## v1.2 PDF Quality & Workflow Fixes (Shipped: 2026-02-24)
+
+**Phases completed:** 13 phases, 26 plans, 0 tasks
+
+**Key accomplishments:**
+- (none recorded)
+
+---
+

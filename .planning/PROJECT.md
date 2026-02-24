@@ -39,20 +39,22 @@
 - ✓ OCR支持：系统检测图像型PDF并在FastAPI后端进行Tesseract OCR预处理 — v1.1
 - ✓ OCR错误分类和i18n用户友好错误消息 — v1.1
 
+**v1.2 PDF Quality & Workflow Fixes:**
+- ✓ 履歴書：姓名全角空格分隔（U+3000） — v1.2
+- ✓ 履歴書：住所に郵便番号を追加 — v1.2
+- ✓ 履歴書：職歴に役職名を追加 — v1.2
+- ✓ 履歴書/職務経歴書：職歴と個人プロジェクトを分離（職務経歴書は会社内プロジェクトを含む） — v1.2
+- ✓ 履歴書：通勤時間・扶養家族・配偶者フィールドを削除 — v1.2
+- ✓ 履歴書：本人希望記入欄を改善（「貴社の規定に従います」デフォルト） — v1.2
+- ✓ 職務経歴書：終了日なしの場合「現在」を表示 — v1.2
+- ✓ 提取工作流：新增`other`字段 — v1.2
+- ✓ 提取工作流：语言证书提取到certificates — v1.2
+- ✓ 翻译工作流：删除未使用字段（linkedin, website, gpa, notes） — v1.2
+- ✓ Playwright替换WeasyPrint：简化Docker依赖，改善CJK渲染 — v1.2
+
 ### Active
 
-**v1.2 PDF Quality & Workflow Fixes:**
-- [ ] 履歴書：姓名全角空格分隔
-- [ ] 履歴書：住所に郵便番号を追加
-- [ ] 履歴書：職歴に役職名を追加
-- [ ] 履歴書/職務経歴書：職歴と個人プロジェクトを分離（職務経歴書は会社内プロジェクトを含む）
-- [ ] 履歴書：通勤時間・扶養家族・配偶者フィールドを削除
-- [ ] 履歴書：本人希望記入欄を改善（「貴社の規定に従います」デフォルト）
-- [ ] 職務経歴書：終了日なしの場合「現在」を表示（"none"ではなく）
-- [ ] 提取工作流：新增`other`字段
-- [ ] 提取工作流：语言证书提取到certificates
-- [ ] 翻译工作流：删除未使用字段（linkedin, website, gpa, notes）
-- [ ] Dify工作流提示词按DESIGN_PRINCIPLES.md规范修改
+(None — ready for next milestone)
 
 ### Out of Scope
 
@@ -62,24 +64,24 @@
 - 移动端App — Web优先
 - 实时协作编辑 — 单用户使用场景
 - 自定义简历模板 — 履歴書有唯一JIS标准格式
-- 云OCR API（Google Vision、Azure）— 外部依赖和成本；本地OCR足够 — v1.1明确排除
+- 云OCR API（Google Vision、Azure）— 外部依赖和成本；本地OCR足够
 
 ## Context
 
-- **当前状态**: v1.2 PDF Quality & Workflow Fixes 开发中。~100K行代码（TypeScript + Python），支持扫描版PDF的OCR处理。
-- **技术栈**: React 19 + Vite + Tailwind + Zustand + react-i18next（前端）；FastAPI + WeasyPrint + Jinja2 + Dify Client + Tesseract OCR（后端）；nginx + Docker Compose（部署）
-- **Dify工作流**: 提取工作流（CoT剥离 + 约束式提示 + 日期排序）；翻译工作流（单LLM节点 + 本地化集成）
-- **PDF格式**: WeasyPrint 63.1 + Noto Sans JP字体，CSS表格布局（无flexbox/grid），严格遵循JIS/MHLW格式规范
+- **当前状态**: v1.2 shipped。~4,148 LOC（TypeScript 2,978 + Python 1,170），完整的中日文简历转换系统。
+- **技术栈**: React 19 + Vite + Tailwind + Zustand + react-i18next（前端）；FastAPI + Playwright + Jinja2 + Dify Client + Tesseract OCR（后端）；nginx + Docker Compose（部署）
+- **Dify工作流**: 提取工作流（CoT剥离 + 约束式提示 + 日期排序 + other字段）；翻译工作流（单LLM节点 + 本地化集成 + 项目分类）
+- **PDF格式**: Playwright headless Chrome + Noto Sans JP字体，CSS表格布局（无flexbox/grid），严格遵循JIS/MHLW格式规范
 - **OCR**: Tesseract本地OCR，支持chi_sim+chi_tra+jpn+eng，100字符阈值检测图像型PDF，30秒超时
 - **已知限制**: Dify Cloud免费版限200条消息额度；OCR对低质量扫描件效果有限
-- **技术债务**: test_pdf_generation.py导入失败（缺少pypdf模块）；前端bundle >1MB（未来可考虑代码分割）
+- **技术债务**: 前端bundle >1MB（未来可考虑代码分割）
 
 ## Constraints
 
 - **AI平台**: Dify Cloud — 已确定使用Dify作为AI工作流平台
 - **前端**: React — 使用React构建前端应用
 - **后端**: Python（FastAPI）— 处理文件上传、调用Dify API、PDF生成、OCR处理
-- **PDF生成**: HTML/CSS → PDF — 通过Jinja2模板渲染后用WeasyPrint转PDF
+- **PDF生成**: HTML/CSS → PDF — 通过Jinja2模板渲染后用Playwright转PDF
 - **OCR**: Tesseract本地 — 不使用云OCR API
 - **简历格式**: JIS标准 — 履歴書采用JIS标准格式（2021年修订版）
 - **信息提取准确率**: ≥90%（依赖Dify工作流质量）
@@ -93,7 +95,7 @@
 | 使用Dify Cloud而非自部署 | 降低运维复杂度，快速上线 | ✓ Good — API稳定，双工作流独立密钥管理清晰 |
 | React前端 + Zustand状态 | 组件化开发，状态跨步骤持久化不序列化File对象 | ✓ Good — 无persist middleware，避免File对象序列化问题 |
 | Python FastAPI后端 | 异步支持好，适合IO密集的API调用场景 | ✓ Good — Dify调用90s超时管理清晰 |
-| HTML-to-PDF（WeasyPrint + CSS表格） | CSS控制力强，适合复杂JIS表格布局；零flexbox/grid | ✓ Good — 双模板人工验证通过，字体嵌入正常 |
+| HTML-to-PDF（Playwright + CSS表格） | CSS控制力强，适合复杂JIS表格布局；零flexbox/grid | ✓ Good — v1.2替换WeasyPrint，Docker更简洁 |
 | 步骤式用户流程（4步） | 每步可审核修正，提升输出质量和用户信任 | ✓ Good — DownloadStep合并进PreviewStep后更简洁 |
 | 中日双语界面（react-i18next） | 目标用户群体涵盖中文和日文使用者 | ✓ Good — 零硬编码字符串，语言切换即时生效 |
 | 和暦转换用Intl.DateTimeFormat | 零库依赖，浏览器原生；Gannen用Unicode正则 | ✓ Good — 元年/令和元年边界测试通过 |
@@ -104,7 +106,10 @@
 | 单LLM翻译节点 | 合并翻译+本地化为单次pass，减少语义漂移 | ✓ Good — v1.1重构，保持翻译一致性 |
 | 本地Tesseract OCR | 无外部依赖和成本，支持中日英三语 | ✓ Good — v1.1实现，100字符阈值检测 |
 | OCR错误隐藏技术术语 | 用户看到"处理错误"而非"OCR错误" | ✓ Good — v1.1实现，generic i18n消息 |
+| Playwright async API | FastAPI async endpoints需要async Playwright | ✓ Good — v1.2实现，sync API导致nested event loop错误 |
+| 工作与项目分离（JpProjectEntry） | 職務経歴書需要区分公司项目和個人项目 | ✓ Good — v1.2实现，LLM分类+模板渲染 |
+| U+3000全角空格姓名分隔 | 日本履歴書标准格式 | ✓ Good — v1.2实现，name_formatted字段 |
 
 ---
 
-*Last updated: 2026-02-22 after v1.2 milestone started*
+*Last updated: 2026-02-25 after v1.2 milestone shipped*
