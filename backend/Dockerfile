@@ -1,16 +1,7 @@
 FROM python:3.12-slim
 
-# Install WeasyPrint system dependencies and fonts
+# Install system dependencies for Playwright, fonts, and other tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpango-1.0-0 \
-    libpangocairo-1.0-0 \
-    libpangoft2-1.0-0 \
-    libgdk-pixbuf-2.0-0 \
-    libcairo2 \
-    libffi-dev \
-    libglib2.0-0 \
-    libgobject-2.0-0 \
-    shared-mime-info \
     fonts-noto-cjk \
     gcc \
     tesseract-ocr \
@@ -26,11 +17,11 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir "fonttools[instancer]"
 
+# Install Playwright chromium browser with dependencies
+RUN playwright install chromium --with-deps
+
 # Copy application code
 COPY app/ app/
-
-# Download and bake fonts into image
-RUN python -m app.fonts.download_fonts
 
 EXPOSE 8000
 
