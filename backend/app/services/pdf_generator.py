@@ -1,78 +1,47 @@
 import logging
-import os
-import sys
 from pathlib import Path
 
-# On Windows, Python 3.8+ requires os.add_dll_directory for native library resolution.
-# WeasyPrint depends on GTK/Pango/Cairo from MSYS2 ucrt64.
-if sys.platform == "win32":
-    _msys2_bin = Path(r"C:\msys64\ucrt64\bin")
-    if _msys2_bin.is_dir():
-        os.add_dll_directory(str(_msys2_bin))
-    _fontconfig = Path(r"C:\msys64\ucrt64\etc\fonts\fonts.conf")
-    if _fontconfig.is_file() and "FONTCONFIG_FILE" not in os.environ:
-        os.environ["FONTCONFIG_FILE"] = str(_fontconfig)
+from playwright.sync_api import sync_playwright
 
-from weasyprint import HTML, CSS
-from weasyprint.text.fonts import FontConfiguration
-
-from app.config import FONTS_DIR, TEMPLATES_DIR
+from app.config import TEMPLATES_DIR
 
 logger = logging.getLogger(__name__)
 
 
-def _normalize_path_for_url(path: Path) -> str:
-    """Convert a Path to a file:// URL with forward slashes (required on Windows)."""
-    absolute = path.resolve()
-    return absolute.as_posix()
-
-
 def generate_pdf(html_content: str, base_css_path: Path | None = None) -> bytes:
-    """Render HTML content to PDF bytes with embedded Noto Sans JP CJK fonts.
+    """Render HTML content to PDF bytes using Playwright headless Chrome.
 
     Args:
         html_content: The HTML string to render.
-        base_css_path: Optional path to a base CSS file. Defaults to TEMPLATES_DIR/base.css.
+        base_css_path: Optional path to a base CSS file (ignored - CSS should be in HTML).
 
     Returns:
         PDF file contents as bytes.
     """
-    font_config = FontConfiguration()
-
-    regular_path = _normalize_path_for_url(FONTS_DIR / "NotoSansJP-Regular.ttf")
-    bold_path = _normalize_path_for_url(FONTS_DIR / "NotoSansJP-Bold.ttf")
-
-    font_css = CSS(string=f"""
-        @font-face {{
-            font-family: 'Noto Sans JP';
-            font-weight: 400;
-            src: url('file:///{regular_path}');
-        }}
-        @font-face {{
-            font-family: 'Noto Sans JP';
-            font-weight: 700;
-            src: url('file:///{bold_path}');
-        }}
-    """, font_config=font_config)
-
-    stylesheets = [font_css]
-
     if base_css_path is None:
         base_css_path = TEMPLATES_DIR / "base.css"
+
     if base_css_path.exists():
-        base_css = CSS(filename=str(base_css_path), font_config=font_config)
-        stylesheets.insert(0, base_css)
+        css_content = base_css_path.read_text(encoding="utf-8")
+        html_with_css = f"<style>{css_content}</style>{html_content}"
+    else:
+        html_with_css = html_content
 
-    html = HTML(string=html_content)
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        page.set_content(html_with_css)
 
-    try:
-        pdf_bytes = html.write_pdf(
-            stylesheets=stylesheets,
-            font_config=font_config,
-        )
-    except Exception:
-        logger.exception("WeasyPrint PDF generation failed")
-        raise
+        try:
+            pdf_bytes = page.pdf(
+                format="A4",
+                print_background=True,
+            )
+        except Exception:
+            logger.exception("Playwright PDF generation failed")
+            raise
+        finally:
+            browser.close()
 
     return pdf_bytes
 
