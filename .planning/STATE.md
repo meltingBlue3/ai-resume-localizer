@@ -11,20 +11,20 @@ See: .planning/PROJECT.md (updated 2026-02-22)
 
 ```
 Milestone : v1.2 PDF Quality & Workflow Fixes
-Phase     : 11 of 11 (Template Polish) — COMPLETE
-Plan      : 2 of 2 complete
+Phase     : 12 of 12 (Replace WeasyPrint with Playwright) — COMPLETE
+Plan      : 1 of 1 complete
 Status    : Complete
 Progress  : [██████████] 100%
 ```
 
-Last activity: 2026-02-23 - Completed quick task 18: Fix PDF display issues (contact info, project dates, personal projects UI)
+Last activity: 2026-02-24 - Completed Phase 12: Replaced WeasyPrint with Playwright for PDF generation
 
 ## Performance Metrics
 
 | Metric | v1.0 | v1.1 | v1.2 |
 |--------|------|------|------|
-| Phases complete | 5/5 | 3/3 | 3/3 |
-| Plans complete | 14/14 | 5/5 | 5/5 |
+| Phases complete | 5/5 | 3/3 | 4/4 |
+| Plans complete | 14/14 | 5/5 | 6/6 |
 | Requirements mapped | 17/17 | 9/9 | 13/13 |
 
 **Phase 10 metrics:**
@@ -39,7 +39,17 @@ Last activity: 2026-02-23 - Completed quick task 18: Fix PDF display issues (con
 | P01 | 13min | 4 | 3 |
 | P02 | 4min | 2 | 1 |
 
+**Phase 12 metrics:**
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| P01 | 25min | 4 | 4 |
+
 ## Accumulated Context
+
+### Roadmap Evolution
+
+- Phase 12 added: replace WeasyPrint with Playwright
+- Phase 12 completed: Playwright async API for PDF generation
 
 ### Decisions
 
@@ -62,6 +72,7 @@ All major decisions logged in PROJECT.md Key Decisions table.
 - end_date normalization: "none"/"null" strings converted to None in prepare_context() for proper 現在 display
 - Rirekisho template: removed commute/dependents/spouse section entirely (not needed for modern resumes)
 - Rirekisho template: position/title displayed after company name in work history entries
+- Playwright async API (not sync) required for FastAPI compatibility - sync API causes nested event loop errors
 
 ### Pending Todos
 
@@ -83,6 +94,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-23
-Stopped At: Completed quick task 18 (Fix PDF display issues)
-Resume: Continue with v1.2 maintenance or v1.3 planning
+Last session: 2026-02-24
+Stopped At: Completed Phase 12 (Replace WeasyPrint with Playwright)
+Resume: v1.2 complete - ready for v1.3 planning or maintenance

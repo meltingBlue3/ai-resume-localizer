@@ -4,7 +4,7 @@
 
 - ✅ **v1.0 MVP** — Phases 1–5 (shipped 2026-02-20)
 - ✅ **v1.1 Quality & OCR** — Phases 6–8 (shipped 2026-02-21)
-- 🚧 **v1.2 PDF Quality & Workflow Fixes** — Phases 9–11 (in progress)
+- ✅ **v1.2 PDF Quality & Workflow Fixes** — Phases 9–12 (shipped 2026-02-24)
 
 ## Phases
 
@@ -32,13 +32,14 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 
 </details>
 
-### 🚧 v1.2 PDF Quality & Workflow Fixes (In Progress)
+### ✅ v1.2 PDF Quality & Workflow Fixes (Complete)
 
-**Milestone Goal:** Fix PDF output quality issues and update Dify workflow prompts to produce correct field structures for template rendering.
+**Milestone Goal:** Fix PDF output quality issues, update Dify workflow prompts, and simplify PDF generation with Playwright.
 
 - [x] **Phase 9: Workflow Data Cleanup** — Add missing fields, consolidate language certs, remove unused fields in Dify prompts
 - [x] **Phase 10: Work-Project Separation** — Separate work history from project experience across both workflows and both templates (completed 2026-02-22)
 - [x] **Phase 11: Template Polish** — Fix remaining rirekisho layout issues and shokumukeirekisho end-date display (completed 2026-02-22)
+- [x] **Phase 12: Replace WeasyPrint with Playwright** — Simplify PDF generation with headless Chrome (completed 2026-02-24)
 
 ## Phase Details
 
@@ -106,7 +107,8 @@ Plans:
 | 8. OCR Support | v1.1 | 2/2 | Complete | 2026-02-20 |
 | 9. Workflow Data Cleanup | v1.2 | 2/2 | Complete | 2026-02-22 |
 | 10. Work-Project Separation | v1.2 | 2/2 | Complete    | 2026-02-22 |
-| 11. Template Polish | 2/2 | Complete    | 2026-02-22 | - |
+| 11. Template Polish | v1.2 | 2/2 | Complete | 2026-02-22 |
+| 12. Replace WeasyPrint with Playwright | v1.2 | 1/1 | Complete | 2026-02-24 |
 
 ### Phase 12: Replace WeasyPrint with Playwright
 
@@ -119,7 +121,7 @@ Plans:
   3. PDF output renders CJK characters correctly
   4. PDF output is A4 format with backgrounds printed
   5. No WeasyPrint packages in final Docker image
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
-- [ ] 12-01-PLAN.md — Core implementation (requirements.txt, Dockerfile, pdf_generator.py rewrite)
+- [x] 12-01-PLAN.md — Core implementation (requirements.txt, Dockerfile, pdf_generator.py rewrite) — completed 2026-02-24
