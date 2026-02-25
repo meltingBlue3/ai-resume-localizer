@@ -215,6 +215,30 @@ export default function ResumeFieldEditor({ data, onChange, readOnly = false }: 
         </div>
       </CollapsibleSection>
 
+      {/* Project Experience */}
+      <CollapsibleSection title={s('projectExperience')}>
+        <div className="space-y-3">
+          {projects.map((entry, i) => (
+            <div key={i} className="space-y-2 rounded-md border border-slate-100 bg-slate-50 p-3">
+              {!readOnly && (
+                <div className="flex justify-end">
+                  <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ project_experience: removeAt(projects, i) })} />
+                </div>
+              )}
+              <div className="grid grid-cols-2 gap-2">
+                <FieldInput label={f('projectName')} value={entry.project_name ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { project_name: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('associatedCompany')} value={entry.associated_company ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { associated_company: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('projectRole')} value={entry.role ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { role: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('startDate')} value={entry.start_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { start_date: v || null }) })} readOnly={readOnly} />
+                <FieldInput label={f('endDate')} value={entry.end_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { end_date: v || null }) })} readOnly={readOnly} />
+              </div>
+              <FieldInput label={f('description')} value={entry.description ?? ''} multiline onChange={(v) => set({ project_experience: updateAt(projects, i, { description: v || null }) })} readOnly={readOnly} />
+            </div>
+          ))}
+          {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ project_experience: [...projects, emptyProject] })} />}
+        </div>
+      </CollapsibleSection>
+
       {/* Skills */}
       <CollapsibleSection title={s('skills')}>
         <div className="space-y-2">
@@ -275,61 +299,35 @@ export default function ResumeFieldEditor({ data, onChange, readOnly = false }: 
         </div>
       </CollapsibleSection>
 
+      {/* Portfolio Links */}
+      <CollapsibleSection title={f('portfolioLinks')}>
+        <div className="space-y-2">
+          {portfolioLinks.map((link, i) => (
+            <div key={i} className="flex items-end gap-2">
+              <div className="flex-1">
+                <FieldInput
+                  label={`${f('portfolioLinks')} ${i + 1}`}
+                  value={link}
+                  onChange={(v) => {
+                    const updated = [...portfolioLinks];
+                    updated[i] = v;
+                    set({ portfolio_links: updated });
+                  }}
+                  readOnly={readOnly}
+                />
+              </div>
+              {!readOnly && <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ portfolio_links: removeAt(portfolioLinks, i) })} />}
+            </div>
+          ))}
+          {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ portfolio_links: [...portfolioLinks, ''] })} />}
+        </div>
+      </CollapsibleSection>
+
       {/* Other */}
       <CollapsibleSection title={s('other')}>
         <div className="space-y-3">
           <FieldInput label={f('selfIntroduction')} value={data.self_introduction ?? ''} multiline onChange={(v) => set({ self_introduction: v || null })} readOnly={readOnly} />
           <FieldInput label={f('other')} value={data.other ?? ''} multiline onChange={(v) => set({ other: v || null })} readOnly={readOnly} />
-
-          {/* Project Experience */}
-          <div>
-            <p className="mb-2 text-xs font-medium text-slate-500">{f('projectExperience')}</p>
-            <div className="space-y-3">
-              {projects.map((entry, i) => (
-                <div key={i} className="space-y-2 rounded-md border border-slate-100 bg-slate-50 p-3">
-                  {!readOnly && (
-                    <div className="flex justify-end">
-                      <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ project_experience: removeAt(projects, i) })} />
-                    </div>
-                  )}
-                  <div className="grid grid-cols-2 gap-2">
-                    <FieldInput label={f('projectName')} value={entry.project_name ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { project_name: v || null }) })} readOnly={readOnly} />
-                    <FieldInput label={f('associatedCompany')} value={entry.associated_company ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { associated_company: v || null }) })} readOnly={readOnly} />
-                    <FieldInput label={f('projectRole')} value={entry.role ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { role: v || null }) })} readOnly={readOnly} />
-                    <FieldInput label={f('startDate')} value={entry.start_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { start_date: v || null }) })} readOnly={readOnly} />
-                    <FieldInput label={f('endDate')} value={entry.end_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { end_date: v || null }) })} readOnly={readOnly} />
-                  </div>
-                  <FieldInput label={f('description')} value={entry.description ?? ''} multiline onChange={(v) => set({ project_experience: updateAt(projects, i, { description: v || null }) })} readOnly={readOnly} />
-                </div>
-              ))}
-              {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ project_experience: [...projects, emptyProject] })} />}
-            </div>
-          </div>
-
-          {/* Portfolio Links */}
-          <div>
-            <p className="mb-2 text-xs font-medium text-slate-500">{f('portfolioLinks')}</p>
-            <div className="space-y-2">
-              {portfolioLinks.map((link, i) => (
-                <div key={i} className="flex items-end gap-2">
-                  <div className="flex-1">
-                    <FieldInput
-                      label={`${f('portfolioLinks')} ${i + 1}`}
-                      value={link}
-                      onChange={(v) => {
-                        const updated = [...portfolioLinks];
-                        updated[i] = v;
-                        set({ portfolio_links: updated });
-                      }}
-                      readOnly={readOnly}
-                    />
-                  </div>
-                  {!readOnly && <RemoveButton label={t('steps.reviewExtraction.removeEntry')} onClick={() => set({ portfolio_links: removeAt(portfolioLinks, i) })} />}
-                </div>
-              ))}
-              {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ portfolio_links: [...portfolioLinks, ''] })} />}
-            </div>
-          </div>
         </div>
       </CollapsibleSection>
     </div>
