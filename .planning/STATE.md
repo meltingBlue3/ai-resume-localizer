@@ -17,7 +17,7 @@ Status    : Complete
 Progress  : [██████████] 100%
 ```
 
-Last activity: 2026-02-25 - Completed quick task 23: Add missing projects and portfolio links editing in JpResumeFieldEditor
+Last activity: 2026-02-25 - Completed quick task 24: Project Experience Position Adjustment
 
 ## Performance Metrics
 
@@ -43,6 +43,7 @@ Last activity: 2026-02-25 - Completed quick task 23: Add missing projects and po
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | P01 | 25min | 4 | 4 |
+| Phase quick P24 | 5min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -89,6 +90,7 @@ None.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 24 | Project Experience Position Adjustment | 2026-02-25 | c5252f7 | [24-项目经历位置调整](./quick/24-项目经历位置调整/) |
 | 23 | Add missing projects and portfolio links editing in JpResumeFieldEditor | 2026-02-25 | f164eb3 | [23-add](./quick/23-add-missing-projects-and-portfolio-links/) |
 | 22 | Remove unused fields from Japanese resume models (translation workflow alignment) | 2026-02-25 | 870b381 | [22-adapt](./quick/22-adapt-frontend-and-backend-for-translati/) |
 | 21 | Create ProjectEntry model for Dify extraction schema alignment | 2026-02-25 | 69fff14 | [21-validate](./quick/21-validate-frontend-backend-adapt-extracti/) |
@@ -101,5 +103,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-25
-Stopped At: Completed quick task 23 (Add missing projects and portfolio links editing)
+Stopped At: Completed quick task 24 (Project Experience Position Adjustment)
 Resume: v1.2 complete - ready for v1.3 planning or maintenance
