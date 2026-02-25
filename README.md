@@ -15,8 +15,8 @@
 
 | 层 | 技术 |
 |---|---|
-| 前端 | React 19 + Vite + Tailwind CSS + Zustand |
-| 后端 | FastAPI + WeasyPrint + Jinja2 |
+| 前端 | React 19 + Vite + Tailwind CSS v4 + Zustand + i18next |
+| 后端 | FastAPI + Playwright + Jinja2 |
 | AI | Dify Cloud（提取工作流 + 翻译工作流）|
 | 部署 | Docker Compose + nginx |
 
@@ -94,6 +94,7 @@ ai-resume-localizer/
 │   │   ├── components/      # UI组件
 │   │   ├── steps/           # 向导步骤页面
 │   │   ├── stores/          # Zustand状态
+│   │   ├── utils/           # 工具函数
 │   │   └── i18n/            # 国际化
 │   └── Dockerfile
 ├── backend/                  # FastAPI后端
@@ -112,13 +113,10 @@ ai-resume-localizer/
 
 | 端点 | 方法 | 说明 |
 |---|---|---|
-| `/api/upload` | POST | 上传简历文件 |
-| `/api/extract` | POST | 提取简历信息 |
+| `/api/upload-and-extract` | POST | 上传简历并提取结构化信息 |
 | `/api/translate` | POST | 翻译为日文 |
-| `/api/preview/rirekisho` | POST | 预览履歴書HTML |
-| `/api/preview/shokumukeirekisho` | POST | 預览職務経歴書HTML |
-| `/api/pdf/rirekisho` | POST | 下载履歴書PDF |
-| `/api/pdf/shokumukeirekisho` | POST | 下载職務経歴書PDF |
+| `/api/preview/{doc_type}` | POST | 预览HTML（doc_type: rirekisho/shokumukeirekisho）|
+| `/api/download/{doc_type}` | POST | 下载PDF（doc_type: rirekisho/shokumukeirekisho）|
 
 ## 用户流程
 
@@ -146,5 +144,4 @@ npm run build
 ## 注意事项
 
 - Dify Cloud免费版限200条消息/月
-- Windows本地开发需安装MSYS2 ucrt64的Pango/Cairo依赖（WeasyPrint）
-- PDF生成使用CSS表格布局，严格遵循JIS格式规范
+- PDF生成使用Playwright（Chromium），严格遵循JIS格式规范
