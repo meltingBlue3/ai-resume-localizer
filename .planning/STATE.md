@@ -17,7 +17,7 @@ Status    : Complete
 Progress  : [██████████] 100%
 ```
 
-Last activity: 2026-02-24 - Completed Phase 12: Replaced WeasyPrint with Playwright for PDF generation
+Last activity: 2026-02-25 - Completed quick task 20: Remove Tesseract Traditional Chinese support
 
 ## Performance Metrics
 
@@ -85,8 +85,9 @@ None.
 
 ### Quick Tasks Completed
 
-| # | Description | Date | Commit |
-|---|-------------|------|--------|
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 20 | Remove Tesseract Traditional Chinese support | 2026-02-25 | 45f4f27 | [20-tesseract](./quick/20-tesseract/) |
 | 18 | Fix PDF display issues (contact info, project dates, personal projects UI) | 2026-02-23 | e2f760b |
 | 17 | 更新dify工作流提示词和中文日文输出json字段 | 2026-02-23 | 08a56ca |
 | 16 | Update DESIGN_PRINCIPLES.md | 2026-02-21 | 4169a78 |
