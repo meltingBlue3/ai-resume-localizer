@@ -111,7 +111,6 @@ class JpWorkEntry(BaseModel):
     title: str | None = None
     start_date: str | None = None
     end_date: str | None = None
-    location: str | None = None
     responsibilities: list[str] | None = None
     achievements: list[str] | None = None
     projects: list[JpProjectEntry] | None = None
@@ -124,9 +123,7 @@ class JpSkillEntry(BaseModel):
 
 class JpCertificationEntry(BaseModel):
     name: str | None = None
-    issuer: str | None = None
     date: str | None = None
-    score: str | None = None
 
 
 class JpResumeData(BaseModel):
