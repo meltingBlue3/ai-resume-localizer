@@ -17,7 +17,7 @@ Status    : Complete
 Progress  : [██████████] 100%
 ```
 
-Last activity: 2026-02-25 - Completed quick task 22: Remove unused fields from Japanese resume models (translation workflow alignment)
+Last activity: 2026-02-25 - Completed quick task 23: Add missing projects and portfolio links editing in JpResumeFieldEditor
 
 ## Performance Metrics
 
@@ -89,6 +89,7 @@ None.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 23 | Add missing projects and portfolio links editing in JpResumeFieldEditor | 2026-02-25 | f164eb3 | [23-add](./quick/23-add-missing-projects-and-portfolio-links/) |
 | 22 | Remove unused fields from Japanese resume models (translation workflow alignment) | 2026-02-25 | 870b381 | [22-adapt](./quick/22-adapt-frontend-and-backend-for-translati/) |
 | 21 | Create ProjectEntry model for Dify extraction schema alignment | 2026-02-25 | 69fff14 | [21-validate](./quick/21-validate-frontend-backend-adapt-extracti/) |
 | 20 | Remove Tesseract Traditional Chinese support | 2026-02-25 | 45f4f27 | [20-tesseract](./quick/20-tesseract/) |
@@ -100,5 +101,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-25
-Stopped At: Completed quick task 22 (Remove unused fields from Japanese resume models)
+Stopped At: Completed quick task 23 (Add missing projects and portfolio links editing)
 Resume: v1.2 complete - ready for v1.3 planning or maintenance
