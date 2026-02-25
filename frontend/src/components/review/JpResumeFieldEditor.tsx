@@ -374,7 +374,30 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
               </div>
             </div>
           ))}
-          <AddButton label={t('reviewTranslation.addEntry')} onClick={() => setData({ certifications: [...certs, emptyCert] })} />
+<AddButton label={t('reviewTranslation.addEntry')} onClick={() => setData({ certifications: [...certs, emptyCert] })} />
+        </div>
+      </CollapsibleSection>
+
+      {/* Portfolio Links */}
+      <CollapsibleSection title={f('portfolioLinks')}>
+        <div className="space-y-2">
+          {(data.portfolio_links ?? []).map((link, i) => (
+            <div key={i} className="flex items-end gap-2">
+              <div className="flex-1">
+                <FieldInput
+                  label={`${f('portfolioLinks')} ${i + 1}`}
+                  value={link}
+                  onChange={(v) => {
+                    const updated = [...(data.portfolio_links ?? [])];
+                    updated[i] = v;
+                    setData({ portfolio_links: updated });
+                  }}
+                />
+              </div>
+              <RemoveButton label={t('reviewTranslation.removeEntry')} onClick={() => setData({ portfolio_links: removeAt(data.portfolio_links ?? [], i) })} />
+            </div>
+          ))}
+          <AddButton label={t('reviewTranslation.addEntry')} onClick={() => setData({ portfolio_links: [...(data.portfolio_links ?? []), ''] })} />
         </div>
       </CollapsibleSection>
 
