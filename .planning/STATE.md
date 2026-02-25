@@ -17,7 +17,7 @@ Status    : Complete
 Progress  : [██████████] 100%
 ```
 
-Last activity: 2026-02-25 - Completed quick task 21: Create ProjectEntry model for Dify extraction schema alignment
+Last activity: 2026-02-25 - Completed quick task 22: Remove unused fields from Japanese resume models (translation workflow alignment)
 
 ## Performance Metrics
 
@@ -74,6 +74,7 @@ All major decisions logged in PROJECT.md Key Decisions table.
 - Rirekisho template: position/title displayed after company name in work history entries
 - Playwright async API (not sync) required for FastAPI compatibility - sync API causes nested event loop errors
 - ProjectEntry model created for CnResumeData.project_experience to match Dify extraction workflow output schema (project_name, associated_company, role vs WorkEntry's company, position, department)
+- JpWorkEntry.location and JpCertificationEntry.issuer/score fields removed from both backend and frontend - never populated by translation workflow
 
 ### Pending Todos
 
@@ -88,6 +89,7 @@ None.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 22 | Remove unused fields from Japanese resume models (translation workflow alignment) | 2026-02-25 | 870b381 | [22-adapt](./quick/22-adapt-frontend-and-backend-for-translati/) |
 | 21 | Create ProjectEntry model for Dify extraction schema alignment | 2026-02-25 | 69fff14 | [21-validate](./quick/21-validate-frontend-backend-adapt-extracti/) |
 | 20 | Remove Tesseract Traditional Chinese support | 2026-02-25 | 45f4f27 | [20-tesseract](./quick/20-tesseract/) |
 | 18 | Fix PDF display issues (contact info, project dates, personal projects UI) | 2026-02-23 | e2f760b |
@@ -98,5 +100,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-25
-Stopped At: Completed quick task 21 (ProjectEntry model for Dify schema alignment)
+Stopped At: Completed quick task 22 (Remove unused fields from Japanese resume models)
 Resume: v1.2 complete - ready for v1.3 planning or maintenance
