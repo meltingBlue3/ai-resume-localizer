@@ -105,7 +105,6 @@ export interface JpWorkEntry {
   title?: string | null;
   start_date?: string | null;
   end_date?: string | null;
-  location?: string | null;
   responsibilities?: string[] | null;
   achievements?: string[] | null;
   projects?: JpProjectEntry[] | null;
@@ -118,9 +117,7 @@ export interface JpSkillEntry {
 
 export interface JpCertificationEntry {
   name?: string | null;
-  issuer?: string | null;
   date?: string | null;
-  score?: string | null;
 }
 
 export interface JpResumeData {
