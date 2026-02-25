@@ -21,8 +21,8 @@ class OCRService:
     MAX_FILE_SIZE = 5 * 1024 * 1024
     # OCR timeout in seconds
     OCR_TIMEOUT = 30
-    # Languages for OCR: Chinese Simplified, Chinese Traditional, Japanese, English
-    OCR_LANGUAGES = "chi_sim+chi_tra+jpn+eng"
+    # Languages for OCR: Chinese Simplified, Japanese, English
+    OCR_LANGUAGES = "chi_sim+jpn+eng"
 
     def is_image_based(self, text: str) -> bool:
         """Check if extracted text indicates an image-based PDF.

@@ -72,7 +72,7 @@
 - **技术栈**: React 19 + Vite + Tailwind + Zustand + react-i18next（前端）；FastAPI + Playwright + Jinja2 + Dify Client + Tesseract OCR（后端）；nginx + Docker Compose（部署）
 - **Dify工作流**: 提取工作流（CoT剥离 + 约束式提示 + 日期排序 + other字段）；翻译工作流（单LLM节点 + 本地化集成 + 项目分类）
 - **PDF格式**: Playwright headless Chrome + Noto Sans JP字体，CSS表格布局（无flexbox/grid），严格遵循JIS/MHLW格式规范
-- **OCR**: Tesseract本地OCR，支持chi_sim+chi_tra+jpn+eng，100字符阈值检测图像型PDF，30秒超时
+- **OCR**: Tesseract本地OCR，支持chi_sim+jpn+eng，100字符阈值检测图像型PDF，30秒超时
 - **已知限制**: Dify Cloud免费版限200条消息额度；OCR对低质量扫描件效果有限
 - **技术债务**: 前端bundle >1MB（未来可考虑代码分割）
 

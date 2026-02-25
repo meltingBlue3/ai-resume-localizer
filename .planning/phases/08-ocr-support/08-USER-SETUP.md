@@ -34,10 +34,10 @@ OCR processing requires two system-level utilities that cannot be installed via 
 
 - [ ] **Install OCR language data**
   - Tesseract requires trained data files for each language
-  - **Languages needed:** Chinese Simplified, Chinese Traditional, Japanese, English
+  - **Languages needed:** Chinese Simplified, Japanese, English
   - **Windows:**
     - Download from [tessdata repository](https://github.com/tesseract-ocr/tessdata)
-    - Files needed: `chi_sim.traineddata`, `chi_tra.traineddata`, `jpn.traineddata`, `eng.traineddata`
+    - Files needed: `chi_sim.traineddata`, `jpn.traineddata`, `eng.traineddata`
     - Copy to Tesseract tessdata folder (default: `C:\Program Files\Tesseract-OCR\tessdata`)
   - **macOS/Linux:** Usually included by default. If not:
     ```bash
@@ -58,7 +58,7 @@ python -c "from pdf2image import convert_from_path; print('pdf2image OK')"
 
 # Verify language data installed
 tesseract --list-languages
-# Should show: chi_sim, chi_tra, jpn, eng (and possibly others)
+# Should show: chi_sim, jpn, eng (and possibly others)
 
 # Test OCR on a sample scanned PDF (from project root)
 cd backend
@@ -73,7 +73,7 @@ print('OCRService initialized successfully')
 
 Expected results:
 - `tesseract --version` shows version 4.x or 5.x
-- `tesseract --list-languages` includes chi_sim, chi_tra, jpn, eng
+- `tesseract --list-languages` includes chi_sim, jpn, eng
 - Python import succeeds without errors
 
 ## Troubleshooting
