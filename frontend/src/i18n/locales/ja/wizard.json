@@ -63,6 +63,9 @@
         "certDate": "取得日",
         "selfIntroduction": "自己PR",
         "projectExperience": "プロジェクト経験",
+        "projectName": "プロジェクト名",
+        "associatedCompany": "所属会社",
+        "projectRole": "役割",
         "other": "その他"
       }
     },

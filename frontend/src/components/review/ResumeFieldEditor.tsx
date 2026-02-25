@@ -6,6 +6,7 @@ import type {
   WorkEntry,
   SkillEntry,
   CertificationEntry,
+  ProjectEntry,
 } from '../../types/resume';
 
 interface ResumeFieldEditorProps {
@@ -148,6 +149,7 @@ export default function ResumeFieldEditor({ data, onChange, readOnly = false }: 
   const emptyWork: WorkEntry = { company: null, position: null, department: null, start_date: null, end_date: null, description: null };
   const emptySkill: SkillEntry = { name: null, level: null };
   const emptyCert: CertificationEntry = { name: null, date: null };
+  const emptyProject: ProjectEntry = { project_name: null, associated_company: null, role: null, start_date: null, end_date: null, description: null };
 
   return (
     <div className="space-y-3">
@@ -291,15 +293,16 @@ export default function ResumeFieldEditor({ data, onChange, readOnly = false }: 
                     </div>
                   )}
                   <div className="grid grid-cols-2 gap-2">
-                    <FieldInput label={f('company')} value={entry.company ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { company: v || null }) })} readOnly={readOnly} />
-                    <FieldInput label={f('position')} value={entry.position ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { position: v || null }) })} readOnly={readOnly} />
+                    <FieldInput label={f('projectName')} value={entry.project_name ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { project_name: v || null }) })} readOnly={readOnly} />
+                    <FieldInput label={f('associatedCompany')} value={entry.associated_company ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { associated_company: v || null }) })} readOnly={readOnly} />
+                    <FieldInput label={f('projectRole')} value={entry.role ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { role: v || null }) })} readOnly={readOnly} />
                     <FieldInput label={f('startDate')} value={entry.start_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { start_date: v || null }) })} readOnly={readOnly} />
                     <FieldInput label={f('endDate')} value={entry.end_date ?? ''} onChange={(v) => set({ project_experience: updateAt(projects, i, { end_date: v || null }) })} readOnly={readOnly} />
                   </div>
                   <FieldInput label={f('description')} value={entry.description ?? ''} multiline onChange={(v) => set({ project_experience: updateAt(projects, i, { description: v || null }) })} readOnly={readOnly} />
                 </div>
               ))}
-              {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ project_experience: [...projects, emptyWork] })} />}
+              {!readOnly && <AddButton label={t('steps.reviewExtraction.addEntry')} onClick={() => set({ project_experience: [...projects, emptyProject] })} />}
             </div>
           </div>
 

@@ -63,6 +63,9 @@
         "certDate": "获取日期",
         "selfIntroduction": "自我评价",
         "projectExperience": "项目经历",
+        "projectName": "项目名称",
+        "associatedCompany": "所属公司",
+        "projectRole": "角色",
         "other": "其他信息"
       }
     },

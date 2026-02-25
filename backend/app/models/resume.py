@@ -28,6 +28,17 @@ class CertificationEntry(BaseModel):
     date: str | None = None
 
 
+class ProjectEntry(BaseModel):
+    """Project experience entry matching Dify extraction workflow output."""
+
+    project_name: str | None = None
+    associated_company: str | None = None
+    role: str | None = None
+    start_date: str | None = None
+    end_date: str | None = None
+    description: str | None = None
+
+
 class CnResumeData(BaseModel):
     # Personal
     name: str | None = None
@@ -54,7 +65,7 @@ class CnResumeData(BaseModel):
 
     # Content
     self_introduction: str | None = None
-    project_experience: list[WorkEntry] | None = None
+    project_experience: list[ProjectEntry] | None = None
     other: str | None = None
 
 

@@ -25,6 +25,15 @@ export interface CertificationEntry {
   date: string | null;
 }
 
+export interface ProjectEntry {
+  project_name: string | null;
+  associated_company: string | null;
+  role: string | null;
+  start_date: string | null;
+  end_date: string | null;
+  description: string | null;
+}
+
 export interface CnResumeData {
   name: string | null;
   phone: string | null;
@@ -48,7 +57,7 @@ export interface CnResumeData {
   languages: string[] | null;
 
   self_introduction: string | null;
-  project_experience: WorkEntry[] | null;
+  project_experience: ProjectEntry[] | null;
   other: string | null;
 }
 
