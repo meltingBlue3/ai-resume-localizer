@@ -22,8 +22,9 @@
       "extractedData": "抽出結果",
       "noData": "データがありません。アップロードステップに戻ってください",
       "goBack": "アップロードに戻る",
-      "addEntry": "項目を追加",
-      "removeEntry": "削除",
+"addEntry": "項目を追加",
+    "addProject": "プロジェクトを追加",
+    "removeEntry": "削除",
       "sections": {
         "personalInfo": "基本情報",
         "education": "学歴",
@@ -140,6 +141,8 @@
       "projectRole": "役割",
       "projectDescription": "説明",
       "projectTechnologies": "使用技術",
+      "participatingProjects": "参画プロジェクト",
+      "portfolioLinks": "ポートフォリオリンク",
       "other": "その他"
     }
   },

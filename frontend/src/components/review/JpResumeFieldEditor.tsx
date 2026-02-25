@@ -7,6 +7,7 @@ import type {
   JpWorkEntry,
   JpSkillEntry,
   JpCertificationEntry,
+  JpProjectEntry,
 } from '../../types/resume';
 import { toWareki } from '../../utils/wareki';
 import { mapDegreeToJapanese } from '../../utils/credentials';
@@ -144,7 +145,8 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
   const certs = data.certifications ?? [];
 
   const emptyEdu: JpEducationEntry = { school: null, degree: null, major: null, start_date: null, end_date: null };
-  const emptyWork: JpWorkEntry = { company: null, title: null, start_date: null, end_date: null, responsibilities: [], achievements: [] };
+  const emptyWork: JpWorkEntry = { company: null, title: null, start_date: null, end_date: null, responsibilities: [], achievements: [], projects: [] };
+  const emptyProject: JpProjectEntry = { name: null, role: null, start_date: null, end_date: null, description: null, technologies: null };
   const emptySkill: JpSkillEntry = { category: null, skills: [] };
   const emptyCert: JpCertificationEntry = { name: null, date: null };
 
@@ -275,12 +277,34 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
                 onChange={(v) => setData({ work_history: updateAt(workHistory, i, { responsibilities: v ? v.split('\n') : [] }) })}
                 multiline
               />
-              <FieldInput
+<FieldInput
                 label={f('achievements')}
                 value={(entry.achievements ?? []).join('\n')}
                 onChange={(v) => setData({ work_history: updateAt(workHistory, i, { achievements: v ? v.split('\n') : [] }) })}
                 multiline
               />
+              {/* Projects within work entry */}
+              <div className="mt-3 space-y-2 rounded-md border border-slate-200 bg-white p-3">
+                <p className="text-xs font-medium text-slate-600">{f('participatingProjects')}</p>
+                <div className="space-y-2">
+                  {(entry.projects ?? []).map((project, pi) => (
+                    <div key={pi} className="space-y-2 rounded border border-slate-100 bg-slate-50 p-2">
+                      <div className="flex justify-end">
+                        <RemoveButton label={t('reviewTranslation.removeEntry')} onClick={() => setData({ work_history: updateAt(workHistory, i, { projects: removeAt(entry.projects ?? [], pi) }) })} />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <FieldInput label={f('projectName')} value={project.name ?? ''} onChange={(v) => setData({ work_history: updateAt(workHistory, i, { projects: updateAt(entry.projects ?? [], pi, { name: v || null }) }) })} />
+                        <FieldInput label={f('projectRole')} value={project.role ?? ''} onChange={(v) => setData({ work_history: updateAt(workHistory, i, { projects: updateAt(entry.projects ?? [], pi, { role: v || null }) }) })} />
+                        <FieldInput label={f('startDate')} value={project.start_date ?? ''} onChange={(v) => setData({ work_history: updateAt(workHistory, i, { projects: updateAt(entry.projects ?? [], pi, { start_date: v || null }) }) })} helperText={warekiHelper(project.start_date)} />
+                        <FieldInput label={f('endDate')} value={project.end_date ?? ''} onChange={(v) => setData({ work_history: updateAt(workHistory, i, { projects: updateAt(entry.projects ?? [], pi, { end_date: v || null }) }) })} helperText={warekiHelper(project.end_date)} />
+                      </div>
+                      <FieldInput label={f('projectDescription')} value={project.description ?? ''} onChange={(v) => setData({ work_history: updateAt(workHistory, i, { projects: updateAt(entry.projects ?? [], pi, { description: v || null }) }) })} multiline />
+                      <FieldInput label={f('projectTechnologies')} value={(project.technologies ?? []).join(', ')} onChange={(v) => setData({ work_history: updateAt(workHistory, i, { projects: updateAt(entry.projects ?? [], pi, { technologies: v ? v.split(',').map((s) => s.trim()) : null }) }) })} />
+                    </div>
+                  ))}
+                  <AddButton label={t('reviewTranslation.addProject')} onClick={() => setData({ work_history: updateAt(workHistory, i, { projects: [...(entry.projects ?? []), emptyProject] }) })} />
+                </div>
+              </div>
             </div>
           ))}
           <AddButton label={t('reviewTranslation.addEntry')} onClick={() => setData({ work_history: [...workHistory, emptyWork] })} />

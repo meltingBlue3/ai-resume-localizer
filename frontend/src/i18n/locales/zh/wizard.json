@@ -22,8 +22,9 @@
       "extractedData": "提取结果",
       "noData": "暂无数据，请返回上传步骤",
       "goBack": "返回上传",
-      "addEntry": "添加条目",
-      "removeEntry": "删除",
+"addEntry": "添加条目",
+    "addProject": "添加项目",
+    "removeEntry": "删除",
       "sections": {
         "personalInfo": "基本信息",
         "education": "教育经历",
@@ -140,6 +141,8 @@
       "projectRole": "角色",
       "projectDescription": "描述",
       "projectTechnologies": "使用技术",
+      "participatingProjects": "参与项目",
+      "portfolioLinks": "作品集链接",
       "other": "其他信息"
     }
   },
