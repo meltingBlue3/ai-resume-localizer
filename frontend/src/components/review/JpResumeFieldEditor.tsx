@@ -302,7 +302,7 @@ export default function JpResumeFieldEditor({ data, onChange }: JpResumeFieldEdi
                       <FieldInput label={f('projectTechnologies')} value={(project.technologies ?? []).join(', ')} onChange={(v) => setData({ work_history: updateAt(workHistory, i, { projects: updateAt(entry.projects ?? [], pi, { technologies: v ? v.split(',').map((s) => s.trim()) : null }) }) })} />
                     </div>
                   ))}
-                  <AddButton label={t('reviewTranslation.addProject')} onClick={() => setData({ work_history: updateAt(workHistory, i, { projects: [...(entry.projects ?? []), emptyProject] }) })} />
+                  <AddButton label={t('reviewTranslation.addEntry')} onClick={() => setData({ work_history: updateAt(workHistory, i, { projects: [...(entry.projects ?? []), emptyProject] }) })} />
                 </div>
               </div>
             </div>
