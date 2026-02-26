@@ -76,6 +76,32 @@ def _parse_date_parts(date_str: str | None) -> dict:
     return {"year": date_str, "month": ""}
 
 
+def _date_to_sort_key(date_str: str | None) -> tuple[int, int]:
+    """Convert date string to (western_year, month) for sorting. Unparseable → (9999, 12)."""
+    if not date_str:
+        return (9999, 12)
+    iso_match = re.match(r"(\d{4})[-/](\d{1,2})", date_str)
+    if iso_match:
+        return (int(iso_match.group(1)), int(iso_match.group(2)))
+    match = re.match(r"(.+年)\s*(\d+)月?", date_str)
+    if match:
+        year_str = match.group(1).rstrip("年").replace("元", "1")
+        month_int = int(match.group(2))
+        num_match = re.search(r"\d+", year_str)
+        if num_match:
+            era_year = int(num_match.group())
+            if "令和" in year_str:
+                western = 2018 + era_year  # Reiwa 1 = 2019
+            elif "平成" in year_str:
+                western = 1988 + era_year  # Heisei 1 = 1989
+            elif "昭和" in year_str:
+                western = 1925 + era_year  # Showa 1 = 1926
+            else:
+                return (9999, 12)
+            return (western, month_int)
+    return (9999, 12)
+
+
 def _current_date_wareki() -> str:
     """Generate current date in wareki format: '令和{year}年　{month}月　{day}日現在'."""
     today = datetime.date.today()
@@ -117,34 +143,37 @@ def prepare_context(jp_resume: JpResumeData) -> dict:
         else:
             data["personal_info"]["name_formatted"] = data["personal_info"]["name"]
 
-    # Normalize "none"/"null" strings to None for end_date
+    # Normalize "none"/"null"/empty strings to None for end_date (ongoing position → 現在)
     for entry in data["work_history"]:
-        if entry.get("end_date"):
-            end_val = entry["end_date"]
-            if isinstance(end_val, str) and end_val.lower() in ("none", "null", ""):
+        end_val = entry.get("end_date")
+        if end_val is not None and isinstance(end_val, str):
+            if end_val.strip() == "" or end_val.lower() in ("none", "null"):
                 entry["end_date"] = None
 
-    # Normalize "none"/"null" strings to None for project end_dates (embedded in work_history)
+    # Normalize "none"/"null"/empty strings to None for project end_dates (embedded in work_history)
     for entry in data["work_history"]:
         if entry.get("projects"):
             for project in entry["projects"]:
-                if project.get("end_date"):
-                    end_val = project["end_date"]
-                    if isinstance(end_val, str) and end_val.lower() in (
-                        "none",
-                        "null",
-                        "",
-                    ):
+                end_val = project.get("end_date")
+                if end_val is not None and isinstance(end_val, str):
+                    if end_val.strip() == "" or end_val.lower() in ("none", "null"):
                         project["end_date"] = None
 
-    # Normalize "none"/"null" strings to None for personal_projects end_dates
+    # Normalize "none"/"null"/empty strings to None for personal_projects end_dates
     for project in data["personal_projects"]:
-        if project.get("end_date"):
-            end_val = project["end_date"]
-            if isinstance(end_val, str) and end_val.lower() in ("none", "null", ""):
+        end_val = project.get("end_date")
+        if end_val is not None and isinstance(end_val, str):
+            if end_val.strip() == "" or end_val.lower() in ("none", "null"):
                 project["end_date"] = None
 
-    # Process education entries with year/month extraction
+    # Normalize "none"/"null"/empty strings to None for certification date (取得年月)
+    for cert in data["certifications"]:
+        date_val = cert.get("date")
+        if date_val is not None and isinstance(date_val, str):
+            if date_val.strip() == "" or date_val.lower() in ("none", "null"):
+                cert["date"] = None
+
+    # Process education entries with year/month extraction (履歴書: chronological 早→晚)
     education_processed = []
     for entry in data["education"]:
         processed = dict(entry)
@@ -155,9 +184,12 @@ def prepare_context(jp_resume: JpResumeData) -> dict:
         processed["end_year"] = end_parts["year"]
         processed["end_month"] = end_parts["month"]
         education_processed.append(processed)
+    education_processed.sort(
+        key=lambda e: _date_to_sort_key(e.get("start_date") or e.get("end_date"))
+    )
     data["education_processed"] = education_processed
 
-    # Process work_history entries with year/month extraction
+    # Process work_history entries with year/month extraction (履歴書: chronological 早→晚)
     work_history_processed = []
     for entry in data["work_history"]:
         processed = dict(entry)
@@ -168,7 +200,17 @@ def prepare_context(jp_resume: JpResumeData) -> dict:
         processed["end_year"] = end_parts["year"]
         processed["end_month"] = end_parts["month"]
         work_history_processed.append(processed)
+    work_history_processed.sort(
+        key=lambda e: _date_to_sort_key(e.get("start_date") or e.get("end_date"))
+    )
     data["work_history_processed"] = work_history_processed
+
+    # 職務経歴書: work_history reverse chronological (晚→早)
+    data["work_history"] = sorted(
+        data["work_history"],
+        key=lambda e: _date_to_sort_key(e.get("start_date") or e.get("end_date")),
+        reverse=True,
+    )
 
     # Process certifications with date splitting (year + month)
     certifications_processed = []

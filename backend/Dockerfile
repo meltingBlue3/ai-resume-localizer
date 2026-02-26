@@ -1,8 +1,7 @@
-FROM python:3.12-slim
+FROM python:3.12-slim-bookworm
 
 # Install system dependencies for Playwright, fonts, and other tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    fonts-noto-cjk \
     gcc \
     tesseract-ocr \
     tesseract-ocr-jpn \

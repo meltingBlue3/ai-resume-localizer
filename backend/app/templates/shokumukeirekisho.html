@@ -187,7 +187,7 @@
     <!-- Company block -->
     <table class="title-table">
         <tr class="company-header-row">
-            <td>{{ job.company | default('未記入') }}　（{{ job.start_date | default('') }}〜{{ job.end_date | default('現在') }}）</td>
+            <td>{{ job.company | default('未記入') }}　（{{ job.start_date | default('') }}〜{{ job.end_date | default('現在', true) }}）</td>
         </tr>
     </table>
 
@@ -329,7 +329,7 @@
         <tbody>
             {% for cert in data.certifications %}
             <tr>
-                <td class="cert-date">{{ cert.date | default('') }}</td>
+                <td class="cert-date">{{ cert.date | default('', true) }}</td>
                 <td>{{ cert.name | default('') }}</td>
             </tr>
             {% endfor %}
